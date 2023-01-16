@@ -19,9 +19,10 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<UserEntity,Integer> {
 
 	// 커스텀 ORM메소드 작성
-	@Query("select m from USER m where m.email = ?1")
+//	@Query("select m from USER m where m.email = ?1")
 	
 	public UserEntity findByEmail(String email);
 	public boolean existsByEmail(String email);
-	public UserEntity deleteByEmail(String email);
+	
+	
 }
