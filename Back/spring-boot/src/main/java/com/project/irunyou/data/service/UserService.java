@@ -9,6 +9,9 @@
 
 package com.project.irunyou.data.service;
 
+import javax.validation.constraints.Pattern;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.irunyou.data.dto.GetUserResponseDto;
@@ -21,6 +24,7 @@ import com.project.irunyou.data.repository.UserRepository;
 
 @Service
 public class UserService {
+	@Autowired
 	// 레파지토리 선언
 	UserRepository userRepository;
 	UserEntity user;
@@ -86,8 +90,9 @@ public class UserService {
 
 	public ResponseDto<ResultResponseDto> deleteUser(String email) {
 		// email, pw확인 >> 삭제가능
-		userRepository.deleteByEmail(email);
-		return ResponseDto.setSuccess(email, new ResultResponseDto(true));
+		int userId = userRepository.findByEmail(email).getUser_idx();
+	      userRepository.deleteById(userId);
+	      
+	      return ResponseDto.setSuccess("탈퇴되었습니다.", new ResultResponseDto(true));
 	}
-
 }
