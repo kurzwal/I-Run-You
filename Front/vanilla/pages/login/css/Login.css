@@ -71,7 +71,6 @@ input {
 .email-password-find {
     display: flex;
     justify-content: center;
-;
 }
 
 a {
@@ -91,6 +90,8 @@ a:visited {
 
 button {
     display: flex;
+    justify-content: center;
+    align-items: center;
     
     width: 200px;
     height: 40px;
@@ -104,4 +105,12 @@ button {
 
 .button-text {
     display: flex;
+}
+
+.login-button {
+    background-color: #58d697;
+}
+
+.signup-button {
+    background-color: #58d697;
 }
