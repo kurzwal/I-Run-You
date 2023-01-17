@@ -3,12 +3,13 @@
  * 작성날짜 : 2023-01-12
  * 
  * 업데이트 작성자 : 홍지혜
- * 업데이트 날짜 : datetime 자료형 변경
+ * 업데이트 날짜 : datetime 자료형 변경, Dto 생성자 추가
  * 작성날짜 : 2023-01-17
  * */
 package com.project.irunyou.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.irunyou.data.dto.RunScheduleDto;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,12 +41,21 @@ public class RunScheduleEntity {
     @NotNull
     private String title;
     @NotNull
-    private int writer_user;
+    private int writerid;
     @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime datetime;
     @NotNull
     private String content;
+    
+    // 일정 등록용 생성자
+    public RunScheduleEntity(RunScheduleDto dto) {
+    	this.park = dto.getPark();
+    	this.title = dto.getTitle();
+    	this.writerid = dto.getWriterId();
+    	this.datetime = dto.getDatetime();
+    	this.content = dto.getContent();
+    }
 
 }
