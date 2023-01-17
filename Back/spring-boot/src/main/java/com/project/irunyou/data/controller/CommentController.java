@@ -6,14 +6,14 @@
 package com.project.irunyou.data.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.irunyou.data.dto.RegistCommentDto;
+import com.project.irunyou.data.dto.CommentDto;
+import com.project.irunyou.data.dto.CommentResponseDto;
 import com.project.irunyou.data.dto.ResponseDto;
-import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.service.CommentService;
 
 @RestController
@@ -23,8 +23,8 @@ public class CommentController {
 	@Autowired CommentService commentService;
 	
 	// Create (댓글작성)
-	@PostMapping("")
-	public ResponseDto<ResultResponseDto> registComment (@RequestBody RegistCommentDto requestBody){
+	@PutMapping("")
+	public ResponseDto<CommentResponseDto> registComment (@RequestBody CommentDto requestBody){
 		return commentService.registComment(requestBody);
 	}
 	

@@ -30,7 +30,7 @@ import com.project.irunyou.data.repository.UserRepository;
 
 @Service
 public class UserService {
-	@Autowired
+	
 	// 레파지토리 선언
 	@Autowired UserRepository userRepository;
 	UserEntity user;
