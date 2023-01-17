@@ -39,7 +39,6 @@ public class UserController {
 	}
 	
 	// Read (회원정보 읽기)
-	// email뿐만아니라 password도 확인후 정보 읽을수 있게끔
 	@GetMapping("{email}")
 	public ResponseDto<GetUserResponseDto> readUser (@PathVariable("email") String email) {
 		return userService.readUser(email);

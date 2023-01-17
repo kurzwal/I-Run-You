@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GetUserResponseDto {
 
-//	private int user_idx;
+	private int user_idx;
 	private String email;
 	private String address;
 //	private String phone_num;
@@ -26,7 +26,7 @@ public class GetUserResponseDto {
 	
 	// 생성자 생성, 전화번호는 공개여부 곤란..(생성자 매개변수 명 확인요망)
 	public GetUserResponseDto(UserEntity user) {
-//		this.user_idx = user.getUser_idx();
+		this.user_idx = user.getUser_idx();
 		this.email = user.getEmail();
 		this.address = user.getAddress();
 //		this.phone_num = user.getPhone_num();
