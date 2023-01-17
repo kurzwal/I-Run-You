@@ -1,0 +1,25 @@
+/* 
+작성자 : 최예정
+파일의 역할 : 회원가입 css
+작성날짜 : 2023-01-16
+
+업데이트 작성자 : -
+업데이트 날짜 : - 
+*/
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.signup-container {
+    display: block;
+}
+

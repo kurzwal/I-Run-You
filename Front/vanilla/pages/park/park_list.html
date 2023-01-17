@@ -1,0 +1,85 @@
+<!--
+    작성자 : 유열림
+    파일의 역할 : 공원 list html
+    작성날짜 : 2023-01-16
+
+    업데이트 작성자 : -
+    업데이트 날짜 : -
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I RUN YOU</title>
+    <!-- Title Icon -->
+    <link href="./asset/icon/person-running.svg" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="./park_list.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+</head>
+<body>
+    <div class="wrap">
+        <div id="map" class="main-map" style="position:absolute;width:100%;height:100%;">
+        </div>
+        <div class="main-menu">
+            <div class="menu-header">
+                <div class="menu-logo">
+                    <img class="logo-img" src="./asset/icon/person-running.svg">
+                    <div class="logo-txt">I Run You</div>
+                    <i class="fa-solid fa-bars-staggered"></i>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="menu-profile">
+                    <div class="profile-img-continer">
+                        <i class="fa-solid fa-user-large"></i>
+                    </div>
+                    <div class="profile-text">UserName</div>
+                    <div class="profile-welcome">님, 환영합니다.</div>
+                </div>
+                <div class="park-list-container">
+                    <div class="park-list-item">
+                        <img class="park-list-img" src="../../asset/img/park-img.jpg">
+                        <div class="park-list-txt-container">
+                            <div class="park-list-name">멋진 공원</div>
+                            <div class="park-list-rate">★★★★★ 5.0/5.0</div>
+                            <div class="park-list-area">30000㎡</div>
+                            <div class="park-list-desc">매우 아름다운 공원입니다.</div>
+                        </div>
+                    </div>
+                    <div class="park-list-item">
+                        <img class="park-list-img" src="../../asset/img/park-img.jpg">
+                        <div class="park-list-txt-container">
+                            <div class="park-list-name">멋진 공원</div>
+                            <div class="park-list-rate">★★★★★ 5.0/5.0</div>
+                            <div class="park-list-area">30000㎡</div>
+                            <div class="park-list-desc">조금 지저분한 공원입니다. 근처에 먹을 거리가 별로 없습니다. 이렇게 길게 설명을 적으면 어떻게 되는지 궁금해서 일단 길게 적어보기로 했습니다. 잘 작동되고 있나요? 넘어가면 오버플로우 히든으로 인해 보이지 않게 됩니다.</div>
+                        </div>
+                    </div>
+                    <div class="park-list-item">
+                        <img class="park-list-img" src="../../asset/img/park-img.jpg">
+                        <div class="park-list-txt-container">
+                            <div class="park-list-name">멋진 공원</div>
+                            <div class="park-list-rate">★★★★★ 5.0/5.0</div>
+                            <div class="park-list-area">30000㎡</div>
+                            <div class="park-list-desc">매우 아름다운 공원입니다.</div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4914b85fbf46770cdeedeeee18e2d1d"></script>
+    <script>
+        var container = document.getElementById('map');
+        var options = {
+                center: new kakao.maps.LatLng(35.1540173, 129.0595575), // 지도의 중심좌표
+                level: 4, // 지도의 확대 레벨
+            };
+        console.log(container)
+        var map = new kakao.maps.Map(container, options);
+        
+    </script>
+    
+</body>
+</html>
