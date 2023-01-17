@@ -7,6 +7,8 @@
  * */
 package com.project.irunyou.data.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +30,25 @@ public class RunScheduleService {
 	
 	// 일정 등록 (공원, 제목, 작성자, 시간, 내용)
 	public ResponseDto<ResultResponseDto> registSchedule(RunScheduleDto dto){
-//		parkRepository.get --작성중
 		
-		return null;
+		try {
+		scheduleEntity = RunScheduleEntity
+				.builder()
+				.park(dto.getPark())
+				.title(dto.getTitle())
+				.writer_user(dto.getWriter_user())
+				// LocalDateTime.now() 현재 시간 등록
+				.datetime(LocalDateTime.now())
+				.content(dto.getContent())
+				.build();
+		scheduleRepository.save(scheduleEntity);
+		
+		} catch(Exception e) {
+			return ResponseDto.setFailed("일정 등록중 오류가 발생했습니다.");
+		}
+		return ResponseDto.setSuccess("일정이 등록되었습니다.",new ResultResponseDto(true));
 	}
+	
 	// 일정 조회
 	
 	// 일정 수정
