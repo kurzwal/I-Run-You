@@ -1,0 +1,38 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 200px;
+    height: 50px;
+    
+    border: none;
+    background-color: #b6cf55;
+
+    font-size: medium;
+}
+
+.email-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fa-envelope {
+    font-size: 50px;
+}
+
+.btn-con {
+    display: flex;
+    justify-content: space-between;
+    width: 130%;
+}
