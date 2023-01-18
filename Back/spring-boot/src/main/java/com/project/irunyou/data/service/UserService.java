@@ -22,7 +22,8 @@ import com.project.irunyou.data.repository.UserRepository;
 @Service
 public class UserService {
 	// 레파지토리 선언
-	UserRepository userRepository;
+	@Autowired UserRepository userRepository;
+	
 	UserEntity user;
 
 	public ResponseDto<ResultResponseDto> signUpUser(PostUserDto dto) {
