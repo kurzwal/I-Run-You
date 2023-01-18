@@ -17,13 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RegistCommentDto {
 
-	    @NotNull
-	    private int com_idx;
-	    @NotNull
-	    private int sch_idx;
-	    @NotNull
-	    private int writer_user;
-	    @NotNull
+		@javax.validation.constraints.NotNull
 	    private String content;
 	    @NotNull
 	    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
