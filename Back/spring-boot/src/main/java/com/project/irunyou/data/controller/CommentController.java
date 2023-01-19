@@ -6,6 +6,7 @@
 package com.project.irunyou.data.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.irunyou.data.dto.CommentDto;
 import com.project.irunyou.data.dto.CommentResponseDto;
+import com.project.irunyou.data.dto.DeleteCommentDto;
 import com.project.irunyou.data.dto.ResponseDto;
+import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.service.CommentService;
 
 @RestController
@@ -28,5 +31,10 @@ public class CommentController {
 		return commentService.registComment(requestBody);
 	}
 	
-
+	// Delete (댓글삭제)
+	@DeleteMapping("")
+	public ResponseDto<ResultResponseDto> deleteComment (@RequestBody DeleteCommentDto requestBody){
+		return commentService.deleteComment(requestBody);
+	}
+	
 }

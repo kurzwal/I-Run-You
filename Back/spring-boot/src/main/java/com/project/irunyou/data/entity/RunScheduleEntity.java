@@ -29,7 +29,6 @@ public class RunScheduleEntity {
     @Id
     @NotNull
     private int sch_idx;
-    @NotNull
     private int park;
     @NotNull
     private String title;
