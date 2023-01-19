@@ -14,11 +14,15 @@ import lombok.NoArgsConstructor;
 public class CloseParkDto {
 	private String name;
 	private String address;
+	private double latitude;
+	private double longitude;
 	private int area;
 	
 	public CloseParkDto(ParkEntity p) {
 		this.name = p.getName();
 		this.address = p.getAddress();
+		this.latitude = p.getLatitude();
+		this.longitude = p.getLongitude();
 		this.area = p.getArea();
 	}
 }

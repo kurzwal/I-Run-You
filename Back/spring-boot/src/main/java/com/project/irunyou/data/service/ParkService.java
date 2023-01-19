@@ -1,3 +1,8 @@
+/* 
+ * 업데이트 작성자 : 홍지혜
+ * 업데이트 날짜 : 2023-01-19
+ * 업데이트 내용 : 사용자 위치 기반 가장 가까운 공원 5개 respose service
+ * */
 package com.project.irunyou.data.service;
 
 import java.util.ArrayList;
@@ -52,16 +57,17 @@ public class ParkService {
 	// 가까운 공원 5개 가져오기
 	// request 값 위도, 경도
 	public ResponseDto<List<CloseParkDto>> findClosePark(UserLocationDto dto) {
-		List<CloseParkDto> ClosePark = new ArrayList<>(); 
+		List<CloseParkDto> ClosePark = new ArrayList<>();
 		try {
-		List<ParkEntity> CloseDistancePark = parkRepository.findAllByDistance(dto.getLatitude(),dto.getLongitude());
-		for(ParkEntity p : CloseDistancePark) {
-			ClosePark.add(new CloseParkDto(p));
-		}
-		} catch(Exception e) {
+			List<ParkEntity> CloseDistancePark = parkRepository.findAllByDistance(dto.getLatitude(),
+					dto.getLongitude());
+			for (ParkEntity p : CloseDistancePark) {
+				ClosePark.add(new CloseParkDto(p));
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return ResponseDto.setSuccess("Load Success", ClosePark);
 	}
 
