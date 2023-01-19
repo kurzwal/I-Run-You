@@ -9,6 +9,7 @@
 
 package com.project.irunyou.data.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.irunyou.data.dto.GetUserResponseDto;
