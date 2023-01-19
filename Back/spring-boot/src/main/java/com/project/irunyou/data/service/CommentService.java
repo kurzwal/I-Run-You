@@ -42,7 +42,7 @@ public class CommentService {
 				.sch_idx(0)
 				.writer_user(dto.getWriter_user())
 				.content(dto.getContent())
-				.datetime(timestamp)
+//				.datetime(timestamp)
 				.build();
 				
 		

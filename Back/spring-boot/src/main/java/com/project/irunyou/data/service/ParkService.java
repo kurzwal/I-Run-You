@@ -1,10 +1,15 @@
 package com.project.irunyou.data.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.irunyou.data.dto.CloseParkDto;
 import com.project.irunyou.data.dto.ParkInfoDto;
 import com.project.irunyou.data.dto.ResponseDto;
+import com.project.irunyou.data.dto.UserLocationDto;
 import com.project.irunyou.data.entity.ParkEntity;
 import com.project.irunyou.data.repository.ParkRepository;
 
@@ -42,6 +47,22 @@ public class ParkService {
 			return null;
 		}
 		return park;
+	}
+	
+	// 가까운 공원 5개 가져오기
+	// request 값 위도, 경도
+	public ResponseDto<List<CloseParkDto>> findClosePark(UserLocationDto dto) {
+		List<CloseParkDto> ClosePark = new ArrayList<>(); 
+		try {
+		List<ParkEntity> CloseDistancePark = parkRepository.findAllByDistance(dto.getLatitude(),dto.getLongitude());
+		for(ParkEntity p : CloseDistancePark) {
+			ClosePark.add(new CloseParkDto(p));
+		}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ResponseDto.setSuccess("Load Success", ClosePark);
 	}
 
 }
