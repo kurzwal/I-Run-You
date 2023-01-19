@@ -6,16 +6,17 @@
         파일의 역할 : 로그인 html
         작성날짜 : 2023-01-13
 
-        업데이트 작성자 : -
-        업데이트 날짜 : -
+        업데이트 작성자 : 최예정
+        업데이트 날짜 : 2023-01-19
     -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/Login.css">
+    <!-- <link rel="stylesheet" href="../javascript/Login.js"> -->
     <!-- title img -->
     <title>로그인</title>
-    <link href="/Front/vanilla/pages/images/main-logo.svg" rel="shortcut icon" type="image/x-icon">
+    <link href="../images/main-logo.svg" rel="shortcut icon" type="image/x-icon">
 </head>
 <body>
     <!-- 로그인 전체 영역 -->
@@ -30,14 +31,32 @@
                     <input class="password-input" type="password" placeholder="비밀번호(8~16자 숫자, 영문, 특수문자)" required>
                 </div>
             </fieldset>
+            <div class="box">
+                    <input class="id-save" type="checkbox" id="checkid" name="checkid">
+                    <label for="checkid"> 아이디 저장</label>
+            </div>
             <!-- 아이디(이메일), 비밀번호 찾는 링크 -->
             <div class="email-password-find">
-                <a href="">아이디 / 비밀번호 찾기</a>
+                <a href="http://127.0.0.1:5500/Front/vanilla/pages/login/html/IDPW.html">아이디 / 비밀번호 찾기</a>
+            </div>
+            <!-- 간편 로그인 -->
+            <div class="other-login">
+                <div class="line"></div>
+                <div class="other-login-text">간편 로그인</div>
+                <div class="line"></div>
+            </div>
+            <div class="other-login-button">
+                <div class="kakao-login">
+                    <img src="../images/kakao_login_medium_wide.png" width="280px" height="45px">
+                </div>
+                <div class="google-login">
+                    <img src="../images/btn_google_signin_light_normal_web.png" width="285px" height="45px">
+                </div>
             </div>
             <!-- 로그인, 회원가입 각 버튼 -->
             <div class="login-signup-button">
-                <button class="login-button" onclick="location.href=''">로그인</button>
-                <button class="signup-button" onclick="location.href='http://127.0.0.1:5500/Front/vanilla/pages/login/html/Signup.html'">회원가입</button>
+                <button class="login-button button" onclick="location.href=''">로그인</button>
+                <button class="signup-button button" onclick="location.href='http://127.0.0.1:5500/Front/vanilla/pages/login/html/Signup.html'">회원가입</button>
             </div>
         </form>
     </div>

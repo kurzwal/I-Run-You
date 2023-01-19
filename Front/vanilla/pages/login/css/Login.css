@@ -2,9 +2,10 @@
  * 파일의 역할 : 로그인 css
  * 작성날짜 : 2023-01-13
  * 
- * 업데이트 작성자 : -
- * 업데이트 날짜 : -
+ * 업데이트 작성자 : 최예정
+ * 업데이트 날짜 : 2023-01-19
  */
+
 body {
     margin: 0px;
 }
@@ -68,6 +69,24 @@ input {
     border: none;
 }
 
+.box {
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 30px;
+}
+
+.id-save {
+    display: flex;
+    justify-content: left;
+    
+    margin-right: 10px;
+
+    width: 15px;
+}
+
 .email-password-find {
     display: flex;
     justify-content: center;
@@ -81,14 +100,49 @@ a:visited {
     color: black;
 }
 
+.other-login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding : 20px 0;
+
+    height: 30px;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #6d696945;
+
+    width: 40%;
+    height: 1px;
+}
+
+.other-login-text {
+    color: #6d6969bd;
+}
+
+
 .login-signup-button {
     display: flex;
     justify-content: space-between;
-
+    
     padding-top: 20px;
 }
 
-button {
+.other-login-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.google-login {
+    padding-top: 10px;
+}
+
+.button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,10 +155,6 @@ button {
     vertical-align: middle;
     
     cursor: pointer;
-}
-
-.button-text {
-    display: flex;
 }
 
 .login-button {
