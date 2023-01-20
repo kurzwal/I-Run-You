@@ -36,13 +36,13 @@ public class ResgisterMailService {
 		msgg += "<br>";
 		msgg += "<p> 아래의 인증코드로 인증해주세요.</p>";
 		msgg += "<br>";
-		msgg += "<strong>" + cerpw + "</strong>";
+		msgg += "<p>" + cerpw + "<p>";
 		msgg += "<br>";
 		
 		message.setText(msgg, "utf-8", "html");	// 메일 내용, charset 타입, subtype
 		
-//		message.setFrom(new InternetAddress("projectirunyou@gmail.com", "IRunYou_Admin"));
-		message.setFrom("projectirunyou@gmail.com");
+		message.setFrom(new InternetAddress("projectirunyou@gmail.com", "IRunYou_Admin"));
+//		message.setFrom("projectirunyou@gmail.com");
 		
 		return message;
 	}

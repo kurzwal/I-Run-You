@@ -28,8 +28,6 @@ import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.service.ResgisterMailService;
 import com.project.irunyou.data.service.UserService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @RestController
 @RequestMapping("irunyou/")
 public class UserController {
@@ -63,11 +61,16 @@ public class UserController {
 	
 	// 이메일 인증
 	@PostMapping("mailConfirm")	
-	public String mailConfirm(@RequestParam("email") String email) throws Exception{
+	public ResponseDto<String> mailConfirm(@RequestParam("email") String email){
+		String code = null;
+		try {
 		// 인증코드 발송 
-		String code = mailService.sendMail(email);
+		code = mailService.sendMail(email);
+		} catch (Exception e) {
+			return ResponseDto.setFailed("error");
+		}	
 		// 보내진 코드 프론트로 return
-		return code;
+		return ResponseDto.setSuccess("Success", code);
 	}
 	
 }
