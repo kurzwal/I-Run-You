@@ -18,8 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +29,8 @@ import com.project.irunyou.data.dto.PatchScheduleDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.dto.RunScheduleDto;
+import com.project.irunyou.data.dto.ScheduleDto;
 import com.project.irunyou.data.dto.UserRequestDto;
-import com.project.irunyou.data.repository.UserRepository;
 import com.project.irunyou.data.service.RunScheduleService;
 
 @RestController
@@ -62,5 +60,10 @@ public class RunScheduleController {
 	public ResponseDto<ResultResponseDto> deleteSchedule(@RequestBody FindRunScheduleDto dto) {
 		return scheduleService.deleteSchedule(dto);
 	}
-	
+//	// 일정에 사용자 등록
+//	@PutMapping("")
+//	public ResponseDto<ResultResponseDto> enrollSchedule(@RequestBody ScheduleDto requestBody){
+//		return scheduleService.enrollSchedule(requestBody);
+//	}
+//	
 }

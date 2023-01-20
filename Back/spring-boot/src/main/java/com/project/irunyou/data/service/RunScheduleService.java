@@ -16,7 +16,6 @@ package com.project.irunyou.data.service;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +25,7 @@ import com.project.irunyou.data.dto.PatchScheduleDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.dto.RunScheduleDto;
+import com.project.irunyou.data.dto.ScheduleDto;
 import com.project.irunyou.data.dto.UserRequestDto;
 import com.project.irunyou.data.entity.RunScheduleEntity;
 import com.project.irunyou.data.entity.UserEntity;
@@ -123,4 +123,15 @@ public class RunScheduleService {
 		}
 		return ResponseDto.setSuccess("일정이 삭제되었습니다.", new ResultResponseDto(true));
 	}
+	
+	// 일정에 사용자 등록
+//	일정에 사용자를 등록해야하는데 일정 column에 사용자를 받을수 있는 column?
+//	public ResponseDto<ResultResponseDto> enrollSchedule(ScheduleDto dto){
+//		int schIdx = dto.getSch_idx();
+//		
+//		RunScheduleEntity enrollschedule = scheduleRepository.getById(dto.getUser_idx());
+//		
+//		
+//		return ResponseDto.setSuccess("일정등록이 완료되었습니다.", new ResultResponseDto(true));
+//	}
 }
