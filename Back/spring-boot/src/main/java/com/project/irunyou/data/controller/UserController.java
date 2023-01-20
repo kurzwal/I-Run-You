@@ -30,7 +30,6 @@ import com.project.irunyou.data.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 @RequestMapping("irunyou/")
 public class UserController {
