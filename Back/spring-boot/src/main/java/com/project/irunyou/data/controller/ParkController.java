@@ -6,6 +6,7 @@ package com.project.irunyou.data.controller;
 
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,14 @@ import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.UserLocationDto;
 import com.project.irunyou.data.service.ParkService;
 
+<<<<<<< Updated upstream
 
+=======
+import ch.qos.logback.classic.Logger;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+>>>>>>> Stashed changes
 @RestController
 @RequestMapping("irunyou/park/")
 public class ParkController {

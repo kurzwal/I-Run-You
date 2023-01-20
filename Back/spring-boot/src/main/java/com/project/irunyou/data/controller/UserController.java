@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.irunyou.data.dto.GetUserResponseDto;
@@ -24,13 +25,18 @@ import com.project.irunyou.data.dto.PatchUserDto;
 import com.project.irunyou.data.dto.PostUserDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
+import com.project.irunyou.data.service.ResgisterMailService;
 import com.project.irunyou.data.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("irunyou/")
 public class UserController {
 	
 	@Autowired UserService userService;
+	@Autowired ResgisterMailService mailService;
 	
 	// Create (회원가입)
 	@PostMapping("")
@@ -55,4 +61,14 @@ public class UserController {
 	public ResponseDto<ResultResponseDto> deleteUser (@PathVariable("email") String email) {
 		return userService.deleteUser(email);
 	}
+	
+	// 이메일 인증
+	@PostMapping("mailConfirm")	
+	public String mailConfirm(@RequestParam("email") String email) throws Exception{
+		// 인증코드 발송 
+		String code = mailService.sendMail(email);
+		// 보내진 코드 프론트로 return
+		return code;
+	}
+	
 }

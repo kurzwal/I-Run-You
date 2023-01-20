@@ -19,6 +19,9 @@ import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.service.CommentService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("irunyou/comment/")
 public class CommentController {
