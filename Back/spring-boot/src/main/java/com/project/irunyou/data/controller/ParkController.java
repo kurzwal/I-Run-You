@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.irunyou.data.dto.CloseParkDto;
 import com.project.irunyou.data.dto.ParkInfoDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.UserLocationDto;
@@ -33,7 +32,7 @@ public class ParkController {
 	
 	// 사용자 위치기반 가까운 공원 5개
 	@GetMapping("")
-	public ResponseDto<List<CloseParkDto>> findClosePark(@RequestBody UserLocationDto dto) {
+	public ResponseDto<List<ParkInfoDto>> findClosePark(@RequestBody UserLocationDto dto) {
 		return parkService.findClosePark(dto);
 	}
 
