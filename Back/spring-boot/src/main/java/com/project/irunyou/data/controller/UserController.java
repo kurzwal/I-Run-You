@@ -59,6 +59,12 @@ public class UserController {
 		return userService.deleteUser(email);
 	}
 	
+	// id찾기
+	@GetMapping("phone/{phone_num}")
+	public ResponseDto<GetUserResponseDto> findUserId(@PathVariable("phone_num")String phone_num) {
+		return userService.findUserId(phone_num);
+	}
+
 	// 이메일 인증
 	@PostMapping("mailConfirm")	
 	public ResponseDto<String> mailConfirm(@RequestParam("email") String email){
@@ -72,5 +78,7 @@ public class UserController {
 		// 보내진 코드 프론트로 return
 		return ResponseDto.setSuccess("Success", code);
 	}
+	
+	// pw찾기
 	
 }
