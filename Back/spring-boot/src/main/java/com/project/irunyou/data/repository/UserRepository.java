@@ -10,16 +10,16 @@ package com.project.irunyou.data.repository;
 
 import com.project.irunyou.data.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity,Integer> {
 
 	// 커스텀 ORM메소드 작성
-	@Query("select m from user m where m.email = ?1")
+//	@Query("select m from USER m where m.email = ?1")
+	
 	public UserEntity findByEmail(String email);
 	
 	public boolean existsByEmail(String email);

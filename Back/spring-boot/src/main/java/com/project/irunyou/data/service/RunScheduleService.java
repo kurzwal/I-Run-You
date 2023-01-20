@@ -12,9 +12,10 @@
  * */
 package com.project.irunyou.data.service;
 
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,10 @@ public class RunScheduleService {
 		RunScheduleEntity runScheduleEntity = new RunScheduleEntity(dto);		
 		scheduleRepository.save(runScheduleEntity);
 		
+		
+		
+	// 일정 조회
+	
 		} catch(Exception e) {
 			return ResponseDto.setFailed("일정 등록중 오류가 발생했습니다.");
 		}
