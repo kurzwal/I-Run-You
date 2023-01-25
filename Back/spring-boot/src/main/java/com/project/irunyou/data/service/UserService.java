@@ -97,8 +97,8 @@ public class UserService {
 	}
 	
 	// id찾기
-	public ResponseDto<GetUserResponseDto> findUserId(String phone_num) {
-		UserEntity user = findByPhone_num(phone_num);
+	public ResponseDto<GetUserResponseDto> findUserId(String phoneNum) {
+		UserEntity user = findByPhoneNum(phoneNum);
 		if (user == null)
 			return ResponseDto.setFailed("가입된 정보가 없습니다.");
 		
@@ -119,7 +119,7 @@ public class UserService {
 	}
 	
 //	Phone_num 언더바 인식 못하므로 나중에 수정 요망
-	private UserEntity findByPhone_num(String phone) {
+	private UserEntity findByPhoneNum(String phone) {
 		UserEntity user;
 		try {
 			user = userRepository.findByPhoneNumber(phone);

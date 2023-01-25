@@ -18,7 +18,7 @@ public class CommentResponseDto {
 	@NotNull
     private int commentIndex;
     @NotNull
-    private int schedulIndex;
+    private int scheduleIndex;
     @NotNull
     private int writerIndex;
     @NotNull

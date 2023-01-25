@@ -39,7 +39,7 @@ public class RunScheduleEntity {
 
     @Id
     @NotNull
-    private int schedulIndex;
+    private int scheduleIndex;
     private int park;
     @NotNull
     private String title;

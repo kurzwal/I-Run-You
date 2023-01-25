@@ -91,7 +91,7 @@ public class RunScheduleService {
 	
 	// 일정 수정
 	public ResponseDto<GetUserRunScheduleDto> patchSchedule(PatchScheduleDto dto) {
-		int schIdx = dto.getSchedulIndex();
+		int schIdx = dto.getScheduleIndex();
 		RunScheduleEntity patchSchedule = null;
 		try {
 			patchSchedule = scheduleRepository.findById(schIdx).get();
@@ -111,7 +111,7 @@ public class RunScheduleService {
 	
 	// 일정 삭제
 	public ResponseDto<ResultResponseDto> deleteSchedule(FindRunScheduleDto dto) {
-		int schIdx = dto.getSchdulIndex();
+		int schIdx = dto.getSchduleIndex();
 		try {
 			RunScheduleEntity deleteSchedule = scheduleRepository.findById(schIdx).get();
 		} catch(Exception e) {

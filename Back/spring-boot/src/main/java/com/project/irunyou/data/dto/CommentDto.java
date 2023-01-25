@@ -16,7 +16,7 @@ public class CommentDto {
 	@NotNull
     private int writerIndex;
 	@NotNull
-    private int schedulIndex;
+    private int scheduleIndex;
 	@NotNull
     private String content;
 	

@@ -38,7 +38,7 @@ public class CommentService {
 		result = CommentResponseDto
 				.builder()
 				.commentIndex(0)
-				.schedulIndex(0)
+				.scheduleIndex(0)
 				.writerIndex(dto.getWriterIndex())
 				.content(dto.getContent())
 				.datetime(timestamp)
@@ -48,7 +48,7 @@ public class CommentService {
 		comment = CommentEntity
 				.builder()
 				.commentIndex(0)
-				.schedulIndex(0)
+				.scheduleIndex(0)
 				.writerIndex(dto.getWriterIndex())
 				.content(dto.getContent())
 //				.datetime(timestamp)
@@ -67,16 +67,16 @@ public class CommentService {
 		
 		comment = commentRepository.getById(dto.getCommentIndex());
 		
-		int com_idx = comment.getCommentIndex();
-		int sch_idx = comment.getSchedulIndex();
-		int writer_user = comment.getWriterIndex();
+		int comIdx = comment.getCommentIndex();
+		int schIdx = comment.getScheduleIndex();
+		int writerUser = comment.getWriterIndex();
 		
-		int delcom_idx = dto.getCommentIndex();
-		int delsch_idx = dto.getScheduleIndex();
-		int delwriter_user = dto.getWriterIndex();
+		int delcomIdx = dto.getCommentIndex();
+		int delschIdx = dto.getScheduleIndex();
+		int delwriterUser = dto.getWriterIndex();
 		
-		if((com_idx == delcom_idx) & (sch_idx == delsch_idx) & (writer_user == delwriter_user)) {
-			commentRepository.deleteById(delcom_idx);
+		if((comIdx == delcomIdx) & (schIdx == delschIdx) & (writerUser == delwriterUser)) {
+			commentRepository.deleteById(delcomIdx);
 		} else {
 			return ResponseDto.setFailed("작성자, 댓글번호, 일정번호를 확인하세요");
 		}

@@ -61,8 +61,8 @@ public class UserController {
 	
 	// id찾기
 	@GetMapping("phone/{phone_num}")
-	public ResponseDto<GetUserResponseDto> findUserId(@PathVariable("phone_num")String phone_num) {
-		return userService.findUserId(phone_num);
+	public ResponseDto<GetUserResponseDto> findUserId(@PathVariable("phoneNum")String phoneNum) {
+		return userService.findUserId(phoneNum);
 	}
 
 	// 이메일 인증
