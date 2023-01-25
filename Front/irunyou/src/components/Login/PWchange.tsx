@@ -1,4 +1,5 @@
 import './PWchange.css';
+import { Link } from "react-router-dom";
 
 export default function PWchange() {
     return(
@@ -26,10 +27,14 @@ export default function PWchange() {
                 (8~16자까지 영문 대소문자/숫자/특수문자 사용)
             </div>
         </form>
-        {/* <div className="btn">
-            <button onclick="location.href=''">홈으로</button>
-            <button onclick="location.href='http://127.0.0.1:5500/Front/vanilla/pages/login/html/Login.html'">확인</button>
-        </div> */}
+        <div className="btn">
+            <Link to="">
+            <button>홈으로</button>
+            </Link>
+            <Link to="">
+            <button>확인</button>
+            </Link>
+        </div>
     </div>
     );
 }

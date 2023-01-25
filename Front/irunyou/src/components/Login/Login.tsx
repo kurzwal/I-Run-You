@@ -38,9 +38,9 @@ export default function Login() {
                 </div>
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">
-                    {/* <Link>
-                    <button className="login-button button" onClick="location.href=''">로그인</button>
-                    </Link> */}
+                    <Link to="">
+                    <button className="login-button button">로그인</button>
+                    </Link>
                     <Link to="/Signup">
                         <button className="signup-button button" >회원가입</button>
                     </Link>

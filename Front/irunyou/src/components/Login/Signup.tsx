@@ -1,7 +1,10 @@
 import './Signup.css';
 
+
 export default function Signup() {
-    <div className="signup-container">
+
+    return (
+<div className="signup-container">
         <div className="user-config">
             <h1>회원정보 입력</h1>
         </div>
@@ -40,4 +43,6 @@ export default function Signup() {
             </div>
         </div>
     </div>
+    )
+    
 }
