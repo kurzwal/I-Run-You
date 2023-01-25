@@ -128,9 +128,9 @@ public class RunScheduleService {
 	// 일정에 사용자 등록
 //	일정에 사용자를 등록해야하는데 일정 column에 사용자를 받을수 있는 column?
 //	public ResponseDto<ResultResponseDto> enrollSchedule(ScheduleDto dto){
-//		int schIdx = dto.getSch_idx();
+//		int schIdx = dto.getScheduleIndex();
 //		
-//		RunScheduleEntity enrollschedule = scheduleRepository.getById(dto.getUser_idx());
+//		RunScheduleEntity enrollschedule = scheduleRepository.getById(dto.getUserIndex());
 //		
 //		
 //		return ResponseDto.setSuccess("일정등록이 완료되었습니다.", new ResultResponseDto(true));

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ScheduleDto {
 
-	private int schedulIndex;
+	private int scheduleIndex;
 	private int userIndex;
 	
 }

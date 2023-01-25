@@ -29,11 +29,9 @@ import com.project.irunyou.data.dto.PatchScheduleDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.dto.RunScheduleDto;
-import com.project.irunyou.data.dto.ScheduleDto;
 import com.project.irunyou.data.dto.UserRequestDto;
 import com.project.irunyou.data.service.RunScheduleService;
 
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping
@@ -62,10 +60,10 @@ public class RunScheduleController {
 	public ResponseDto<ResultResponseDto> deleteSchedule(@RequestBody FindRunScheduleDto dto) {
 		return scheduleService.deleteSchedule(dto);
 	}
-//	// 일정에 사용자 등록
+	// 일정에 사용자 등록
 //	@PutMapping("")
 //	public ResponseDto<ResultResponseDto> enrollSchedule(@RequestBody ScheduleDto requestBody){
 //		return scheduleService.enrollSchedule(requestBody);
 //	}
-//	
+	
 }
