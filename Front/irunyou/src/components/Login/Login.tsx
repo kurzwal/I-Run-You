@@ -38,7 +38,7 @@ export default function Login() {
                 </div>
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">
-                    <Link to="">
+                    <Link to="메인화면">
                     <button className="login-button button">로그인</button>
                     </Link>
                     <Link to="/Signup">

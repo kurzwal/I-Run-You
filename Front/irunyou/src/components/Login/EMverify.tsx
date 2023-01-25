@@ -7,7 +7,7 @@ export default function EMverify() {
         <i className="fa-regular fa-envelope"></i>
         <p>회원님 이메일로 메일이 전송되었습니다.</p>
         <div className="btn-con">
-            <Link to="">
+            <Link to="/IDPW">
                 <button>이전으로</button>
             </Link>
             <button>메일 재전송</button>

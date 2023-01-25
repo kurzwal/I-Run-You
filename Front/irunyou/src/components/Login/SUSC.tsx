@@ -12,7 +12,7 @@ export default function SUSC() {
             <p>
                 로그인 후 바로 사이트 이용이 가능합니다. 아래 버튼을 눌러서 로그인 해주세요.
             </p>
-            <Link to="">
+            <Link to="/Login">
             <button>시작하기</button>
             </Link>
         </div>

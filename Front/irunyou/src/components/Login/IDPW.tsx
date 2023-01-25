@@ -20,7 +20,7 @@ export default function IDPW() {
                         <Link to="">
                             <button type="button">아이디 찾기</button>
                         </Link>
-                        <Link to="">
+                        <Link to="/Login">
                             <button type="button">로그인</button>
                         </Link>
                     </form>
@@ -40,8 +40,12 @@ export default function IDPW() {
                         <input className="form" type="text" placeholder="NAME" />
                         <input className="form" type="email" placeholder="EMAIL" />
                         <br />
-                        {/* <button type="button" onclick="location.href='http://127.0.0.1:5500/Front/vanilla/pages/login/html/EMverify.html'">임시비밀번호 발급</button>
-                        <button type="button" onclick="location.href='http://127.0.0.1:5500/Front/vanilla/pages/login/html/Login.html'">로그인</button> */}
+                        <Link to="/EMverify">
+                        <button type="button">임시비밀번호 발급</button>
+                        </Link>
+                        <Link to="/Login">
+                        <button type="button">로그인</button>
+                        </Link>
                     </form>
                 </div>
             </div>

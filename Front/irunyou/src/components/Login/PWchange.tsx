@@ -28,10 +28,10 @@ export default function PWchange() {
             </div>
         </form>
         <div className="btn">
-            <Link to="">
+            <Link to="메인화면">
             <button>홈으로</button>
             </Link>
-            <Link to="">
+            <Link to="/Login">
             <button>확인</button>
             </Link>
         </div>
