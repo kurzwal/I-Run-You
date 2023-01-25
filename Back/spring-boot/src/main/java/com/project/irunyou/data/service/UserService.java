@@ -10,21 +10,30 @@
 package com.project.irunyou.data.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.irunyou.data.dto.GetUserResponseDto;
+import com.project.irunyou.data.dto.LoginUserDto;
 import com.project.irunyou.data.dto.PatchUserDto;
 import com.project.irunyou.data.dto.PostUserDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.entity.UserEntity;
 import com.project.irunyou.data.repository.UserRepository;
+import com.project.irunyou.security.TokenProvider;
 
 @Service
 public class UserService {
 	
 	// 레파지토리 선언
 	@Autowired UserRepository userRepository;
+	@Autowired TokenProvider tokenProvider;
+	
+	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 //	public boolean existsByEmail(String email) {
 //		return true;
@@ -127,6 +136,49 @@ public class UserService {
 			return null;
 		}
 		return user;
+	}
+	
+	//// 홍지혜
+	public UserEntity create(UserEntity userEntity) {
+		if(userEntity == null || userEntity.getEmail() == null) {	// null값 확인
+			throw new RuntimeException("대충 오류라는 영어");
+		}
+		String email = userEntity.getEmail();
+		if(userRepository.existsByEmail(email)) {
+			throw new RuntimeException("대충 이메일 존재한다는 내용");
+		}
+		
+		return userRepository.save(userEntity);
+	}
+	
+	// 2023-01-25 홍지혜
+	public UserEntity getByCredentials(String email, String password, PasswordEncoder encoder) {
+		/*
+		 * BCryp어쩌구 인코더는 같은 값을 인코딩하더라도 할 떄마다 값이 다름 -> 의미 없는 값 랜덤 Salt -> Salting
+		 * 유저에게 받은 패스워드를 인코딩해도 데이터베이스에 저장한 패스워드와는 다를 확률이 높음
+		 * 전용 일치 여부 메서드 matches() : Salt고려 두 값 비교
+		 */
+		UserEntity originalUser = userRepository.findByEmail(email);
+		if(originalUser == null && !encoder.matches(password, originalUser.getPassword())) {
+			return null;
+		}
+		return originalUser;
+	}
+	
+	// 로그인 service
+	public ResponseEntity<?> LoginUser(UserEntity user) {		
+		if (user == null) {	// 해당 유저 정보 없음
+			return new ResponseEntity<String>("login failed", HttpStatus.BAD_REQUEST);
+		} else { // 유저정보가 존재함
+			// 토큰 생성
+			String token = tokenProvider.create(user);
+			LoginUserDto responseUser = LoginUserDto.builder()
+					.email(user.getEmail())
+					.password(user.getPassword())
+					.token(token).build();
+			return new ResponseEntity<LoginUserDto>(responseUser, HttpStatus.OK);
+		}
+
 	}
 
 }
