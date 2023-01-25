@@ -121,8 +121,12 @@ public class UserService {
 //	PhoneNum 언더바 인식 못하므로 나중에 수정 요망
 	private UserEntity findByPhoneNum(String phone) {
 		UserEntity user;
+		
+		String phoneNum = phone.replaceAll("-", "");
+		
+		
 		try {
-			user = userRepository.findByPhoneNumber(phone);
+			user = userRepository.findByPhoneNumber(phoneNum);
 		} catch (Exception e) {
 			return null;
 		}
