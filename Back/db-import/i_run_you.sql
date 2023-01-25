@@ -22,7 +22,7 @@ USE `i_run_you`;
 -- 테이블 i_run_you.comment 구조 내보내기
 CREATE TABLE IF NOT EXISTS `comment` (
   `commentIndex` int NOT NULL AUTO_INCREMENT,
-  `schedulIndex` int NOT NULL,
+  `scheduleIndex` int NOT NULL,
   `writerIndex` int NOT NULL,
   `content` varchar(400) NOT NULL,
   `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -2345,13 +2345,13 @@ INSERT INTO `park` (`parkIndex`, `name`, `address`, `latitude`, `longitude`, `ar
 
 -- 테이블 i_run_you.run_schedule 구조 내보내기
 CREATE TABLE IF NOT EXISTS `run_schedule` (
-  `schedulIndex` int NOT NULL AUTO_INCREMENT,
+  `scheduleIndex` int NOT NULL AUTO_INCREMENT,
   `park` int NOT NULL,
   `title` varchar(45) NOT NULL,
   `writerIndex` int NOT NULL,
   `datetime` datetime NOT NULL,
   `content` varchar(1000) NOT NULL,
-  PRIMARY KEY (`schedulIndex`)
+  PRIMARY KEY (`scheduleIndex`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 테이블 데이터 i_run_you.run_schedule:~0 rows (대략적) 내보내기
