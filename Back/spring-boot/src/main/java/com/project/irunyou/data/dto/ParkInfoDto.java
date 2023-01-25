@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class ParkInfoDto {
 
 		@NotNull
-    	private int park_idx;
+    	private int parkIndex;
 	    @NotNull
 	    private String name;
 	    @NotNull
@@ -33,7 +33,7 @@ public class ParkInfoDto {
 	    private int area;
 	    
 	    public ParkInfoDto(ParkEntity parkEntity) {
-	    	this.park_idx = parkEntity.getPark_idx();
+	    	this.parkIndex = parkEntity.getParkIndex();
 	    	this.name = parkEntity.getName();
 	    	this.address = parkEntity.getAddress();
 	    	this.latitude = parkEntity.getLatitude();

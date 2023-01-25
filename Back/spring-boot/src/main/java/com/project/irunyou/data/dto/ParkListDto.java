@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class ParkListDto {
 
 	@NotNull
-    private int park_idx;
+    private int parkIndex;
 	@NotNull
     private String name;
     @NotNull
@@ -25,7 +25,7 @@ public class ParkListDto {
 	
     public ParkListDto (ParkEntity park, double dist) {
     	this.distance = dist;
-    	this.park_idx = park.getPark_idx();
+    	this.parkIndex = park.getParkIndex();
     	this.name = park.getName();
     	this.address = park.getAddress();
     }

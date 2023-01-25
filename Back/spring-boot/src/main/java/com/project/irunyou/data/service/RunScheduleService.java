@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.project.irunyou.data.dto.FindRunScheduleDto;
@@ -77,7 +78,7 @@ public class RunScheduleService {
 		UserEntity user = userRepository.findByEmail(dto.getUserEmail());
 		List<GetUserRunScheduleDto> data = new ArrayList<>();
 		try {
-			List<RunScheduleEntity> scheduleList = scheduleRepository.findAllByWriterid(user.getUser_idx());
+			List<RunScheduleEntity> scheduleList = scheduleRepository.findAllByWriterIndex(user.getUserIndex());
 			for(RunScheduleEntity r : scheduleList) {
 				data.add(new GetUserRunScheduleDto(r));
 			}
@@ -90,7 +91,7 @@ public class RunScheduleService {
 	
 	// 일정 수정
 	public ResponseDto<GetUserRunScheduleDto> patchSchedule(PatchScheduleDto dto) {
-		int schIdx = dto.getSch_idx();
+		int schIdx = dto.getSchedulIndex();
 		RunScheduleEntity patchSchedule = null;
 		try {
 			patchSchedule = scheduleRepository.findById(schIdx).get();
@@ -110,7 +111,7 @@ public class RunScheduleService {
 	
 	// 일정 삭제
 	public ResponseDto<ResultResponseDto> deleteSchedule(FindRunScheduleDto dto) {
-		int schIdx = dto.getSch_idx();
+		int schIdx = dto.getSchdulIndex();
 		try {
 			RunScheduleEntity deleteSchedule = scheduleRepository.findById(schIdx).get();
 		} catch(Exception e) {

@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 public class CommentDto {
 
 	@NotNull
-    private int writer_user;
+    private int writerIndex;
 	@NotNull
-    private int sch_idx;
+    private int schedulIndex;
 	@NotNull
     private String content;
 	

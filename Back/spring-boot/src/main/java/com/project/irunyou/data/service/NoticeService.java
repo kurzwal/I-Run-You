@@ -45,7 +45,7 @@ public class NoticeService {
 	// 공지사항 수정
 	public ResponseDto<NoticeDto> updateNotice(NoticeDto dto) {
 //		String title = dto.getTitle();
-		int idx = dto.getNotice_idx();
+		int idx = dto.getNoticeIndex();
 		NoticeBoardEntity notice = null;
 		System.out.println(idx);
 		try {
@@ -70,7 +70,7 @@ public class NoticeService {
 		} catch (Exception e) {
 			return ResponseDto.setFailed("해당 공지사항이 없습니다.");
 		}
-		noticeRepository.deleteById(notice.getNotice_idx());
+		noticeRepository.deleteById(notice.getNoticeIndex());
 		return ResponseDto.setSuccess("삭제 되었습니다.", new ResultResponseDto(true));
 	}
 

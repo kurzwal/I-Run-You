@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class DeleteCommentDto {
 	
-	private int com_idx;
-	private int sch_idx;
-	private int writer_user;
+	private int commentIndex;
+	private int scheduleIndex;
+	private int writerIndex;
 
 }

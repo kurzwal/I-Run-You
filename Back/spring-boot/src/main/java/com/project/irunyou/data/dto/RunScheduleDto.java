@@ -30,7 +30,7 @@ public class RunScheduleDto {
 	@NotNull
 	private String title;
 	@NotNull
-	private int writerId;
+	private int writerIndex;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
 	//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime datetime;

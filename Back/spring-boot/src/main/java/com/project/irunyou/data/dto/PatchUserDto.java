@@ -18,5 +18,5 @@ import lombok.NoArgsConstructor;
 public class PatchUserDto {
 	private String email;
 	private String address;
-	private String phone_num;
+	private String phoneNumber;
 }

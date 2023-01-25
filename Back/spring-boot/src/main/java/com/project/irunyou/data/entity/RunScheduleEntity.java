@@ -5,6 +5,10 @@
  * 업데이트 작성자 : 홍지혜
  * 업데이트 날짜 : datetime 자료형 변경, Dto 생성자 추가
  * 작성날짜 : 2023-01-17
+ * 
+ * 업데이트 작성자 : 홍지혜
+ * 업데이트 날짜 : 2023-01-25
+ * 업데이트 내용 : 컬럼명 변경 (카멜케이스적용, 약자 표기 정자 표기로 변경)
  * */
 package com.project.irunyou.data.entity;
 
@@ -35,12 +39,12 @@ public class RunScheduleEntity {
 
     @Id
     @NotNull
-    private int sch_idx;
+    private int schedulIndex;
     private int park;
     @NotNull
     private String title;
     @NotNull
-    private int writerid;
+    private int writerIndex;
     @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -52,9 +56,11 @@ public class RunScheduleEntity {
     public RunScheduleEntity(RunScheduleDto dto) {
     	this.park = dto.getPark();
     	this.title = dto.getTitle();
-    	this.writerid = dto.getWriterId();
+    	this.writerIndex = dto.getWriterIndex();
     	this.datetime = dto.getDatetime();
     	this.content = dto.getContent();
     }
+    
+    
 
 }

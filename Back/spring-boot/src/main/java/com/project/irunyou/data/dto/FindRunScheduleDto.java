@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FindRunScheduleDto {
-	private int sch_idx;
+	private int schdulIndex;
 }

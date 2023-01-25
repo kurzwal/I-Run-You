@@ -51,7 +51,7 @@ public class UserService {
 				.email(dto.getEmail())
 				.password(dto.getPassword())
 				.address(dto.getAddress() + " " + dto.getAddressDetail())
-				.phone_num(dto.getPhone_num())
+				.phoneNumber(dto.getPhoneNumber())
 				.build();
 		
 		
@@ -78,7 +78,7 @@ public class UserService {
 			return ResponseDto.setFailed("Not Exist User");
 		
 		user.setAddress(dto.getAddress());
-		user.setPhone_num(dto.getPhone_num());
+		user.setPhoneNumber(dto.getPhoneNumber());
 		
 		userRepository.save(user);
 		
@@ -90,7 +90,7 @@ public class UserService {
 		UserEntity user = findByEmail(email);
 		if (user == null)
 			return ResponseDto.setFailed("Not Exist User");
-		int userId = user.getUser_idx();
+		int userId = user.getUserIndex();
 		userRepository.deleteById(userId);
 		
 		return ResponseDto.setSuccess("탈퇴되었습니다.", new ResultResponseDto(true));
@@ -122,7 +122,7 @@ public class UserService {
 	private UserEntity findByPhone_num(String phone) {
 		UserEntity user;
 		try {
-			user = userRepository.findByPhone_num(phone);
+			user = userRepository.findByPhoneNumber(phone);
 		} catch (Exception e) {
 			return null;
 		}

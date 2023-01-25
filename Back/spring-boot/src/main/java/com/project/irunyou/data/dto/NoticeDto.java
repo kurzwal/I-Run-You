@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class NoticeDto {
 	
 	@NotNull
-	private int notice_idx;
+	private int noticeIndex;
 	@NotNull
 	private String title;
 	@NotNull
@@ -32,7 +32,7 @@ public class NoticeDto {
 	private Timestamp datetime;
 	
 	public NoticeDto(NoticeBoardEntity noticeEntity) {
-		this.notice_idx = noticeEntity.getNotice_idx();
+		this.noticeIndex = noticeEntity.getNoticeIndex();
 		this.title = noticeEntity.getTitle();
 		this.content = noticeEntity.getContent();
 		this.datetime = new Timestamp(System.currentTimeMillis());

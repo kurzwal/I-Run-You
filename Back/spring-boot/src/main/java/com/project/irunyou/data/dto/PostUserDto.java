@@ -28,5 +28,5 @@ public class PostUserDto {
 	@NotNull
 	private String addressDetail;
 	@NotNull
-	private String phone_num;
+	private String phoneNumber;
 }

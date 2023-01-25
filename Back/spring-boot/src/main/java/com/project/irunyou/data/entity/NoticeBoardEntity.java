@@ -2,8 +2,9 @@
  * 파일의 역할 : 공지사항 Entity
  * 작성날짜 : 2023-01-17
  * 
- * 업데이트 작성자 : -
- * 업데이트 날짜 : -
+ * 업데이트 작성자 : 홍지혜
+ * 업데이트 날짜 : 2023-01-25
+ * 업데이트 내용 : 컬럼명 변경 (카멜케이스적용, 약자 표기 정자 표기로 변경)
  * */
 package com.project.irunyou.data.entity;
 
@@ -27,7 +28,7 @@ import lombok.NoArgsConstructor;
 @Table(name="notice_board")
 public class NoticeBoardEntity {
 	@Id
-	private int notice_idx;
+	private int noticeIndex;
 	@NotNull
 	private String title;
 	@NotNull

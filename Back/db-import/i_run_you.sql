@@ -21,12 +21,12 @@ USE `i_run_you`;
 
 -- 테이블 i_run_you.comment 구조 내보내기
 CREATE TABLE IF NOT EXISTS `comment` (
-  `com_idx` int NOT NULL AUTO_INCREMENT,
-  `sch_idx` int NOT NULL,
-  `writer_user` int NOT NULL,
+  `commentIndex` int NOT NULL AUTO_INCREMENT,
+  `schedulIndex` int NOT NULL,
+  `writerIndex` int NOT NULL,
   `content` varchar(400) NOT NULL,
   `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`com_idx`)
+  PRIMARY KEY (`commentIndex`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 테이블 데이터 i_run_you.comment:~0 rows (대략적) 내보내기
@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS `comment` (
 
 -- 테이블 i_run_you.level 구조 내보내기
 CREATE TABLE IF NOT EXISTS `level` (
-  `level_idx` int NOT NULL AUTO_INCREMENT,
+  `levelIndex` int NOT NULL AUTO_INCREMENT,
   `img` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`level_idx`)
+  PRIMARY KEY (`levelIndex`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 테이블 데이터 i_run_you.level:~0 rows (대략적) 내보내기
@@ -44,10 +44,10 @@ CREATE TABLE IF NOT EXISTS `level` (
 
 -- 테이블 i_run_you.notice_board 구조 내보내기
 CREATE TABLE IF NOT EXISTS `notice_board` (
-  `notice_idx` int NOT NULL AUTO_INCREMENT,
+  `noticeIndex` int NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
   `content` text NOT NULL,
-  PRIMARY KEY (`notice_idx`)
+  PRIMARY KEY (`noticeIndex`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 테이블 데이터 i_run_you.notice_board:~0 rows (대략적) 내보내기
@@ -55,18 +55,18 @@ CREATE TABLE IF NOT EXISTS `notice_board` (
 
 -- 테이블 i_run_you.park 구조 내보내기
 CREATE TABLE IF NOT EXISTS `park` (
-  `park_idx` int NOT NULL AUTO_INCREMENT,
+  `parkIndex` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `latitude` double NOT NULL,
   `longitude` double NOT NULL,
   `area` int NOT NULL,
-  PRIMARY KEY (`park_idx`)
+  PRIMARY KEY (`parkIndex`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2276 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 테이블 데이터 i_run_you.park:~0 rows (대략적) 내보내기
 -- DELETE FROM `park`;
-INSERT INTO `park` (`park_idx`, `name`, `address`, `latitude`, `longitude`, `area`) VALUES
+INSERT INTO `park` (`parkIndex`, `name`, `address`, `latitude`, `longitude`, `area`) VALUES
 	(1, '남산근린공원', '강원도 강릉시 노암동 643 일원', 37.74662696, 128.8935233, 31217),
 	(2, '교동1근린공원', '강원도 강릉시 교동 산 153-3 일원', 37.76484931, 128.8953987, 79716),
 	(3, '교동2근린공원', '강원도 강릉시 교동 산141번지', 37.76954665, 128.8991973, 107835),
@@ -2345,13 +2345,13 @@ INSERT INTO `park` (`park_idx`, `name`, `address`, `latitude`, `longitude`, `are
 
 -- 테이블 i_run_you.run_schedule 구조 내보내기
 CREATE TABLE IF NOT EXISTS `run_schedule` (
-  `sch_idx` int NOT NULL AUTO_INCREMENT,
+  `schedulIndex` int NOT NULL AUTO_INCREMENT,
   `park` int NOT NULL,
   `title` varchar(45) NOT NULL,
-  `writer_user` int NOT NULL,
+  `writerIndex` int NOT NULL,
   `datetime` datetime NOT NULL,
   `content` varchar(1000) NOT NULL,
-  PRIMARY KEY (`sch_idx`)
+  PRIMARY KEY (`schedulIndex`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 테이블 데이터 i_run_you.run_schedule:~0 rows (대략적) 내보내기
@@ -2359,14 +2359,14 @@ CREATE TABLE IF NOT EXISTS `run_schedule` (
 
 -- 테이블 i_run_you.user 구조 내보내기
 CREATE TABLE IF NOT EXISTS `user` (
-  `user_idx` int NOT NULL AUTO_INCREMENT,
+  `userIndex` int NOT NULL AUTO_INCREMENT,
   `email` varchar(45) NOT NULL,
   `password` varchar(16) NOT NULL,
   `address` varchar(45) DEFAULT NULL,
-  `phone_num` varchar(16) NOT NULL,
+  `phoneNumber` varchar(16) NOT NULL,
   `level` int DEFAULT '1',
-  PRIMARY KEY (`user_idx`),
-  UNIQUE KEY `email` (`email`,`phone_num`)
+  PRIMARY KEY (`userIndex`),
+  UNIQUE KEY `email` (`email`,`phoneNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 테이블 데이터 i_run_you.user:~0 rows (대략적) 내보내기
