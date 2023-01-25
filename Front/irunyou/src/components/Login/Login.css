@@ -1,0 +1,166 @@
+/* 작성자 : 최예정
+ * 파일의 역할 : 로그인 css
+ * 작성날짜 : 2023-01-13
+ * 
+ * 업데이트 작성자 : 최예정
+ * 업데이트 날짜 : 2023-01-19
+ */
+
+ body {
+    margin: 0px;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 100vh;
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    
+    font-size: 50px;
+    font-weight: 600px;
+
+    color: #494e56;
+    text-align: center;
+
+}
+
+fieldset {
+    display: flex;
+    justify-content: center;
+    padding: 0 0 20px 0;
+
+    border: none;
+    box-sizing: border-box;
+}
+
+input {
+    display: flex;
+
+    padding: 0 10px 0 20px;
+
+    border-radius: 10px;
+    border: 1px solid black;
+
+    width: 530px;
+    height: 45px;
+}
+
+.input-border {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 530px;
+
+    overflow: hidden;
+}
+
+.email-input {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid black;
+}
+
+.password-input {
+    border: none;
+}
+
+.box {
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 30px;
+}
+
+.id-save {
+    display: flex;
+    justify-content: left;
+    
+    margin-right: 10px;
+
+    width: 15px;
+}
+
+.email-password-find {
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    
+}
+a:visited {
+    color: black;
+}
+
+.other-login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding : 20px 0;
+
+    height: 30px;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #6d696945;
+
+    width: 40%;
+    height: 1px;
+}
+
+.other-login-text {
+    color: #6d6969bd;
+}
+
+
+.login-signup-button {
+    display: flex;
+    justify-content: space-between;
+    
+    padding-top: 20px;
+}
+
+.other-login-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.google-login {
+    padding-top: 10px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 200px;
+    height: 40px;
+    
+    border: none;
+    box-sizing: border-box;
+    vertical-align: middle;
+    
+    cursor: pointer;
+}
+
+.login-button {
+    background-color: #b6cf55;
+}
+
+.signup-button {
+    background-color: #b6cf55;
+}

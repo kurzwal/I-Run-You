@@ -1,14 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import KakaoMap from './components/KakaoMap';
-import MainMenu from './components/MainMenu'
+import { Routes, Route } from "react-router-dom";
+import LoginView from './components/Login';
+
 
 function App() {
+
   return (
     <div className="App">
-      <KakaoMap></KakaoMap>
-      <MainMenu></MainMenu>
+      <Routes>
+        <Route path="/Signup" element={<LoginView />}  />
+        <Route path="/Login" element={<LoginView />}  />
+      </Routes>
     </div>
   );
 }
