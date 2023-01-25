@@ -32,10 +32,10 @@ public class NoticeService {
 	}
 
 	// 공지사항 조회
-	public ResponseDto<NoticeDto> readNotice(Integer notice_idx) {
+	public ResponseDto<NoticeDto> readNotice(Integer noticeIndex) {
 		NoticeBoardEntity notice;
 		try {
-			notice = noticeRepository.findById(notice_idx).get();
+			notice = noticeRepository.findById(noticeIndex).get();
 		} catch (Exception e) {
 			return null;
 		}
@@ -63,10 +63,10 @@ public class NoticeService {
 	}
 
 	// 공지사항 삭제
-	public ResponseDto<ResultResponseDto> deleteNotice(Integer notice_idx) {
+	public ResponseDto<ResultResponseDto> deleteNotice(Integer noticeIndex) {
 		NoticeBoardEntity notice;
 		try {
-			notice = noticeRepository.findById(notice_idx).get();
+			notice = noticeRepository.findById(noticeIndex).get();
 		} catch (Exception e) {
 			return ResponseDto.setFailed("해당 공지사항이 없습니다.");
 		}
