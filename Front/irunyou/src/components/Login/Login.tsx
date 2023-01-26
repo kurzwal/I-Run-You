@@ -20,7 +20,7 @@ export default function Login() {
                 </div>
                 {/* 아이디(이메일), 비밀번호 찾는 링크 */}
                 <div className="email-password-find">
-                    <a href="http://127.0.0.1:5500/Front/vanilla/pages/login/html/IDPW.html">아이디 / 비밀번호 찾기</a>
+                    <Link to="/IDPW">아이디 / 비밀번호 찾기</Link>
                 </div>
                 {/* 간편 로그인 */}
                 <div className="other-login">
@@ -38,7 +38,7 @@ export default function Login() {
                 </div>
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">
-                    <Link to="메인화면">
+                    <Link to="/Login">
                     <button className="login-button button">로그인</button>
                     </Link>
                     <Link to="/Signup">

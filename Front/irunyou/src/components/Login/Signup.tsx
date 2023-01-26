@@ -41,6 +41,8 @@ export default function Signup() {
             <div className="config-input">
                 <input type="text" placeholder="휴대전화" />
             </div>
+
+            {/* onclick을 했을 경우 백으로 전송 */}
         </div>
     </div>
     )
