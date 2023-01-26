@@ -18,6 +18,6 @@ import com.project.irunyou.data.entity.UserEntity;
 public interface NoticeBoardRepository extends JpaRepository<NoticeBoardEntity, Integer>{
 
 	// 메서드 추가
-	public NoticeBoardEntity findByTitle(String title);
+	public NoticeBoardEntity findByNoticeTitle(String title);
 	
 }
