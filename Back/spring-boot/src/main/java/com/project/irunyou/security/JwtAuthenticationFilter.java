@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -65,6 +67,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 			// 서버가 요청이 끝나기 전까지 인증한 사용자의 정보를 갖고 있어야 한다. 
 		} catch(Exception e) {
 			logger.error("token error",e);
+			filterChain.doFilter(request, response);
 		}
 		filterChain.doFilter(request, response);
 	}
