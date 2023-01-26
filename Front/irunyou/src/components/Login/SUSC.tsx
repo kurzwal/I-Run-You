@@ -1,6 +1,13 @@
 import './SUSC.css';
 import { Link } from "react-router-dom";
 
+// 작성자 : 최예정
+// 파일의 역할 : 회원가입 성공 html
+// 작성날짜 : 2023-01-16
+
+// 업데이트 작성자 : -
+// 업데이트 날짜 : -
+
 export default function SUSC() {
     return(
         <div className="susc-container">

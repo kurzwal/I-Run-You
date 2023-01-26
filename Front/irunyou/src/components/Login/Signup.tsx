@@ -3,6 +3,12 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Signup.css';
 
+// 작성자 : 최예정
+// 파일의 역할 : 회원가입 html
+// 작성날짜 : 2023-01-16
+
+// 업데이트 작성자 : 최예정
+// 업데이트 날짜 : 2023-01-26
 
 export default function Signup() {
 

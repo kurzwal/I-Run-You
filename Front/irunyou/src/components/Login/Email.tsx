@@ -1,6 +1,13 @@
 import './Email.css';
 import { Link } from "react-router-dom";
 
+// 작성자 : 최예정
+// 파일의 역할 : 찾은 아이디 표시 html
+// 작성날짜 : 2023-01-26
+
+// 업데이트 작성자 : -
+// 업데이트 날짜 : -
+
 export default function Email() {
     const email = 'asdf@asdf.com';
     return(

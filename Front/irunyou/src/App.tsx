@@ -9,7 +9,12 @@ import EMverifyView from './components/Login/EMverify';
 import EmailView from './components/Login/Email';
 import SUSCView from './components/Login/SUSC';
 
+// 작성자 : 최예정
+// 파일의 역할 : 링크 연결, 백 -> 프론트 GET
+// 작성날짜 : 2023-01-25
 
+// 업데이트 작성자 : 최예정
+// 업데이트 날짜 : 2023-01-26
 
 function App() {
   
@@ -23,18 +28,6 @@ function App() {
       }
     })
   }, []);
-
-  // const User = {
-  //   id,
-  //   password,
-  // }
-
-  // useEffect(() => {
-  //   axios.post('http//localhost:4040/irunyou/', {requestbody에 담아서 백으로 보낼 데이터}=> 데이터).then((response) => {
-  //     const data = response.data;
-  //     alert(data);
-  //   })
-  // }, []);
 
   return (
     <div className="App">
