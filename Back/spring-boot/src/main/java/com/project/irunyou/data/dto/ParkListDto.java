@@ -26,7 +26,7 @@ public class ParkListDto {
     public ParkListDto (ParkEntity park, double dist) {
     	this.distance = dist;
     	this.parkIndex = park.getParkIndex();
-    	this.name = park.getName();
-    	this.address = park.getAddress();
+    	this.name = park.getParkName();
+    	this.address = park.getParkAddress();
     }
 }

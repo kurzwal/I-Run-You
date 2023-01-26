@@ -32,7 +32,7 @@ public class TokenProvider {
 				.signWith(SignatureAlgorithm.HS512, SECRET_KEY)
 				// payload
 				// subject : 토큰의 주인 유일한 식별자
-				.setSubject(userEntity.getEmail())
+				.setSubject(userEntity.getUserEmail())
 				// Issuer : 토큰 발행 주체
 				.setIssuer("I Run You")
 				// Issued at : 토큰 발행 시간 

@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="code")
-@Table(name="code")
-public class CodeEntity {
+@Entity(name="run_schedule_like")
+@Table(name="run_schedule_like")
+public class RunScheduleLikeEntity {
 	@Id
 	@NotNull
-	private String code;
-	@NotNull
-	private String userEmail;
+	private int runScheduleLikeIndex;
+	private int runScheduleIndex;
+	private int userIndex;
 }

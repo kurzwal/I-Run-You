@@ -48,9 +48,9 @@ public class CommentService {
 		comment = CommentEntity
 				.builder()
 				.commentIndex(0)
-				.scheduleIndex(0)
-				.writerIndex(dto.getWriterIndex())
-				.content(dto.getContent())
+				.commentScheduleIndex(0)
+				.commentWriterIndex(dto.getWriterIndex())
+				.commentContent(dto.getContent())
 //				.datetime(timestamp)
 				.build();
 				
@@ -68,8 +68,8 @@ public class CommentService {
 		comment = commentRepository.getById(dto.getCommentIndex());
 		
 		int comIdx = comment.getCommentIndex();
-		int schIdx = comment.getScheduleIndex();
-		int writerUser = comment.getWriterIndex();
+		int schIdx = comment.getCommentScheduleIndex();
+		int writerUser = comment.getCommentWriterIndex();
 		
 		int delcomIdx = dto.getCommentIndex();
 		int delschIdx = dto.getScheduleIndex();

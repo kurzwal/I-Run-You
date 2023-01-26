@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `comment_writer_index` int NOT NULL,
   `comment_content` varchar(400) NOT NULL,
   `comment_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `comment_like_user` int default 0,
   PRIMARY KEY (`comment_index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -2351,6 +2352,7 @@ CREATE TABLE IF NOT EXISTS `run_schedule` (
   `run_schedule_writer_index` int NOT NULL,
   `run_schedule_datetime` datetime NOT NULL,
   `run_schedule_content` varchar(1000) NOT NULL,
+  `run_schedule_like_user` int default 0,
   PRIMARY KEY (`run_schedule_index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -2363,8 +2365,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user_email` varchar(45) NOT NULL,
   `user_password` varchar(16) NOT NULL,
   `user_address` varchar(45) DEFAULT NULL,
+  `user_address_detail` int default null,
   `user_phone_number` varchar(16) NOT NULL,
   `user_level` int DEFAULT '1',
+  `user_join_date` datetime not null,
   PRIMARY KEY (`user_index`),
   UNIQUE KEY `user_email` (`user_email`,`user_phone_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -2374,6 +2378,29 @@ CREATE TABLE IF NOT EXISTS `code` (
   `code` varchar(10) NOT NULL,
   `user_email` varchar(45) NOT NULL,
   PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 테이블 i_run_you.user 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_address_detail` (
+`user_address_detail_index` int not null auto_increment,
+  `user_index` int NOT NULL,
+  `user_address_detail` varchar(45),
+  `user_poastal_code` int,
+  PRIMARY KEY (`user_address_detail_index`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+create table if not exists `run_schedule_like` (
+	`run_schedule_like_index` int not null auto_increment,
+	`run_schedule_index` int not null,
+    `user_index` int not null,
+	primary key (`run_schedule_like_index`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+create table if not exists `comment_like` (
+	`comment_like_index` int not null auto_increment,
+	`commnet_index` int not null,
+    `user_index` int not null,
+	primary key (`comment_like_index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 테이블 데이터 i_run_you.user:~0 rows (대략적) 내보내기

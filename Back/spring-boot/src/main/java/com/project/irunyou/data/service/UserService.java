@@ -57,10 +57,10 @@ public class UserService {
 		
 		user = UserEntity
 				.builder()
-				.email(dto.getEmail())
-				.password(dto.getPassword())
-				.address(dto.getAddress() + " " + dto.getAddressDetail())
-				.phoneNumber(dto.getPhoneNumber())
+				.userEmail(dto.getEmail())
+				.userPassword(dto.getPassword())
+				.userAddress(dto.getAddress() + " " + dto.getAddressDetail())
+				.userPhoneNumber(dto.getPhoneNumber())
 				.build();
 		
 		
@@ -86,8 +86,8 @@ public class UserService {
 		if (user == null)
 			return ResponseDto.setFailed("Not Exist User");
 		
-		user.setAddress(dto.getAddress());
-		user.setPhoneNumber(dto.getPhoneNumber());
+		user.setUserAddress(dto.getAddress());
+		user.setUserPhoneNumber(dto.getPhoneNumber());
 		
 		userRepository.save(user);
 		
@@ -140,10 +140,10 @@ public class UserService {
 	
 	//// 홍지혜
 	public UserEntity create(UserEntity userEntity) {
-		if(userEntity == null || userEntity.getEmail() == null) {	// null값 확인
+		if(userEntity == null || userEntity.getUserEmail() == null) {	// null값 확인
 			throw new RuntimeException("대충 오류라는 영어");
 		}
-		String email = userEntity.getEmail();
+		String email = userEntity.getUserEmail();
 		if(userRepository.existsByEmail(email)) {
 			throw new RuntimeException("대충 이메일 존재한다는 내용");
 		}
@@ -159,7 +159,7 @@ public class UserService {
 		 * 전용 일치 여부 메서드 matches() : Salt고려 두 값 비교
 		 */
 		UserEntity originalUser = userRepository.findByEmail(email);
-		if(originalUser == null && !encoder.matches(password, originalUser.getPassword())) {
+		if(originalUser == null && !encoder.matches(password, originalUser.getUserPassword())) {
 			return null;
 		}
 		return originalUser;
@@ -173,8 +173,8 @@ public class UserService {
 			// 토큰 생성
 			String token = tokenProvider.create(user);
 			LoginUserDto responseUser = LoginUserDto.builder()
-					.email(user.getEmail())
-					.password(user.getPassword())
+					.email(user.getUserEmail())
+					.password(user.getUserPassword())
 					.token(token).build();
 			return new ResponseEntity<LoginUserDto>(responseUser, HttpStatus.OK);
 		}

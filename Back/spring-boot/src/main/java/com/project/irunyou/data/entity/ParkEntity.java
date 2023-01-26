@@ -27,13 +27,13 @@ public class ParkEntity {
     @NotNull
     private int parkIndex;
     @NotNull
-    private String name;
+    private String parkName;
     @NotNull
-    private String address;
+    private String parkAddress;
     @NotNull
-    private double latitude;
+    private double parkLatitude;
     @NotNull
-    private double longitude;
+    private double parkLongitude;
     @NotNull
-    private int area;
+    private int parkArea;
 }

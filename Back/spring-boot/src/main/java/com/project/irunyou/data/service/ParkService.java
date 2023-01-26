@@ -35,11 +35,11 @@ public class ParkService {
 		
 		ParkInfoDto result;
 		result = ParkInfoDto.builder()
-				.address(park.getAddress())
-				.area(park.getArea())
-				.latitude(park.getLatitude())
-				.longitude(park.getLongitude())
-				.name(park.getName())
+				.address(park.getParkAddress())
+				.area(park.getParkArea())
+				.latitude(park.getParkLatitude())
+				.longitude(park.getParkLongitude())
+				.name(park.getParkName())
 				.build();
 		
 		return ResponseDto.setSuccess("Load Success", result);

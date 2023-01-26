@@ -30,9 +30,9 @@ public class NoticeBoardEntity {
 	@Id
 	private int noticeIndex;
 	@NotNull
-	private String title;
+	private String noticeTitle;
 	@NotNull
-	private String content;
+	private String noticeContent;
 //	@NotNull
 //	private Timestamp datetime;
 }
