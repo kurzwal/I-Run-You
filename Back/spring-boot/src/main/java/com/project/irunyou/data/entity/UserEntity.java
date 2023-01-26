@@ -36,7 +36,7 @@ public class UserEntity {
     @NotNull
     private String userPassword;
     private String userAddress;
-    private int userAddressDetail;
+    private String userAddressDetail;
     @NotNull
     private String userPhoneNumber;
     private int userLevel;

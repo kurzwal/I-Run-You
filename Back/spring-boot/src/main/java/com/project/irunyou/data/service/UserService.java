@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.project.irunyou.data.dto.GetUserResponseDto;
 import com.project.irunyou.data.dto.LoginUserDto;
@@ -32,6 +33,7 @@ public class UserService {
 	// 레파지토리 선언
 	@Autowired UserRepository userRepository;
 	@Autowired TokenProvider tokenProvider;
+	@Autowired ResgisterMailService mailService;
 	
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
@@ -180,5 +182,37 @@ public class UserService {
 		}
 
 	}
+	
+	// pw찾기 0126 황석민 (하는중)
+		public ResponseDto<ResultResponseDto> findPw (FindPasswordDto dto) {
+			// 전화번호 하고 이메일 입력 검증 
+			String email = dto.getEmail();
+			String phoneNumber = dto.getPhoneNumber();
+			// 둘중 하나라도 정상이 아니면 ResponseDto Failed 반환
+			if (!StringUtils.hasText(email) || !StringUtils.hasText(phoneNumber)) {
+				return ResponseDto.setFailed("빈값입니다.");
+			}
+			// 데이터베이스에서 해당 이메일과 전화번호를 조건으로 검색
+			UserEntity userEntity = userRepository.findByEmailAndPhoneNumber(email, phoneNumber);
+			// 존재하지 않으면 존재하지 않는 다는 ResponseDto 반환
+			if (userEntity == null) {
+				return ResponseDto.setFailed("입력정보가 존재하지 않습니다.");
+			}
+			
+			// sendMail 하고 결과로 받은 code를 데이터베이스에 저장
+			try {
+				String code = mailService.sendMail(email);
+				// TODO 보낸 코드를 데이터베이스에 저장
+				
+				// Code Entity 생성 (email, code 기준으로)
+				
+				// 생성된 Entity를 CodeRepository에 save
+				
+			} catch(Exception exception) {
+				return ResponseDto.setFailed("코드 전송 또는 저장에 실패했습니다.");
+			}
+			// 성공하면 ResponseDto Successed 반환
+			return ResponseDto.setSuccess("메일 전송에 성공했습니다.", new ResultResponseDto(true));
+		}
 
 }

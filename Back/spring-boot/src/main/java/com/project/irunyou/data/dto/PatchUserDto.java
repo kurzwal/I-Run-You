@@ -18,5 +18,6 @@ import lombok.NoArgsConstructor;
 public class PatchUserDto {
 	private String userEmail;
 	private String userAddress;
+	private String userAddressDetail;
 	private String userPhoneNumber;
 }

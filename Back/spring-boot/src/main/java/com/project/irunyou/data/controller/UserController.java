@@ -80,7 +80,12 @@ public class UserController {
 	}
 	
 	// pw찾기
-	
+	// request method가 Post이고 end point는 findPw
+		@PostMapping("findPw")
+		public ResponseDto<ResultResponseDto> findPw (@RequestBody FindPasswordDto requestBody) {
+			// 비즈니스 로직에 대한 결과 반환
+			return userService.findPw(requestBody);
+		}
 	
 
 	

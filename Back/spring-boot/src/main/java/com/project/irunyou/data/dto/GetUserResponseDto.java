@@ -21,6 +21,7 @@ public class GetUserResponseDto {
 	private int userIndex;
 	private String userEmail;
 	private String userAddress;
+	private String userAddressDetail;
 //	private String phone_num;
 	private int userLevel;
 	
@@ -29,6 +30,7 @@ public class GetUserResponseDto {
 		this.userIndex = user.getUserIndex();
 		this.userEmail = user.getUserEmail();
 		this.userAddress = user.getUserAddress();
+		this.userAddressDetail = user.getUserAddressDetail();
 //		this.phone_num = user.getPhone_num();
 		this.userLevel = user.getUserLevel();
 	}
