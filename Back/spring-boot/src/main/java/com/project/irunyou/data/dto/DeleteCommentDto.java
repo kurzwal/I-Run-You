@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class DeleteCommentDto {
 	
 	private int commentIndex;
-	private int scheduleIndex;
-	private int writerIndex;
+	private int commentScheduleIndex;
+	private int commentWriterIndex;
 
 }

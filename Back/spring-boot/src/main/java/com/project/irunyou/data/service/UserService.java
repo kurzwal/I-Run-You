@@ -41,15 +41,15 @@ public class UserService {
 	
 	public ResponseDto<ResultResponseDto> signUpUser(PostUserDto dto) {
 		// email중복확인, 등록가능한 이메일 여부 확인
-		String email = dto.getEmail();
+		String email = dto.getUserEmail();
 		UserEntity user;
 //		if (!existsByEmail(email)) 
 //			return ResponseDto.setFailed("이미 가입된 email 입니다.");
 		if (userRepository.existsByEmail(email)) 
 			return ResponseDto.setFailed("이미 가입된 email 입니다.");
 		
-		String password = dto.getPassword();
-		String password2 = dto.getPassword2();
+		String password = dto.getUserPassword();
+		String password2 = dto.getUserPassword2();
 
 		if (!password.equals(password2)) {
 			return ResponseDto.setFailed("비밀번호를 다시 확인해주세요");
@@ -57,10 +57,10 @@ public class UserService {
 		
 		user = UserEntity
 				.builder()
-				.userEmail(dto.getEmail())
-				.userPassword(dto.getPassword())
-				.userAddress(dto.getAddress() + " " + dto.getAddressDetail())
-				.userPhoneNumber(dto.getPhoneNumber())
+				.userEmail(dto.getUserEmail())
+				.userPassword(dto.getUserPassword())
+				.userAddress(dto.getUserAddress() + " " + dto.getUserAddressDetail())
+				.userPhoneNumber(dto.getUserPhoneNumber())
 				.build();
 		
 		
@@ -80,14 +80,14 @@ public class UserService {
 
 	public ResponseDto<GetUserResponseDto> updateUser(PatchUserDto dto) {
 		// email, pw확인후 정보수정가능하게
-		String email = dto.getEmail();
+		String email = dto.getUserEmail();
 		
 		UserEntity user = findByEmail(email);
 		if (user == null)
 			return ResponseDto.setFailed("Not Exist User");
 		
-		user.setUserAddress(dto.getAddress());
-		user.setUserPhoneNumber(dto.getPhoneNumber());
+		user.setUserAddress(dto.getUserAddress());
+		user.setUserPhoneNumber(dto.getUserPhoneNumber());
 		
 		userRepository.save(user);
 		
@@ -173,9 +173,9 @@ public class UserService {
 			// 토큰 생성
 			String token = tokenProvider.create(user);
 			LoginUserDto responseUser = LoginUserDto.builder()
-					.email(user.getUserEmail())
-					.password(user.getUserPassword())
-					.token(token).build();
+					.userEmail(user.getUserEmail())
+					.userPassword(user.getUserPassword())
+					.userToken(token).build();
 			return new ResponseEntity<LoginUserDto>(responseUser, HttpStatus.OK);
 		}
 

@@ -22,14 +22,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetUserRunScheduleDto {
-	private int park;
-	private String title;
-	private LocalDateTime datetime;
+	private int runSchedulePark;
+	private String runScheduleTitle;
+	private LocalDateTime runScheduleDatetime;
 	
 	// 일정 조회 서비스용 생성자
 	public GetUserRunScheduleDto(RunScheduleEntity runSchedule) {
-		this.park = runSchedule.getRunSchedulePark();
-		this.title = runSchedule.getRunScheduleTitle();
-		this.datetime = runSchedule.getRunScheduleDatetime();
+		this.runSchedulePark = runSchedule.getRunSchedulePark();
+		this.runScheduleTitle = runSchedule.getRunScheduleTitle();
+		this.runScheduleDatetime = runSchedule.getRunScheduleDatetime();
 	}
 }

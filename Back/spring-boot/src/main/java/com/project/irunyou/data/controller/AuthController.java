@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.irunyou.data.dto.LoginUserDto;
 import com.project.irunyou.data.entity.UserEntity;
 import com.project.irunyou.data.service.UserService;
-import com.project.irunyou.security.TokenProvider;
 
 // 2023-01-25 홍지혜
 @RestController
@@ -33,7 +32,7 @@ public class AuthController {
 	public ResponseEntity<?> LoginUser(@RequestBody LoginUserDto dto) {
 		UserEntity user = null;
 		try {
-			user = userService.getByCredentials(dto.getEmail(), dto.getPassword(), passwordEncoder);
+			user = userService.getByCredentials(dto.getUserEmail(), dto.getUserPassword(), passwordEncoder);
 		} catch (Exception e) {
 			// 해당 유저가 존재하지 않음
 			return new ResponseEntity<String>("User information does not exist.", HttpStatus.BAD_REQUEST);

@@ -18,15 +18,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PostUserDto {
 	@NotNull
-	private String email;
+	private String userEmail;
 	@NotNull
-	private String password;
+	private String userPassword;
 	@NotNull
-	private String password2;
+	private String userPassword2;
 	@NotNull
-	private String address;
+	private String userAddress;
 	@NotNull
-	private String addressDetail;
+	private String userAddressDetail;
 	@NotNull
-	private String phoneNumber;
+	private String userPhoneNumber;
 }

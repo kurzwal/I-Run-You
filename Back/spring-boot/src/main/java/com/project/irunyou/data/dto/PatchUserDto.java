@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatchUserDto {
-	private String email;
-	private String address;
-	private String phoneNumber;
+	private String userEmail;
+	private String userAddress;
+	private String userPhoneNumber;
 }

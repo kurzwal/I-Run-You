@@ -25,16 +25,16 @@ public class NoticeDto {
 	@NotNull
 	private int noticeIndex;
 	@NotNull
-	private String title;
+	private String noticeTitle;
 	@NotNull
-	private String content;
+	private String noticeContent;
 	@NotNull
 	private Timestamp datetime;
 	
 	public NoticeDto(NoticeBoardEntity noticeEntity) {
 		this.noticeIndex = noticeEntity.getNoticeIndex();
-		this.title = noticeEntity.getNoticeTitle();
-		this.content = noticeEntity.getNoticeContent();
+		this.noticeTitle = noticeEntity.getNoticeTitle();
+		this.noticeContent = noticeEntity.getNoticeContent();
 		this.datetime = new Timestamp(System.currentTimeMillis());
 	}
 	

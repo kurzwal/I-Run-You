@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class MyLocationDto {
 
     @NotNull
-    private double latitude;
+    private double userLatitude;
     @NotNull
-    private double longitude;
+    private double userLongitude;
 	
 }

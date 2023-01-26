@@ -31,17 +31,17 @@ public class CommentService {
 		CommentEntity comment;
 		
 		int writerNum;
-		writerNum = dto.getWriterIndex();
+		writerNum = dto.getCommentWriterIndex();
 		CommentResponseDto result;
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		
 		result = CommentResponseDto
 				.builder()
 				.commentIndex(0)
-				.scheduleIndex(0)
-				.writerIndex(dto.getWriterIndex())
-				.content(dto.getContent())
-				.datetime(timestamp)
+				.commentScheduleIndex(0)
+				.commentWriterIndex(dto.getCommentWriterIndex())
+				.commentContent(dto.getCommentContent())
+				.commentDatetime(timestamp)
 				.build();
 		
 		
@@ -49,8 +49,8 @@ public class CommentService {
 				.builder()
 				.commentIndex(0)
 				.commentScheduleIndex(0)
-				.commentWriterIndex(dto.getWriterIndex())
-				.commentContent(dto.getContent())
+				.commentWriterIndex(dto.getCommentWriterIndex())
+				.commentContent(dto.getCommentContent())
 //				.datetime(timestamp)
 				.build();
 				
@@ -72,8 +72,8 @@ public class CommentService {
 		int writerUser = comment.getCommentWriterIndex();
 		
 		int delcomIdx = dto.getCommentIndex();
-		int delschIdx = dto.getScheduleIndex();
-		int delwriterUser = dto.getWriterIndex();
+		int delschIdx = dto.getCommentScheduleIndex();
+		int delwriterUser = dto.getCommentWriterIndex();
 		
 		if((comIdx == delcomIdx) & (schIdx == delschIdx) & (writerUser == delwriterUser)) {
 			commentRepository.deleteById(delcomIdx);

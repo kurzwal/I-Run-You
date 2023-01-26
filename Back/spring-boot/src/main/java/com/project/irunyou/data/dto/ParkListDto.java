@@ -17,16 +17,16 @@ public class ParkListDto {
 	@NotNull
     private int parkIndex;
 	@NotNull
-    private String name;
+    private String parkName;
     @NotNull
-    private String address;
+    private String parkAddress;
     @NotNull
     private double distance;
 	
     public ParkListDto (ParkEntity park, double dist) {
     	this.distance = dist;
     	this.parkIndex = park.getParkIndex();
-    	this.name = park.getParkName();
-    	this.address = park.getParkAddress();
+    	this.parkName = park.getParkName();
+    	this.parkAddress = park.getParkAddress();
     }
 }

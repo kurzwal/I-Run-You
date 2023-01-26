@@ -22,23 +22,23 @@ public class ParkInfoDto {
 		@NotNull
     	private int parkIndex;
 	    @NotNull
-	    private String name;
+	    private String parkName;
 	    @NotNull
-	    private String address;
+	    private String parkAddress;
 	    @NotNull
-	    private double latitude;
+	    private double parkLatitude;
 	    @NotNull
-	    private double longitude;
+	    private double parkLongitude;
 	    @NotNull
-	    private int area;
+	    private int parkArea;
 	    
 	    public ParkInfoDto(ParkEntity parkEntity) {
 	    	this.parkIndex = parkEntity.getParkIndex();
-	    	this.name = parkEntity.getParkName();
-	    	this.address = parkEntity.getParkAddress();
-	    	this.latitude = parkEntity.getParkLatitude();
-	    	this.longitude = parkEntity.getParkLongitude();
-	    	this.area = parkEntity.getParkArea();
+	    	this.parkName = parkEntity.getParkName();
+	    	this.parkAddress = parkEntity.getParkAddress();
+	    	this.parkLatitude = parkEntity.getParkLatitude();
+	    	this.parkLongitude = parkEntity.getParkLongitude();
+	    	this.parkArea = parkEntity.getParkArea();
 	    }
 	    
 }

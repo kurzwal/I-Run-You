@@ -20,8 +20,8 @@ public class NoticeService {
 	// 공지사항 등록
 	public ResponseDto<NoticeDto> createNotice(NoticeDto dto) {
 
-		String title = dto.getTitle();
-		String content = dto.getContent();
+		String title = dto.getNoticeTitle();
+		String content = dto.getNoticeContent();
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 		NoticeBoardEntity notice = NoticeBoardEntity.builder().noticeTitle(title).noticeContent(content).build();
@@ -54,8 +54,8 @@ public class NoticeService {
 			if (notice == null)
 				return ResponseDto.setFailed("찾으시는 사항이 없습니다.");
 		}
-		notice.setNoticeTitle(dto.getTitle());
-		notice.setNoticeContent(dto.getContent());
+		notice.setNoticeTitle(dto.getNoticeTitle());
+		notice.setNoticeContent(dto.getNoticeContent());
 
 		noticeRepository.save(notice);
 

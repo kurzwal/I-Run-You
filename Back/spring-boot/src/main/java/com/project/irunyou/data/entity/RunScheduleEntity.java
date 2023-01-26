@@ -55,11 +55,11 @@ public class RunScheduleEntity {
     
     // 일정 등록용 생성자
     public RunScheduleEntity(RunScheduleDto dto) {
-    	this.runSchedulePark = dto.getPark();
-    	this.runScheduleTitle = dto.getTitle();
-    	this.runScheduleWriterIndex = dto.getWriterIndex();
-    	this.runScheduleDatetime = dto.getDatetime();
-    	this.runScheduleContent = dto.getContent();
+    	this.runSchedulePark = dto.getRunSchedulePark();
+    	this.runScheduleTitle = dto.getRunScheduleTitle();
+    	this.runScheduleWriterIndex = dto.getRunScheduleWriterIndex();
+    	this.runScheduleDatetime = dto.getRunScheduleDatetime();
+    	this.runScheduleContent = dto.getRunScheduleContent();
     }
     
     

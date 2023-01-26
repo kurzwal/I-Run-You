@@ -18,12 +18,12 @@ public class CommentResponseDto {
 	@NotNull
     private int commentIndex;
     @NotNull
-    private int scheduleIndex;
+    private int commentScheduleIndex;
     @NotNull
-    private int writerIndex;
+    private int commentWriterIndex;
     @NotNull
-    private String content;
+    private String commentContent;
     @NotNull
-    private Timestamp datetime;
+    private Timestamp commentDatetime;
 	
 }

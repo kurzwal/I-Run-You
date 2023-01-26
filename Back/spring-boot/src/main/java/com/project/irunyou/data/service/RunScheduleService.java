@@ -91,7 +91,7 @@ public class RunScheduleService {
 	
 	// 일정 수정
 	public ResponseDto<GetUserRunScheduleDto> patchSchedule(PatchScheduleDto dto) {
-		int schIdx = dto.getScheduleIndex();
+		int schIdx = dto.getRunScheduleIndex();
 		RunScheduleEntity patchSchedule = null;
 		try {
 			patchSchedule = scheduleRepository.findById(schIdx).get();
@@ -99,9 +99,9 @@ public class RunScheduleService {
 			return ResponseDto.setFailed("해당 일정이 존재하지 않습니다.");
 		}
 		
-		patchSchedule.setRunScheduleTitle(dto.getTitle());
-		patchSchedule.setRunScheduleDatetime(dto.getDatetime());
-		patchSchedule.setRunScheduleContent(dto.getContent());
+		patchSchedule.setRunScheduleTitle(dto.getRunScheduleTitle());
+		patchSchedule.setRunScheduleDatetime(dto.getRunScheduleDatetime());
+		patchSchedule.setRunScheduleContent(dto.getRunScheduleContent());
 		
 		scheduleRepository.save(patchSchedule);
 		
@@ -111,7 +111,7 @@ public class RunScheduleService {
 	
 	// 일정 삭제
 	public ResponseDto<ResultResponseDto> deleteSchedule(FindRunScheduleDto dto) {
-		int schIdx = dto.getSchduleIndex();
+		int schIdx = dto.getRunScheduleIndex();
 		try {
 			RunScheduleEntity deleteSchedule = scheduleRepository.findById(schIdx).get();
 		} catch(Exception e) {

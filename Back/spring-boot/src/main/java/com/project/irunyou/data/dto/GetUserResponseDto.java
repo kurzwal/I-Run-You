@@ -19,17 +19,17 @@ import lombok.NoArgsConstructor;
 public class GetUserResponseDto {
 
 	private int userIndex;
-	private String email;
-	private String address;
+	private String userEmail;
+	private String userAddress;
 //	private String phone_num;
-	private int level;
+	private int userLevel;
 	
 	// 생성자 생성, 전화번호는 공개여부 곤란..(생성자 매개변수 명 확인요망)
 	public GetUserResponseDto(UserEntity user) {
 		this.userIndex = user.getUserIndex();
-		this.email = user.getUserEmail();
-		this.address = user.getUserAddress();
+		this.userEmail = user.getUserEmail();
+		this.userAddress = user.getUserAddress();
 //		this.phone_num = user.getPhone_num();
-		this.level = user.getUserLevel();
+		this.userLevel = user.getUserLevel();
 	}
 }
