@@ -17,5 +17,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RunScheduleRepository extends JpaRepository<RunScheduleEntity,Integer>{	
-	public List<RunScheduleEntity> findAllByWriterIndex(int writerIndex);
+	public List<RunScheduleEntity> findAllByrunScheduleWriterIndex(int writerIndex);
 }
