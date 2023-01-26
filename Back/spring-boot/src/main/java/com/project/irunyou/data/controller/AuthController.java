@@ -30,8 +30,14 @@ public class AuthController {
 	// login 요청을 받는 메소드
 	// 요청을 받으면 email과 password를 서비스단의 login 메소드로 넘김
 	@PostMapping("login")
-	public ResponseEntity<?> LoginUser(@RequestBody LoginUserDto dto) {	
-		UserEntity user = userService.getByCredentials(dto.getEmail(),dto.getPassword(),passwordEncoder);
+	public ResponseEntity<?> LoginUser(@RequestBody LoginUserDto dto) {
+		UserEntity user = null;
+		try {
+			user = userService.getByCredentials(dto.getEmail(), dto.getPassword(), passwordEncoder);
+		} catch (Exception e) {
+			// 해당 유저가 존재하지 않음
+			return new ResponseEntity<String>("User information does not exist.", HttpStatus.BAD_REQUEST);
+		}
 		return userService.LoginUser(user);
 	}
 	
