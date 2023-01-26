@@ -36,14 +36,15 @@ public class CommentEntity {
     @NotNull
     private int commentIndex;
     @NotNull
-    private int scheduleIndex;
+    private int commentScheduleIndex;
     @NotNull
-    private int writerIndex;
+    private int commentWriterIndex;
     @NotNull
-    private String content;
+    private String commentContent;
     @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime datetime;
+    private LocalDateTime commentDatetime;
+    private int commentLikeUser;
 
 }

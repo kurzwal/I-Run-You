@@ -28,8 +28,8 @@ public class GetUserRunScheduleDto {
 	
 	// 일정 조회 서비스용 생성자
 	public GetUserRunScheduleDto(RunScheduleEntity runSchedule) {
-		this.park = runSchedule.getPark();
-		this.title = runSchedule.getTitle();
-		this.datetime = runSchedule.getDatetime();
+		this.park = runSchedule.getRunSchedulePark();
+		this.title = runSchedule.getRunScheduleTitle();
+		this.datetime = runSchedule.getRunScheduleDatetime();
 	}
 }

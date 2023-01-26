@@ -33,8 +33,8 @@ public class NoticeDto {
 	
 	public NoticeDto(NoticeBoardEntity noticeEntity) {
 		this.noticeIndex = noticeEntity.getNoticeIndex();
-		this.title = noticeEntity.getTitle();
-		this.content = noticeEntity.getContent();
+		this.title = noticeEntity.getNoticeTitle();
+		this.content = noticeEntity.getNoticeContent();
 		this.datetime = new Timestamp(System.currentTimeMillis());
 	}
 	

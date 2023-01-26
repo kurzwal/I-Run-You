@@ -8,11 +8,14 @@
  * */
 package com.project.irunyou.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,11 +32,15 @@ public class UserEntity {
     @NotNull
     private int userIndex;
     @NotNull
-    private String email;
+    private String userEmail;
     @NotNull
-    private String password;
-    private String address;
+    private String userPassword;
+    private String userAddress;
+    private int userAddressDetail;
     @NotNull
-    private String phoneNumber;
-    private int level;
+    private String userPhoneNumber;
+    private int userLevel;
+    @NotNull
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
+    private LocalDateTime userJoinDate;
 }

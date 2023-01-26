@@ -59,7 +59,7 @@ public class RunScheduleService {
 //				.content(dto.getContent())
 //				.build();
 		
-		RunScheduleEntity runScheduleEntity = new RunScheduleEntity(dto);		
+		RunScheduleEntity runScheduleEntity = new RunScheduleEntity(dto);
 		scheduleRepository.save(runScheduleEntity);
 		
 		
@@ -99,9 +99,9 @@ public class RunScheduleService {
 			return ResponseDto.setFailed("해당 일정이 존재하지 않습니다.");
 		}
 		
-		patchSchedule.setTitle(dto.getTitle());
-		patchSchedule.setDatetime(dto.getDatetime());
-		patchSchedule.setContent(dto.getContent());
+		patchSchedule.setRunScheduleTitle(dto.getTitle());
+		patchSchedule.setRunScheduleDatetime(dto.getDatetime());
+		patchSchedule.setRunScheduleContent(dto.getContent());
 		
 		scheduleRepository.save(patchSchedule);
 		

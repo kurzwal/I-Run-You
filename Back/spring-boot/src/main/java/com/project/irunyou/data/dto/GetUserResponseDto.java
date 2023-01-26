@@ -27,9 +27,9 @@ public class GetUserResponseDto {
 	// 생성자 생성, 전화번호는 공개여부 곤란..(생성자 매개변수 명 확인요망)
 	public GetUserResponseDto(UserEntity user) {
 		this.userIndex = user.getUserIndex();
-		this.email = user.getEmail();
-		this.address = user.getAddress();
+		this.email = user.getUserEmail();
+		this.address = user.getUserAddress();
 //		this.phone_num = user.getPhone_num();
-		this.level = user.getLevel();
+		this.level = user.getUserLevel();
 	}
 }

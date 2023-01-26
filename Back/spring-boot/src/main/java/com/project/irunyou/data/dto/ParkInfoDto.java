@@ -34,11 +34,11 @@ public class ParkInfoDto {
 	    
 	    public ParkInfoDto(ParkEntity parkEntity) {
 	    	this.parkIndex = parkEntity.getParkIndex();
-	    	this.name = parkEntity.getName();
-	    	this.address = parkEntity.getAddress();
-	    	this.latitude = parkEntity.getLatitude();
-	    	this.longitude = parkEntity.getLongitude();
-	    	this.area = parkEntity.getArea();
+	    	this.name = parkEntity.getParkName();
+	    	this.address = parkEntity.getParkAddress();
+	    	this.latitude = parkEntity.getParkLatitude();
+	    	this.longitude = parkEntity.getParkLongitude();
+	    	this.area = parkEntity.getParkArea();
 	    }
 	    
 }

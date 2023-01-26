@@ -39,26 +39,27 @@ public class RunScheduleEntity {
 
     @Id
     @NotNull
-    private int scheduleIndex;
-    private int park;
+    private int runScheduleIndex;
+    private int runSchedulePark;
     @NotNull
-    private String title;
+    private String runScheduleTitle;
     @NotNull
-    private int writerIndex;
+    private int runScheduleWriterIndex;
     @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime datetime;
+    private LocalDateTime runScheduleDatetime;
     @NotNull
-    private String content;
+    private String runScheduleContent;
+    private int runScheduleLikeUser;
     
     // 일정 등록용 생성자
     public RunScheduleEntity(RunScheduleDto dto) {
-    	this.park = dto.getPark();
-    	this.title = dto.getTitle();
-    	this.writerIndex = dto.getWriterIndex();
-    	this.datetime = dto.getDatetime();
-    	this.content = dto.getContent();
+    	this.runSchedulePark = dto.getPark();
+    	this.runScheduleTitle = dto.getTitle();
+    	this.runScheduleWriterIndex = dto.getWriterIndex();
+    	this.runScheduleDatetime = dto.getDatetime();
+    	this.runScheduleContent = dto.getContent();
     }
     
     

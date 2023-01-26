@@ -15,12 +15,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="code")
-@Table(name="code")
-public class CodeEntity {
+@Entity(name="user_address_detail")
+@Table(name="user_address_detail")
+public class UserAddressDetailEntity {
 	@Id
 	@NotNull
-	private String code;
+	private int userAddressDetailIndex;
 	@NotNull
-	private String userEmail;
+	private int userIndex;
+	private String userAddressDetail;
+	private String userPoastalCode;
 }
