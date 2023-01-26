@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.irunyou.data.dto.FindPasswordDto;
 import com.project.irunyou.data.dto.GetUserResponseDto;
 import com.project.irunyou.data.dto.PatchUserDto;
 import com.project.irunyou.data.dto.PostUserDto;

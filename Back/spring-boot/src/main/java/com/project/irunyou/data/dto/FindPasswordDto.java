@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FindPasswordDto {
 	@NotNull
-	private String email;
+	private String userEmail;
 	@NotNull
-	private String phoneNumber;
+	private String userPhoneNumber;
 	
 }

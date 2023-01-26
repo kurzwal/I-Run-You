@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.project.irunyou.data.dto.FindPasswordDto;
 import com.project.irunyou.data.dto.GetUserResponseDto;
 import com.project.irunyou.data.dto.LoginUserDto;
 import com.project.irunyou.data.dto.PatchUserDto;
@@ -186,14 +187,14 @@ public class UserService {
 	// pw찾기 0126 황석민 (하는중)
 		public ResponseDto<ResultResponseDto> findPw (FindPasswordDto dto) {
 			// 전화번호 하고 이메일 입력 검증 
-			String email = dto.getEmail();
-			String phoneNumber = dto.getPhoneNumber();
+			String email = dto.getUserEmail();
+			String phoneNumber = dto.getUserPhoneNumber();
 			// 둘중 하나라도 정상이 아니면 ResponseDto Failed 반환
 			if (!StringUtils.hasText(email) || !StringUtils.hasText(phoneNumber)) {
 				return ResponseDto.setFailed("빈값입니다.");
 			}
 			// 데이터베이스에서 해당 이메일과 전화번호를 조건으로 검색
-			UserEntity userEntity = userRepository.findByEmailAndPhoneNumber(email, phoneNumber);
+			UserEntity userEntity = userRepository.findByUserEmailAndUserPhoneNumber(email, phoneNumber);
 			// 존재하지 않으면 존재하지 않는 다는 ResponseDto 반환
 			if (userEntity == null) {
 				return ResponseDto.setFailed("입력정보가 존재하지 않습니다.");
