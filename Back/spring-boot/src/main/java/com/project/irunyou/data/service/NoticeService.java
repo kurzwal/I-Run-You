@@ -77,7 +77,7 @@ public class NoticeService {
 	public NoticeBoardEntity findByTitle(String title) {
 		NoticeBoardEntity notice;
 		try {
-			notice = noticeRepository.findByTitle(title);
+			notice = noticeRepository.findByNoticeTitle(title);
 		} catch (Exception e) {
 			return null;
 		}

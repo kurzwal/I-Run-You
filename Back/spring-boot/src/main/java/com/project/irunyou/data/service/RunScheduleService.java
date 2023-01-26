@@ -78,7 +78,7 @@ public class RunScheduleService {
 		UserEntity user = userRepository.findByUserEmail(dto.getUserEmail());
 		List<GetUserRunScheduleDto> data = new ArrayList<>();
 		try {
-			List<RunScheduleEntity> scheduleList = scheduleRepository.findAllByWriterIndex(user.getUserIndex());
+			List<RunScheduleEntity> scheduleList = scheduleRepository.findAllByrunScheduleWriterIndex(user.getUserIndex());
 			for(RunScheduleEntity r : scheduleList) {
 				data.add(new GetUserRunScheduleDto(r));
 			}
