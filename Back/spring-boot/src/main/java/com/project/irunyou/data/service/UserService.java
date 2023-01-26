@@ -45,7 +45,7 @@ public class UserService {
 		UserEntity user;
 //		if (!existsByEmail(email)) 
 //			return ResponseDto.setFailed("이미 가입된 email 입니다.");
-		if (userRepository.existsByEmail(email)) 
+		if (userRepository.existsByUserEmail(email)) 
 			return ResponseDto.setFailed("이미 가입된 email 입니다.");
 		
 		String password = dto.getUserPassword();
@@ -120,7 +120,7 @@ public class UserService {
 	private UserEntity findByEmail(String email) {
 		UserEntity user;
 		try {
-			user = userRepository.findByEmail(email);
+			user = userRepository.findByUserEmail(email);
 		} catch (Exception e) {
 			return null;
 		}
@@ -131,7 +131,7 @@ public class UserService {
 	private UserEntity findByPhoneNum(String phone) {
 		UserEntity user;
 		try {
-			user = userRepository.findByPhoneNumber(phone);
+			user = userRepository.findByUserPhoneNumber(phone);
 		} catch (Exception e) {
 			return null;
 		}
@@ -144,7 +144,7 @@ public class UserService {
 			throw new RuntimeException("대충 오류라는 영어");
 		}
 		String email = userEntity.getUserEmail();
-		if(userRepository.existsByEmail(email)) {
+		if(userRepository.existsByUserEmail(email)) {
 			throw new RuntimeException("대충 이메일 존재한다는 내용");
 		}
 		
@@ -158,7 +158,7 @@ public class UserService {
 		 * 유저에게 받은 패스워드를 인코딩해도 데이터베이스에 저장한 패스워드와는 다를 확률이 높음
 		 * 전용 일치 여부 메서드 matches() : Salt고려 두 값 비교
 		 */
-		UserEntity originalUser = userRepository.findByEmail(email);
+		UserEntity originalUser = userRepository.findByUserEmail(email);
 		if(originalUser == null && !encoder.matches(password, originalUser.getUserPassword())) {
 			return null;
 		}

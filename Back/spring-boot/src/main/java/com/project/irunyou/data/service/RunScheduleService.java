@@ -75,10 +75,10 @@ public class RunScheduleService {
 	// 일정 조회 유저정보 -> (일정 있는 공원, 일정 제목, 일정 시간) 
 	// 공원 이름으로 출력?
 	public ResponseDto<List<GetUserRunScheduleDto>> readSchedule(UserRequestDto dto) {
-		UserEntity user = userRepository.findByEmail(dto.getUserEmail());
+		UserEntity user = userRepository.findByUserEmail(dto.getUserEmail());
 		List<GetUserRunScheduleDto> data = new ArrayList<>();
 		try {
-			List<RunScheduleEntity> scheduleList = scheduleRepository.findAllByWriterIndex(user.getUserIndex());
+			List<RunScheduleEntity> scheduleList = scheduleRepository.findAllByrunScheduleWriterIndex(user.getUserIndex());
 			for(RunScheduleEntity r : scheduleList) {
 				data.add(new GetUserRunScheduleDto(r));
 			}
