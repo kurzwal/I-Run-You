@@ -1,0 +1,46 @@
+/* 작성자 : 최예정
+ * 파일의 역할 : 이메일 인증 css
+ * 작성날짜 : 2023-01-18
+ * 
+ * 업데이트 작성자 : -
+ * 업데이트 날짜 : -
+ */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 200px;
+    height: 50px;
+    
+    border: none;
+    background-color: #b6cf55;
+
+    font-size: medium;
+}
+
+.email-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fa-envelope {
+    font-size: 50px;
+}
+
+.btn-con {
+    display: flex;
+    justify-content: space-between;
+    width: 130%;
+}

@@ -1,0 +1,39 @@
+/* 작성자 : 최예정
+ * 파일의 역할 : 로그인 성공 css
+ * 작성날짜 : 2023-01-16
+ * 
+ * 업데이트 작성자 : -
+ * 업데이트 날짜 : -
+ */
+
+.susc-img {
+    padding: 0 200px 0 200px;
+
+    width: 100px;
+    height: 100px;
+}
+
+.susc-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.susc-box {
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.start-btn {
+    border: none;
+    
+    width: 300px;
+    height: 50px;
+    
+    background-color: #b6cf55;
+    cursor: pointer;
+}
