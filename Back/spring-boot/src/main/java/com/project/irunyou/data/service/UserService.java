@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 
 import com.project.irunyou.data.dto.FindPasswordDto;
 import com.project.irunyou.data.dto.GetUserResponseDto;
+import com.project.irunyou.data.dto.LoginTokenDto;
 import com.project.irunyou.data.dto.LoginUserDto;
 import com.project.irunyou.data.dto.PatchUserDto;
 import com.project.irunyou.data.dto.PostUserDto;
@@ -29,6 +30,9 @@ import com.project.irunyou.data.entity.UserEntity;
 import com.project.irunyou.data.repository.CodeRepository;
 import com.project.irunyou.data.repository.UserRepository;
 import com.project.irunyou.security.TokenProvider;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 
 @Service
 public class UserService {
@@ -175,13 +179,13 @@ public class UserService {
 		if (user == null) {	// 해당 유저 정보 없음
 			return new ResponseEntity<String>("login failed", HttpStatus.BAD_REQUEST);
 		} else { // 유저정보가 존재함
-			// 토큰 생성
-			String token = tokenProvider.create(user);
-			LoginUserDto responseUser = LoginUserDto.builder()
-					.userEmail(user.getUserEmail())
-					.userPassword(user.getUserPassword())
-					.userToken(token).build();
-			return new ResponseEntity<LoginUserDto>(responseUser, HttpStatus.OK);
+			String token = tokenProvider.create(user); 	// 토큰 생성
+			String expiration = tokenProvider.GetExpiration(token);	// 토큰 유효기간
+			LoginTokenDto tokenResponse = LoginTokenDto.builder()	
+					.token(token)
+					.expiration(expiration)
+					.build();	// LoginTokenDto에 토큰과 토큰 유효기간 담아 response
+			return new ResponseEntity<LoginTokenDto>(tokenResponse, HttpStatus.OK);
 		}
 
 	}

@@ -24,12 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SecurityConfig {
 	// WebSecurityConfigurerAdapter - deprecated 
 	
-	private TokenProvider tokenProvider;
-	
-	@Autowired
-	public SecurityConfig(TokenProvider tokenProvider) {
-		this.tokenProvider = tokenProvider;
-	}
+	@Autowired private TokenProvider tokenProvider;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {

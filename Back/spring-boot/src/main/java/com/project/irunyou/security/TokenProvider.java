@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class TokenProvider {
+	
 	private static final String SECRET_KEY = "vpvjfhslv1wksms5aktdlTek7";
 	
 	public String create(UserEntity userEntity) {
@@ -51,4 +52,14 @@ public class TokenProvider {
 				.getBody();
 		return claims.getSubject();	// getSubject -> userEmail 돌려줌
 	}
+	
+	// 토큰 디코딩. 유효기간 리턴
+	public String GetExpiration(String token) {
+		Claims claims = Jwts.parser()
+				.setSigningKey(SECRET_KEY)
+				.parseClaimsJws(token)
+				.getBody();
+		return claims.getExpiration().toString();
+	}
+	
 }
