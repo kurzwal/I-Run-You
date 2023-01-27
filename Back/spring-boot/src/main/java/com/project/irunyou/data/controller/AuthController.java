@@ -18,13 +18,8 @@ import com.project.irunyou.data.service.UserService;
 @RestController
 @RequestMapping("irunyou/auth/")
 public class AuthController {
-	private UserService userService;
+	@Autowired private UserService userService;
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	
-	@Autowired
-	public AuthController(UserService userService) {
-		this.userService = userService;
-	}
 	
 	// login 요청을 받는 메소드
 	// 요청을 받으면 email과 password를 서비스단의 login 메소드로 넘김

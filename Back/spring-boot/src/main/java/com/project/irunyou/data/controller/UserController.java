@@ -61,9 +61,17 @@ public class UserController {
 	}
 	
 	// id찾기
-	@GetMapping("phone/{phone_num}")
+	@GetMapping("phone/{phoneNum}")
 	public ResponseDto<GetUserResponseDto> findUserId(@PathVariable("phoneNum")String phoneNum) {
 		return userService.findUserId(phoneNum);
+	}
+	
+	// pw찾기
+	// request method가 Post이고 end point는 findPw
+	@PostMapping("findPw")
+	public ResponseDto<ResultResponseDto> findPw(@RequestBody FindPasswordDto requestBody) {
+		// 비즈니스 로직에 대한 결과 반환
+		return userService.findPw(requestBody);
 	}
 
 	// 이메일 인증
@@ -79,15 +87,5 @@ public class UserController {
 		// 보내진 코드 프론트로 return
 		return ResponseDto.setSuccess("Success", code);
 	}
-	
-	// pw찾기
-	// request method가 Post이고 end point는 findPw
-		@PostMapping("findPw")
-		public ResponseDto<ResultResponseDto> findPw (@RequestBody FindPasswordDto requestBody) {
-			// 비즈니스 로직에 대한 결과 반환
-			return userService.findPw(requestBody);
-		}
-	
-
 	
 }
