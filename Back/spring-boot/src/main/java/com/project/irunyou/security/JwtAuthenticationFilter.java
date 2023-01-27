@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.util.StringUtils;
@@ -28,14 +29,11 @@ import org.springframework.util.StringUtils;
 // 인증 구현 필터
 @Slf4j
 @Component
+@AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter{
 	
-	private TokenProvider tokenProvider;
-	@Autowired
-	public JwtAuthenticationFilter(TokenProvider tokenProvider) {
-		this.tokenProvider = tokenProvider;
-	}
-	
+	@Autowired private TokenProvider tokenProvider;
+
 	// request {header} 파싱, Bearer 토큰 리턴
 	private String parseBearerToken(HttpServletRequest request) {
 		String bearerToken = request.getHeader("Authorization");
@@ -50,8 +48,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 		try {
 			String token = parseBearerToken(request);	// request에서 토큰 가져오기
-			log.info("필터실행중 오 개신기");
-			
 			if(token != null && !token.equalsIgnoreCase("null")) {	// 토큰 검사
 				String userEmail = tokenProvider.CheckAndGetUserEmail(token);	// 이메일 가져오기
 				log.info("인증 유저 이메일 확인용 : " + userEmail);

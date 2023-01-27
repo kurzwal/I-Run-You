@@ -23,7 +23,7 @@ public class ResgisterMailService {
 	
 	private String cerpw; // 메일로 날라갈 인증번호
 	
-	// 객체 직접 생성 메일 발송
+	
 	// 메일 내용 작성 : 받는 유저 이메일 지정, 메일 내용, 보내는 이메일 주소, 보내는 사람
 	public MimeMessage createMail(String UserEmail) throws MessagingException, UnsupportedEncodingException {
 		MimeMessage message = mailSender.createMimeMessage();
@@ -42,7 +42,6 @@ public class ResgisterMailService {
 		message.setText(msgg, "utf-8", "html");	// 메일 내용, charset 타입, subtype
 		
 		message.setFrom(new InternetAddress("projectirunyou@gmail.com", "IRunYou_Admin"));
-//		message.setFrom("projectirunyou@gmail.com");
 		
 		return message;
 	}
@@ -76,20 +75,20 @@ public class ResgisterMailService {
 	}
 	
 	// 실제로 메일 발송 메서드
-	// 매개변수 userMail -> 이메일 주소
-	// MimeMessage 객체 mail -> 전송할 메일 내용
 	// bean 등록된 mailSender로 이메일 send
-	public String sendMail(String userMail) throws Exception {
-		cerpw = createKey();
+	public String sendMail(String userMail) throws Exception {	// 매개변수 userMail -> 이메일 주소
 		
-		MimeMessage mail = createMail(userMail);	// 메일 발송
-		
+		cerpw = createKey();	// 인증코드 생성
+		MimeMessage mail = createMail(userMail);	// 메일 내용 생성
+	
 		try {
-			mailSender.send(mail); 
+			mailSender.send(mail); // 메일 발송
 		} catch (MailException e) {
 			e.printStackTrace();
 		}
 		
 		return cerpw; // 메일로 보냈던 인증 코드 서버로 반환
 	}
+	
+	
 }

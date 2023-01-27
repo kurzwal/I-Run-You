@@ -19,8 +19,7 @@ import com.project.irunyou.data.service.NoticeService;
 @RequestMapping("notice/")
 public class NoticeController {
 
-	@Autowired
-	NoticeService noticeService;
+	@Autowired NoticeService noticeService;
 
 	// 공지사항 등록
 	@PostMapping("")
