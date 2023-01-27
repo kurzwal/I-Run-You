@@ -67,18 +67,18 @@ public class UserController {
 	}
 
 	// 이메일 인증
-	@PostMapping("mailConfirm")	
-	public ResponseDto<String> mailConfirm(@RequestParam("email") String email){
-		String code = null;
-		try {
-		// 인증코드 발송 
-		code = mailService.sendMail(email);
-		} catch (Exception e) {
-			return ResponseDto.setFailed("error");
-		}	
-		// 보내진 코드 프론트로 return
-		return ResponseDto.setSuccess("Success", code);
-	}
+//	@PostMapping("mailConfirm")	
+//	public ResponseDto<String> mailConfirm(@RequestParam("email") String email){
+//		String code = null;
+//		try {
+//		// 인증코드 발송 
+//		code = mailService.sendMail(email);
+//		} catch (Exception e) {
+//			return ResponseDto.setFailed("error");
+//		}	
+//		// 보내진 코드 프론트로 return
+//		return ResponseDto.setSuccess("Success", code);
+//	}
 	
 	// pw찾기
 	// request method가 Post이고 end point는 findPw

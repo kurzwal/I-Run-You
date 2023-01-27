@@ -42,6 +42,7 @@ public class TokenProvider {
 				.setExpiration(expiryDate)
 				.compact();
 	}
+
 	
 	// 토큰 디코딩. 파싱, 위조여부 확인
 	public String CheckAndGetUserEmail(String token) {
