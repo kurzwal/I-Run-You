@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.irunyou.data.dto.FindPasswordDto;
 import com.project.irunyou.data.dto.GetUserResponseDto;
 import com.project.irunyou.data.dto.PatchUserDto;
 import com.project.irunyou.data.dto.PostUserDto;
@@ -61,8 +62,8 @@ public class UserController {
 	
 	// id찾기
 	@GetMapping("phone/{phone_num}")
-	public ResponseDto<GetUserResponseDto> findUserId(@PathVariable("phone_num")String phone_num) {
-		return userService.findUserId(phone_num);
+	public ResponseDto<GetUserResponseDto> findUserId(@PathVariable("phoneNum")String phoneNum) {
+		return userService.findUserId(phoneNum);
 	}
 
 	// 이메일 인증
@@ -80,5 +81,13 @@ public class UserController {
 	}
 	
 	// pw찾기
+	// request method가 Post이고 end point는 findPw
+		@PostMapping("findPw")
+		public ResponseDto<ResultResponseDto> findPw (@RequestBody FindPasswordDto requestBody) {
+			// 비즈니스 로직에 대한 결과 반환
+			return userService.findPw(requestBody);
+		}
+	
+
 	
 }

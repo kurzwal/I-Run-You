@@ -21,6 +21,6 @@ public class TestService {
 	public String getPark(Integer num) {
 		
 		ParkEntity park = parkRepository.findById(num).get();
-		return park.getName();
+		return park.getParkName();
 	}
 }

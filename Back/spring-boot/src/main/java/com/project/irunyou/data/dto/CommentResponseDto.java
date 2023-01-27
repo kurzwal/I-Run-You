@@ -16,14 +16,14 @@ import lombok.NoArgsConstructor;
 public class CommentResponseDto {
 	
 	@NotNull
-    private int com_idx;
+    private int commentIndex;
     @NotNull
-    private int sch_idx;
+    private int commentScheduleIndex;
     @NotNull
-    private int writer_user;
+    private int commentWriterIndex;
     @NotNull
-    private String content;
+    private String commentContent;
     @NotNull
-    private Timestamp datetime;
+    private Timestamp commentDatetime;
 	
 }

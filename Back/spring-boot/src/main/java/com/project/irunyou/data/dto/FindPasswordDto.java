@@ -1,21 +1,20 @@
 package com.project.irunyou.data.dto;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Builder
-public class MyLocationDto {
-
-    @NotNull
-    private double userLatitude;
-    @NotNull
-    private double userLongitude;
+public class FindPasswordDto {
+	@NotNull
+	private String userEmail;
+	@NotNull
+	private String userPhoneNumber;
 	
 }

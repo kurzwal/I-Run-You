@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatchScheduleDto {
-	private int sch_idx;
-	private String title;
-	private LocalDateTime datetime;
-	private String content;
+	private int runScheduleIndex;
+	private String runScheduleTitle;
+	private LocalDateTime runScheduleDatetime;
+	private String runScheduleContent;
 	
 }

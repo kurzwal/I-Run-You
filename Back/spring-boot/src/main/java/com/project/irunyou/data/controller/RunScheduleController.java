@@ -15,6 +15,7 @@ package com.project.irunyou.data.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -35,6 +36,7 @@ import com.project.irunyou.data.service.RunScheduleService;
 
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping
 public class RunScheduleController {
@@ -42,7 +44,8 @@ public class RunScheduleController {
 	@Autowired RunScheduleService scheduleService;
 	
 	//C (일정등록)
-	public ResponseDto<ResultResponseDto> registSchedule(@RequestBody RunScheduleDto requestBody) {
+	public ResponseDto<ResultResponseDto> registSchedule(@AuthenticationPrincipal String writer, @RequestBody RunScheduleDto requestBody) {
+		log.info("jwt 인증 확인용 :" + writer);
 		return scheduleService.registSchedule(requestBody);
 	}
 	//R (일정조회)

@@ -19,6 +19,8 @@ import com.project.irunyou.data.entity.CommentEntity;
 import com.project.irunyou.data.repository.CommentRepository;
 import com.project.irunyou.data.repository.UserRepository;
 
+import ch.qos.logback.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy;
+
 @Service
 public class CommentService {
 
@@ -29,26 +31,26 @@ public class CommentService {
 		CommentEntity comment;
 		
 		int writerNum;
-		writerNum = dto.getWriter_user();
+		writerNum = dto.getCommentWriterIndex();
 		CommentResponseDto result;
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		
 		result = CommentResponseDto
 				.builder()
-				.com_idx(0)
-				.sch_idx(0)
-				.writer_user(dto.getWriter_user())
-				.content(dto.getContent())
-				.datetime(timestamp)
+				.commentIndex(0)
+				.commentScheduleIndex(0)
+				.commentWriterIndex(dto.getCommentWriterIndex())
+				.commentContent(dto.getCommentContent())
+				.commentDatetime(timestamp)
 				.build();
 		
 		
 		comment = CommentEntity
 				.builder()
-				.com_idx(0)
-				.sch_idx(0)
-				.writer_user(dto.getWriter_user())
-				.content(dto.getContent())
+				.commentIndex(0)
+				.commentScheduleIndex(0)
+				.commentWriterIndex(dto.getCommentWriterIndex())
+				.commentContent(dto.getCommentContent())
 //				.datetime(timestamp)
 				.build();
 				
@@ -63,18 +65,18 @@ public class CommentService {
 		
 		CommentEntity comment;
 		
-		comment = commentRepository.getById(dto.getWriter_user());
+		comment = commentRepository.getById(dto.getCommentIndex());
 		
-		int com_idx = comment.getCom_idx();
-		int sch_idx = comment.getSch_idx();
-		int writer_user = comment.getWriter_user();
+		int comIdx = comment.getCommentIndex();
+		int schIdx = comment.getCommentScheduleIndex();
+		int writerUser = comment.getCommentWriterIndex();
 		
-		int delcom_idx = dto.getCom_idx();
-		int delsch_idx = dto.getSch_idx();
-		int delwriter_user = dto.getWriter_user();
+		int delcomIdx = dto.getCommentIndex();
+		int delschIdx = dto.getCommentScheduleIndex();
+		int delwriterUser = dto.getCommentWriterIndex();
 		
-		if((com_idx == delcom_idx) & (sch_idx == delsch_idx) & (writer_user == delwriter_user)) {
-			commentRepository.deleteById(delcom_idx);
+		if((comIdx == delcomIdx) & (schIdx == delschIdx) & (writerUser == delwriterUser)) {
+			commentRepository.deleteById(delcomIdx);
 		} else {
 			return ResponseDto.setFailed("작성자, 댓글번호, 일정번호를 확인하세요");
 		}

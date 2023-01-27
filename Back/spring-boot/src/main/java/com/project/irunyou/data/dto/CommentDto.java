@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 public class CommentDto {
 
 	@NotNull
-    private int writer_user;
+    private int commentWriterIndex;
 	@NotNull
-    private int sch_idx;
+    private int commentScheduleIndex;
 	@NotNull
-    private String content;
+    private String commentContent;
 	
 }

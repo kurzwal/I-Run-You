@@ -20,10 +20,12 @@ public interface UserRepository extends JpaRepository<UserEntity,Integer> {
 
 	// 커스텀 ORM메소드 작성
 //	@Query("select m from USER m where m.email = ?1")
-	
-	public UserEntity findByEmail(String email);
-	public boolean existsByEmail(String email);
+	public UserEntity findByUserEmail(String email);	// 이메일로 userEntity찾기 
+	public boolean existsByUserEmail(String email);		
+	public UserEntity findByUserEmailAndUserPassword(String email, String password);	
 	// id 찾기용 메서드
-	public UserEntity findByPhone_num(String phone_num);
+	public UserEntity findByUserPhoneNumber(String phoneNumber);
+	public UserEntity findByUserEmailAndUserPhoneNumber(String email, String phoneNumber);
+	
 	
 }

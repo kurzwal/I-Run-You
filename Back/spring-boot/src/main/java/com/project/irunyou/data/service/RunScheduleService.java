@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.project.irunyou.data.dto.FindRunScheduleDto;
@@ -58,7 +59,7 @@ public class RunScheduleService {
 //				.content(dto.getContent())
 //				.build();
 		
-		RunScheduleEntity runScheduleEntity = new RunScheduleEntity(dto);		
+		RunScheduleEntity runScheduleEntity = new RunScheduleEntity(dto);
 		scheduleRepository.save(runScheduleEntity);
 		
 		
@@ -74,10 +75,10 @@ public class RunScheduleService {
 	// 일정 조회 유저정보 -> (일정 있는 공원, 일정 제목, 일정 시간) 
 	// 공원 이름으로 출력?
 	public ResponseDto<List<GetUserRunScheduleDto>> readSchedule(UserRequestDto dto) {
-		UserEntity user = userRepository.findByEmail(dto.getUserEmail());
+		UserEntity user = userRepository.findByUserEmail(dto.getUserEmail());
 		List<GetUserRunScheduleDto> data = new ArrayList<>();
 		try {
-			List<RunScheduleEntity> scheduleList = scheduleRepository.findAllByWriterid(user.getUser_idx());
+			List<RunScheduleEntity> scheduleList = scheduleRepository.findAllByrunScheduleWriterIndex(user.getUserIndex());
 			for(RunScheduleEntity r : scheduleList) {
 				data.add(new GetUserRunScheduleDto(r));
 			}
@@ -90,7 +91,7 @@ public class RunScheduleService {
 	
 	// 일정 수정
 	public ResponseDto<GetUserRunScheduleDto> patchSchedule(PatchScheduleDto dto) {
-		int schIdx = dto.getSch_idx();
+		int schIdx = dto.getRunScheduleIndex();
 		RunScheduleEntity patchSchedule = null;
 		try {
 			patchSchedule = scheduleRepository.findById(schIdx).get();
@@ -98,9 +99,9 @@ public class RunScheduleService {
 			return ResponseDto.setFailed("해당 일정이 존재하지 않습니다.");
 		}
 		
-		patchSchedule.setTitle(dto.getTitle());
-		patchSchedule.setDatetime(dto.getDatetime());
-		patchSchedule.setContent(dto.getContent());
+		patchSchedule.setRunScheduleTitle(dto.getRunScheduleTitle());
+		patchSchedule.setRunScheduleDatetime(dto.getRunScheduleDatetime());
+		patchSchedule.setRunScheduleContent(dto.getRunScheduleContent());
 		
 		scheduleRepository.save(patchSchedule);
 		
@@ -110,7 +111,7 @@ public class RunScheduleService {
 	
 	// 일정 삭제
 	public ResponseDto<ResultResponseDto> deleteSchedule(FindRunScheduleDto dto) {
-		int schIdx = dto.getSch_idx();
+		int schIdx = dto.getRunScheduleIndex();
 		try {
 			RunScheduleEntity deleteSchedule = scheduleRepository.findById(schIdx).get();
 		} catch(Exception e) {

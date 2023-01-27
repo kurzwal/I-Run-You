@@ -35,11 +35,11 @@ public class ParkService {
 		
 		ParkInfoDto result;
 		result = ParkInfoDto.builder()
-				.address(park.getAddress())
-				.area(park.getArea())
-				.latitude(park.getLatitude())
-				.longitude(park.getLongitude())
-				.name(park.getName())
+				.parkAddress(park.getParkAddress())
+				.parkArea(park.getParkArea())
+				.parkLatitude(park.getParkLatitude())
+				.parkLongitude(park.getParkLongitude())
+				.parkName(park.getParkName())
 				.build();
 		
 		return ResponseDto.setSuccess("Load Success", result);
@@ -61,8 +61,8 @@ public class ParkService {
 	public ResponseDto<List<ParkInfoDto>> findClosePark(UserLocationDto dto) {
 		List<ParkInfoDto> ClosePark = new ArrayList<>();
 		try {
-			List<ParkEntity> CloseDistancePark = parkRepository.findAllByDistance(dto.getLatitude(),
-					dto.getLongitude());
+			List<ParkEntity> CloseDistancePark = parkRepository.findAllByDistance(dto.getUserLatitude(),
+					dto.getUserLongitude());
 			for (ParkEntity p : CloseDistancePark) {
 				ClosePark.add(new ParkInfoDto(p));
 			}

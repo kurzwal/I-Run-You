@@ -23,7 +23,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+	//swagger 추가 - 홍지혜
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	// validation 추가 -황석민
@@ -31,6 +31,10 @@ dependencies {
 	// spring mail 추가 - 홍지혜
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
 	implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.1'
+	// jsonwebtoken 추가 - 홍지혜
+	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+	// spring security 추가 - 홍지혜
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.6.3'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'

@@ -5,6 +5,10 @@
  * 업데이트 작성자 : 홍지혜
  * 업데이트 날짜 : datetime 자료형 변경, Dto 생성자 추가
  * 작성날짜 : 2023-01-17
+ * 
+ * 업데이트 작성자 : 홍지혜
+ * 업데이트 날짜 : 2023-01-25
+ * 업데이트 내용 : 컬럼명 변경 (카멜케이스적용, 약자 표기 정자 표기로 변경)
  * */
 package com.project.irunyou.data.entity;
 
@@ -35,26 +39,29 @@ public class RunScheduleEntity {
 
     @Id
     @NotNull
-    private int sch_idx;
-    private int park;
+    private int runScheduleIndex;
+    private int runSchedulePark;
     @NotNull
-    private String title;
+    private String runScheduleTitle;
     @NotNull
-    private int writerid;
+    private int runScheduleWriterIndex;
     @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime datetime;
+    private LocalDateTime runScheduleDatetime;
     @NotNull
-    private String content;
+    private String runScheduleContent;
+    private int runScheduleLikeUser;
     
     // 일정 등록용 생성자
     public RunScheduleEntity(RunScheduleDto dto) {
-    	this.park = dto.getPark();
-    	this.title = dto.getTitle();
-    	this.writerid = dto.getWriterId();
-    	this.datetime = dto.getDatetime();
-    	this.content = dto.getContent();
+    	this.runSchedulePark = dto.getRunSchedulePark();
+    	this.runScheduleTitle = dto.getRunScheduleTitle();
+    	this.runScheduleWriterIndex = dto.getRunScheduleWriterIndex();
+    	this.runScheduleDatetime = dto.getRunScheduleDatetime();
+    	this.runScheduleContent = dto.getRunScheduleContent();
     }
+    
+    
 
 }

@@ -20,25 +20,25 @@ import lombok.NoArgsConstructor;
 public class ParkInfoDto {
 
 		@NotNull
-    	private int park_idx;
+    	private int parkIndex;
 	    @NotNull
-	    private String name;
+	    private String parkName;
 	    @NotNull
-	    private String address;
+	    private String parkAddress;
 	    @NotNull
-	    private double latitude;
+	    private double parkLatitude;
 	    @NotNull
-	    private double longitude;
+	    private double parkLongitude;
 	    @NotNull
-	    private int area;
+	    private int parkArea;
 	    
 	    public ParkInfoDto(ParkEntity parkEntity) {
-	    	this.park_idx = parkEntity.getPark_idx();
-	    	this.name = parkEntity.getName();
-	    	this.address = parkEntity.getAddress();
-	    	this.latitude = parkEntity.getLatitude();
-	    	this.longitude = parkEntity.getLongitude();
-	    	this.area = parkEntity.getArea();
+	    	this.parkIndex = parkEntity.getParkIndex();
+	    	this.parkName = parkEntity.getParkName();
+	    	this.parkAddress = parkEntity.getParkAddress();
+	    	this.parkLatitude = parkEntity.getParkLatitude();
+	    	this.parkLongitude = parkEntity.getParkLongitude();
+	    	this.parkArea = parkEntity.getParkArea();
 	    }
 	    
 }

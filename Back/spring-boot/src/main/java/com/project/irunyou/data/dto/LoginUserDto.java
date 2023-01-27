@@ -1,21 +1,16 @@
 package com.project.irunyou.data.dto;
 
-import com.sun.istack.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class MyLocationDto {
-
-    @NotNull
-    private double userLatitude;
-    @NotNull
-    private double userLongitude;
-	
+public class LoginUserDto {
+	private String userToken;
+	private String userEmail;
+	private String userPassword;
 }

@@ -29,9 +29,9 @@ public class NoticeController {
 	}
 
 	// 공지사항 조회
-	@GetMapping("{notice_idx}")
-	public ResponseDto<NoticeDto> readNotice(@PathVariable("notice_idx") Integer notice_idx) {
-		return noticeService.readNotice(notice_idx);
+	@GetMapping("{noticeIdx}")
+	public ResponseDto<NoticeDto> readNotice(@PathVariable("noticeIndex") Integer noticeIndex) {
+		return noticeService.readNotice(noticeIndex);
 	}
 
 	// 공지사항 수정
@@ -41,8 +41,8 @@ public class NoticeController {
 	}
 
 	// 공지사항 삭제
-	@DeleteMapping("{notice_idx}")
-	public ResponseDto<ResultResponseDto> deleteNotice(@PathVariable("notice_idx")Integer notice_idx) {
-		return noticeService.deleteNotice(notice_idx);
+	@DeleteMapping("{noticeIdx}")
+	public ResponseDto<ResultResponseDto> deleteNotice(@PathVariable("noticeIndex")Integer noticeIndex) {
+		return noticeService.deleteNotice(noticeIndex);
 	}
 }

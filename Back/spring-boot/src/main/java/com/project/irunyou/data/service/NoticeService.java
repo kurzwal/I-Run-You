@@ -20,11 +20,11 @@ public class NoticeService {
 	// 공지사항 등록
 	public ResponseDto<NoticeDto> createNotice(NoticeDto dto) {
 
-		String title = dto.getTitle();
-		String content = dto.getContent();
+		String title = dto.getNoticeTitle();
+		String content = dto.getNoticeContent();
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-		NoticeBoardEntity notice = NoticeBoardEntity.builder().title(title).content(content).build();
+		NoticeBoardEntity notice = NoticeBoardEntity.builder().noticeTitle(title).noticeContent(content).build();
 
 		noticeRepository.save(notice);
 
@@ -32,10 +32,10 @@ public class NoticeService {
 	}
 
 	// 공지사항 조회
-	public ResponseDto<NoticeDto> readNotice(Integer notice_idx) {
+	public ResponseDto<NoticeDto> readNotice(Integer noticeIdx) {
 		NoticeBoardEntity notice;
 		try {
-			notice = noticeRepository.findById(notice_idx).get();
+			notice = noticeRepository.findById(noticeIdx).get();
 		} catch (Exception e) {
 			return null;
 		}
@@ -45,7 +45,7 @@ public class NoticeService {
 	// 공지사항 수정
 	public ResponseDto<NoticeDto> updateNotice(NoticeDto dto) {
 //		String title = dto.getTitle();
-		int idx = dto.getNotice_idx();
+		int idx = dto.getNoticeIndex();
 		NoticeBoardEntity notice = null;
 		System.out.println(idx);
 		try {
@@ -54,8 +54,8 @@ public class NoticeService {
 			if (notice == null)
 				return ResponseDto.setFailed("찾으시는 사항이 없습니다.");
 		}
-		notice.setTitle(dto.getTitle());
-		notice.setContent(dto.getContent());
+		notice.setNoticeTitle(dto.getNoticeTitle());
+		notice.setNoticeContent(dto.getNoticeContent());
 
 		noticeRepository.save(notice);
 
@@ -63,21 +63,21 @@ public class NoticeService {
 	}
 
 	// 공지사항 삭제
-	public ResponseDto<ResultResponseDto> deleteNotice(Integer notice_idx) {
+	public ResponseDto<ResultResponseDto> deleteNotice(Integer noticeIdx) {
 		NoticeBoardEntity notice;
 		try {
-			notice = noticeRepository.findById(notice_idx).get();
+			notice = noticeRepository.findById(noticeIdx).get();
 		} catch (Exception e) {
 			return ResponseDto.setFailed("해당 공지사항이 없습니다.");
 		}
-		noticeRepository.deleteById(notice.getNotice_idx());
+		noticeRepository.deleteById(notice.getNoticeIndex());
 		return ResponseDto.setSuccess("삭제 되었습니다.", new ResultResponseDto(true));
 	}
 
 	public NoticeBoardEntity findByTitle(String title) {
 		NoticeBoardEntity notice;
 		try {
-			notice = noticeRepository.findByTitle(title);
+			notice = noticeRepository.findByNoticeTitle(title);
 		} catch (Exception e) {
 			return null;
 		}

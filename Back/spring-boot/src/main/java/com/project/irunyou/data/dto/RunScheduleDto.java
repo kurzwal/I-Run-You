@@ -26,14 +26,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RunScheduleDto {
 	@NotNull
-	private int park;
+	private int runSchedulePark;
 	@NotNull
-	private String title;
+	private String runScheduleTitle;
 	@NotNull
-	private int writerId;
+	private int runScheduleWriterIndex;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
 	//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private LocalDateTime datetime;
+	private LocalDateTime runScheduleDatetime;
     @NotNull
-    private String content;
+    private String runScheduleContent;
 }
