@@ -18,8 +18,12 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Data
 @Builder
@@ -27,6 +31,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity(name="user")
 @Table(name="user")
+@EntityListeners(AuditingEntityListener.class)
 public class UserEntity {
     @Id
     @NotNull
@@ -40,7 +45,7 @@ public class UserEntity {
     @NotNull
     private String userPhoneNumber;
     private int userLevel;
-    @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
+    @CreatedDate
     private LocalDateTime userJoinDate;
 }

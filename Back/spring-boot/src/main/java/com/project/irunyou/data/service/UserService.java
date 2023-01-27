@@ -24,7 +24,9 @@ import com.project.irunyou.data.dto.PatchUserDto;
 import com.project.irunyou.data.dto.PostUserDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
+import com.project.irunyou.data.entity.CodeEntity;
 import com.project.irunyou.data.entity.UserEntity;
+import com.project.irunyou.data.repository.CodeRepository;
 import com.project.irunyou.data.repository.UserRepository;
 import com.project.irunyou.security.TokenProvider;
 
@@ -35,6 +37,7 @@ public class UserService {
 	@Autowired UserRepository userRepository;
 	@Autowired TokenProvider tokenProvider;
 	@Autowired ResgisterMailService mailService;
+	@Autowired CodeRepository codeRepository;
 	
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
@@ -62,7 +65,8 @@ public class UserService {
 				.builder()
 				.userEmail(dto.getUserEmail())
 				.userPassword(dto.getUserPassword())
-				.userAddress(dto.getUserAddress() + " " + dto.getUserAddressDetail())
+				.userAddress(dto.getUserAddress()) 
+				.userAddressDetail(dto.getUserAddressDetail())
 				.userPhoneNumber(dto.getUserPhoneNumber())
 				.build();
 		
@@ -90,6 +94,7 @@ public class UserService {
 			return ResponseDto.setFailed("Not Exist User");
 		
 		user.setUserAddress(dto.getUserAddress());
+		user.setUserAddressDetail(dto.getUserAddressDetail());
 		user.setUserPhoneNumber(dto.getUserPhoneNumber());
 		
 		userRepository.save(user);
@@ -116,9 +121,6 @@ public class UserService {
 		
 		return ResponseDto.setSuccess("회원님의 email 입니다.", new GetUserResponseDto(user));
 	}
-	
-	// pw찾기
-	
 	
 	private UserEntity findByEmail(String email) {
 		UserEntity user;
@@ -184,31 +186,29 @@ public class UserService {
 
 	}
 	
-	// pw찾기 0126 황석민 (하는중)
+	// pw찾기 0126 황석민
 		public ResponseDto<ResultResponseDto> findPw (FindPasswordDto dto) {
 			// 전화번호 하고 이메일 입력 검증 
 			String email = dto.getUserEmail();
 			String phoneNumber = dto.getUserPhoneNumber();
 			// 둘중 하나라도 정상이 아니면 ResponseDto Failed 반환
-			if (!StringUtils.hasText(email) || !StringUtils.hasText(phoneNumber)) {
+			if (!StringUtils.hasText(email) || !StringUtils.hasText(phoneNumber))
 				return ResponseDto.setFailed("빈값입니다.");
-			}
+			
 			// 데이터베이스에서 해당 이메일과 전화번호를 조건으로 검색
 			UserEntity userEntity = userRepository.findByUserEmailAndUserPhoneNumber(email, phoneNumber);
 			// 존재하지 않으면 존재하지 않는 다는 ResponseDto 반환
-			if (userEntity == null) {
+			if (userEntity == null) 
 				return ResponseDto.setFailed("입력정보가 존재하지 않습니다.");
-			}
 			
 			// sendMail 하고 결과로 받은 code를 데이터베이스에 저장
 			try {
 				String code = mailService.sendMail(email);
-				// TODO 보낸 코드를 데이터베이스에 저장
-				
-				// Code Entity 생성 (email, code 기준으로)
-				
-				// 생성된 Entity를 CodeRepository에 save
-				
+				// TODO : 보낸 코드를 데이터베이스에 저장
+					// 1. Code Entity 생성 (email, code 기준으로)
+				CodeEntity codeEtt = new CodeEntity(code, email);
+					// 2. 생성된 Entity를 CodeRepository에 save
+				codeRepository.save(codeEtt);
 			} catch(Exception exception) {
 				return ResponseDto.setFailed("코드 전송 또는 저장에 실패했습니다.");
 			}

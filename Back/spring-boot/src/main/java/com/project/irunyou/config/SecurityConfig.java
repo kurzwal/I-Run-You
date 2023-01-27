@@ -47,7 +47,7 @@ public class SecurityConfig {
 				.formLogin().disable()	// HTTP Basic Authentication 사용안함
 				.httpBasic().disable()	// Form Based Authentication 사용 안함
 				.authorizeRequests()	
-				.antMatchers("/irunyou","/irunyou/auth/**").permitAll() // 해당 요청에 관해서는 모두 접근 가능
+				.antMatchers("/irunyou/**","/irunyou/auth/**").permitAll() // 해당 요청에 관해서는 모두 접근 가능
 				.anyRequest().authenticated()	// 그 외는 인증해야함
 				.and()
 				.addFilterBefore(new JwtAuthenticationFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)

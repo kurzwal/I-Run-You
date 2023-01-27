@@ -7,7 +7,11 @@
  * */
 package com.project.irunyou.data.dto;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
