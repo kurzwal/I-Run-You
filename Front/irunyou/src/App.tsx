@@ -8,6 +8,8 @@ import IDPWView from './components/Login/IDPW';
 import EMverifyView from './components/Login/EMverify';
 import EmailView from './components/Login/Email';
 import SUSCView from './components/Login/SUSC';
+import KakaoRedirectHandler from './components/Login/KakaoRedirectHandler';
+import KakaoMap from './components/KakaoMap'
 
 // 작성자 : 최예정
 // 파일의 역할 : 링크 연결, 백 -> 프론트 GET
@@ -38,6 +40,11 @@ function App() {
         <Route path="/EMverify" element={<EMverifyView />}  />
         <Route path="/Email" element={<EmailView />} />
         <Route path="/SUSC" element={<SUSCView />} />
+        <Route path="/Login/kakao" element={<KakaoRedirectHandler />} />
+        <Route path="/kakaomap" element={<KakaoMap />} />
+
+        {/* <Route path='/' element={< Autehntication />}/> */}
+        <Route  />
       </Routes>
     </div>
   );
