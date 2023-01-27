@@ -1,5 +1,6 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
+import kakao from '../../assets/images/kakao_login_medium_wide.png';
 
 // 작성자 : 최예정
 // 파일의 역할 : id, password 찾기 html
@@ -8,7 +9,19 @@ import { Link } from "react-router-dom";
 // 업데이트 작성자 : 최예정
 // 업데이트 날짜 : 2023-01-19
 
+
 export default function Login() {
+    
+    const { Kakao }:Window = window;
+
+    const loginWithKakao = () => {
+        Kakao.Auth.authorize({
+            // 나중에 주소 수정
+            redirectUri : 'http://localhost:3000/Login/kakao',
+            scope : "profile_nickname, account_email", //받아올 값들 => 이름 나중에 수정
+        });
+    };
+
     return(
         <div className="login-container">
             {/* 로그인 전체 form */}
@@ -35,13 +48,8 @@ export default function Login() {
                     <div className="other-login-text">간편 로그인</div>
                     <div className="line"></div>
                 </div>
-                <div className="other-login-button">
-                    <div className="kakao-login">
-                        <img src="../images/kakao_login_medium_wide.png" width="280px" height="45px" />
-                    </div>
-                    <div className="google-login">
-                        <img src="../images/btn_google_signin_light_normal_web.png" width="285px" height="45px" />
-                    </div>
+                <div className="kakao-login">
+                    <img onClick={loginWithKakao} className="kakao-login-img" src={ kakao } />
                 </div>
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">

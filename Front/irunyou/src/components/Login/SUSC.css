@@ -6,12 +6,7 @@
  * 업데이트 날짜 : -
  */
 
- body {
-    display: flex;
-    justify-content: center;
-}
-
-img {
+.susc-img {
     padding: 0 200px 0 200px;
 
     width: 100px;
@@ -33,7 +28,7 @@ img {
     text-align: center;
 }
 
-button {
+.start-btn {
     border: none;
     
     width: 300px;

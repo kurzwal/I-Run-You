@@ -24,7 +24,7 @@ public interface UserRepository extends JpaRepository<UserEntity,Integer> {
 	public boolean existsByUserEmail(String email);		
 	public UserEntity findByUserEmailAndUserPassword(String email, String password);	
 	// id 찾기용 메서드
-	public UserEntity findByUserPhoneNumber(String phoneNumber);
+	public UserEntity findByUserPhoneNumber(String userPhoneNumber);
 	public UserEntity findByUserEmailAndUserPhoneNumber(String email, String phoneNumber);
 	
 	

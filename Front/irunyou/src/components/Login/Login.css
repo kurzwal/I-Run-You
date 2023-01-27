@@ -6,7 +6,7 @@
  * 업데이트 날짜 : 2023-01-19
  */
 
- body {
+body {
     margin: 0px;
 }
 
@@ -131,7 +131,7 @@ a:visited {
     padding-top: 20px;
 }
 
-.other-login-button {
+.kakao-login {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -163,4 +163,9 @@ a:visited {
 
 .signup-button {
     background-color: #b6cf55;
+}
+
+.kakao-login-img {
+    width: 300px;
+    height: 45px;
 }
