@@ -1,14 +1,29 @@
 import "./IDPW.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 // 작성자 : 최예정
 // 파일의 역할 : id, password 찾기 html
 // 작성날짜 : 2023-01-18
 
-// 업데이트 작성자 : -
-// 업데이트 날짜 : -
+// 업데이트 작성자 : 최예정
+// 업데이트 날짜 : 2023-01-28
 
 export default function IDPW() {
+
+    const [name, setName] = useState<String>('');
+    const [telnumber, setTelnumber] = useState<String>('');
+
+    const findId = () => {
+        const id = {
+            name,
+            telnumber
+        }
+    }
+
+    // 아이디랑 비밀번호 찾는 공간이 한 페이지에 구현되어있는데
+    // 백으로 따로 보낼 수 있는 방법
+
     return(
         <div className="idpw-container">
             <div className="container">
@@ -25,7 +40,7 @@ export default function IDPW() {
                         <input className="form" type="text" placeholder="TEL" />
                         <br />
                         <Link to="/Email">
-                            <button type="button">아이디 찾기</button>
+                            <button type="button" onClick={() => findId()}>아이디 찾기</button>
                         </Link>
                         <Link to="/Login">
                             <button type="button">로그인</button>
@@ -37,7 +52,7 @@ export default function IDPW() {
                 <div className="form-container">
                     <h2 className="form-title">비밀번호 찾기</h2>
                     <p>
-                        가입하신 아이디 + 이메일 입력,
+                        가입하신 이름 + 아이디(이메일),
                         <br />본인인증을 통해 이메일로 임시 비밀번호를 보내드립니다.
                         <br />확인 후 로그인하셔서 반드시 비밀번호를 변경하시기 바랍니다.
                     </p>

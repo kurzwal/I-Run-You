@@ -13,8 +13,8 @@ import { useState } from "react";
 
 export default function Login() {
 
-    const [id, setid] = useState<String>('');
-    const [password, setpassword] = useState<String>('');
+    const [id, setId] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     const LoginHandler = () => {
         const data = {

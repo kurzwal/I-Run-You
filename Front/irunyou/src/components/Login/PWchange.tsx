@@ -13,9 +13,9 @@ export default function PWchange() {
 
     const PasswordChange = () => {
 
-        const [password, setpassword] = useState<String>('');
-        const [newPassword, setnewPassword] = useState<String>('');
-        const [newPassword2, setnewPassword2] = useState<String>('');
+        const [password, setPassword] = useState<string>('');
+        const [newPassword, setNewPassword] = useState<string>('');
+        const [newPassword2, setNewPassword2] = useState<string>('');
         
 
         const data = {
