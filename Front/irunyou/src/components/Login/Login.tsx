@@ -1,16 +1,28 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
 import kakao from '../../assets/images/kakao_login_medium_wide.png';
+import { useState } from "react";
 
 // 작성자 : 최예정
 // 파일의 역할 : id, password 찾기 html
 // 작성날짜 : 2023-01-13
 
 // 업데이트 작성자 : 최예정
-// 업데이트 날짜 : 2023-01-19
+// 업데이트 날짜 : 2023-01-28
 
 
 export default function Login() {
+
+    const [id, setid] = useState<String>('');
+    const [password, setpassword] = useState<String>('');
+
+    const LoginHandler = () => {
+        const data = {
+            id,
+            password
+        }
+    }
+
     
     const { Kakao }:Window = window;
 
@@ -54,7 +66,7 @@ export default function Login() {
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">
                     <Link to="/Login">
-                    <button className="login-button button">로그인</button>
+                    <button className="login-button button" onClick={() => LoginHandler()}>로그인</button>
                     </Link>
                     <Link to="/Signup">
                         <button className="signup-button button" >회원가입</button>
