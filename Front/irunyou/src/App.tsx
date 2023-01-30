@@ -46,6 +46,7 @@ function App() {
         <Route path="/Email" element={<EmailView />} />
         <Route path="/SUSC" element={<SUSCView />} />
         <Route path="/Login/kakao" element={<KakaoRedirectHandler />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
 
         {/* <Route path='/' element={< Autehntication />}/> */}
         <Route  />
