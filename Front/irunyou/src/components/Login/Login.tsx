@@ -1,5 +1,6 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
+
 import kakao from '../../assets/images/kakao_login_medium_wide.png';
 
 // 작성자 : 최예정
@@ -11,6 +12,7 @@ import kakao from '../../assets/images/kakao_login_medium_wide.png';
 
 
 export default function Login() {
+
     
     const { Kakao }:Window = window;
 
@@ -30,7 +32,7 @@ export default function Login() {
                 {/* 아이디(이메일), 비밀번호 입력창 */}
                 <fieldset>
                     <div className="input-border">
-                        <input className="email-input" type="text" placeholder="아이디(이메일)" required />
+                        <input className="email-input" type="text" placeholder="아이디(이메일)" required/>
                         <input className="password-input" type="password" placeholder="비밀번호(8~16자 숫자, 영문, 특수문자)" required />
                     </div>
                 </fieldset>

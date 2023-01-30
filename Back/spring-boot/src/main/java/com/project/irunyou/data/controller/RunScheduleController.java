@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -36,6 +37,7 @@ import com.project.irunyou.data.service.RunScheduleService;
 
 import lombok.extern.slf4j.Slf4j;
 
+//@CrossOrigin(originPatterns = "http://localhost:3000")
 @Slf4j
 @RestController
 @RequestMapping

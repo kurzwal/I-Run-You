@@ -10,6 +10,7 @@
 package com.project.irunyou.data.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -30,6 +31,7 @@ import com.project.irunyou.data.dto.UserRequestDto;
 import com.project.irunyou.data.service.ResgisterMailService;
 import com.project.irunyou.data.service.UserService;
 
+//@CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController
 @RequestMapping("irunyou/")
 public class UserController {
@@ -39,7 +41,7 @@ public class UserController {
 	
 	// Create (회원가입)
 	@PostMapping("")
-	public ResponseDto<ResultResponseDto> signUpUser (@RequestBody PostUserDto requestBody) {
+	public ResponseDto<?> signUpUser (@RequestBody PostUserDto requestBody) {
 		return userService.signUpUser(requestBody);
 	}
 	
@@ -56,9 +58,9 @@ public class UserController {
 	}
 	
 	// Delete (회원탈퇴)
-	@DeleteMapping("{email}")
-	public ResponseDto<ResultResponseDto> deleteUser (@PathVariable("email") String email) {
-		return userService.deleteUser(email);
+	@DeleteMapping("{email},{password}")
+	public ResponseDto<ResultResponseDto> deleteUser (@PathVariable("email") String email,String password) {
+		return userService.deleteUser(email,password);
 	}
 	
 	// id찾기

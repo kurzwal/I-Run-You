@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 import LoginView from './components/Login/Login';
 import SignupView from './components/Login/Signup';
-import axios from 'axios';
+// import from "module";
 import IDPWView from './components/Login/IDPW';
 import EMverifyView from './components/Login/EMverify';
 import EmailView from './components/Login/Email';
 import SUSCView from './components/Login/SUSC';
+
 import KakaoRedirectHandler from './components/Login/KakaoRedirectHandler';
 import KakaoMap from './components/KakaoMap'
 

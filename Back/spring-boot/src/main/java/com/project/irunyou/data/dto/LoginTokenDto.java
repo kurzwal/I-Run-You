@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginTokenDto {
 	private String token;
-	private String expiration;
+	private long expiration;
 }
