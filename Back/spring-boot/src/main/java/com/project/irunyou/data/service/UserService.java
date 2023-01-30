@@ -25,14 +25,14 @@ import com.project.irunyou.data.dto.PatchUserDto;
 import com.project.irunyou.data.dto.PostUserDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
+import com.project.irunyou.data.dto.UserPhoneAndNameDto;
+import com.project.irunyou.data.dto.UserRequestDto;
 import com.project.irunyou.data.entity.CodeEntity;
 import com.project.irunyou.data.entity.UserEntity;
 import com.project.irunyou.data.repository.CodeRepository;
 import com.project.irunyou.data.repository.UserRepository;
 import com.project.irunyou.security.TokenProvider;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -76,6 +76,7 @@ public class UserService {
 		String userPhone = dto.getUserPhoneNumber().replace("-", "");
 
 		user = UserEntity.builder()
+				.userName(dto.getUserName())
 				.userEmail(dto.getUserEmail())
 				.userPassword(passwordEncoder.encode(password))
 				.userAddress(dto.getUserAddress())
@@ -128,13 +129,21 @@ public class UserService {
 	}
 
 	// id찾기
-	public ResponseDto<GetUserResponseDto> findUserId(String userPhoneNumber) {
-		String userPhone = userPhoneNumber.replace("-", "");
-		UserEntity user = findByPhoneNum(userPhone);
+	public ResponseDto<UserRequestDto> findUserId(UserPhoneAndNameDto dto) {
+		
+		String phone = dto.getUserPhoneNumber(); 
+		String name = dto.getUserName();
+		
+		String userPhone = phone.replace("-", "");
+		
+		if (!StringUtils.hasText(userPhone) || !StringUtils.hasText(name)) {
+			return ResponseDto.setFailed("입력한 정보를 다시 확인하세요");
+		}
+		UserEntity user = userRepository.findByUserPhoneNumberAndUserName(userPhone, name);
 		if (user == null)
 			return ResponseDto.setFailed("가입된 정보가 없습니다.");
 
-		return ResponseDto.setSuccess("회원님의 email 입니다.", new GetUserResponseDto(user));
+		return ResponseDto.setSuccess("회원님의 email 입니다.", new UserRequestDto(user));
 	}
 
 	// pw찾기 0126 황석민

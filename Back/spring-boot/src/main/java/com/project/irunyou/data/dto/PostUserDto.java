@@ -33,4 +33,6 @@ public class PostUserDto {
 	private String userAddressDetail;
 	@NotNull
 	private String userPhoneNumber;
+	@NotNull
+	private String userName;
 }

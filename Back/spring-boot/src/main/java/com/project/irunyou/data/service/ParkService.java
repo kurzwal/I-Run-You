@@ -31,7 +31,6 @@ public class ParkService {
 		if (park == null) {
 			return ResponseDto.setFailed("망했어요");
 		}
-	
 		
 		ParkInfoDto result;
 		result = ParkInfoDto.builder()

@@ -26,6 +26,7 @@ public interface UserRepository extends JpaRepository<UserEntity,Integer> {
 	// id 찾기용 메서드
 	public UserEntity findByUserPhoneNumber(String userPhoneNumber);
 	public UserEntity findByUserEmailAndUserPhoneNumber(String email, String phoneNumber);
+	public UserEntity findByUserPhoneNumberAndUserName(String userPhoneNumber, String userName);
 	
 	
 }

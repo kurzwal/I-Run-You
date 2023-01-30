@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.irunyou.data.dto.FindPasswordDto;
@@ -26,6 +25,8 @@ import com.project.irunyou.data.dto.PatchUserDto;
 import com.project.irunyou.data.dto.PostUserDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
+import com.project.irunyou.data.dto.UserPhoneAndNameDto;
+import com.project.irunyou.data.dto.UserRequestDto;
 import com.project.irunyou.data.service.ResgisterMailService;
 import com.project.irunyou.data.service.UserService;
 
@@ -61,9 +62,9 @@ public class UserController {
 	}
 	
 	// id찾기
-	@GetMapping("phone/{phoneNum}")
-	public ResponseDto<GetUserResponseDto> findUserId(@PathVariable("phoneNum")String phoneNum) {
-		return userService.findUserId(phoneNum);
+	@GetMapping("findemail")
+	public ResponseDto<UserRequestDto> findUserId(@RequestBody UserPhoneAndNameDto requestBody) {
+		return userService.findUserId(requestBody);
 	}
 	
 	// pw찾기
