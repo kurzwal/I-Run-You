@@ -47,6 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		try {
+			log.info("필터실행중");
 			String token = parseBearerToken(request);	// request에서 토큰 가져오기
 			if(token != null && !token.equalsIgnoreCase("null")) {	// 토큰 검사
 				String userEmail = tokenProvider.CheckAndGetUserEmail(token);	// 이메일 가져오기
@@ -63,7 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 			// 서버가 요청이 끝나기 전까지 인증한 사용자의 정보를 갖고 있어야 한다. 
 		} catch(Exception e) {
 			logger.error("token error",e);
-			filterChain.doFilter(request, response);
+//			filterChain.doFilter(request, response);
 		}
 		filterChain.doFilter(request, response);
 	}

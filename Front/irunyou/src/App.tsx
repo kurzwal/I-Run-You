@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 import LoginView from './components/Login/Login';
 import SignupView from './components/Login/Signup';
-import axios from 'axios';
+// import from "module";
 import IDPWView from './components/Login/IDPW';
 import EMverifyView from './components/Login/EMverify';
 import EmailView from './components/Login/Email';
 import SUSCView from './components/Login/SUSC';
+import MainMenu from './components/MainMenu';
 
 // 작성자 : 최예정
 // 파일의 역할 : 링크 연결, 백 -> 프론트 GET
@@ -32,6 +34,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        {/* <Route path="/" element={<MainMenu/>}/> */}
         <Route path="/Signup" element={<SignupView />}  />
         <Route path="/Login" element={<LoginView />}  />
         <Route path="/IDPW" element={<IDPWView />}  />

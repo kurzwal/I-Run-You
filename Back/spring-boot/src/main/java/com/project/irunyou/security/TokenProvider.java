@@ -55,12 +55,12 @@ public class TokenProvider {
 	}
 	
 	// 토큰 디코딩. 유효기간 리턴
-	public String GetExpiration(String token) {
+	public long GetExpiration(String token) {
 		Claims claims = Jwts.parser()
 				.setSigningKey(SECRET_KEY)
 				.parseClaimsJws(token)
 				.getBody();
-		return claims.getExpiration().toString();
+		return claims.getExpiration().getTime();
 	}
 	
 }

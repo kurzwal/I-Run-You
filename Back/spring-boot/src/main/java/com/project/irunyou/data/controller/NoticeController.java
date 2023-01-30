@@ -1,6 +1,7 @@
 package com.project.irunyou.data.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -15,6 +16,7 @@ import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.service.NoticeService;
 
+@CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController
 @RequestMapping("notice/")
 public class NoticeController {

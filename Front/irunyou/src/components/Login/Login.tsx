@@ -1,5 +1,7 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 // 작성자 : 최예정
 // 파일의 역할 : id, password 찾기 html
@@ -9,6 +11,7 @@ import { Link } from "react-router-dom";
 // 업데이트 날짜 : 2023-01-19
 
 export default function Login() {
+
     return(
         <div className="login-container">
             {/* 로그인 전체 form */}
@@ -17,7 +20,7 @@ export default function Login() {
                 {/* 아이디(이메일), 비밀번호 입력창 */}
                 <fieldset>
                     <div className="input-border">
-                        <input className="email-input" type="text" placeholder="아이디(이메일)" required />
+                        <input className="email-input" type="text" placeholder="아이디(이메일)" required/>
                         <input className="password-input" type="password" placeholder="비밀번호(8~16자 숫자, 영문, 특수문자)" required />
                     </div>
                 </fieldset>
