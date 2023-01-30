@@ -30,7 +30,7 @@ export default function Login() {
         Kakao.Auth.authorize({
             // 나중에 주소 수정
             redirectUri : 'http://localhost:3000/Login/kakao',
-            scope : "profile_nickname, account_email", //받아올 값들 => 이름 나중에 수정
+            scope : "profile_nickname, account_email",
         });
     };
 
