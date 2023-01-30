@@ -2,6 +2,8 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import kakao from '../../assets/images/kakao_login_medium_wide.png';
 import { useState } from "react";
+import axios from "axios";
+const { Kakao }:Window = window;
 
 // 작성자 : 최예정
 // 파일의 역할 : id, password 찾기 html
@@ -21,10 +23,11 @@ export default function Login() {
             id,
             password
         }
-    }
-
-    
-    const { Kakao }:Window = window;
+        axios.post('http//localhost:4040/irunyou/', data).then((Response) => {
+            const UserInformation = Response.data.user;
+            alert(data);
+        })
+    }  
 
     const loginWithKakao = () => {
         Kakao.Auth.authorize({
@@ -33,6 +36,7 @@ export default function Login() {
             scope : "profile_nickname, account_email",
         });
     };
+    
 
     return(
         <div className="login-container">
@@ -65,7 +69,7 @@ export default function Login() {
                 </div>
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">
-                    <Link to="/Login">
+                    <Link to="/MainPage">
                     <button className="login-button button" onClick={() => LoginHandler()}>로그인</button>
                     </Link>
                     <Link to="/Signup">

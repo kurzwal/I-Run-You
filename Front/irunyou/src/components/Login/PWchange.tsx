@@ -1,6 +1,7 @@
 import './PWchange.css';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
+import axios from 'axios';
 
 // 작성자 : 최예정
 // 파일의 역할 : 비밀번호 변경 html
@@ -23,6 +24,10 @@ export default function PWchange() {
             newPassword,
             newPassword2
         }
+        axios.post('http//localhost:4040/irunyou/', data).then((Response) => {
+        const UserInformation = Response.data.user;
+        alert(data);
+        })
     }
 
     return(

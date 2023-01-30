@@ -1,6 +1,7 @@
 import "./IDPW.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 // 작성자 : 최예정
 // 파일의 역할 : id, password 찾기 html
@@ -20,6 +21,10 @@ export default function IDPW() {
             name,
             telnumber
         }
+        axios.post('http//localhost:4040/irunyou/', findId).then((Response) => {
+        const UserInformation = Response.data.user;
+        alert(findId);
+        })
     }
 
     const findPassword = () => {
@@ -27,6 +32,10 @@ export default function IDPW() {
             name,
             id
         }
+        axios.post('http//localhost:4040/irunyou/', findPassword).then((Response) => {
+            const UserInformation = Response.data.user;
+            alert(findPassword);
+        })
     }
 
     // 아이디랑 비밀번호 찾는 공간이 한 페이지에 구현되어있는데

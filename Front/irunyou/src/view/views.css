@@ -20,6 +20,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url("../assets/mainimg.jpg");
+    /* background-repeat: no-repeat; */
     padding: 10% 15%;
 }
 
