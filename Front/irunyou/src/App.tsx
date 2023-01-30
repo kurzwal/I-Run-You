@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
 import { Routes, Route } from "react-router-dom";
+
 import LoginView from './components/Login/Login';
 import SignupView from './components/Login/Signup';
-import axios from 'axios';
 import IDPWView from './components/Login/IDPW';
 import EMverifyView from './components/Login/EMverify';
 import EmailView from './components/Login/Email';
 import SUSCView from './components/Login/SUSC';
 import KakaoRedirectHandler from './components/Login/KakaoRedirectHandler';
-import KakaoMap from './components/KakaoMap'
+import KakaoMap from './components/KakaoMap';
+import HomePage from './view/HomePage';
+import MainPage from './view/MainPage';
 
 // 작성자 : 최예정
 // 파일의 역할 : 링크 연결, 백 -> 프론트 GET
@@ -34,6 +37,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/MainPage" element={<MainPage />}></Route>
         <Route path="/Signup" element={<SignupView />}  />
         <Route path="/Login" element={<LoginView />}  />
         <Route path="/IDPW" element={<IDPWView />}  />

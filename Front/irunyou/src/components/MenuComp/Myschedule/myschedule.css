@@ -1,0 +1,42 @@
+.myschedule-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+}
+
+.my-schedule-title {
+    width: 100%;
+    height: 40px;
+    background-color: beige;
+    color: #444;
+    font-size: 30px;
+    font-weight: 800;
+    padding-left: 20px;
+}
+
+.schedule-item-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3% 0;
+    width: 100%;
+    padding: 3%;
+    background-color: aliceblue;
+}
+
+.week-txt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    width: 20%;
+    text-align: center;
+    background-image: url("../../../assets/circle-regular.svg");
+    background-repeat: no-repeat; 
+}
+
+.schedule-txt-container {
+    padding-left: 15px;
+    width: 70%;
+}

@@ -1,0 +1,43 @@
+/* 작성자 : 유열림
+ * 파일의 역할 : 홈화면 css
+ * 작성날짜 : 2023-01-14
+ * 
+ * 업데이트 작성자 : -
+ * 업데이트 날짜 : -
+ */
+ body {
+    margin:0;
+    padding:0;
+}
+* {
+    box-sizing: border-box;
+}
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(162, 162, 226);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow: hidden;
+}
+.zi1 {
+    z-index: 1;
+}
+.zi2 {
+    z-index: 2;
+}
+.zi3 {
+    z-index: 3;
+}
+.zi4 {
+    z-index: 4;
+}
+.zi5 {
+    z-index: 5;
+}

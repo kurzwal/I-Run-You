@@ -1,6 +1,6 @@
 import "./menu.css";
 
-export default function MenuLogo() {
+export default function MenuProfile() {
     return (
         <div className="menu-profile">
             <div className="profile-img-continer">
