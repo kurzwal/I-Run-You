@@ -1,0 +1,81 @@
+/* 
+    작성자 : 유열림
+    파일의 역할 : view 폴더 안 css
+    작성날짜 : 2023-01-30
+
+    업데이트 작성자 : -
+    업데이트 날짜 : - 
+*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+/* HomePage */
+
+.home-main-img {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../assets/mainimg.jpg");
+    padding: 10% 15%;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.txt-container {
+    width: 70%;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: rgba(213, 213, 213, 0.486);
+}
+
+.home-title {
+    font-size: 44px;
+    font-weight: 800;
+}
+
+.home-desc {
+    font-size: 24px;
+    font-weight: 400;
+    margin-left: 5%;
+    color: #555;
+}
+
+.btn-container {
+    margin-top: 15%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 3%;
+}
+
+.btn {
+    width: 20%;
+    height: 60px;
+}
+
+.home-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15%;
+    width: 100vw;
+    height: 8vh;
+    background-color: rgba(213, 213, 213, 0.865);
+    font-size: 17px;
+    color: #555;
+}
+
+/* MainPage */
+
