@@ -37,7 +37,7 @@ import com.project.irunyou.data.service.RunScheduleService;
 
 import lombok.extern.slf4j.Slf4j;
 
-//@CrossOrigin(originPatterns = "http://localhost:3000")
+@CrossOrigin(originPatterns = "http://localhost:3000")
 @Slf4j
 @RestController
 @RequestMapping

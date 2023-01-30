@@ -84,7 +84,7 @@ public class ResgisterMailService {
 		try {
 			mailSender.send(mail); // 메일 발송
 		} catch (MailException e) {
-			e.printStackTrace();
+			return "발송중 오류가 발생했습니다.";
 		}
 		
 		return cerpw; // 메일로 보냈던 인증 코드 서버로 반환
