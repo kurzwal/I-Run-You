@@ -3,12 +3,8 @@
  * 작성날짜 : 2023-01-13
  * 
  * 업데이트 작성자 : 최예정
- * 업데이트 날짜 : 2023-01-19
+ * 업데이트 날짜 : 2023-01-30
  */
-
-body {
-    margin: 0px;
-}
 
 .login-container {
     display: flex;
@@ -39,7 +35,7 @@ fieldset {
     box-sizing: border-box;
 }
 
-input {
+.login-input {
     display: flex;
 
     padding: 0 10px 0 20px;

@@ -45,42 +45,40 @@ export default function Signup() {
         </div>
         <div className="config-container">
             <div className="config-input">
-                <input onChange={(e) => setName(e.target.value)} type="text" placeholder="이름" />
+                <input className='singup-input' onChange={(e) => setName(e.target.value)} type="text" placeholder="이름" />
             </div>
             <div className="config-input">
-                <input onChange={(e) => setNickname(e.target.value)} type="text" placeholder="닉네임" />
-                <button>중복확인</button>
+                <input className='singup-input' onChange={(e) => setNickname(e.target.value)} type="text" placeholder="닉네임" />
+                <button className='check-btn'>중복확인</button>
             </div>
             <div className="config-input">
-                <input onChange={(e) => setId(e.target.value)} type="email" placeholder="아이디(이메일)" />
-                <button>중복확인</button>
+                <input className='singup-input' onChange={(e) => setId(e.target.value)} type="email" placeholder="아이디(이메일)" />
+                <button className='check-btn'>중복확인</button>
             </div>
             <div className="config-input">
-                <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder="비밀번호(8~16자까지 영문 대소문자/숫자/특수문자 사용)" />
+                <input className='singup-input' onChange={(e) => setPassword(e.target.value)} type="password" placeholder="비밀번호(8~16자까지 영문 대소문자/숫자/특수문자 사용)" />
             </div>
             <div className="config-input">
-                <input onChange={(e) => setPassword2(e.target.value)} type="password" placeholder="비밀번호 확인" />
+                <input className='singup-input' onChange={(e) => setPassword2(e.target.value)} type="password" placeholder="비밀번호 확인" />
             </div>
             <div className="config-input">
-                <input onChange={(e) => setPostNumber(e.target.value)} type="text" placeholder="우편찾기" />
-                <button>주소검색</button>
+                <input className='singup-input' onChange={(e) => setPostNumber(e.target.value)} type="text" placeholder="우편찾기" />
+                <button className='check-btn'>주소검색</button>
             </div>
-            <div className="config-input">
                 <div className="address-input">
-                    <input onChange={(e) => setAddress(e.target.value)} type="text" placeholder="주소" />
+                    <input className='singup-input' onChange={(e) => setAddress(e.target.value)} type="text" placeholder="주소" />
                 </div>
                 <div className="address-input2">
-                    <input onChange={(e) => setAddressDetail(e.target.value)} type="text" placeholder="나머지주소" />
+                    <input className='singup-input' onChange={(e) => setAddressDetail(e.target.value)} type="text" placeholder="나머지주소" />
                 </div>
-            </div>
             <div className="config-input">
-                <input type="text" placeholder="휴대전화" />
+                <input className='singup-input' type="text" placeholder="휴대전화" />
             </div>
         </div>
         <div className='submit-btn'>
             <Link to="/SUSC">
             {/* onclick을 했을 경우 백으로 전송 */}
-                <button onClick={() => onSubmitHandler()}></button>
+                <button className='singup-btn' onClick={() => onSubmitHandler()}>회원가입</button>
             </Link>
         </div>
     </div>
