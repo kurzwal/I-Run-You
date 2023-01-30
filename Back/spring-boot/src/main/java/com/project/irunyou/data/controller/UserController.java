@@ -10,6 +10,7 @@
 package com.project.irunyou.data.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,9 @@ import com.project.irunyou.data.dto.UserRequestDto;
 import com.project.irunyou.data.service.ResgisterMailService;
 import com.project.irunyou.data.service.UserService;
 
-//@CrossOrigin(originPatterns = "http://localhost:3000")
+// 로그인이 되어있는 경우 (JWT 토큰을 가지고 있는 상태)
+
+@CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController
 @RequestMapping("irunyou/")
 public class UserController {
@@ -39,15 +42,10 @@ public class UserController {
 	@Autowired UserService userService;
 	@Autowired ResgisterMailService mailService;
 	
-	// Create (회원가입)
-	@PostMapping("")
-	public ResponseDto<?> signUpUser (@RequestBody PostUserDto requestBody) {
-		return userService.signUpUser(requestBody);
-	}
-	
+
 	// Read (회원정보 읽기)
-	@GetMapping("{email}")
-	public ResponseDto<GetUserResponseDto> readUser (@PathVariable("email") String email) {
+	@GetMapping("mypage")
+	public ResponseDto<GetUserResponseDto> readUser (@AuthenticationPrincipal String email) {	// 로그인 되어있는 상태! -> 마이페이지
 		return userService.readUser(email);
 	}
 	
@@ -58,8 +56,9 @@ public class UserController {
 	}
 	
 	// Delete (회원탈퇴)
-	@DeleteMapping("{email},{password}")
-	public ResponseDto<ResultResponseDto> deleteUser (@PathVariable("email") String email,String password) {
+	@PostMapping("dropuser")	// deleteMapping의 경우 RequestBody를 받지 않기 때문에 Post로 처리함.
+	public ResponseDto<ResultResponseDto> deleteUser (@AuthenticationPrincipal String email, @RequestBody String password) {
+		// password의 경우 프론트에서 json형태가 아닌 text로 처리해야 합니다!
 		return userService.deleteUser(email,password);
 	}
 	
@@ -77,18 +76,6 @@ public class UserController {
 		return userService.findPw(requestBody);
 	}
 
-	// 이메일 인증
-//	@PostMapping("mailConfirm")	
-//	public ResponseDto<String> mailConfirm(@RequestParam("email") String email){
-//		String code = null;
-//		try {
-//		// 인증코드 발송 
-//		code = mailService.sendMail(email);
-//		} catch (Exception e) {
-//			return ResponseDto.setFailed("error");
-//		}	
-//		// 보내진 코드 프론트로 return
-//		return ResponseDto.setSuccess("Success", code);
-//	}
+
 	
 }

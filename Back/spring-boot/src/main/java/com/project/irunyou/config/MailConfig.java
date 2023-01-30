@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+// 홍지혜
+
 @Configuration
 // 설정파일을 만들기 위한 어노테이션, Bean을 등록하기 위한 어노테이션
 // 설정파일이야 Bean 등록할꺼야

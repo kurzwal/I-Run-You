@@ -22,13 +22,13 @@ public class IrunyouApplication {
 	}
 	
 	// CORS 설정
-//	@Bean
-//	public WebMvcConfigurer corsConfig() {
-//		return new WebMvcConfigurer() {
-//			@Override
-//			public void addCorsMappings(CorsRegistry registry) {
-//				registry.addMapping("/*").allowedOriginPatterns("http://localhost:3000");
-//			}
-//		};
-//	}
+	@Bean
+	public WebMvcConfigurer corsConfig() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/*").allowedOriginPatterns("http://localhost:3000");
+			}
+		};
+	}
 }
