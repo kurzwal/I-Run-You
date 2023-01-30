@@ -11,8 +11,9 @@ import { useState } from "react";
 
 export default function IDPW() {
 
-    const [name, setName] = useState<String>('');
-    const [telnumber, setTelnumber] = useState<String>('');
+    const [name, setName] = useState<string>('');
+    const [telnumber, setTelnumber] = useState<string>('');
+    const [id, setId] = useState<string>('');
 
     const findId = () => {
         const id = {
@@ -21,7 +22,12 @@ export default function IDPW() {
         }
     }
 
-    
+    const findPassword = () => {
+        const password = {
+            name,
+            id
+        }
+    }
 
     // 아이디랑 비밀번호 찾는 공간이 한 페이지에 구현되어있는데
     // 백으로 따로 보낼 수 있는 방법
