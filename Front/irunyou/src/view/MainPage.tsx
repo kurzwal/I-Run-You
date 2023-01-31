@@ -19,18 +19,12 @@ import MySchedule from '../components/MenuComp/MySchedule';
 
 function MenuIcon() {
     return (
-      <div className="container">
-        <img className="menu-icon" src={ MenuImg } />
+      <div className="speed-dial-container">
+        <img className="speed-dial-icon" src={ MenuImg } />
       </div>
     )
   }
   
-// 필요한 변수
-// 1. 기본그림 & 메뉴 (boolean)
-// 2. 메뉴 온오프 (boolean)
-// 3. 메뉴 종류 (num)
-// 4. 새 일정 만들기 창 (boolean)
-// 5. 일정 수정하기 창 (boolean)
 
 
 export default function MainPage(){
@@ -56,13 +50,16 @@ export default function MainPage(){
             <Box sx={{...(!mapOpen ? {display: 'none'} : {display: 'flex'})}}> {/* true되면 나옴 */}
                 {/* <KakaoMap></KakaoMap> */}
             </Box>
+            {/* 공지사항 alert창 */}
+            <></>
             {/* 메뉴버튼 */}
             <SpeedDial
                 ariaLabel="Menu btn"
+                onClick={() => toggleMenu()}
                 sx={{ position: 'absolute', top: 16, right: 16,
                 ...(menuOpen && {display: 'none'})}}
                 icon={<SpeedDialIcon 
-                    onClick={() => toggleMenu()}
+                    
                     icon={<MenuIcon />}
                 />}>
             </SpeedDial>
@@ -70,10 +67,10 @@ export default function MainPage(){
             <Drawer
                 sx={{
                 width: 0,
-                borderRadius: '10px',
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
-                    borderRadius: '10px',
+                    borderTopLeftRadius: '10px',
+                    borderBottomLeftRadius: '10px',
                     width: '25%',
                     boxSizing: 'border-box',
                 },
@@ -93,7 +90,6 @@ export default function MainPage(){
             <Drawer
                 sx={{
                 width: 0,
-                borderRadius: '10px',
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     borderRadius: '10px',
@@ -116,7 +112,6 @@ export default function MainPage(){
             <Drawer
                 sx={{
                 width: 0,
-                borderRadius: '10px',
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     borderRadius: '10px',
@@ -126,9 +121,31 @@ export default function MainPage(){
                 }}
                 variant="persistent"
                 anchor="right"
-                open={menuOpen && menuState == 2}
+                open={menuOpen && (menuState == 2 || menuState == 3)}
             >
                 <ParkList></ParkList>
+                <Box>
+                <img className='x-icon' src={ Xmark }
+                    onClick={() => toggleMenu()} />
+                </Box>
+            </Drawer>
+
+            {/* 공원 찾기(리스트) */}
+            <Drawer
+                sx={{
+                width: 0,
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                    borderRadius: '10px',
+                    width: '25%',
+                    boxSizing: 'border-box',
+                },
+                }}
+                variant="persistent"
+                anchor="right"
+                open={menuOpen && menuState == 3}
+            >
+                <ParkInfo></ParkInfo>
                 <Box>
                 <img className='x-icon' src={ Xmark }
                     onClick={() => toggleMenu()} />
@@ -139,7 +156,6 @@ export default function MainPage(){
             <Drawer
                 sx={{
                 width: 0,
-                borderRadius: '10px',
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     borderRadius: '10px',

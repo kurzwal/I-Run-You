@@ -6,13 +6,6 @@
     업데이트 작성자 : -
     업데이트 날짜 : - 
 */
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-}
 
 /* HomePage */
 
@@ -93,4 +86,24 @@ body {
 }
 
 /* MainPage */
+
+.speed-dial-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.speed-dial-icon {
+    width: 22px;
+}
+
+.x-icon {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    z-index: 5;
+
+    width: 22px;
+    cursor: pointer;
+}
 

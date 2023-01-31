@@ -38,28 +38,25 @@
 .menu-back-icon {
     width: 30px;
     height: 30px;
-    margin-top: -20px;
+    margin-top: -10px;
     margin-left: -10px;
     cursor: pointer;
 }
 .logo-img {
     width: 40px;
     height: 40px;
-    cursor: pointer;
 }
 .logo-txt {
     padding-left: 15px;
     font-size: 35px;
     font-weight: 800;
-    word-spacing: -9px;
+    word-spacing: -5px;
     padding-bottom: 5px;
-    cursor: pointer;
 }
 .fa-bars-staggered {
     font-size: 30px;
     padding-left: 6px;
     padding-top: 3px;
-    cursor: pointer;
 }
 
 

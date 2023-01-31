@@ -5,8 +5,8 @@ import ParkInfoBody from "./Parkinfo/ParkInfoBody";
 export default function ParkInfo() {
     return (
         <div className="main-menu zi3">
-            <MenuLogoBack></MenuLogoBack>
-            <ParkInfoBody></ParkInfoBody>
+            <MenuLogoBack />
+            <ParkInfoBody />
         </div>
     )
 }
