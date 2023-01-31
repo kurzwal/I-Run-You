@@ -38,12 +38,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class UserService {
+
+	@Autowired private AuthService authService;
+	@Autowired private ResgisterMailService mailService;
 	
 	@Autowired private UserRepository userRepository;
+	@Autowired private CodeRepository codeRepository;;
+	
 	@Autowired private PasswordEncoder passwordEncoder;
-	@Autowired private CodeRepository codeRepository;
-	@Autowired private ResgisterMailService mailService;
-		
 
 	// 회원 정보조회, email, pw확인후 pw제외 정보제공
 	public ResponseDto<GetUserResponseDto> readUser(String email) {
@@ -75,7 +77,7 @@ public class UserService {
 	// 회원 탈퇴
 	public ResponseDto<ResultResponseDto> deleteUser(String email, String password) {
 		// 비밀번호로 회원 검증
-		UserEntity user = AuthService.getByCredentials(email, password, passwordEncoder);
+		UserEntity user = authService.getByCredentials(email, password, passwordEncoder);
 		
 		if (user == null) {
 			return ResponseDto.setFailed("회원정보가 일치하지 않습니다.");

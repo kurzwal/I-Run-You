@@ -18,13 +18,13 @@ import com.project.irunyou.security.TokenProvider;
 @Service
 public class AuthService {
 	
-	@Autowired private static UserRepository userRepository;
+	@Autowired private UserRepository userRepository;
 	@Autowired private PasswordEncoder passwordEncoder;
 	@Autowired private TokenProvider tokenProvider;
 	
 	// 2023-01-25 홍지혜
 	// 유저의 이메일과 비밀번호로 유저 엔티티 생성 -> rawPassword / encodedPassword 같은지 확인
-	public static UserEntity getByCredentials(String email, String password, PasswordEncoder encoder) {
+	public UserEntity getByCredentials(String email, String password, PasswordEncoder encoder) {
 		/*
 		 * BCryp어쩌구 인코더는 같은 값을 인코딩하더라도 할 떄마다 값이 다름 -> 의미 없는 값 랜덤 Salt -> Salting
 		 * 유저에게 받은 패스워드를 인코딩해도 데이터베이스에 저장한 패스워드와는 다를 확률이 높음
@@ -85,7 +85,7 @@ public class AuthService {
 		UserEntity user = getByCredentials(dto.getUserEmail(), dto.getUserPassword(), passwordEncoder);
 
 		if (user == null) {	// 해당 유저 정보 없음
-			return new ResponseEntity<String>("해당하는 유저정보가 없습니다./n이메일과 비밀번호를 확인해 주세요.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("해당하는 유저정보가 없습니다. 이메일과 비밀번호를 확인해 주세요.", HttpStatus.BAD_REQUEST);
 		} else { // 유저정보가 존재함
 			String token = tokenProvider.create(user); 	// 토큰 생성
 			long expiration = tokenProvider.GetExpiration(token);	// 토큰 유효기간
