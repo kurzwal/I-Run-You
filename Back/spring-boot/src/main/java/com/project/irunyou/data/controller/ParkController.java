@@ -7,6 +7,7 @@ package com.project.irunyou.data.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.UserLocationDto;
 import com.project.irunyou.data.service.ParkService;
 
-
+@CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController
 @RequestMapping("irunyou/park/")
 public class ParkController {

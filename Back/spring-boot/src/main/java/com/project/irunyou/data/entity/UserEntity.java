@@ -48,4 +48,5 @@ public class UserEntity {
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
     @CreatedDate
     private LocalDateTime userJoinDate;
+    private String userName;
 }

@@ -32,8 +32,9 @@ public class ParkInfoDto {
 	    @NotNull
 	    private int parkArea;
 	    
+//	 	0131 parkService 빌더 -> 생성자로 수정 - 황석민
 	    public ParkInfoDto(ParkEntity parkEntity) {
-	    	this.parkIndex = parkEntity.getParkIndex();
+//	    	this.parkIndex = parkEntity.getParkIndex();
 	    	this.parkName = parkEntity.getParkName();
 	    	this.parkAddress = parkEntity.getParkAddress();
 	    	this.parkLatitude = parkEntity.getParkLatitude();

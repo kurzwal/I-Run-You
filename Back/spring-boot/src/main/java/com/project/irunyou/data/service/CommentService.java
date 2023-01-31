@@ -35,15 +35,16 @@ public class CommentService {
 		CommentResponseDto result;
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		
-		result = CommentResponseDto
-				.builder()
-				.commentIndex(0)
-				.commentScheduleIndex(0)
-				.commentWriterIndex(dto.getCommentWriterIndex())
-				.commentContent(dto.getCommentContent())
-				.commentDatetime(timestamp)
-				.build();
+//	 	0131 result 빌더 -> 생성자로 대체 - 황석민
 		
+//		result = CommentResponseDto
+//				.builder()
+//				.commentIndex(0)
+//				.commentScheduleIndex(0)
+//				.commentWriterIndex(dto.getCommentWriterIndex())
+//				.commentContent(dto.getCommentContent())
+//				.commentDatetime(timestamp)
+//				.build();
 		
 		comment = CommentEntity
 				.builder()
@@ -51,9 +52,10 @@ public class CommentService {
 				.commentScheduleIndex(0)
 				.commentWriterIndex(dto.getCommentWriterIndex())
 				.commentContent(dto.getCommentContent())
-//				.datetime(timestamp)
+//				.datetime(timestamp) -> entity에서 설정
 				.build();
-				
+		
+		result = new CommentResponseDto(comment);		
 		
 		commentRepository.save(comment);
 		
