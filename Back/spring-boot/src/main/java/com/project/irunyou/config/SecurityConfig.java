@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -27,7 +28,7 @@ public class SecurityConfig {
 	@Autowired private TokenProvider tokenProvider;
 	
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
@@ -50,22 +51,6 @@ public class SecurityConfig {
 				.build();
 	}
 	
-	
-	/*
-	 * o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with
-	 * [org.springframework.security.web.session.DisableEncodeUrlFilter@69ee0861,
-	 * org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5de6c7d7,
-	 * org.springframework.security.web.context.SecurityContextPersistenceFilter@7f6936cc,
-	 * org.springframework.security.web.header.HeaderWriterFilter@6e6bd43b,
-	 * org.springframework.security.web.authentication.logout.LogoutFilter@9fd5dd0,
-	 * com.project.irunyou.security.JwtAuthenticationFilter@69f55ea,
-	 * org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ac26092,
-	 * org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@308e465b,
-	 * org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b370ca9,
-	 * org.springframework.security.web.session.SessionManagementFilter@35b38986,
-	 * org.springframework.security.web.access.ExceptionTranslationFilter@62f3ad90,
-	 * org.springframework.security.web.access.intercept.FilterSecurityInterceptor@30a79476]
-	 */
 	
 	
 }

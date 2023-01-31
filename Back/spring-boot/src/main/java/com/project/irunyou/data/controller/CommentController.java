@@ -6,6 +6,7 @@
 package com.project.irunyou.data.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import com.project.irunyou.data.service.CommentService;
 
 import lombok.extern.slf4j.Slf4j;
 
+@CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController
 @RequestMapping("irunyou/comment/")
 public class CommentController {
