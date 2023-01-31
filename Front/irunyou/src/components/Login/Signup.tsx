@@ -62,8 +62,6 @@ export default function Signup() {
         })
     }
 
-    // 중복확인할 때 사용자가 값을 넣고 데이터베이스에 있는 값을 빼오고 싶음
-
     return (
     <div className="signup-container">
         <div className="user-config">

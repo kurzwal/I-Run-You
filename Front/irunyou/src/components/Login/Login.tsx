@@ -1,5 +1,5 @@
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import kakao from '../../assets/images/kakao_login_medium_wide.png';
 import { useState } from "react";
 import axios from "axios";
@@ -10,24 +10,32 @@ const { Kakao }:Window = window;
 // 작성날짜 : 2023-01-13
 
 // 업데이트 작성자 : 최예정
-// 업데이트 날짜 : 2023-01-28
+// 업데이트 날짜 : 2023-01-30
 
 
 export default function Login() {
 
+
     const [id, setId] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const movePage = useNavigate();
 
     const LoginHandler = () => {
         const data = {
             id,
             password
         }
-        axios.post('http//localhost:4040/irunyou/', data).then((Response) => {
+
+        axios.post('http://localhost:4040/irunyou/auth/login', data).then((Response) => {
             const UserInformation = Response.data.user;
-            alert(data);
+            console.log(UserInformation);
+
+            if(!UserInformation) alert('입력하신 회원정보가 존재하지않습니다.');
+            else movePage('/MainPage');
         })
-    }  
+        // 로그인을 할 시 사용자가 입력한 데이터가 일치하지 않을 경우 경고창 띄우기
+        // 지금 적어놓은 조건문은 else에 있는 조건문만 실행됨
+    } 
 
     const loginWithKakao = () => {
         Kakao.Auth.authorize({
