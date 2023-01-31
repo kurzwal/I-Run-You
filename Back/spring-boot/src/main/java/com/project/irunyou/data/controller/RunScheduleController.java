@@ -40,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin(originPatterns = "http://localhost:3000")
 @Slf4j
 @RestController
-@RequestMapping
+@RequestMapping("/irunyou/runshedule/")
 public class RunScheduleController {
 
 	@Autowired RunScheduleService scheduleService;
@@ -50,10 +50,11 @@ public class RunScheduleController {
 		log.info("jwt 인증 확인용 :" + writer);
 		return scheduleService.registSchedule(requestBody);
 	}
+	
 	//R (일정조회)
-	@GetMapping("schedule_info")
-	public ResponseDto<List<GetUserRunScheduleDto>> readSchedule(@RequestBody UserRequestDto dto) {
-		return scheduleService.readSchedule(dto);
+	@GetMapping("list")
+	public ResponseDto<List<GetUserRunScheduleDto>> readSchedule(@AuthenticationPrincipal String userEmail) {
+		return scheduleService.readSchedule(userEmail);
 	}
 	
 	//U

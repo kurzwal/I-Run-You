@@ -74,10 +74,13 @@ public class RunScheduleService {
 	
 	// 일정 조회 유저정보 -> (일정 있는 공원, 일정 제목, 일정 시간) 
 	// 공원 이름으로 출력?
-	public ResponseDto<List<GetUserRunScheduleDto>> readSchedule(UserRequestDto dto) {
-		UserEntity user = userRepository.findByUserEmail(dto.getUserEmail());
-		List<GetUserRunScheduleDto> data = new ArrayList<>();
-		try {
+	public ResponseDto<List<GetUserRunScheduleDto>> readSchedule(String userEmail) {
+		
+		UserEntity user = userRepository.findByUserEmail(userEmail);	// 이메일로 유저 가져오기
+		
+		List<GetUserRunScheduleDto> data = new ArrayList<>();	
+		
+		try {	// 본인 작성 일정 말고 참여 일정까지 어떻게 가져올지 수정해야 함
 			List<RunScheduleEntity> scheduleList = scheduleRepository.findAllByrunScheduleWriterIndex(user.getUserIndex());
 			for(RunScheduleEntity r : scheduleList) {
 				data.add(new GetUserRunScheduleDto(r));
@@ -86,7 +89,7 @@ public class RunScheduleService {
 			e.printStackTrace();
 			return ResponseDto.setFailed("일정 조회중 오류가 발생했습니다.");
 		}
-		return ResponseDto.setSuccess("일정 조회 완료",data);
+		return ResponseDto.setSuccess("Success",data);
 	}
 	
 	// 일정 수정

@@ -38,7 +38,7 @@ public class AuthController {
 	
 	// 로그인
 	@PostMapping("login")
-	public ResponseEntity<?> LoginUser(@RequestBody LoginUserDto requestBody) {
+	public ResponseDto<?> LoginUser(@RequestBody LoginUserDto requestBody) {
 		return authService.LoginUser(requestBody);
 	}
 	

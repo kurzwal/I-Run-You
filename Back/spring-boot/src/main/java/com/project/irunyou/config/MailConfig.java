@@ -11,7 +11,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
 // 설정파일을 만들기 위한 어노테이션, Bean을 등록하기 위한 어노테이션
-// 설정파일이야 Bean 등록할꺼야
 // @Bean 어노테이션이 동봉된 메소드를 서넝ㄴ하면, 그 메소드를 통해 빈을 정의하고 생명주기를 설정
 public class MailConfig {
 	
