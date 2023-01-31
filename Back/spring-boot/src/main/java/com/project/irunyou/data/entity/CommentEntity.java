@@ -22,6 +22,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.CreatedDate;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -44,6 +47,7 @@ public class CommentEntity {
     @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @CreatedDate	// service클래스에서 dateTime 빌드없이 설정해주기
     private LocalDateTime commentDatetime;
     private int commentLikeUser;
 
