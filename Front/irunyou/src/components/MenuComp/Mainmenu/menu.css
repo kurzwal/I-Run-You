@@ -5,13 +5,6 @@
  * 업데이트 작성자 : -
  * 업데이트 날짜 : -
  */
- body {
-    margin:0;
-    padding:0;
-}
-* {
-    box-sizing: border-box;
-}
 .wrap {
     position: relative;
     width: 100vw;
@@ -19,18 +12,7 @@
 }
 
 /*  */
-
-.main-map {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(190, 208, 153);
-}
-.menuprofile {
-    width: 100%;
-}
+/* 메뉴 여기저기서 다씀 */
 .menu-header {
     display: flex;
     flex-direction: column;
@@ -53,9 +35,11 @@
     margin-bottom: 7px;
     
 }
-.back-img {
+.menu-back-icon {
     width: 30px;
     height: 30px;
+    margin-top: -20px;
+    margin-left: -10px;
     cursor: pointer;
 }
 .logo-img {
@@ -130,7 +114,7 @@
     border-top: #888888;
 }
 
-.menu-item {
+.main-menu-item {
     display: flex;
     position: relative;
     width: 30%;
@@ -158,8 +142,7 @@
     font-size: 18px;
 }
 
-/* 
- */
+/*  */
  .menu-footer {
     display: flex;
     justify-content: space-between;
@@ -176,7 +159,3 @@
     color: #666666;
 
  }
-.contact-us {
-    color: #666666;
-
-}

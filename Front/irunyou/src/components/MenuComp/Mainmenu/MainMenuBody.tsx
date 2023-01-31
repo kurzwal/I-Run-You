@@ -8,7 +8,7 @@ export default function MainMenu() {
     const { setMenuMyInfo } = useToggleStore();    
     return (
         <div className="menu-header">
-            <div onClick={setMenuMyInfo} className='menuprofile'>
+            <div onClick={setMenuMyInfo} style={{width:"100%"}}>
                 <MenuProfile></MenuProfile>
             </div>
             <MenuItemList></MenuItemList>

@@ -7,10 +7,10 @@ export default function MenuLogoBack() {
     const { setMenuMain } = useToggleStore();
     return (
         <div className="menu-logo">
-            <img className="back-img" src={ BackIcon } alt="" onClick={ setMenuMain }/>
+            <img className="menu-back-icon" src={ BackIcon } alt="" onClick={ setMenuMain }/>
             <img className="logo-img" src={ LogoImg } alt=""/>
             <div className="logo-txt">I Run You</div>
-            <i className="fa-solid fa-bars-staggered"></i>
+            <i className="fa-solid fa-bars-staggered "></i>
         </div>
     )
 }
