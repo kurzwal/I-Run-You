@@ -3,12 +3,11 @@
  * 작성날짜 : 2023-01-13
  * 
  * 업데이트 작성자 : 최예정
- * 업데이트 날짜 : 2023-01-19
+ * 업데이트 날짜 : 2023-01-30
+ * 추가 업데이트 작성자 : 유열림
+ * 업데이트 날짜 : 2023-01-31
+ * 업데이트 내용 : login-input 외관 수정
  */
-
-body {
-    margin: 0px;
-}
 
 .login-container {
     display: flex;
@@ -39,35 +38,37 @@ fieldset {
     box-sizing: border-box;
 }
 
-input {
+.login-input {
     display: flex;
-
+    width: 100%;
     padding: 0 10px 0 20px;
-
-    border-radius: 10px;
-    border: 1px solid black;
-
-    width: 530px;
+    
     height: 45px;
-}
 
-.input-border {
     border: 1px solid black;
-    border-radius: 10px;
-    width: 530px;
-
-    overflow: hidden;
 }
 
 .email-input {
     border: none;
-    border-radius: 0;
     border-bottom: 1px solid black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .password-input {
     border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
+
+.input-border {
+    border-radius: 10px;
+    width: 530px;
+
+    border: 1px solid black;
+    
+}
+
 
 .box {
     display: flex;
@@ -168,4 +169,5 @@ a:visited {
 .kakao-login-img {
     width: 300px;
     height: 45px;
+    cursor: pointer;
 }

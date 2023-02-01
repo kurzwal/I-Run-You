@@ -2,21 +2,15 @@
  * 파일의 역할 : id, password 찾기 css
  * 작성날짜 : 2023-01-18
  * 
- * 업데이트 작성자 : -
- * 업데이트 날짜 : -
+ * 업데이트 작성자 : 최예정
+ * 업데이트 날짜 : 2023-01-30
  */
 
  * {
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    width: 100vw;
-    height: 100vh;
-}
-
-p {
+.text {
     text-align: center;
     padding: 0 30px;
 }
@@ -78,12 +72,12 @@ p {
     align-items: center;
 }
 
-input {
+.form {
     padding-left: 12px;
     cursor: text;
 }
 
-button {
+.idpw-btn {
     display: flex;
     justify-content: center;
     align-items: center;

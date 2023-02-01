@@ -1,14 +1,35 @@
 import './PWchange.css';
 import { Link } from "react-router-dom";
+import { useState } from 'react';
+import axios from 'axios';
 
 // 작성자 : 최예정
 // 파일의 역할 : 비밀번호 변경 html
 // 작성날짜 : 2023-01-20
 
-// 업데이트 작성자 : -
-// 업데이트 날짜 : -
+// 업데이트 작성자 : 최예정
+// 업데이트 날짜 : 2023-01-28
 
 export default function PWchange() {
+
+    const PasswordChange = () => {
+
+        const [password, setPassword] = useState<string>('');
+        const [newPassword, setNewPassword] = useState<string>('');
+        const [newPassword2, setNewPassword2] = useState<string>('');
+        
+
+        const data = {
+            password,
+            newPassword,
+            newPassword2
+        }
+        axios.post('http//localhost:4040/irunyou/', data).then((Response) => {
+        const UserInformation = Response.data.user;
+        alert(data);
+        })
+    }
+
     return(
         <div className="pwfind-container">
         <div className="box-header">
@@ -39,7 +60,7 @@ export default function PWchange() {
             <button>홈으로</button>
             </Link>
             <Link to="/Login">
-            <button>확인</button>
+            <button onClick={() => PasswordChange()}>확인</button>
             </Link>
         </div>
     </div>

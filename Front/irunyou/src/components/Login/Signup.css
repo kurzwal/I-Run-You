@@ -3,8 +3,8 @@
 파일의 역할 : 회원가입 css
 작성날짜 : 2023-01-16
 
-업데이트 작성자 : -
-업데이트 날짜 : - 
+업데이트 작성자 : 최예정
+업데이트 날짜 : 2023-01-31
 */
 
 * {
@@ -20,6 +20,57 @@ body {
 }
 
 .signup-container {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
 }
 
+.config-container {
+    width: 30%;
+}
+
+.singup-mui {
+    display: flex;
+    justify-content: left;
+}
+
+.check-btn {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 10px;
+    margin-top: 5px;
+
+    line-height: 25px;
+    width: 15%;
+    height: 30px;
+}
+
+#check-error {
+    display: none;
+}
+
+.singup-btn {
+    border: none;
+
+    margin-top: 30px;
+
+    width: 200px;
+    height: 40px;
+
+    background-color: #b6cf55;
+}
+
+.config-input {
+    display: flex;
+    align-items: center;
+}
+
+/* 스크롤바 숨기기(없애기) */
+body::-webkit-scrollbar {
+    display: none;
+}

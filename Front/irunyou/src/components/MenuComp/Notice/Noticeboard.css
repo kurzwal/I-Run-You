@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+}
+
+.notice-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.irunyou-logo {
+    height: 80px;
+}
+
+
+.notice-header {
+    display: flex;
+    top: 80px;
+    width: 100vw;
+    height: 80px;
+    text-align: left;
+
+    background-color: #b6cf55;
+}
+
+.notice-text {
+    margin-left: 30px;
+    line-height: 80px;
+    vertical-align: middle;
+    font-size: 25px;
+}
+
+.notice-information {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 0px auto;
+    padding: 50px 20px 20px;
+
+}
+
+.notice-information :first-child {
+    height: 30px;
+    font-size: 20px;
+    white-space: nowrap;
+}
+
+.notice-information :last-child {
+    padding-top: 3px;
+    padding-left: 20px;
+    white-space: nowrap;
+}
+
+.notice-key-container{
+    display: flex;
+    margin: 0 auto;
+    padding-right: 100px;
+    width: 80%;
+    justify-content: space-between;
+    padding: 10px 50px 10px 40px;
+    
+    background-color: #cccc;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+
+.notice-list-container {
+    margin: 20px auto;
+    width: 80%;
+    /* padding: 50px 110px; */
+}
+
+.noticeboard-item-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 50px;
+    border-bottom: 1px solid #cccc;
+}
+
+.noticeboard-item-container div{
+    white-space: nowrap;
+}
+
+.notice-board-number {
+    padding-right : 50px;
+}
+
+
+.noticeboard-title {
+   display: flex;
+   justify-content: left; 
+   width: 70%;
+}
+
