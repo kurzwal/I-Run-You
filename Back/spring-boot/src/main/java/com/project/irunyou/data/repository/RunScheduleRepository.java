@@ -9,13 +9,19 @@
 package com.project.irunyou.data.repository;
 
 import com.project.irunyou.data.entity.RunScheduleEntity;
+import com.project.irunyou.data.entity.RunSchedulePaticipateEntity;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RunScheduleRepository extends JpaRepository<RunScheduleEntity,Integer>{	
-	public List<RunScheduleEntity> findAllByrunScheduleWriterIndex(int writerIndex);
+	public List<RunScheduleEntity> findAllByRunScheduleWriter(String userEmail);
+	public List<RunScheduleEntity> findAllByRunScheduleIndex(int runScheduleIndex);
+	
+	public RunScheduleEntity findByRunScheduleIndex(int runScheduleIndex);
+	
 }

@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Access;
 
 import com.project.irunyou.data.entity.RunScheduleEntity;
+import com.project.irunyou.data.entity.RunSchedulePaticipateEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,4 +33,6 @@ public class GetUserRunScheduleDto {
 		this.runScheduleTitle = runSchedule.getRunScheduleTitle();
 		this.runScheduleDatetime = runSchedule.getRunScheduleDatetime();
 	}
+
+	
 }

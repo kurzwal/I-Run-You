@@ -15,12 +15,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="run_schedule_like")
-@Table(name="run_schedule_like")
-public class RunScheduleLikeEntity {
+@Entity(name="run_schedule_participate")
+@Table(name="run_schedule_participate")
+public class RunSchedulePaticipateEntity { // 일정참여 유저 관리 테이블
 	@Id
 	@NotNull
-	private int runScheduleLikeIndex;
+	private int runScheduleParticipateIndex;
+	@NotNull
 	private int runScheduleIndex;
-	private int userIndex;
+	@NotNull
+	private String userEmail;
 }

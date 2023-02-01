@@ -22,7 +22,6 @@ public class UserAddressDetailEntity {
 	@NotNull
 	private int userAddressDetailIndex;
 	@NotNull
-	private int userIndex;
-	private String userAddressDetail;
+	private String userEmail;
 	private String userPoastalCode;
 }

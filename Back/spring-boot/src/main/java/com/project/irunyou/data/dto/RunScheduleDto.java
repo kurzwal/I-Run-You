@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -25,13 +26,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RunScheduleDto {
+	// 일정 만든 유저 -> @AuthenticationPrincipal로 받아옴
+	
 	@NotNull
 	private int runSchedulePark;
 	@NotNull
 	private String runScheduleTitle;
-	@NotNull
-	private int runScheduleWriterIndex;
-	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm",timezone="Asia/Seoul" )
 	//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime runScheduleDatetime;
     @NotNull
