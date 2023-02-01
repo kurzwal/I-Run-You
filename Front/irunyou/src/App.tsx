@@ -27,15 +27,15 @@ import MainPage from './view/MainPage';
 function App() {
   
   // eclips -> vscode (GET)
-  useEffect(() => {
-    axios.get('http//localhost:4040/irunyou/').then((Response) => {
-      const data = Response.data;
-      const result = data.result;
-      if (!result) {
-        alert(data.message)
-      }
-    })
-  }, []);
+  // useEffect(() => {
+  //   axios.get('http//localhost:4040/irunyou/').then((response) => {
+  //     const data = response.data;
+  //     const result = data.result;
+  //     if (!result) {
+  //       alert(data.message)
+  //     }
+  //   })
+  // }, []);
 
   return (
     <div className="App">
