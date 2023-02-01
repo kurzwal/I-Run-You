@@ -105,7 +105,19 @@ public class UserService {
 
 		return ResponseDto.setSuccess("회원님의 email 입니다.", new UserRequestDto(user));
 	}
+	
+	// 최예정 2023-02-01
+	// 아이디(이메일) 중복 체크
+	public ResponseDto<ResultResponseDto> checkId(UserRequestDto data) {
+		String email = data.getUserEmail();
+		boolean checkUserEmailDupe = userRepository.existsByUserEmail(email);
 
+		if (checkUserEmailDupe) {
+			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 이메일 입니다.", email));
+		}
+		return ResponseDto.setSuccess("사용가능한 이메일 입니다.", null) ;
+	}
+	
 	// pw찾기 0126 황석민
 	public ResponseDto<ResultResponseDto> findPw(FindPasswordDto dto) {
 		// 전화번호 하고 이메일 입력 검증

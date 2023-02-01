@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.irunyou.data.dto.FindPasswordDto;
@@ -66,6 +68,13 @@ public class UserController {
 	@GetMapping("findemail")
 	public ResponseDto<UserRequestDto> findUserId(@RequestBody UserPhoneAndNameDto requestBody) {
 		return userService.findUserId(requestBody);
+	}
+	
+	// 최예정 2023-02-01
+	// 아이디(이메일) 중복 체크
+	@PostMapping("checkId")
+	public ResponseDto<ResultResponseDto> checkId(@RequestBody UserRequestDto requsetBody) {
+		return userService.checkId(requsetBody);
 	}
 	
 	// pw찾기
