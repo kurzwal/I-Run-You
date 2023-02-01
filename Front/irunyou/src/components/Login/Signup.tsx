@@ -37,7 +37,9 @@ export default function Signup() {
     const [userAddressDetail, setUserAddressDetail] = useState<string>('');
     const [postNumber, setPostNumber] = useState<string>('');
     const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
+
     const [idCheckResult, setIdCheckResult] = useState<number>(0);
+    const [nicknameCheckResult, setNicknameCheckResult] = useState<number>(0);
 
     const onSubmitHandler = () => {
         const data = {
@@ -56,17 +58,30 @@ export default function Signup() {
         })
     }
 
-    // 중복된 아이디(이메일)
+    // 중복된 닉네임 확인
+    const onExistIdHandler2 = () => {
+        const data = {
+            userNickname
+        };
+        axios.post('http://localhost:4040/irunyou/?', data).then((response) => {
+            const result = response.data.result;
+            if(result) setNicknameCheckResult(-1);
+            else setNicknameCheckResult(1);
+        })
+    } 
+
+    // 중복된 아이디(이메일) 확인
     const onExistIdHandler = () => {
         const data = {
             userEmail
         };
         axios.post('http://localhost:4040/irunyou/checkId', data).then((response) => {
-            const result = response.data.result; // eclips에서 받아올 result
+            const result = response.data.result;
             if (result) setIdCheckResult(-1);
             else setIdCheckResult(1);
         })
     }
+    
 
 
     return (
@@ -85,6 +100,11 @@ export default function Signup() {
                     {/* <input className='singup-input' onChange={(e) => setNickname(e.target.value)} type="text" placeholder="닉네임" /> */}
                     <button className='check-btn'>중복확인</button>
                 </div>
+                {
+                    nicknameCheckResult === 1 ? (<div className='success' id='check-error'>사용 가능한 닉네임입니다.</div>) :
+                    nicknameCheckResult === -1 ? (<div className='failed' id='check-error'>중복된 닉네임입니다.</div>) :
+                    (<></>)
+                }
                 <div className="config-input">
                     <TextField size='small' label="아이디(이메일)" sx={{width: "80%"}} onChange={(e) => setUserEmail(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
                     {/* <input className='singup-input' onChange={(e) => setId(e.target.value)} type="email" placeholder="아이디(이메일)" /> */}
