@@ -13,6 +13,7 @@ import KakaoRedirectHandler from './components/Login/KakaoRedirectHandler';
 import KakaoMap from './components/KakaoMap';
 import HomePage from './view/HomePage';
 import MainPage from './view/MainPage';
+import Calander from './components/Calander/Calander';
 
 // 작성자 : 최예정
 // 파일의 역할 : 링크 연결, 백 -> 프론트 GET
@@ -49,6 +50,7 @@ function App() {
         <Route path="/Email" element={<EmailView />} />
         <Route path="/SUSC" element={<SUSCView />} />
         <Route path="/Login/kakao" element={<KakaoRedirectHandler />} />
+        <Route path="/Calander" element={<Calander />} />
         {/* <Route path="*" element={<NotFound />} /> */}
 
         {/* <Route path='/' element={< Autehntication />}/> */}
