@@ -1,0 +1,61 @@
+.FAQ-detail-con {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.FAQ-d-title {
+    display: flex;
+    justify-content: center;
+
+    width: 50em;
+
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.FAQ-d-fir {
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.FAQ-d-email {
+    display: flex;
+    justify-content: space-between;
+}
+
+.FAQ-d-titleclass {
+    justify-content: center;
+    align-items: center;
+}
+
+.FAQ-d-titleblank {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.FAQ-d-content {
+    width: 50em;
+    height: 15em;
+    border: 1px solid black;
+    resize: none;
+}
+
+.FAQ-submit-btn {
+    width: 200px;
+    height: 50px;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    border: none;
+    border-radius: 5px;
+    background-color: #b6cf55;
+}
