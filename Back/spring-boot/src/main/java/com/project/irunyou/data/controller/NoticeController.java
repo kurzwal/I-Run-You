@@ -1,5 +1,7 @@
 package com.project.irunyou.data.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +20,7 @@ import com.project.irunyou.data.service.NoticeService;
 
 @CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController
-@RequestMapping("notice/")
+@RequestMapping("/notice/")
 public class NoticeController {
 
 	@Autowired NoticeService noticeService;
@@ -46,4 +48,11 @@ public class NoticeController {
 	public ResponseDto<ResultResponseDto> deleteNotice(@PathVariable("noticeIndex")Integer noticeIndex) {
 		return noticeService.deleteNotice(noticeIndex);
 	}
+	
+	// 공지사항 페이지에서 공지사항 목록 전체 불러오기
+	@GetMapping("")
+	public ResponseDto<List<NoticeDto>> getNoticeList() {
+		return noticeService.getNoticeList();
+	}
+	
 }

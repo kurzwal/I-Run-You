@@ -1,6 +1,8 @@
 package com.project.irunyou.data.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +84,23 @@ public class NoticeService {
 			return null;
 		}
 		return notice;
+	}
+	
+	
+	// 모든 공지사항
+	public ResponseDto<List<NoticeDto>> getNoticeList() {	
+		List<NoticeDto> data = new ArrayList<>();
+		List<NoticeBoardEntity> AllNotice = new ArrayList<>(); 
+		try {
+			AllNotice = noticeRepository.findAll();
+			
+			for(NoticeBoardEntity n : AllNotice) {
+				data.add(new NoticeDto(n));
+			}
+		} catch(Exception e) {
+			return ResponseDto.setFailed("공지사항을 불러오는 중 오류가 발생했습니다.");
+		}
+		
+		return ResponseDto.setSuccess("Success",data);
 	}
 }

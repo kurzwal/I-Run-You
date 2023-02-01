@@ -1,3 +1,6 @@
+/* 홍지혜 2023-02-01  */
+/* 공지사항 관련 스타일 */
+
 * {
     box-sizing: border-box;
 }
@@ -31,6 +34,9 @@
     line-height: 80px;
     vertical-align: middle;
     font-size: 25px;
+    font-weight: 800;
+
+    color: white;
 }
 
 .notice-information {
@@ -62,11 +68,14 @@
     justify-content: space-between;
     padding: 10px 50px 10px 40px;
     
-    background-color: #cccc;
+    background-color: #e4eebe;
     border-radius: 5px;
     font-size: 20px;
     font-weight: 600;
+}
 
+.notice-key-container div {
+    white-space: nowrap;
 }
 
 
@@ -99,3 +108,32 @@
    width: 70%;
 }
 
+.noticeboard-footer {
+    display: flex;
+    justify-content: center;
+    height: 20px;
+
+}
+
+.noticeboard-footer div {
+    margin: 0 5px;
+}
+
+.noticeboard-page-button :hover {
+    cursor: pointer;
+}
+
+@media(max-width : 500px) {
+    
+    .notice-key-container{
+        width: 400px;
+    }
+
+    .noticeboard-item-container {
+        width: 400px;
+    }
+
+    .noticeboard-footer {
+        width: 500px;
+    }
+}
