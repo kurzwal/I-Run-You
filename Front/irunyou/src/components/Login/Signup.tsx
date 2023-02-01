@@ -98,7 +98,7 @@ export default function Signup() {
                 <div className="config-input">
                     <TextField size='small' label="닉네임" sx={{width: "80%"}} onChange={(e) => setUserNickname(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
                     {/* <input className='singup-input' onChange={(e) => setNickname(e.target.value)} type="text" placeholder="닉네임" /> */}
-                    <button className='check-btn'>중복확인</button>
+                    <button onClick={() => onExistIdHandler2()} className='check-btn'>중복확인</button>
                 </div>
                 {
                     nicknameCheckResult === 1 ? (<div className='success' id='check-error'>사용 가능한 닉네임입니다.</div>) :
