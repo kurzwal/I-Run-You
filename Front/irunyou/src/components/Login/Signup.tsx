@@ -63,7 +63,7 @@ export default function Signup() {
         const data = {
             userNickname
         };
-        axios.post('http://localhost:4040/irunyou/?', data).then((response) => {
+        axios.post('http://localhost:4040/irunyou/checkNickname', data).then((response) => {
             const result = response.data.result;
             if(result) setNicknameCheckResult(-1);
             else setNicknameCheckResult(1);

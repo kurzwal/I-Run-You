@@ -115,7 +115,19 @@ public class UserService {
 		if (checkUserEmailDupe) {
 			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 이메일 입니다.", email));
 		}
-		return ResponseDto.setSuccess("사용가능한 이메일 입니다.", null) ;
+		return ResponseDto.setSuccess("사용가능한 이메일 입니다.", null);
+	}
+	
+	// 최예정 2023-02-02
+	// 닉네임 중복 체크
+	public ResponseDto<ResultResponseDto> checkNickname(UserPhoneAndNameDto data) {
+		String nickname = data.getUserName();
+		boolean checkUserNicknameDupe = userRepository.existsByUserNickname(nickname);
+		
+		if(checkUserNicknameDupe) {
+			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 닉네임 입니다.", nickname));
+		}
+		return ResponseDto.setSuccess("사용가능한 닉네임 입니다.", null);
 	}
 	
 	// pw찾기 0126 황석민

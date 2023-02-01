@@ -24,6 +24,7 @@ public interface UserRepository extends JpaRepository<UserEntity,Integer> {
 	
 	public boolean existsByUserEmail(String email);	// 이메일 중복여부 체크	
 	public boolean existsByUserPhoneNumber(String phoneNumber);	// 휴대폰번호 중복여부 체크
+	public boolean existsByUserNickname(String nickname); // 닉네임 중복여부 체크
 	
 	public UserEntity findByUserEmailAndUserPassword(String email, String password);	
 	// id 찾기용 메서드

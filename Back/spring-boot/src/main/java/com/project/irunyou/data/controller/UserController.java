@@ -77,6 +77,13 @@ public class UserController {
 		return userService.checkId(requsetBody);
 	}
 	
+	// 최예정 2023-02-02
+	// 닉네임 중복 체크
+	@PostMapping("checkNickname")
+	public ResponseDto<ResultResponseDto> checkNickname(@RequestBody UserPhoneAndNameDto requsetBody) {
+		return userService.checkNickname(requsetBody);
+	}
+	
 	// pw찾기
 	// request method가 Post이고 end point는 findPw
 	@PostMapping("findPw")
