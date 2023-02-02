@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// 작성자 : 최예정
+// 파일의 역할 : EmailDto
+// 작성날짜 : 2023-02-02
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
