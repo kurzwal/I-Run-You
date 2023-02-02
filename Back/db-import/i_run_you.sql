@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: i_run_you
+-- Host: localhost    Database: i_run_you
 -- ------------------------------------------------------
 -- Server version	8.0.31
 
@@ -124,7 +124,7 @@ CREATE TABLE `notice_board` (
   `notice_title` varchar(45) NOT NULL,
   `notice_content` text NOT NULL,
   PRIMARY KEY (`notice_index`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +188,6 @@ CREATE TABLE `run_schedule` (
 
 LOCK TABLES `run_schedule` WRITE;
 /*!40000 ALTER TABLE `run_schedule` DISABLE KEYS */;
-INSERT INTO `run_schedule` VALUES (1,1,'스프링시큐리티','1','2023-01-26 11:54:00','jwt검사중'),(2,1,'스프링시큐리티','1','2023-01-26 11:54:00','jwt검사중'),(3,1,'스프링시큐리티','1','2023-01-26 11:54:00','jwt검사중'),(4,1,'스프링시큐리티','1','2023-01-26 11:54:00','jwt검사중'),(5,1,'스프링시큐리티','1','2023-01-26 11:54:00','jwt검사중'),(6,1,'같이 뛰실분','1234@gmail.com','2023-02-01 10:30:00','ㄲㄲㄲㄲㄲㄲ');
 /*!40000 ALTER TABLE `run_schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +243,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'qwer@gmail.com','qwer1234','경남 김해시','2','010-5506-4376',1,'2022-01-26',''),(3,'dfhjksdh@gmail.com','dfdfdf123','경남김해시','1','010-5506-4376',0,'2023-01-27',''),(4,'dfhjkdsdh@gmail.com','dfdfdf123','경남김해시','1','010-5506-4376',0,'2023-01-27',''),(5,'dfhasdfsdh@gmail.com','dfdfdf123','경남김해시','1','010-5506-4376',0,'2023-01-27',''),(6,'dfhddd@gmail.com','$2a$10$Dn7EqJNWLddkwE8Iln7EaeHwuBVBamlQYLRkjDWy4BCAe71Nj6ax.','경남김해시','전하동','010-5456-4376',0,'2023-01-30',''),(7,'abcd@gmail.com','$2a$10$GORQhhC8TqHcW/l4YsNyrerB8WpOYs5lTyiziB/Kn8myPN.CyOO0a','경남김해시','전하동','010-4566-4376',0,'2023-01-30',''),(8,'abcdd@gmail.com','$2a$10$OTtlLBXNgnqotiMcFm62vuVgwdqXCsZX04SQBLUVam8nTbEuPCNHa','경남김해시','전하동','01045664376',0,'2023-01-30',''),(11,'abcde@gmail.com','$2a$10$0KmnC93REntgRuQtffaSi.nHCipxRE0v/sk8gkvLizVHIH/q2Tkyi','경남 김해시','내외동','01000001212',0,'2023-01-31','지혜'),(12,'1234@gmail.com','$2a$10$9q4REo1PAqCGYRl3HmpgweZqsfuHN/htoiWuVSLixjPxpIx/X1/yS','경남 김해시','내외동','01000011212',0,'2023-01-31','지혜');
+INSERT INTO `user` VALUES (12,'1234@gmail.com','$2a$10$9q4REo1PAqCGYRl3HmpgweZqsfuHN/htoiWuVSLixjPxpIx/X1/yS','경남 김해시','내외동','01000011212',0,'2023-01-31','지혜');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,4 +280,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-01 10:40:50
+-- Dump completed on 2023-02-02 22:39:34

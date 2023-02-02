@@ -7,6 +7,10 @@
  * */
 package com.project.irunyou.data.repository;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +23,7 @@ public interface NoticeBoardRepository extends JpaRepository<NoticeBoardEntity, 
 
 	// 메서드 추가
 	public NoticeBoardEntity findByNoticeTitle(String title);
+	
+	public Page<NoticeBoardEntity> findAllByOrderByNoticeIndex(PageRequest pageRequest);
 	
 }

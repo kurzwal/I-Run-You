@@ -6,9 +6,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.irunyou.data.dto.NoticeDto;
+import com.project.irunyou.data.dto.NoticePageInfoDto;
+import com.project.irunyou.data.dto.NoticePageResponseDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.entity.NoticeBoardEntity;
@@ -19,21 +24,50 @@ public class NoticeService {
 
 	@Autowired
 	NoticeBoardRepository noticeRepository;
-
-	// 공지사항 등록
-	public ResponseDto<NoticeDto> createNotice(NoticeDto dto) {
-
-		String title = dto.getNoticeTitle();
-		String content = dto.getNoticeContent();
-
-		NoticeBoardEntity notice = NoticeBoardEntity.builder()
-				.noticeTitle(title)
-				.noticeContent(content)
+	
+	public Page<NoticeBoardEntity> findAllNotice(int page, int size) {
+		PageRequest pageRequest = PageRequest.of(page, size);
+		return noticeRepository.findAllByOrderByNoticeIndex(pageRequest);
+	}
+	
+	
+	// 페이징
+	public ResponseDto<NoticePageResponseDto<?>> getNoticeList(int page, int size) {
+		Page<NoticeBoardEntity> noticePage = findAllNotice(page-1, size);
+		
+		NoticePageInfoDto noticePageInfo = NoticePageInfoDto.builder()
+				.page(page).size(size)
+				.totalElements((int)noticePage.getTotalElements())
+				.totalPages(noticePage.getTotalPages())
 				.build();
+		
+		List<NoticeBoardEntity> notices = noticePage.getContent();
+		
+		List<NoticeDto> data = new ArrayList<>();
+		
+		for(NoticeBoardEntity n : notices) {
+			data.add(new NoticeDto(n));
+		}
+		
+		return ResponseDto.setSuccess("date load Success",new NoticePageResponseDto(data,noticePageInfo));
+	}
+	
+	
+	
+	// 공지사항 등록
+	// 수정 2023-02-02 홍지혜
+	public ResponseDto<ResultResponseDto> createNotice(NoticeDto dto) {
+		try {
+			String title = dto.getNoticeTitle();
+			String content = dto.getNoticeContent();
 
-		noticeRepository.save(notice);
+			NoticeBoardEntity notice = NoticeBoardEntity.builder().noticeTitle(title).noticeContent(content).build();
 
-		return ResponseDto.setSuccess("공지사항이 등록되었습니다.", new NoticeDto(notice));
+			noticeRepository.save(notice);
+		} catch (Exception e) {
+			return ResponseDto.setFailed("공지사항 등록 중 오류가 발생했습니다.");
+		}
+			return ResponseDto.setSuccess("공지사항이 등록되었습니다.", new ResultResponseDto(true));
 	}
 
 	// 공지사항 조회
