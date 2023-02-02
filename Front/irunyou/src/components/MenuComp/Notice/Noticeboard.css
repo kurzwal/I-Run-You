@@ -65,17 +65,21 @@
     margin: 0 auto;
     padding-right: 100px;
     width: 80%;
-    justify-content: space-between;
-    padding: 10px 50px 10px 40px;
+    padding: 10px 0px 10px 50px;
     
     background-color: #e4eebe;
     border-radius: 5px;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 550;
 }
 
 .notice-key-container div {
     white-space: nowrap;
+}
+
+
+.notice-key-container :last-child {
+    width: 90%;
 }
 
 
@@ -88,9 +92,7 @@
 .noticeboard-item-container {
     display: flex;
     width: 100%;
-    justify-content: space-between;
     padding: 10px 50px;
-    border-bottom: 1px solid #cccc;
 }
 
 .noticeboard-item-container div{
@@ -123,14 +125,23 @@
     cursor: pointer;
 }
 
+.notice-content-box {
+    padding: 20px 40px;
+    
+}
+
 @media(max-width : 500px) {
     
+    .notice-header {
+        width: 500px;
+    }
+
     .notice-key-container{
         width: 400px;
     }
 
     .noticeboard-item-container {
-        width: 400px;
+        width: 360px;
     }
 
     .noticeboard-footer {

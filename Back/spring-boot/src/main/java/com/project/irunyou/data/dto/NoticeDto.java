@@ -8,9 +8,14 @@
 package com.project.irunyou.data.dto;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.annotation.CreatedDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.irunyou.data.entity.NoticeBoardEntity;
 
 import lombok.AllArgsConstructor;
@@ -28,14 +33,11 @@ public class NoticeDto {
 	private String noticeTitle;
 	@NotNull
 	private String noticeContent;
-	@NotNull
-	private Timestamp datetime;
 	
 	public NoticeDto(NoticeBoardEntity noticeEntity) {
 		this.noticeIndex = noticeEntity.getNoticeIndex();
 		this.noticeTitle = noticeEntity.getNoticeTitle();
 		this.noticeContent = noticeEntity.getNoticeContent();
-		this.datetime = new Timestamp(System.currentTimeMillis());
 	}
 	
 }

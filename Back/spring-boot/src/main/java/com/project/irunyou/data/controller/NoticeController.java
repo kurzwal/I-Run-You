@@ -20,7 +20,7 @@ import com.project.irunyou.data.service.NoticeService;
 
 @CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController
-@RequestMapping("/notice/")
+@RequestMapping("irunyou/notice/")
 public class NoticeController {
 
 	@Autowired NoticeService noticeService;
@@ -31,11 +31,11 @@ public class NoticeController {
 		return noticeService.createNotice(requestBody);
 	}
 
-	// 공지사항 조회
-	@GetMapping("{noticeIdx}")
-	public ResponseDto<NoticeDto> readNotice(@PathVariable("noticeIndex") Integer noticeIndex) {
-		return noticeService.readNotice(noticeIndex);
-	}
+//	// 공지사항 조회
+//	@GetMapping("{noticeIdx}")
+//	public ResponseDto<NoticeDto> readNotice(@PathVariable("noticeIndex") Integer noticeIndex) {
+//		return noticeService.readNotice(noticeIndex);
+//	}	--> 사용 안함!
 
 	// 공지사항 수정
 	@PatchMapping("")
@@ -49,6 +49,7 @@ public class NoticeController {
 		return noticeService.deleteNotice(noticeIndex);
 	}
 	
+	// 2023-02-02 홍지혜
 	// 공지사항 페이지에서 공지사항 목록 전체 불러오기
 	@GetMapping("")
 	public ResponseDto<List<NoticeDto>> getNoticeList() {

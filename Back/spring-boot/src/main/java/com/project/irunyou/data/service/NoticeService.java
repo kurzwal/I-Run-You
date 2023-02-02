@@ -2,6 +2,7 @@ package com.project.irunyou.data.service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,11 @@ public class NoticeService {
 
 		String title = dto.getNoticeTitle();
 		String content = dto.getNoticeContent();
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-		NoticeBoardEntity notice = NoticeBoardEntity.builder().noticeTitle(title).noticeContent(content).build();
+		NoticeBoardEntity notice = NoticeBoardEntity.builder()
+				.noticeTitle(title)
+				.noticeContent(content)
+				.build();
 
 		noticeRepository.save(notice);
 

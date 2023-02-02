@@ -1,77 +1,102 @@
-// 홍지혜 2023-02-01 
+// 홍지혜 2023-02-01
 // 공지사항 목록 페이지
-import React from "react";
-import NoticeboardItem from "./Noticeboard-item";
+import React, { useEffect, useState } from "react";
 import "./Noticeboard.css";
 import MenuLogo from "../Mainmenu/MenuLogo";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Link } from "react-router-dom";
-import axios from "axios";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { Link, Route } from "react-router-dom";
+import axios, { AxiosResponse } from "axios";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Pagination, PaginationItem } from "@mui/material";
 
-
-class Noticeboard extends React.Component {
-
-  state = {
-    noticeList : [] as any
+export default function Noticeboard() {
+  const [noticeList, setNoticeList] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const onPageChange = (e : React.ChangeEvent<unknown>, page:number) => {
+    setCurrentPage(page);
   }
 
-  getNoticeList = async() => {  // 로딩 시간 필요
-    const {
-      data: {
-        noticeList,
-      }
-    } = await axios.get("http://localhost:4040/notice");  // get 실행 기다릴것
+  const getNoticeList = async () => {
+    await axios
+      .get("http://localhost:4040/irunyou/notice/")
+      .then((response) => {
+        const noticeList = response.data.data;
+        setNoticeList(noticeList);
+      })
+      .catch((error) => {});
     
-    this.setState({noticeList});  // 동일 이름 축약가능
-  }
+  };
 
-  componentDidMount() {
-   this.getNoticeList(); 
-  }
+  useEffect(() => {
+    getNoticeList();
+  }, []);
 
-  render () {
-
-    const {noticeList} = this.state;
-    
-    return (
-      <div className="notice-container">
-        <div className="irunyou-logo"><MenuLogo></MenuLogo></div>
-        <div className="notice-header">
-          <div className="notice-text">I RUN YOU 공지사항</div>
-        </div>
-        <div className="notice-information">
-          <div>공지사항</div>
-          <div>I RUN YOU의 공지사항을 조회합니다.</div>
-        </div>
-        <div className="notice-key-container">
-          <div>번호</div>
-          <div>제목</div>
-          <div>작성날짜</div>
-        </div>
-        <div className="notice-list-container">
-          {noticeList.map((notice : any) => {
-            return (
-              <NoticeboardItem
-                key={notice.noticeIndex}
-                title={notice.noticeTitle}
-                // datetime={notice.datetime}
-              />
-            )
-          })}
-        </div>
-        <div className="noticeboard-footer">
-          <div className="noticeboard-page-button">
-            <ChevronLeftIcon />
-          </div>
-          <div>1</div>
-          <div className="noticeboard-page-button">
-            <ChevronRightIcon />
-          </div>
-        </div>
+  return (
+    <div className="notice-container">
+      <div className="irunyou-logo">
+        <MenuLogo></MenuLogo>
       </div>
-    );
-  }
+      <div className="notice-header">
+        <div className="notice-text">I RUN YOU 공지사항</div>
+      </div>
+      <div className="notice-information">
+        <div>공지사항</div>
+        <div>I RUN YOU의 공지사항을 조회합니다.</div>
+      </div>
+      <div className="notice-key-container">
+        <div>번호</div>
+        <div>제목</div>
+      </div>
+      <div className="notice-list-container">
+        {noticeList &&
+          noticeList.map((notice: any) => (
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div className="noticeboard-item-container">
+                  <div className="notice-board-number">1</div>
+                  <div className="noticeboard-title">{notice.noticeTitle}</div>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className="notice-content-box">
+                  <div>{notice.noticeContent}</div>
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+      </div>
+      <div className="noticeboard-footer">
+        <Pagination
+          count={Math.ceil(noticeList.length / 10)}
+          page={currentPage}
+          onChange={onPageChange}
+          size="medium"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "15px 0",
+          }}
+          renderItem={(item) => (
+            <PaginationItem {...item} sx={{ fontSize: 12 }} />
+          )}
+        />
+        {/* <div className="noticeboard-page-button">
+          <ChevronLeftIcon />
+        </div>
+        <div>1</div>
+        <div className="noticeboard-page-button">
+          <ChevronRightIcon />
+        </div> */}
+      </div>
+    </div>
+  );
 }
-
-export default Noticeboard;
