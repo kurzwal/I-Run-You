@@ -1,0 +1,56 @@
+.FAQ-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 좌우 cetner */
+    align-items: center; /* 상하 center */
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.FAQ-title {
+    display: flex;
+    justify-content: space-between;
+
+    width: 60%;
+
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.FAQ-text {
+    font-size: 40px;
+}
+
+.FAQ-text-btn {
+    width: 80px;
+    height: 30px;
+
+    border: none;
+    border-radius: 5px;
+    background-color: #b6cf55;
+}
+
+
+.FAQ-contentmain {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid black;
+    
+    width: 60%;
+    height: 50%;
+}
+
+.FAQ-box-btn {
+    border: none;
+    background-color: #ffffff;
+}
+
+.FAQ-btn {
+    border-right: 1px solid black;
+}
+
+.FAQ-contentbox {
+    border-top: 1px solid black;
+}
