@@ -82,7 +82,7 @@ export default function Signup() {
         })
     }
     
-
+    
 
     return (
     <div className="signup-container">
@@ -92,11 +92,11 @@ export default function Signup() {
         <div className="config-container">
             <ThemeProvider theme={theme}>
                 <div className="config-input">
-                    <TextField size='small' label="이름" sx={{width: "80%"}} onChange={(e) => setUserName(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
+                    <TextField size='small' label="이름" sx={{width: "80%"}} onChange={(e) => setUserName(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' onChange={(e) => setName(e.target.value)} type="text" placeholder="이름" /> */}
                 </div>
                 <div className="config-input">
-                    <TextField size='small' label="닉네임" sx={{width: "80%"}} onChange={(e) => setUserNickname(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
+                    <TextField size='small' label="닉네임" sx={{width: "80%"}} onChange={(e) => setUserNickname(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' onChange={(e) => setNickname(e.target.value)} type="text" placeholder="닉네임" /> */}
                     <button onClick={() => onExistIdHandler2()} className='check-btn'>중복확인</button>
                 </div>
@@ -106,7 +106,7 @@ export default function Signup() {
                     (<></>)
                 }
                 <div className="config-input">
-                    <TextField size='small' label="아이디(이메일)" sx={{width: "80%"}} onChange={(e) => setUserEmail(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
+                    <TextField size='small' label="아이디(이메일)" sx={{width: "80%"}} onChange={(e) => setUserEmail(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' onChange={(e) => setId(e.target.value)} type="email" placeholder="아이디(이메일)" /> */}
                     <button onClick={() => onExistIdHandler()} className='check-btn'>중복확인</button>
                 </div>
@@ -116,20 +116,20 @@ export default function Signup() {
                     (<></>)
                 }
                 <div className="config-input">
-                <TextField size='small' label="비밀번호(8~16자까지 영문 대소문자/숫자)" sx={{width: "80%"}} onChange={(e) => setUserPassword(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
+                <TextField size='small' label="비밀번호(8~16자까지 영문 대소문자/숫자)" type="password" sx={{width: "80%"}} onChange={(e) => setUserPassword(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' onChange={(e) => setPassword(e.target.value)} type="password" placeholder="비밀번호(8~16자까지 영문 대소문자/숫자/특수문자 사용)" /> */}
                 </div>
                 <div className="config-input">
-                <TextField size='small' label="비밀번호 확인" sx={{width: "80%"}} onChange={(e) => setUserPassword2(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
+                <TextField size='small' label="비밀번호 확인" type="password" sx={{width: "80%"}} onChange={(e) => setUserPassword2(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' onChange={(e) => setPassword2(e.target.value)} type="password" placeholder="비밀번호 확인" /> */}
                 </div>
                 <div className="config-input">
-                <TextField size='small' label="우편 찾기" sx={{width: "80%"}} onChange={(e) => setPostNumber(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
+                <TextField size='small' label="우편 찾기" sx={{width: "80%"}} onChange={(e) => setPostNumber(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' onChange={(e) => setPostNumber(e.target.value)} type="text" placeholder="우편찾기" /> */}
                     <button className='check-btn'>주소검색</button>
                 </div>
                     <div className="address-input config-input">
-                    <TextField size='small' label="주소" sx={{width: "80%"}} onChange={(e) => setUserAddress(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
+                    <TextField size='small' label="주소" sx={{width: "80%"}} onChange={(e) => setUserAddress(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                         {/* <input className='singup-input' onChange={(e) => setAddress(e.target.value)} type="text" placeholder="주소" /> */}
                     </div>
                     <div className="address-input2 config-input">
@@ -137,7 +137,7 @@ export default function Signup() {
                         {/* <input className='singup-input' onChange={(e) => setAddressDetail(e.target.value)} type="text" placeholder="나머지주소" /> */}
                     </div>
                 <div className="config-input">
-                <TextField size='small' label="휴대전화" sx={{width: "80%"}} onChange={(e) => setUserPhoneNumber(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
+                <TextField size='small' label="휴대전화" sx={{width: "80%"}} onChange={(e) => setUserPhoneNumber(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' type="text" placeholder="휴대전화" /> */}
                 </div>
             </ThemeProvider>
