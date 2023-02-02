@@ -46,7 +46,7 @@ export const retrieveStoredToken = () => {
   };
 };
 
-export const LoginAction = (userEmail: string,userPassword: string,movePage: any) => {
+export const LoginAction = (userEmail: string, userPassword: string, movePage: any) => {
   return axios
     .post("http://localhost:4040/irunyou/auth/login", {
       userEmail,
