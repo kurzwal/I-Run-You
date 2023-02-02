@@ -1,6 +1,8 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import './views.css';
 import useToggleStore from './Store';
+import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
@@ -15,6 +17,9 @@ import MyInfo from '../components/MenuComp/MyInfo';
 import ParkList from '../components/MenuComp/ParkList';
 import ParkInfo from '../components/MenuComp/ParkInfo';
 import MySchedule from '../components/MenuComp/MySchedule';
+import { useLocation } from 'react-router';
+
+
 
 
 function MenuIcon() {
@@ -28,7 +33,63 @@ function MenuIcon() {
 
 
 export default function MainPage(){
-    
+
+    interface locationType {
+        loaded: boolean;
+        coordinates?: { lat: number; lng: number };
+        error?: { code: number; message: string };
+    }
+
+    // 좌표(위도, 경도) 받아오는 메서드
+    const useGeolocation = () => {
+        const [location, setLocation] = useState<locationType>({
+          loaded: false,
+          coordinates: { lat: 0, lng: 0, }
+        })
+      
+        // 성공에 대한 로직
+        const onSuccess = (location: { coords: { latitude: number; longitude: number; }; }) => {
+          setLocation({
+            loaded: true,
+            coordinates: {
+              lat: location.coords.latitude,
+              lng: location.coords.longitude,
+            }
+          })
+        }
+      
+        // 에러에 대한 로직
+        const onError = (error: { code: number; message: string; }) => {
+          setLocation({
+            loaded: true,
+            error,
+          })
+        }
+      
+        useEffect(() => {
+          // navigator 객체 안에 geolocation이 없다면
+          // 위치 정보가 없는 것.
+          if (!("geolocation" in navigator)) {
+            onError({
+              code: 0,
+              message: "Geolocation not supported",
+            })
+          }
+          navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }, [])
+      
+        return location;
+    }
+
+    // 좌표로 axios get요청 보내는 메서드
+    const getParkList = () => {
+        // 유저 좌표 받아오기
+        const userLocation = useGeolocation();
+
+    };
+            
+
+
     const { 
         // 변수값
         mapOpen, menuOpen, menuState, popRegist, popUpdate,
