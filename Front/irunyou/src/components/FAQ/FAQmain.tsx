@@ -1,11 +1,14 @@
 import './FAQmain.css'
+import { Link } from "react-router-dom";
 
 export default function FAQmain() {
     return(
         <div className='FAQ-container'>
             <div className='FAQ-title'>
                 <h1 className='FAQ-text'>고객지원센터</h1>
+                <Link to="/FAQdetail">
                 <button className='FAQ-text-btn'>문의하기</button>
+                </Link>
             </div>
             <div className='FAQ-contentmain'>
                 <div className='FAQ-contenttitle'>
