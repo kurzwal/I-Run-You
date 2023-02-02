@@ -12,25 +12,25 @@ import axios from "axios";
 
 export default function IDPW() {
 
-    const [name, setName] = useState<string>('');
-    const [telnumber, setTelnumber] = useState<string>('');
-    const [id, setId] = useState<string>('');
+    const [userName, setUserName] = useState<string>('');
+    const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
+    const [userEmail, setUserEmail] = useState<string>('');
 
     const findId = () => {
         const id = {
-            name,
-            telnumber
+            userName,
+            userPhoneNumber
         }
         axios.post('http//localhost:4040/irunyou/', findId).then((Response) => {
         const UserInformation = Response.data.user;
         alert(findId);
         })
     }
-
+    
     const findPassword = () => {
         const password = {
-            name,
-            id
+            userName,
+            userEmail
         }
         axios.post('http//localhost:4040/irunyou/', findPassword).then((Response) => {
             const UserInformation = Response.data.user;

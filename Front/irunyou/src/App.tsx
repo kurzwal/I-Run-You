@@ -30,7 +30,7 @@ function App() {
   
   // eclips -> vscode (GET)
   // useEffect(() => {
-  //   axios.get('http//localhost:4040/irunyou/').then((response) => {
+  //   axios.get('http://localhost:4040/irunyou/').then((response) => {
   //     const data = response.data;
   //     const result = data.result;
   //     if (!result) {

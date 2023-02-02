@@ -1,0 +1,44 @@
+.Email-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.idfind-header {
+    display: flex;
+    justify-content: center;
+}
+
+.Email-main {
+    margin-bottom: 30px;
+}
+
+.email {
+    color: #b6cf55;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+
+    width: 500px;
+}
+
+.footer-btn {
+    border: none;
+
+    width: 200px;
+    height: 40px;
+
+    background-color: #b6cf55;
+}

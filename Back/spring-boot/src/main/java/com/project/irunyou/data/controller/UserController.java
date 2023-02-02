@@ -63,12 +63,14 @@ public class UserController {
 		// password의 경우 프론트에서 json형태가 아닌 text로 처리해야 합니다!
 		return userService.deleteUser(email,password);
 	}
-	
-	// id찾기
-	@GetMapping("findemail")
+
+	// 최예정 2023-02-02
+	// id 찾기
+	@PostMapping("findemail")
 	public ResponseDto<UserRequestDto> findUserId(@RequestBody UserPhoneAndNameDto requestBody) {
 		return userService.findUserId(requestBody);
 	}
+	
 	
 	// 최예정 2023-02-01
 	// 아이디(이메일) 중복 체크
