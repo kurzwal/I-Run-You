@@ -122,7 +122,7 @@ public class UserService {
 	// 닉네임 중복 체크
 	public ResponseDto<ResultResponseDto> checkNickname(UserPhoneAndNameDto data) {
 		String nickname = data.getUserName();
-		boolean checkUserNicknameDupe = userRepository.existsByUserNickname(nickname);
+		boolean checkUserNicknameDupe = userRepository.existsByUserName(nickname);
 		
 		if(checkUserNicknameDupe) {
 			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 닉네임 입니다.", nickname));
