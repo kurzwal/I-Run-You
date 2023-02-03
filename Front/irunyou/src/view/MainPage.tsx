@@ -20,7 +20,8 @@ import MySchedule from '../components/MenuComp/MySchedule';
 import { useLocation } from 'react-router';
 
 
-
+userLatitude
+userLongitude
 
 function MenuIcon() {
     return (
@@ -36,7 +37,7 @@ export default function MainPage(){
 
     interface locationType {
         loaded: boolean;
-        coordinates?: { lat: number; lng: number };
+        coordinates?: { userLatitude: number; userLongitude: number };
         error?: { code: number; message: string };
     }
 
@@ -44,7 +45,7 @@ export default function MainPage(){
     const useGeolocation = () => {
         const [location, setLocation] = useState<locationType>({
           loaded: false,
-          coordinates: { lat: 0, lng: 0, }
+          coordinates: { userLatitude: 0, userLongitude: 0, }
         })
       
         // 성공에 대한 로직
@@ -52,8 +53,8 @@ export default function MainPage(){
           setLocation({
             loaded: true,
             coordinates: {
-              lat: location.coords.latitude,
-              lng: location.coords.longitude,
+                userLatitude: location.coords.latitude,
+                userLongitude: location.coords.longitude,
             }
           })
         }
@@ -85,7 +86,13 @@ export default function MainPage(){
     const getParkList = () => {
         // 유저 좌표 받아오기
         const userLocation = useGeolocation();
-
+        
+        axios.post('http://localhost:4040/irunyou/park/', userLocation.coordinates).then((response) => {
+            const closeParkList = response.data;
+            console.log(closeParkList);
+        }).catch((e)=> {
+            console.log(e);
+        })
     };
             
 
