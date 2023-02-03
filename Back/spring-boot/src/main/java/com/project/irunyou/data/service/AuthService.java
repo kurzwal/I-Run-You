@@ -71,6 +71,7 @@ public class AuthService {
 				.userPassword(encryptedPassword) // 암호화된 비밀번호로 저장
 				.userAddress(dto.getUserAddress()).userAddressDetail(dto.getUserAddressDetail())
 				.userPhoneNumber(userPhone) // 하이픈 제외한 휴대전화번호 저장
+				.userNickname(dto.getUserNickname()) // 닉네임
 				.build();
 
 		userRepository.save(user);

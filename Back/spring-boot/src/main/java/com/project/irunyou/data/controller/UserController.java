@@ -66,7 +66,7 @@ public class UserController {
 
 	// 최예정 2023-02-02
 	// id 찾기
-	@PostMapping("findemail")
+	@PostMapping("findEmail")
 	public ResponseDto<UserRequestDto> findUserId(@RequestBody UserPhoneAndNameDto requestBody) {
 		return userService.findUserId(requestBody);
 	}

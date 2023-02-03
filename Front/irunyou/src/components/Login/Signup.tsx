@@ -52,7 +52,7 @@ export default function Signup() {
             userPhoneNumber
         }
 
-        axios.post('http://localhost:4040/irunyou/', data).then((response) => {
+        axios.post('http://localhost:4040/irunyou/auth/signup', data).then((response) => {
             const UserInformation = response.data.user;
             alert(data);
         })
@@ -82,8 +82,6 @@ export default function Signup() {
         })
     }
     
-    
-
     return (
     <div className="signup-container">
         <div className="user-config">
@@ -142,7 +140,7 @@ export default function Signup() {
                 </div>
             </ThemeProvider>
         </div>
-        <div className='submit-btn'>
+        <div className='Singup-submit-btn'>
             <Link to="/Login">
                 <button className='signup-btn'>이전으로</button>
             </Link>

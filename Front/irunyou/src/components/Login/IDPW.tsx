@@ -17,24 +17,24 @@ export default function IDPW() {
     const [userEmail, setUserEmail] = useState<string>('');
 
     const findId = () => {
-        const id = {
+        const data = {
             userName,
             userPhoneNumber
         }
-        axios.post('http//localhost:4040/irunyou/', findId).then((response) => {
+        axios.post('http://localhost:4040/irunyou/findEmail', data).then((response) => {
         const UserInformation = response.data.user;
-        alert(findId);
+        alert(data);
         })
     }
     
     const findPassword = () => {
-        const password = {
+        const data = {
             userName,
             userEmail
         }
-        axios.post('http//localhost:4040/irunyou/', findPassword).then((Response) => {
-            const UserInformation = Response.data.user;
-            alert(findPassword);
+        axios.post('http://localhost:4040/irunyou/findPw', data).then((response) => {
+            const UserInformation = response.data.user;
+            alert(data);
         })
     }
 
