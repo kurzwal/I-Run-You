@@ -21,8 +21,8 @@ export default function IDPW() {
             userName,
             userPhoneNumber
         }
-        axios.post('http//localhost:4040/irunyou/', findId).then((Response) => {
-        const UserInformation = Response.data.user;
+        axios.post('http//localhost:4040/irunyou/', findId).then((response) => {
+        const UserInformation = response.data.user;
         alert(findId);
         })
     }
