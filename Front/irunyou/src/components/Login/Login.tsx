@@ -15,7 +15,7 @@ const { Kakao }:Window = window;
 // 업데이트 날짜 : 2023-01-30
 
 
-
+  
 export default function Index() {
     
     const [userEmail, setUserEmail] = useState<string>('');

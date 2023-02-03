@@ -2,7 +2,7 @@
 
 /*  */
 
-.calander-wrap {
+.calender-wrap {
     display: flex;
     flex-direction: column; /* 세로로 쌓기 */
     justify-content: center;
@@ -14,7 +14,7 @@
     font-size: 3vw;
 }
 
-.calander-title {
+.calender-title {
     display: flex;
     justify-content: center;
     /* align-items: center; */
@@ -22,7 +22,7 @@
     height: 25vh;
 }
 
-.calander-header {
+.calender-header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,7 +32,7 @@
     margin-bottom: 20px;
 }
 
-.calander-caret {
+.calender-caret {
     width: 13px;
 }
 
@@ -40,11 +40,11 @@
     transform: scaleX(-1);
 }
 
-.calander-year-month {
+.calender-year-month {
     margin: 5px 10px;
 }
 
-.calander-body {
+.calender-body {
     display: flex;
     flex-direction: column;
 
@@ -54,7 +54,7 @@
     border-radius: 5px;
 }
 
-.calander-day-label {
+.calender-day-label {
     display: flex;
     
     width: 100%;
@@ -62,19 +62,41 @@
     border-bottom: 1px solid #777777;
 }
 
-.calander-day-label-item {
+.calender-day-label-item {
     text-align: center;
     width: 15%;
 }
 
-.calander-day-number {
+.calender-day-number {
     display: flex;
     flex-wrap: wrap; /* 가로범위 넘어가면 밑줄로 이동 */
     justify-content: space-between;
 }
 
-.calander-day-item {
+.calender-day-item {
     width: 14%;
     padding: 3% 5%;
     text-align: center;
+}
+
+
+/* Post Schedule */
+
+.post-schedule-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45vw;
+    height: 40vh;
+}
+
+.calender-schedule-add {
+    width: 14%;
+    padding: 3% 5%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #ffffff;
 }
