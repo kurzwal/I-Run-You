@@ -20,7 +20,6 @@ import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.service.NoticeService;
 
-@CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController
 @RequestMapping("irunyou/notice")
 public class NoticeController {
@@ -47,8 +46,8 @@ public class NoticeController {
 	}
 
 	// 공지사항 삭제
-	@DeleteMapping("{noticeIdx}")
-	public ResponseDto<ResultResponseDto> deleteNotice(@PathVariable("noticeIndex")Integer noticeIndex) {
+	@DeleteMapping("")
+	public ResponseDto<ResultResponseDto> deleteNotice(@RequestParam("noticeIndex")int noticeIndex) {
 		return noticeService.deleteNotice(noticeIndex);
 	}
 	

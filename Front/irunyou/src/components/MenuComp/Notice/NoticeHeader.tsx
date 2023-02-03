@@ -4,10 +4,17 @@ import MenuLogo from "../Mainmenu/MenuLogo"
 import "./Noticeboard.css";
 import {Button} from "@mui/material";
 import NoticeWriteAdmin from "./NoticeWriteAdmin";
+import TokenContext from "../../../service/TokenContext";
+import { Navigate, useNavigate } from "react-router";
+import path from "path";
+import NoticeItemList from "./NoticeItemList";
 
 export default function NoticeHeader() {
 
-    const [isAdmin, setIsAdmin] = useState(true);
+    const AdminContext = useContext(TokenContext);
+    
+    const movePage = useNavigate();
+
 
     return (
         <>
@@ -20,7 +27,7 @@ export default function NoticeHeader() {
                     <div>공지사항</div>
                     <div>I RUN YOU의 공지사항 게시판 입니다.</div>
                 </div>
-                {isAdmin && <Button color="success" onClick={()=>{<NoticeWriteAdmin/>}} style={{padding : "0"}}>공지 작성</Button>} 
+                {AdminContext.isAdmin && <Button color="success" onClick={()=>{movePage("/Notice/Admin")}} style={{padding : "0"}}>공지 작성</Button>}   
             </div>
         </>
     )

@@ -34,7 +34,23 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http.csrf().disable()	
+//		return http.csrf().disable()	
+//				// cross site request forgery 사이트간 위조 요청 : 인증된 사용자의 토큰을 탈취해 위조된 요청을 보냈을 경우 파악해 방지
+//				// rest api에서는 권한이 필요한 요청을 위해서 인증 정보를 포함시켜야 한다. 서버에 인증정보를 저장하지 않기 때문에 필요 없음(JWT를 쿠키에 저장하지 않기 때문)
+//				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//				//JWT를 사용하기 때문에 세션도 사용하지 않는다.
+//				.and()
+//				.formLogin().disable()	// HTTP Basic Authentication 사용안함
+//				.httpBasic().disable()	// Form Based Authentication 사용 안함
+//				.authorizeRequests()	
+//				.antMatchers("/auth/**").permitAll() // 해당 요청에 관해서는 모두 접근 가능
+//				.anyRequest().authenticated()	// 그 외는 인증해야함
+//				.and()
+//				.addFilterBefore(new JwtAuthenticationFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
+//				// UsernamePasswordAuthenticationFilter 전에 JwtAuthenticationFilter를 실행
+//				.build();
+		
+		http.csrf().disable()	
 				// cross site request forgery 사이트간 위조 요청 : 인증된 사용자의 토큰을 탈취해 위조된 요청을 보냈을 경우 파악해 방지
 				// rest api에서는 권한이 필요한 요청을 위해서 인증 정보를 포함시켜야 한다. 서버에 인증정보를 저장하지 않기 때문에 필요 없음(JWT를 쿠키에 저장하지 않기 때문)
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -43,12 +59,15 @@ public class SecurityConfig {
 				.formLogin().disable()	// HTTP Basic Authentication 사용안함
 				.httpBasic().disable()	// Form Based Authentication 사용 안함
 				.authorizeRequests()	
-				.antMatchers("/*","/irunyou/**","/irunyou/auth/**").permitAll() // 해당 요청에 관해서는 모두 접근 가능
-				.anyRequest().authenticated()	// 그 외는 인증해야함
-				.and()
-				.addFilterBefore(new JwtAuthenticationFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
+				.antMatchers("/auth/**").permitAll() // 해당 요청에 관해서는 모두 접근 가능
+				.anyRequest().authenticated();	// 그 외는 인증해야함
 				// UsernamePasswordAuthenticationFilter 전에 JwtAuthenticationFilter를 실행
-				.build();
+				
+		
+		http
+		.addFilterBefore(new JwtAuthenticationFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
+		
+		return http.build();
 	}
 	
 	

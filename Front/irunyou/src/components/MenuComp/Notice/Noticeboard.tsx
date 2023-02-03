@@ -12,7 +12,7 @@ export default function Noticeboard() {
   return (
     <div className="notice-container">
       <NoticeHeader/>
-      {(false) ? <NoticeItemList/> : <NoticeWriteAdmin/>}
+      <NoticeItemList/>
     </div>
   );
 }

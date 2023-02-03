@@ -19,6 +19,9 @@ import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.entity.NoticeBoardEntity;
 import com.project.irunyou.data.repository.NoticeBoardRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class NoticeService {
 
@@ -102,14 +105,14 @@ public class NoticeService {
 	}
 
 	// 공지사항 삭제
-	public ResponseDto<ResultResponseDto> deleteNotice(Integer noticeIdx) {
+	public ResponseDto<ResultResponseDto> deleteNotice(int noticeIndex) {
 		NoticeBoardEntity notice;
 		try {
-			notice = noticeRepository.findById(noticeIdx).get();
+			notice = noticeRepository.findById(noticeIndex).get();
 		} catch (Exception e) {
 			return ResponseDto.setFailed("해당 공지사항이 없습니다.");
 		}
-		noticeRepository.deleteById(notice.getNoticeIndex());
+		noticeRepository.delete(notice);
 		return ResponseDto.setSuccess("삭제 되었습니다.", new ResultResponseDto(true));
 	}
 

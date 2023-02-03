@@ -56,11 +56,6 @@ export const LoginAction = (userEmail: string, userPassword: string, movePage: a
 
       const tokendata = response.data;
 
-      // if (!tokendata.result) {
-      //   alert("token error");
-      //   return;
-      // }
-
       loginTokenHandler(tokendata.token, tokendata.expiration);
 
       if(!response.data.status) {
@@ -77,4 +72,8 @@ export const LoginAction = (userEmail: string, userPassword: string, movePage: a
       alert(error.response.message);
       movePage("/Login");
     });
+};
+
+export const LogoutAction = () => {
+  localStorage.removeItem('token');  localStorage.removeItem('expirationTime');
 };

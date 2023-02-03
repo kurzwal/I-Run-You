@@ -1,6 +1,7 @@
 package com.project.irunyou.security;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -36,6 +37,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 
 	// request {header} 파싱, Bearer 토큰 리턴
 	private String parseBearerToken(HttpServletRequest request) {
+		Enumeration<?> requestHeader = request.getHeaderNames();
+		while(requestHeader.hasMoreElements()) {
+			String requestNames = (String)requestHeader.nextElement();
+			log.info("헤더목록" + requestNames);
+		}
+		log.info("리퀘스트헤더 " + request.getHeader("access-control-request-headers"));
 		String bearerToken = request.getHeader("Authorization");
 		if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
 			return bearerToken.substring(7);
@@ -48,7 +55,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 		try {
 			log.info("필터실행중");
-			String token = parseBearerToken(request);	// request에서 토큰 가져오기
+			String token = parseBearerToken(request);
+			log.info("request토큰확인 " + token);// request에서 토큰 가져오기
+			
 			if(token != null && !token.equalsIgnoreCase("null")) {	// 토큰 검사
 				String userEmail = tokenProvider.CheckAndGetUserEmail(token);	// 이메일 가져오기
 				log.info("인증 유저 이메일 확인용 : " + userEmail);

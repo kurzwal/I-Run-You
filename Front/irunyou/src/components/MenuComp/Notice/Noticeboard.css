@@ -186,6 +186,12 @@
     outline: none;
 }
 
+.notice-write-btns {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 .notice-write-btns Button{
     margin: 0px 20px;
 }
