@@ -7,13 +7,20 @@
  * */
 
 /* 서버를 켜고 브라우저에서
- * http://localhost:8080/swagger-ui.html
- * 접속하면 현재 사용 가능한 Request들 조회 가능
+ * http://localhost:4040/v2/api-docs
+ * 접속하면 현재 사용 가능한 Request들 JSON 조회 가능 -> raw 데이터 저장
+ * https://editor.swagger.io/
+ * 접속 후 json 파일 import 하기
+ * 
  * */
 package com.project.irunyou.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -24,7 +31,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+public class SwaggerConfig{
 	
     @Bean
     public Docket api() {
@@ -38,6 +45,7 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
+    
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()

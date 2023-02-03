@@ -46,7 +46,7 @@ export const retrieveStoredToken = () => {
   };
 };
 
-export const LoginAction = (userEmail: string,userPassword: string,movePage: any) => {
+export const LoginAction = (userEmail: string, userPassword: string, movePage: any) => {
   return axios
     .post("http://localhost:4040/irunyou/auth/login", {
       userEmail,
@@ -55,11 +55,6 @@ export const LoginAction = (userEmail: string,userPassword: string,movePage: any
     .then((response) => {
 
       const tokendata = response.data;
-
-      // if (!tokendata.result) {
-      //   alert("token error");
-      //   return;
-      // }
 
       loginTokenHandler(tokendata.token, tokendata.expiration);
 
@@ -77,4 +72,8 @@ export const LoginAction = (userEmail: string,userPassword: string,movePage: any
       alert(error.response.message);
       movePage("/Login");
     });
+};
+
+export const LogoutAction = () => {
+  localStorage.removeItem('token');  localStorage.removeItem('expirationTime');
 };

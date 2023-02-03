@@ -1,9 +1,11 @@
 package com.project.irunyou.security;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,6 +38,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 
 	// request {header} 파싱, Bearer 토큰 리턴
 	private String parseBearerToken(HttpServletRequest request) {
+		Enumeration<?> requestHeader = request.getHeaderNames();
+		while(requestHeader.hasMoreElements()) {
+			String requestNames = (String)requestHeader.nextElement();
+//			log.info("헤더목록" + requestNames);
+		}
+//		log.info("리퀘스트헤더 " + request.getHeader("access-control-request-headers"));
 		String bearerToken = request.getHeader("Authorization");
 		if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
 			return bearerToken.substring(7);
@@ -46,9 +54,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		try {
+//		boolean isOptions = request.getMethod().equals("OPTIONS");
+//		
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "*");
+		response.setHeader("Access-Control-Allow-Headers", "x-requested-with, content-type, Authorization");
+//		
+//		if(isOptions) {
+//			response.setStatus(200);
+//			filterChain.doFilter(request,response);		
+//		} else {
+		try {			
 			log.info("필터실행중");
-			String token = parseBearerToken(request);	// request에서 토큰 가져오기
+			String token = parseBearerToken(request);
+			log.info("request토큰확인 " + token);// request에서 토큰 가져오기
+			
 			if(token != null && !token.equalsIgnoreCase("null")) {	// 토큰 검사
 				String userEmail = tokenProvider.CheckAndGetUserEmail(token);	// 이메일 가져오기
 				log.info("인증 유저 이메일 확인용 : " + userEmail);
@@ -60,6 +80,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 				SecurityContext securityContext = SecurityContextHolder.createEmptyContext();	// 컨텍스트 생성
 				securityContext.setAuthentication(abstractAuthenticationToken);	// 컨텍스트에 인증정보 넣기
 				SecurityContextHolder.setContext(securityContext);	// 다시 컨텍스트로 등록				
+			} else {
+				logger.error("token is null");;
 			}
 			// 서버가 요청이 끝나기 전까지 인증한 사용자의 정보를 갖고 있어야 한다. 
 		} catch(Exception e) {
@@ -67,7 +89,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 //			filterChain.doFilter(request, response);
 		}
 		filterChain.doFilter(request, response);
-	}
-	
+		}
+//	}
 	// ContextHolder -> ThreadLocal ? 몰?루
 }
