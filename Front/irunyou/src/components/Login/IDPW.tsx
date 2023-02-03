@@ -1,5 +1,5 @@
 import "./IDPW.css";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -16,17 +16,20 @@ export default function IDPW() {
     const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
     const [userEmail, setUserEmail] = useState<string>('');
 
+    // 아이디 찾기
     const findId = () => {
         const data = {
             userName,
             userPhoneNumber
         }
         axios.post('http://localhost:4040/irunyou/findEmail', data).then((response) => {
-        const UserInformation = response.data.user;
-        alert(data);
+        const UserInformation = response.data;
+        const userEmail=UserInformation.userEmail;
+        return userEmail;
         })
     }
     
+    // 비밀번호 찾기
     const findPassword = () => {
         const data = {
             userName,
@@ -37,9 +40,6 @@ export default function IDPW() {
             alert(data);
         })
     }
-
-    // 아이디랑 비밀번호 찾는 공간이 한 페이지에 구현되어있는데
-    // 백으로 따로 보낼 수 있는 방법
 
     return(
         <div className="idpw-container">
@@ -56,8 +56,8 @@ export default function IDPW() {
                         <input className="form" type="text" placeholder="NAME" />
                         <input className="form" type="text" placeholder="TEL" />
                         <br />
-                        <Link to="/Email">
-                            <button className="idpw-btn" type="button" onClick={() => findId()}>아이디 찾기</button>
+                        <Link to="/Email" state={{ userEmail: findId()}}>
+                            <button className="idpw-btn" type="button" >아이디 찾기</button>
                         </Link>
                         <Link to="/Login">
                             <button className="idpw-btn" type="button">로그인</button>

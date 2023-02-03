@@ -48,7 +48,8 @@ export default function Signup() {
             userEmail,
             userPassword,
             userPassword2,
-            userAddress: `${postNumber} ${userAddress} ${userAddressDetail}`,
+            userAddress: `${postNumber} ${userAddress}`,
+            userAddressDetail,
             userPhoneNumber
         }
 
