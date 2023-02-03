@@ -1,6 +1,7 @@
 import './Email.css';
 import { Link, Route } from "react-router-dom";
 import { useEffect, useState } from 'react';
+import useEmailStore from './emailStore';
 import axios from 'axios';
 
 
@@ -16,6 +17,8 @@ import axios from 'axios';
 // }
 
 export default function Email() {
+
+    const { email } = useEmailStore();
 
     const [userEmail, setUserEmail] = useState<string>('');
     const [userName, setUserName] = useState<string>('');
@@ -42,7 +45,7 @@ export default function Email() {
                 <p>개인정보 도용에 대한 피해방지를 막기 위하여 아이디 끝 3자리를 ***처리합니다.</p>
             </div>
             <div className='Email-main'>
-                <p>회원님 아이디는 [ <span className='email'> { userEmail } </span> ] 입니다.</p>
+                <p>회원님 아이디는 [ <span className='email'> { email } </span> ] 입니다.</p>
             </div>
             <div className='footer'>
                 <Link to="/Login">

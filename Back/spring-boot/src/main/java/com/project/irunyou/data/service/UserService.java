@@ -94,7 +94,10 @@ public class UserService {
 		String phone = dto.getUserPhoneNumber(); 
 		String name = dto.getUserName();
 		
+		log.info(dto.toString());
+		
 		String userPhone = phone.replace("-", "");
+		log.info(userPhone);
 		
 		if (!StringUtils.hasText(userPhone) || !StringUtils.hasText(name)) {
 			return ResponseDto.setFailed("입력한 정보를 다시 확인하세요");

@@ -1,6 +1,7 @@
 import "./IDPW.css";
 import { Link, Route } from "react-router-dom";
 import { useState } from "react";
+import useEmailStore from './emailStore';
 import axios from "axios";
 
 // 작성자 : 최예정
@@ -12,6 +13,8 @@ import axios from "axios";
 
 export default function IDPW() {
 
+
+    const { email, setEmail } = useEmailStore();
     const [userName, setUserName] = useState<string>('');
     const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
     const [userEmail, setUserEmail] = useState<string>('');
@@ -23,9 +26,8 @@ export default function IDPW() {
             userPhoneNumber
         }
         axios.post('http://localhost:4040/irunyou/findEmail', data).then((response) => {
-        const UserInformation = response.data;
-        const userEmail=UserInformation.userEmail;
-        return userEmail;
+        const {userEmail} = response.data.data;
+        setEmail(userEmail);
         })
     }
     
@@ -53,11 +55,11 @@ export default function IDPW() {
                 </div>
                 <div className="form-container">
                     <form className="id-form">
-                        <input className="form" type="text" placeholder="NAME" />
-                        <input className="form" type="text" placeholder="TEL" />
+                        <input className="form" type="text" onChange={(e) => setUserName(e.target.value)} placeholder="NAME" />
+                        <input className="form" type="text" onChange={(e) => setUserPhoneNumber(e.target.value)} placeholder="TEL" />
                         <br />
-                        <Link to="/Email" state={{ userEmail: findId()}}>
-                            <button className="idpw-btn" type="button" >아이디 찾기</button>
+                        <Link to="/Email" >
+                            <button className="idpw-btn" type="button" onClick={() => findId()} >아이디 찾기</button>
                         </Link>
                         <Link to="/Login">
                             <button className="idpw-btn" type="button">로그인</button>
