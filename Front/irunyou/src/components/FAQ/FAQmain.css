@@ -42,6 +42,11 @@
     height: 50%;
 }
 
+.FAQ-contenttitle {
+    font-size: 30px;
+    font-weight: 700;
+}
+
 .FAQ-box-btn {
     border: none;
     background-color: #ffffff;
