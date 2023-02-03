@@ -33,7 +33,7 @@ public class ParkController {
 	}
 	
 	// 사용자 위치기반 가까운 공원 5개
-	@GetMapping("")
+	@PostMapping("")
 	public ResponseDto<List<ParkInfoDto>> findClosePark(@RequestBody UserLocationDto dto) {
 		return parkService.findClosePark(dto);
 	}
