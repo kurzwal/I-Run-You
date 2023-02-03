@@ -31,6 +31,7 @@ dependencies {
 	// spring mail 추가 - 홍지혜
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
 	implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.1'
+
 	// jsonwebtoken 추가 - 홍지혜
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 	// spring security 추가 - 홍지혜

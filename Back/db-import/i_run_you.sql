@@ -14,7 +14,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
 -- i_run_you 데이터베이스 구조 내보내기
 CREATE DATABASE IF NOT EXISTS `i_run_you` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `i_run_you`;
@@ -2402,6 +2401,17 @@ create table if not exists `comment_like` (
     `user_index` int not null,
 	primary key (`comment_like_index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `faq` (
+  `faq_index` int NOT NULL AUTO_INCREMENT,
+  `faq_title` varchar(45) DEFAULT NULL,
+  `faq_user_name` varchar(45) DEFAULT NULL,
+  `faq_inquiry_type` varchar(45) DEFAULT NULL,
+  `faq_user_email` varchar(45) DEFAULT NULL,
+  `faq_content` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`faq_index`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 -- 테이블 데이터 i_run_you.user:~0 rows (대략적) 내보내기
 -- DELETE FROM `user`;
