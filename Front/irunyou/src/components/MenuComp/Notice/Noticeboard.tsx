@@ -15,4 +15,5 @@ export default function Noticeboard() {
       <NoticeItemList/>
     </div>
   );
+  
 }

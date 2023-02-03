@@ -23,7 +23,7 @@ import com.project.irunyou.data.service.UserService;
 
 // 2023-01-25 홍지혜
 // 2023-01-27 login controller로직 -> 서비스에서 처리
-@CrossOrigin(originPatterns = "http://localhost:3000/**")
+@CrossOrigin(originPatterns = "http://localhost:3000/")
 @RestController
 @RequestMapping("auth/")
 public class AuthController {

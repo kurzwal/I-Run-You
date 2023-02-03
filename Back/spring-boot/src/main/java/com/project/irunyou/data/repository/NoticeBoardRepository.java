@@ -24,6 +24,6 @@ public interface NoticeBoardRepository extends JpaRepository<NoticeBoardEntity, 
 	// 메서드 추가
 	public NoticeBoardEntity findByNoticeTitle(String title);
 	
-	public Page<NoticeBoardEntity> findAllByOrderByNoticeIndex(PageRequest pageRequest);
+	public Page<NoticeBoardEntity> findAllByOrderByNoticeIndexDesc(PageRequest pageRequest);
 	
 }

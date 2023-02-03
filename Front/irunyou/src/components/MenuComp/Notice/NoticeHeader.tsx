@@ -15,7 +15,6 @@ export default function NoticeHeader() {
     
     const movePage = useNavigate();
 
-
     return (
         <>
             <MenuLogo />
@@ -27,8 +26,9 @@ export default function NoticeHeader() {
                     <div>공지사항</div>
                     <div>I RUN YOU의 공지사항 게시판 입니다.</div>
                 </div>
-                {AdminContext.isAdmin && <Button color="success" onClick={()=>{movePage("/Notice/Admin")}} style={{padding : "0"}}>공지 작성</Button>}   
+                {AdminContext.isAdmin && <Button color="success" onClick={()=>{movePage("/Notice/Admin/Write")}} style={{padding : "0"}}>공지 작성</Button>}   
             </div>
         </>
     )
+
 }

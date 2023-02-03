@@ -30,11 +30,11 @@ public class NoticeService {
 	
 	public Page<NoticeBoardEntity> findAllNotice(int page, int size) {
 		PageRequest pageRequest = PageRequest.of(page, size);
-		return noticeRepository.findAllByOrderByNoticeIndex(pageRequest);
+		return noticeRepository.findAllByOrderByNoticeIndexDesc(pageRequest);
 	}
 	
 	
-	// 페이징
+	// 페이지네이션 처리 해서 데이터 불러오기
 	public ResponseDto<NoticePageResponseDto<?>> getNoticeList(int page, int size) {
 		Page<NoticeBoardEntity> noticePage = findAllNotice(page-1, size);
 		
@@ -51,10 +51,9 @@ public class NoticeService {
 		for(NoticeBoardEntity n : notices) {
 			data.add(new NoticeDto(n));
 		}
-		
+				
 		return ResponseDto.setSuccess("date load Success",new NoticePageResponseDto(data,noticePageInfo));
 	}
-	
 	
 	
 	// 공지사항 등록
@@ -63,7 +62,6 @@ public class NoticeService {
 		try {
 			String title = dto.getNoticeTitle();
 			String content = dto.getNoticeContent();
-
 			NoticeBoardEntity notice = NoticeBoardEntity.builder().noticeTitle(title).noticeContent(content).build();
 
 			noticeRepository.save(notice);
@@ -101,7 +99,7 @@ public class NoticeService {
 
 		noticeRepository.save(notice);
 
-		return ResponseDto.setSuccess("내용수정 완료", new NoticeDto(notice));
+		return ResponseDto.setSuccess("공지사항이 수정되었습니다.", new NoticeDto(notice));
 	}
 
 	// 공지사항 삭제
