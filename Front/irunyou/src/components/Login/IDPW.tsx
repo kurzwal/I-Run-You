@@ -8,7 +8,7 @@ import axios from "axios";
 // 작성날짜 : 2023-01-18
 
 // 업데이트 작성자 : 최예정
-// 업데이트 날짜 : 2023-01-28
+// 업데이트 날짜 : 2023-02-03
 
 export default function IDPW() {
 
