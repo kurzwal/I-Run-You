@@ -20,8 +20,6 @@ import MySchedule from '../components/MenuComp/MySchedule';
 import { useLocation } from 'react-router';
 
 
-userLatitude
-userLongitude
 
 function MenuIcon() {
     return (
@@ -35,67 +33,7 @@ function MenuIcon() {
 
 export default function MainPage(){
 
-    interface locationType {
-        loaded: boolean;
-        coordinates?: { userLatitude: number; userLongitude: number };
-        error?: { code: number; message: string };
-    }
-
-    // 좌표(위도, 경도) 받아오는 메서드
-    const useGeolocation = () => {
-        const [location, setLocation] = useState<locationType>({
-          loaded: false,
-          coordinates: { userLatitude: 0, userLongitude: 0, }
-        })
-      
-        // 성공에 대한 로직
-        const onSuccess = (location: { coords: { latitude: number; longitude: number; }; }) => {
-          setLocation({
-            loaded: true,
-            coordinates: {
-                userLatitude: location.coords.latitude,
-                userLongitude: location.coords.longitude,
-            }
-          })
-        }
-      
-        // 에러에 대한 로직
-        const onError = (error: { code: number; message: string; }) => {
-          setLocation({
-            loaded: true,
-            error,
-          })
-        }
-      
-        useEffect(() => {
-          // navigator 객체 안에 geolocation이 없다면
-          // 위치 정보가 없는 것.
-          if (!("geolocation" in navigator)) {
-            onError({
-              code: 0,
-              message: "Geolocation not supported",
-            })
-          }
-          navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        }, [])
-      
-        return location;
-    }
-
-    // 좌표로 axios get요청 보내는 메서드
-    const getParkList = () => {
-        // 유저 좌표 받아오기
-        const userLocation = useGeolocation();
-        
-        axios.post('http://localhost:4040/irunyou/park/', userLocation.coordinates).then((response) => {
-            const closeParkList = response.data;
-            console.log(closeParkList);
-        }).catch((e)=> {
-            console.log(e);
-        })
-    };
-            
-
+    
 
     const { 
         // 변수값
@@ -191,6 +129,7 @@ export default function MainPage(){
                 anchor="right"
                 open={menuOpen && (menuState == 2 || menuState == 3)}
             >
+                
                 <ParkList></ParkList>
                 <Box>
                 <img className='x-icon' src={ Xmark }
