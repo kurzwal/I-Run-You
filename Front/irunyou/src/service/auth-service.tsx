@@ -46,30 +46,34 @@ export const retrieveStoredToken = () => {
   };
 };
 
-export const LoginAction = (
-  userEmail: string,
-  userPassword: string,
-  movePage: any
-) => {
+export const LoginAction = (userEmail: string, userPassword: string, movePage: any) => {
   return axios
     .post("http://localhost:4040/irunyou/auth/login", {
       userEmail,
       userPassword
     })
     .then((response) => {
+
       const tokendata = response.data;
 
-      if (!tokendata.result) {
-        alert("token error");
-        return;
+      loginTokenHandler(tokendata.token, tokendata.expiration);
+
+      if(!response.data.status) {
+        alert(response.data.message);
+        movePage("/Login");
+      
+      } else {
+        alert(response.data.message);
+        movePage("/MainPage");
       }
 
-      loginTokenHandler(tokendata.token, tokendata.expiration);
-      alert("로그인 되었습니다.");
-      movePage("/MainPage");
     })
     .catch((error) => {
-      alert(error.response.data);
+      alert(error.response.message);
       movePage("/Login");
     });
+};
+
+export const LogoutAction = () => {
+  localStorage.removeItem('token');  localStorage.removeItem('expirationTime');
 };

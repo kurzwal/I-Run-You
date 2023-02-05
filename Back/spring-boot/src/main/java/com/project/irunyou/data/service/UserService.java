@@ -38,14 +38,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class UserService {
-
-	@Autowired private AuthService authService;
-	@Autowired private ResgisterMailService mailService;
-	
+		
 	@Autowired private UserRepository userRepository;
-	@Autowired private CodeRepository codeRepository;;
+	@Autowired private CodeRepository codeRepository;
 	
 	@Autowired private PasswordEncoder passwordEncoder;
+	@Autowired private ResgisterMailService mailService;
+	
+	@Autowired private AuthService authService;
 
 	// 회원 정보조회, email, pw확인후 pw제외 정보제공
 	public ResponseDto<GetUserResponseDto> readUser(String email) {

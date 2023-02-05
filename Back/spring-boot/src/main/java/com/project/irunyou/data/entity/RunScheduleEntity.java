@@ -44,24 +44,13 @@ public class RunScheduleEntity {
     @NotNull
     private String runScheduleTitle;
     @NotNull
-    private int runScheduleWriterIndex;
+    private String runScheduleWriter;
     @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime runScheduleDatetime;
     @NotNull
     private String runScheduleContent;
-    private int runScheduleLikeUser;
-    
-    // 일정 등록용 생성자
-    public RunScheduleEntity(RunScheduleDto dto) {
-    	this.runSchedulePark = dto.getRunSchedulePark();
-    	this.runScheduleTitle = dto.getRunScheduleTitle();
-    	this.runScheduleWriterIndex = dto.getRunScheduleWriterIndex();
-    	this.runScheduleDatetime = dto.getRunScheduleDatetime();
-    	this.runScheduleContent = dto.getRunScheduleContent();
-    }
-    
     
 
 }

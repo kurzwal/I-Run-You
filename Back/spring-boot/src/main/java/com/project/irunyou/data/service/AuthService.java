@@ -81,12 +81,12 @@ public class AuthService {
 	
 	
 	// 로그인
-	public ResponseEntity<?> LoginUser(LoginUserDto dto) {
+	public ResponseDto<?> LoginUser(LoginUserDto dto) {
 		
 		UserEntity user = getByCredentials(dto.getUserEmail(), dto.getUserPassword(), passwordEncoder);
 
 		if (user == null) {	// 해당 유저 정보 없음
-			return new ResponseEntity<String>("해당하는 유저정보가 없습니다. 이메일과 비밀번호를 확인해 주세요.", HttpStatus.BAD_REQUEST);
+			return ResponseDto.setFailed("해당하는 유저정보가 없습니다. 이메일과 비밀번호를 확인해 주세요.");
 		} else { // 유저정보가 존재함
 			String token = tokenProvider.create(user); 	// 토큰 생성
 			long expiration = tokenProvider.GetExpiration(token);	// 토큰 유효기간
@@ -96,7 +96,7 @@ public class AuthService {
 					.expiration(expiration)
 					.build();	// LoginTokenDto에 토큰과 토큰 유효기간 담아 response
 			
-			return new ResponseEntity<LoginTokenDto>(tokenResponse, HttpStatus.OK);
+			return ResponseDto.setSuccess("로그인 되었습니다.", tokenResponse);
 		}
 
 	}

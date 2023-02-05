@@ -23,6 +23,79 @@ export default function Index() {
     
     const movePage = useNavigate();
     
+    const [userEmail, setUserEmail] = useState<string>('');
+    const [userPassword, setUserPassword] = useState<string>('');
+
+    const movePage = useNavigate();
+
+    // 토큰 만료기간 계산
+    const calculateRemainingTime = (expiration: number) => {
+        const currentTime = new Date().getTime();
+        const adjExpirationTime = new Date(expiration).getTime();
+        const remainingDuration = adjExpirationTime - currentTime;
+      
+        return remainingDuration;
+      };
+    
+    // 토큰 localStorage에 저장 후 만료기간 돌려줌
+    const loginTokenHandler = (token:string, expiration : number) => {
+
+        window.localStorage.setItem("token", token);
+        window.localStorage.setItem("expirationTime", String(expiration));
+
+        const remainingTime = calculateRemainingTime(expiration);
+
+        return remainingTime;
+    }
+
+    const LoginAction = (userEmail: string, userPassword: string) => {
+
+        return axios.post("http://localhost:4040/auth/login", {
+            userEmail,
+            userPassword
+        })
+        .then((response) => {
+
+            const tokendata = response.data.data;
+            
+            loginTokenHandler(tokendata.token, tokendata.expiration);
+
+            if(!response.data.status) {
+                alert(response.data.message);
+                movePage("/Login");
+              
+              } else {
+                alert(response.data.message);
+                movePage("/MainPage");
+              }
+
+        }).catch((error) => {
+            alert(error.response.message);
+            movePage("/Login");
+        })
+
+    } 
+
+    // const loginButton = () => {
+        
+    //     LoginAction(userEmail,userPassword, movePage);
+
+        // const data = {
+        //     userEmail,
+        //     userPassword
+        // }
+
+        // axios.post('http://localhost:4040/irunyou/auth/login', data)
+        // .then((Response) => {
+        //     const UserInformation = Response.data.user;
+        //     console.log(UserInformation);
+
+        //     if(!UserInformation) alert('입력하신 회원정보가 존재하지않습니다.');
+        //     else movePage('/MainPage');
+        // })
+        // // 로그인을 할 시 사용자가 입력한 데이터가 일치하지 않을 경우 경고창 띄우기
+        // // 지금 적어놓은 조건문은 else에 있는 조건문만 실행됨
+
     const loginButton = () => {
         
         LoginAction(userEmail,userPassword, movePage);
@@ -53,7 +126,7 @@ export default function Index() {
 
     
 
-    return(
+    return (
         <div className="login-container">
             {/* 로그인 전체 form */}
             <div id="input-form" className="form-contant">
@@ -84,9 +157,9 @@ export default function Index() {
                 </div>
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">
-                    {/* <Link to="/MainPage"> */}
-                    <button type="button" className="login-button button" onClick={() => loginButton()}>로그인</button>
-                    {/* </Link> */}
+                    <Link to="/Login">
+                    <button className="login-button button">로그인</button>
+                    </Link>
                     <Link to="/Signup">
                         <button className="signup-button button" >회원가입</button>
                     </Link>

@@ -8,8 +8,8 @@ import axios from "axios";
 // 파일의 역할 : id, password 찾기 html
 // 작성날짜 : 2023-01-18
 
-// 업데이트 작성자 : 최예정
-// 업데이트 날짜 : 2023-02-03
+// 업데이트 작성자 : -
+// 업데이트 날짜 : -
 
 export default function IDPW() {
 
@@ -62,7 +62,7 @@ export default function IDPW() {
                             <button className="idpw-btn" type="button" onClick={() => findId()} >아이디 찾기</button>
                         </Link>
                         <Link to="/Login">
-                            <button className="idpw-btn" type="button">로그인</button>
+                            <button type="button">로그인</button>
                         </Link>
                     </form>
                 </div>

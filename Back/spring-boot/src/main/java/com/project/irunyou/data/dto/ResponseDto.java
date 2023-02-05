@@ -13,6 +13,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ResponseDto<D>{
+	
     private boolean status;
     private String message;
     private D data;

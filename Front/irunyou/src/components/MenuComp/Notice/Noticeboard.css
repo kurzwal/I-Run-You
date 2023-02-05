@@ -1,0 +1,223 @@
+/* 홍지혜 2023-02-01  */
+/* 공지사항 관련 스타일 */
+
+* {
+    box-sizing: border-box;
+}
+
+.notice-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.irunyou-logo {
+    height: 80px;
+}
+
+
+.notice-header {
+    display: flex;
+    top: 80px;
+    width: 100vw;
+    height: 80px;
+    text-align: left;
+
+    background-color: #b6cf55;
+}
+
+.notice-text {
+    margin-left: 30px;
+    line-height: 80px;
+    vertical-align: middle;
+    font-size: 25px;
+    font-weight: 800;
+
+    color: white;
+}
+
+.notice-information {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0px auto;
+    padding: 50px 15px 10px;
+}
+
+
+.notice-information-text {
+    display: flex;
+    flex-direction: row;
+    
+
+}
+
+.notice-information-text :first-child {
+    height: 30px;
+    font-size: 20px;
+    white-space: nowrap;
+}
+
+.notice-information-text :last-child {
+    padding-top: 3px;
+    padding-left: 20px;
+    white-space: nowrap;
+}
+
+.notice-key-container{
+    display: flex;
+    margin: 0 auto;
+    padding-right: 100px;
+    width: 80%;
+    padding: 10px 0px 10px 50px;
+    
+    background-color: #e4eebe;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 550;
+}
+
+.notice-key-container div {
+    white-space: nowrap;
+}
+
+
+.notice-key-container :last-child {
+    width: 90%;
+}
+
+
+.notice-list-container {
+    margin: 20px auto;
+    width: 80%;
+    /* padding: 50px 110px; */
+}
+
+.noticeboard-item-container {
+    display: flex;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+
+.notice-board-number {
+    width: 70px;
+    text-align: center;
+    margin-right : 50px;
+}
+
+
+.noticeboard-title {
+   display: flex;
+   justify-content: left; 
+   width: 80%;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   white-space: nowrap;
+}
+
+.notice-content-container {
+    padding: 20px 40px;
+    text-align: left;
+    
+}
+
+.notice-content {
+    white-space: pre-wrap;
+}
+
+.notice-write-container {
+    width: 80%;
+    height: 60%;
+    margin: 0px auto;
+    border-top: 5px solid #e4eebe;
+    padding: 20px 50px;
+}
+
+.notice-title-inputs {
+    display: flex;
+    width: 100%;
+    height: 10%;
+
+    white-space: nowrap;
+    border-bottom: 2px solid #e4eebe;
+}
+
+.notice-title-inputs div {
+    margin-right: 20px;
+    padding-top: 10px;
+    width: 5%;
+
+
+}
+
+.notice-title-inputs input{
+    padding-bottom: 6px;
+    
+    width: 100%;
+    border: none;
+    font-size: 15px;
+    
+}
+
+.notice-title-inputs input:focus {
+    outline: none;
+}
+
+.notice-content-inputs {
+    height: 90%;
+    padding: 20px 0px;
+}
+
+.notice-content-inputs textarea {
+    width: 95%;
+    height: 100%;
+    resize: none;
+    border : none;
+    border-bottom: 2px solid #e4eebe;
+
+    font-size: 15px;
+}
+
+.notice-content-inputs textarea:focus {
+    outline: none;
+}
+
+.notice-write-btns {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.notice-write-btns Button{
+    margin: 0px 20px;
+}
+
+@media(max-width: 600px) {
+    .notice-information button {
+        display: none;
+    }
+}
+
+
+@media(max-width : 500px) {
+    
+    .notice-header {
+        width: 500px;
+    }
+
+    .notice-key-container{
+        width: 400px;
+    }
+
+    .noticeboard-item-container {
+        width: 360px;
+    }
+
+    .noticeboard-footer {
+        width: 500px;
+    }
+}
