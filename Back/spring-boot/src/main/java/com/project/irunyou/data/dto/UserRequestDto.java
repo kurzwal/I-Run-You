@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequestDto {
+	
 	private String userEmail;
 	
 	public UserRequestDto(UserEntity user) {

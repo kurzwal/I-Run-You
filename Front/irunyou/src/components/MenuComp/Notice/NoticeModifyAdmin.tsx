@@ -5,10 +5,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import blue from '@mui/material/colors/blue';
 import { create } from "domain";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import NoticeHeader from "./NoticeHeader";
 import { resourceLimits } from "worker_threads";
 import { useLocation } from "react-router";
+import axiosInstance from "../../../service/axiosInstance";
 
 
 export default function NoticeModifyAdmin() {
@@ -39,25 +40,24 @@ export default function NoticeModifyAdmin() {
             return alert("내용을 비울 수 없습니다.")
         }
 
-        await axios
-            .patch("http://localhost:4040/irunyou/notice", {
+        await axiosInstance
+            .patch("/irunyou/notice", {
                 noticeIndex,
                 noticeTitle,
                 noticeContent
-            }, {
-                headers : {
-                    Authorization: "Bearer " + window.localStorage.getItem('token')
-                }
-            }).then((response) => {
+            })
+            .then(response => {
                 if(!response.data.status) {
                     alert(response.data.message);
                 } else {
                     alert(response.data.message);
-                    movePage("/Notice");     
+                    movePage("/Notice");
                 }
-            }).catch((error) => {
+            })
+            .catch(error => {
                 alert("오류가 발생했습니다.");
             })
+       
     }
 
     const isRealCancel = () => {
@@ -68,7 +68,6 @@ export default function NoticeModifyAdmin() {
             movePage("/Notice");
         } 
     }
-
    
     return (
         <>
