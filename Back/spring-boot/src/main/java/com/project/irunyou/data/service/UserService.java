@@ -94,7 +94,10 @@ public class UserService {
 		String phone = dto.getUserPhoneNumber(); 
 		String name = dto.getUserName();
 		
+		log.info(dto.toString());
+		
 		String userPhone = phone.replace("-", "");
+		log.info(userPhone);
 		
 		if (!StringUtils.hasText(userPhone) || !StringUtils.hasText(name)) {
 			return ResponseDto.setFailed("입력한 정보를 다시 확인하세요");
@@ -102,8 +105,27 @@ public class UserService {
 		UserEntity user = userRepository.findByUserPhoneNumberAndUserName(userPhone, name);
 		if (user == null)
 			return ResponseDto.setFailed("가입된 정보가 없습니다.");
-
-		return ResponseDto.setSuccess("회원님의 email 입니다.", new UserRequestDto(user));
+		
+		// 최예정, 문경원 2023-02-03
+		// 이메일 @ 앞 3자리 숨기기(* 처리)
+		String userEmail = user.getUserEmail();
+		int hiddenId =  userEmail.indexOf("@");
+		
+		// hiddenId 앞에 있는 아이디
+		String IdExceptEmail = userEmail.substring(0, hiddenId-2);
+	
+		// @ 앞에 있는 세 자리 * 표시
+		String star = "***";
+		
+		String encryptedId = IdExceptEmail.concat(star);
+		
+		// hiddenId 뒤에 있는 메일 주소
+		String emailEnd = userEmail.substring(hiddenId, userEmail.length());
+		
+		// 세 자리 숨긴 아이디와 이메일 주소 붙여서 출력
+		String encryptedEmail = encryptedId.concat(emailEnd);
+				
+		return ResponseDto.setSuccess("회원님의 email 입니다.", new UserRequestDto(encryptedEmail));
 	}
 	
 	// 최예정 2023-02-01
