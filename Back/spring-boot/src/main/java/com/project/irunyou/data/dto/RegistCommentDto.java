@@ -1,6 +1,5 @@
 package com.project.irunyou.data.dto;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;

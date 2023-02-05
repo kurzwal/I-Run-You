@@ -10,10 +10,7 @@ package com.project.irunyou.data.dto;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Access;
-
 import com.project.irunyou.data.entity.RunScheduleEntity;
-import com.project.irunyou.data.entity.RunSchedulePaticipateEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -10,19 +10,13 @@
 package com.project.irunyou.data.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.project.irunyou.data.dto.FindPasswordDto;
 import com.project.irunyou.data.dto.GetUserResponseDto;
-import com.project.irunyou.data.dto.LoginTokenDto;
-import com.project.irunyou.data.dto.LoginUserDto;
 import com.project.irunyou.data.dto.PatchUserDto;
-import com.project.irunyou.data.dto.PostUserDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.dto.UserPhoneAndNameDto;
@@ -31,11 +25,7 @@ import com.project.irunyou.data.entity.CodeEntity;
 import com.project.irunyou.data.entity.UserEntity;
 import com.project.irunyou.data.repository.CodeRepository;
 import com.project.irunyou.data.repository.UserRepository;
-import com.project.irunyou.security.TokenProvider;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class UserService {
 		
@@ -94,10 +84,8 @@ public class UserService {
 		String phone = dto.getUserPhoneNumber(); 
 		String name = dto.getUserName();
 		
-		log.info(dto.toString());
 		
 		String userPhone = phone.replace("-", "");
-		log.info(userPhone);
 		
 		if (!StringUtils.hasText(userPhone) || !StringUtils.hasText(name)) {
 			return ResponseDto.setFailed("입력한 정보를 다시 확인하세요");

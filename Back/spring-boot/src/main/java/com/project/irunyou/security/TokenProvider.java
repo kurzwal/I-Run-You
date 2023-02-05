@@ -11,11 +11,9 @@ import com.project.irunyou.data.entity.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.extern.slf4j.Slf4j;
 
 //2023-01-25 홍지혜
 //유저 정보 -> JWT 생성 클래스
-@Slf4j
 @Service
 public class TokenProvider {
 	

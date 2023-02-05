@@ -1,12 +1,5 @@
 package com.project.irunyou.data.service;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +10,6 @@ import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.entity.CommentEntity;
 import com.project.irunyou.data.repository.CommentRepository;
-import com.project.irunyou.data.repository.UserRepository;
-
-import ch.qos.logback.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy;
 
 @Service
 public class CommentService {
@@ -30,10 +20,7 @@ public class CommentService {
 		
 		CommentEntity comment;
 		
-		int writerNum;
-		writerNum = dto.getCommentWriterIndex();
 		CommentResponseDto result;
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		
 //	 	0131 result 빌더 -> 생성자로 대체 - 황석민
 		
@@ -67,7 +54,7 @@ public class CommentService {
 		
 		CommentEntity comment;
 		
-		comment = commentRepository.getById(dto.getCommentIndex());
+		comment = commentRepository.findById(dto.getCommentIndex()).get();
 		
 		int comIdx = comment.getCommentIndex();
 		int schIdx = comment.getCommentScheduleIndex();

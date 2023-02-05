@@ -13,7 +13,6 @@
 package com.project.irunyou.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.project.irunyou.data.dto.RunScheduleDto;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,9 +23,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data

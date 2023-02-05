@@ -17,24 +17,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.project.irunyou.data.dto.FindRunScheduleDto;
-import com.project.irunyou.data.dto.GetUserResponseDto;
 import com.project.irunyou.data.dto.GetUserRunScheduleDto;
 import com.project.irunyou.data.dto.PatchScheduleDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.dto.RunScheduleDto;
-import com.project.irunyou.data.dto.ScheduleDto;
-import com.project.irunyou.data.dto.UserRequestDto;
 import com.project.irunyou.data.entity.RunScheduleEntity;
 import com.project.irunyou.data.entity.RunSchedulePaticipateEntity;
-import com.project.irunyou.data.entity.UserEntity;
 import com.project.irunyou.data.repository.ParkRepository;
 import com.project.irunyou.data.repository.RunScheduleRepository;
 import com.project.irunyou.data.repository.UserRepository;

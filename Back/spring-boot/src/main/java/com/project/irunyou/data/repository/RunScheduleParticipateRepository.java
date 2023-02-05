@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.project.irunyou.data.entity.RunScheduleEntity;
 import com.project.irunyou.data.entity.RunSchedulePaticipateEntity;
 
 @Repository

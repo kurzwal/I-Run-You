@@ -12,7 +12,6 @@ import EMverifyView from './components/Login/EMverify';
 import EmailView from './components/Login/Email';
 import SUSCView from './components/Login/SUSC';
 import Noticeboard from './components/MenuComp/Notice/Noticeboard';
-
 import KakaoRedirectHandler from './components/Login/KakaoRedirectHandler';
 import KakaoMap from './components/KakaoMap';
 import HomePage from './view/HomePage';
@@ -20,6 +19,8 @@ import MainPage from './view/MainPage';
 import TokenContext from './service/TokenContext';
 import NoticeWriteAdmin from './components/MenuComp/Notice/NoticeWriteAdmin';
 import NoticeModifyAdmin from './components/MenuComp/Notice/NoticeModifyAdmin';
+import FAQmain from './components/FAQ/FAQmain';
+import FAQdetail from './components/FAQ/FAQdetail';
 
 // 작성자 : 최예정
 // 파일의 역할 : 링크 연결, 백 -> 프론트 GET

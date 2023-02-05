@@ -4,7 +4,6 @@
 */
 package com.project.irunyou.data.dto;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;

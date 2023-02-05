@@ -20,11 +20,6 @@ export default function Index() {
 
     const [userEmail, setUserEmail] = useState<string>('');
     const [userPassword, setUserPassword] = useState<string>('');
-    
-    const movePage = useNavigate();
-    
-    const [userEmail, setUserEmail] = useState<string>('');
-    const [userPassword, setUserPassword] = useState<string>('');
 
     const movePage = useNavigate();
 
@@ -98,7 +93,7 @@ export default function Index() {
 
     const loginButton = () => {
         
-        LoginAction(userEmail,userPassword, movePage);
+        LoginAction(userEmail,userPassword);
 
         const data = {
             userEmail,

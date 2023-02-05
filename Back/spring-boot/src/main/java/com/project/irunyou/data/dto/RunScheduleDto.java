@@ -8,13 +8,9 @@
  * */
 package com.project.irunyou.data.dto;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

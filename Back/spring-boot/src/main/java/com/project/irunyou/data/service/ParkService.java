@@ -11,9 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.irunyou.data.dto.MyLocationDto;
 import com.project.irunyou.data.dto.ParkInfoDto;
-import com.project.irunyou.data.dto.ParkListDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.UserLocationDto;
 import com.project.irunyou.data.entity.ParkEntity;

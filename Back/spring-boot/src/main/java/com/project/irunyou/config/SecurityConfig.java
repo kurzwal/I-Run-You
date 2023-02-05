@@ -1,29 +1,23 @@
 package com.project.irunyou.config;
 
-import org.apache.catalina.filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.project.irunyou.security.JwtAuthenticationFilter;
 import com.project.irunyou.security.TokenProvider;
 
-import lombok.extern.slf4j.Slf4j;
-
 // 2023-01-25 홍지혜
 // HTTP 요청 이후의 설정
 @Configuration
 @EnableWebSecurity
-@Slf4j
 public class SecurityConfig {
 	// WebSecurityConfigurerAdapter - deprecated 
 	

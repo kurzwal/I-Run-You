@@ -8,18 +8,10 @@
  * */
 package com.project.irunyou.data.entity;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.data.annotation.CreatedDate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

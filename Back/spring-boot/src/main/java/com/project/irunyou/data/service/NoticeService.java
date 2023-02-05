@@ -1,15 +1,12 @@
 package com.project.irunyou.data.service;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.irunyou.data.dto.NoticeDto;
 import com.project.irunyou.data.dto.NoticePageInfoDto;
@@ -19,9 +16,7 @@ import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.entity.NoticeBoardEntity;
 import com.project.irunyou.data.repository.NoticeBoardRepository;
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 public class NoticeService {
 
@@ -35,6 +30,7 @@ public class NoticeService {
 	
 	
 	// 페이지네이션 처리 해서 데이터 불러오기
+	@SuppressWarnings("unchecked")
 	public ResponseDto<NoticePageResponseDto<?>> getNoticeList(int page, int size) {
 		Page<NoticeBoardEntity> noticePage = findAllNotice(page-1, size);
 		

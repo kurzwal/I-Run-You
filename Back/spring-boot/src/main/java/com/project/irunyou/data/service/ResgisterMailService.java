@@ -13,8 +13,6 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.project.irunyou.config.MailConfig;
-
 @Service
 public class ResgisterMailService {
 	

@@ -20,8 +20,6 @@ import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.service.CommentService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @CrossOrigin(originPatterns = "http://localhost:3000")
 @RestController
 @RequestMapping("irunyou/comment/")
