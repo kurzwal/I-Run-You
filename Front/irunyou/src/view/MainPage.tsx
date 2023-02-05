@@ -1,6 +1,8 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import './views.css';
 import useToggleStore from './Store';
+import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
@@ -15,6 +17,8 @@ import MyInfo from '../components/MenuComp/MyInfo';
 import ParkList from '../components/MenuComp/ParkList';
 import ParkInfo from '../components/MenuComp/ParkInfo';
 import MySchedule from '../components/MenuComp/MySchedule';
+import { useLocation } from 'react-router';
+
 
 
 function MenuIcon() {
@@ -28,7 +32,9 @@ function MenuIcon() {
 
 
 export default function MainPage(){
+
     
+
     const { 
         // 변수값
         mapOpen, menuOpen, menuState, popRegist, popUpdate,
@@ -123,6 +129,7 @@ export default function MainPage(){
                 anchor="right"
                 open={menuOpen && (menuState == 2 || menuState == 3)}
             >
+                
                 <ParkList></ParkList>
                 <Box>
                 <img className='x-icon' src={ Xmark }
