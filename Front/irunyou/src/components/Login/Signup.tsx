@@ -39,6 +39,8 @@ export default function Signup() {
     const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
 
     const [idCheckResult, setIdCheckResult] = useState<number>(0);
+
+    const [idCheckResultMsg, setIdCheckResultMsg] = useState<string>();
     const [nicknameCheckResult, setNicknameCheckResult] = useState<number>(0);
 
     const onSubmitHandler = () => {
@@ -48,12 +50,11 @@ export default function Signup() {
             userEmail,
             userPassword,
             userPassword2,
-            userAddress: `${postNumber} ${userAddress}`,
-            userAddressDetail,
+            userAddress: `${postNumber} ${userAddress} ${userAddressDetail}`,
             userPhoneNumber
         }
 
-        axios.post('http://localhost:4040/irunyou/auth/signup', data).then((response) => {
+        axios.post('http://localhost:4040/auth/signup', data).then((response) => {
             const UserInformation = response.data.user;
             alert(data);
         })
@@ -64,25 +65,39 @@ export default function Signup() {
         const data = {
             userNickname
         };
-        axios.post('http://localhost:4040/irunyou/checkNickname', data).then((response) => {
+        axios.post('http://localhost:4040/auth/checkNickname', data).then((response) => {
             const result = response.data.result;
             if(result) setNicknameCheckResult(-1);
             else setNicknameCheckResult(1);
         })
     } 
 
+
+    // 홍지혜 2023-02-02 중복 아이디 로직 수정
+    // 응답 status 가 true면 result : 1 ("사용가능 이메일")
+    // false면 result -1 ("이메일 창 비어있음","중복된 이메일")
+    // back에서 보내주는 메시지가 출력되게 response.data.message로 useState 추가 -> falid 된 결과가 하나가 아니기 떄문
+
     // 중복된 아이디(이메일) 확인
     const onExistIdHandler = () => {
         const data = {
             userEmail
         };
-        axios.post('http://localhost:4040/irunyou/checkId', data).then((response) => {
-            const result = response.data.result;
-            if (result) setIdCheckResult(-1);
-            else setIdCheckResult(1);
+        axios.post('http://localhost:4040/auth/checkId', data).then((response) => {
+            const result = response.data.status
+            const message = response.data.message
+            if (result) {
+                setIdCheckResult(1);
+                setIdCheckResultMsg(message)
+            } else {
+                setIdCheckResult(-1);
+                setIdCheckResultMsg(message)
+            }
         })
     }
     
+    
+
     return (
     <div className="signup-container">
         <div className="user-config">
@@ -110,8 +125,8 @@ export default function Signup() {
                     <button onClick={() => onExistIdHandler()} className='check-btn'>중복확인</button>
                 </div>
                 {
-                    idCheckResult === 1 ? (<div className='success' id='check-error'>사용 가능한 아이디입니다.</div>) :
-                    idCheckResult === -1 ? (<div className='failed' id='check-error'>중복된 아이디입니다.</div>) :
+                    idCheckResult === 1 ? (<div className='success' id='check-error'>{idCheckResultMsg}</div>) :
+                    idCheckResult === -1 ? (<div className='failed' id='check-error'>{idCheckResultMsg}</div>) :
                     (<></>)
                 }
                 <div className="config-input">
@@ -141,7 +156,7 @@ export default function Signup() {
                 </div>
             </ThemeProvider>
         </div>
-        <div className='Singup-submit-btn'>
+        <div className='submit-btn'>
             <Link to="/Login">
                 <button className='signup-btn'>이전으로</button>
             </Link>

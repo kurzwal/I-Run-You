@@ -3,8 +3,8 @@
     파일의 역할 : view 폴더 안 css
     작성날짜 : 2023-01-30
 
-    업데이트 작성자 : -
-    업데이트 날짜 : - 
+    업데이트 작성자 : 홍지혜
+    업데이트 날짜 : 2023-02-02 텍스트박스 반응형 크기조절
 */
 
 /* HomePage */
@@ -16,10 +16,10 @@
     background-size: 100vw;
     background-color: #b7cf55af;
     background-repeat: no-repeat;
-    padding: 10% 15%;
+    padding: 100px 0px;
 }
 
-.home-container {
+.home-container { 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -27,8 +27,11 @@
 }
 
 .txt-container {
-    width: 70%;
+    width: 55%;
+    max-width: 900px;
+    min-width: 430px;
     border-radius: 20px;
+    margin-left: 100px;
     padding: 30px;
     background-color: rgba(213, 213, 213, 0.859);
 }
@@ -107,3 +110,32 @@
     cursor: pointer;
 }
 
+@media(max-width: 640px){
+    .txt-container {
+       margin : 0 auto;
+    }
+
+}
+
+@media (max-width : 800px) {
+    
+    .home-title {
+        font-size: 20px;
+        font-weight: 800;
+    }
+    
+    .home-desc {
+        font-size: 15px;
+        font-weight: 400;
+        margin-left: 5%;
+        color: #555;
+    }
+    
+    .home-desc-detail {
+        font-size: 15px;
+        font-weight: 400;
+        margin-left: 8%;
+        color: #555;
+    }
+
+}

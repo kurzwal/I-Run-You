@@ -7,8 +7,8 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Pagination, PaginationItem } from "@mui/material";
 import { Button } from "@mui/material";
-import TokenContext from "../../../service/TokenContext";
 import { useNavigate } from "react-router";
+import axiosInstance from "../../../service/axiosInstance";
 
 export default function NoticeItemList() {
     const [noticeList, setNoticeList] = useState<any[]>([]);
@@ -17,7 +17,7 @@ export default function NoticeItemList() {
     const [totalPages, setTotlaPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
 
-    const AdminContext = useContext(TokenContext);
+    const isAdmin = useState(true);
 
     const movePage = useNavigate();
 
@@ -36,39 +36,31 @@ export default function NoticeItemList() {
         let isDelete = window.confirm("정말 삭제하시겠습니까?");
 
         if (isDelete) {
-            await axios
-                .delete("http://localhost:4040/irunyou/notice", {
-                    headers: {
-                        Authorization: "Bearer " + window.localStorage.getItem('token')
-                    },
-                    params: {
-                        noticeIndex: index
-                    }
-                }).then((response) => {
-                    if (!response.data.status) {
+            await axiosInstance
+                .delete("irunyou/notice", {
+                    params : { noticeIndex : index }
+                })
+                .then(response => {
+                    if(!response.data.status) {
                         return alert(response.data.message);
                     }
                     alert(response.data.message);
                     window.location.reload();
-                }).catch((error) => {
+                }).catch(error => {
                     alert(error.message)
-                });
+                })
         }
 
     }
 
     const getNoticeList = async (page: number) => {
-    
-        await axios
-            .get("http://localhost:4040/irunyou/notice", {
-                headers: {
-                    Authorization: "Bearer " + window.localStorage.getItem('token')
-                },
+        await axiosInstance
+            .get("irunyou/notice", {
                 params: {
                     page: page
                 }
             })
-            .then((response) => {
+            .then(response => {
                 const pageInfo = response.data.data.pageInfoDto;
                 const noticeList = response.data.data.data;
                 
@@ -76,9 +68,9 @@ export default function NoticeItemList() {
                 setTotalElements(pageInfo.totalElements);
                 setTotlaPages(pageInfo.totalPages);
                 setNoticeList(noticeList);
+            }).catch((error) => {
+                alert(error.message);
             })
-            .catch((error) => { });
-
     };
 
     useEffect(() => {
@@ -109,8 +101,8 @@ export default function NoticeItemList() {
                                 <div className="notice-content-container">
                                     <div className="notice-content">{notice.noticeContent}</div> 
                                 </div>
-                                {AdminContext.isAdmin && <Button color="success" onClick={() => { deleteNotice(notice.noticeIndex) }} style={{ padding: "0 20px" }}>공지 삭제</Button>}
-                                {AdminContext.isAdmin && <Button color="success" onClick={() => { modifyNotice(notice) }} style={{ padding: "0 20px" }}>공지 수정</Button>}
+                                {isAdmin && <Button color="success" onClick={() => { deleteNotice(notice.noticeIndex) }} style={{ padding: "0 20px" }}>공지 삭제</Button>}
+                                {isAdmin && <Button color="success" onClick={() => { modifyNotice(notice) }} style={{ padding: "0 20px" }}>공지 수정</Button>}
                             </AccordionDetails>
                         </Accordion>
                     ))}

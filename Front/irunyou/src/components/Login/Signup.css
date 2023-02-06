@@ -61,7 +61,7 @@ body {
     color: red;
 }
 
-.Singup-submit-btn {
+.submit-btn {
     display: flex;
     justify-content: space-between;
 

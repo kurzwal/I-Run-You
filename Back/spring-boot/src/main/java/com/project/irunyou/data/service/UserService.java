@@ -28,14 +28,19 @@ import com.project.irunyou.data.repository.UserRepository;
 
 @Service
 public class UserService {
-		
-	@Autowired private UserRepository userRepository;
-	@Autowired private CodeRepository codeRepository;
-	
-	@Autowired private PasswordEncoder passwordEncoder;
-	@Autowired private ResgisterMailService mailService;
-	
-	@Autowired private AuthService authService;
+
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private CodeRepository codeRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private ResgisterMailService mailService;
+
+	@Autowired
+	private AuthService authService;
 
 	// 회원 정보조회, email, pw확인후 pw제외 정보제공
 	public ResponseDto<GetUserResponseDto> readUser(String email) {
@@ -68,25 +73,24 @@ public class UserService {
 	public ResponseDto<ResultResponseDto> deleteUser(String email, String password) {
 		// 비밀번호로 회원 검증
 		UserEntity user = authService.getByCredentials(email, password, passwordEncoder);
-		
+
 		if (user == null) {
 			return ResponseDto.setFailed("회원정보가 일치하지 않습니다.");
 		}
-		
-		userRepository.delete(user);			
-		
+
+		userRepository.delete(user);
+
 		return ResponseDto.setSuccess("탈퇴되었습니다.", new ResultResponseDto(true));
 	}
 
 	// id찾기
 	public ResponseDto<UserRequestDto> findUserId(UserPhoneAndNameDto dto) {
-		
-		String phone = dto.getUserPhoneNumber(); 
+
+		String phone = dto.getUserPhoneNumber();
 		String name = dto.getUserName();
-		
-		
+
 		String userPhone = phone.replace("-", "");
-		
+
 		if (!StringUtils.hasText(userPhone) || !StringUtils.hasText(name)) {
 			return ResponseDto.setFailed("입력한 정보를 다시 확인하세요");
 		}
@@ -115,12 +119,23 @@ public class UserService {
 				
 		return ResponseDto.setSuccess("회원님의 email 입니다.", new UserRequestDto(encryptedEmail));
 	}
+
 	
+
+	
+	// 홍지혜 2023-02-02 로직수정 : 입력창이 빈값인지 먼저 검증
 	// 최예정 2023-02-01
 	// 아이디(이메일) 중복 체크
 	public ResponseDto<ResultResponseDto> checkId(UserRequestDto data) {
+	
 		String email = data.getUserEmail();
+		
+		if(email.isEmpty()) {
+			return ResponseDto.setFailed("이메일을 입력해 주세요.");
+		}
+
 		boolean checkUserEmailDupe = userRepository.existsByUserEmail(email);
+		// log.info(checkUserEmailDupe+"");
 
 		if (checkUserEmailDupe) {
 			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 이메일 입니다.", email));
@@ -128,18 +143,25 @@ public class UserService {
 		return ResponseDto.setSuccess("사용가능한 이메일 입니다.", null);
 	}
 	
+	// 홍지헤 2023-02-02 로직수정 : 입력창이 빈값인지 먼저 검증
 	// 최예정 2023-02-02
 	// 닉네임 중복 체크
 	public ResponseDto<ResultResponseDto> checkNickname(UserPhoneAndNameDto data) {
-		String nickname = data.getUserName();
-		boolean checkUserNicknameDupe = userRepository.existsByUserName(nickname);
 		
-		if(checkUserNicknameDupe) {
+		String nickname = data.getUserName();
+		
+		if(nickname.isEmpty()) {
+			return ResponseDto.setFailed("닉네임을 입력해 주세요.");
+		}
+		
+		boolean checkUserNicknameDupe = userRepository.existsByUserName(nickname);
+
+		if (checkUserNicknameDupe) {
 			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 닉네임 입니다.", nickname));
 		}
 		return ResponseDto.setSuccess("사용가능한 닉네임 입니다.", null);
 	}
-	
+
 	// pw찾기 0126 황석민
 	public ResponseDto<ResultResponseDto> findPw(FindPasswordDto dto) {
 		// 전화번호 하고 이메일 입력 검증
@@ -193,6 +215,5 @@ public class UserService {
 		}
 		return user;
 	}
-
 
 }
