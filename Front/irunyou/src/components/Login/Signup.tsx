@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
+
+import DaumPostCode from 'react-daum-postcode';
 
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -17,6 +19,10 @@ import { createTheme, ThemeProvider } from '@mui/material';
 // 업데이트 작성자 : 최예정
 // 업데이트 내용 : 아이디(이메일) 중복 확인
 // 업데이트 날짜 : 2023-02-01
+
+// 업데이트 작성자 : 문경원
+// 업데이트 내용 : 우편번호찾기
+// 업데이트 날짜 : 2023-02-06
 
 const theme:any = createTheme({
     palette: {
@@ -38,10 +44,32 @@ export default function Signup() {
     const [postNumber, setPostNumber] = useState<string>('');
     const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
 
-    const [idCheckResult, setIdCheckResult] = useState<number>(0);
 
-    const [idCheckResultMsg, setIdCheckResultMsg] = useState<string>();
+    const [postPopup, setPostPopup] = useState<boolean>(false);
+
+    const [idCheckResult, setIdCheckResult] = useState<number>(0);
+    const [idCheckResultMsg, setIdCheckResultMsg] = useState<string>('');
+
     const [nicknameCheckResult, setNicknameCheckResult] = useState<number>(0);
+    const [nicknameCheckResultMsg,setNicknameCheckResultMsg] = useState<string>('');
+
+    const navigator = useNavigate();
+
+    // 우편번호 검색
+    const handleComplete = (data: any) => {
+        let extraAddress = '';
+        if (data.addressType === 'R') {
+            if (data.bname !== '') {
+                extraAddress += data.bname;
+            }
+            if (data.buildingName !== '') {
+                extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
+            }
+        }
+        setUserAddress(data.address);
+        setUserAddressDetail(extraAddress);
+        setPostNumber(data.zonecode);
+    }
 
     const onSubmitHandler = () => {
         const data = {
@@ -50,25 +78,57 @@ export default function Signup() {
             userEmail,
             userPassword,
             userPassword2,
-            userAddress: `${postNumber} ${userAddress} ${userAddressDetail}`,
+            userAddress: `${postNumber} ${userAddress}`,
+            userAddressDetail,
             userPhoneNumber
         }
 
-        axios.post('http://localhost:4040/auth/signup', data).then((response) => {
-            const UserInformation = response.data.user;
-            alert(data);
-        })
+        if (data.userName == '') {
+            alert ("이름을 입력하세요");
+            return;
+        } else if (data.userNickname == '') {
+            alert ("닉네임을 입력하세요")
+            return;
+        } else if (data.userPassword == '') {
+            alert ("비밀번호를 입력하세요")
+            return;
+        } else if (data.userPassword2 == '') {
+            alert ("비밀번호확인을 입력하세요")
+            return;
+        } else if (data.userAddress == '') {
+            alert ("주소를 입력하세요")
+            return;
+        } else if (data.userPhoneNumber == '') {
+            alert("전화번호를 입력하세요")
+            return;
+        } else if (idCheckResult == 0) {
+            alert("닉네임 중복확인은 필수입니다")
+            return;
+        } else if (nicknameCheckResult == 0) {
+            alert("이메일 중복확인은 필수입니다")
+        } else {
+            axios.post('http://localhost:4040/auth/signup', data).then((response) => {
+                const UserInformation = response.data.user;
+                navigator('/SUSC');
+            })
+        }
     }
-
     // 중복된 닉네임 확인
     const onExistIdHandler2 = () => {
         const data = {
-            userNickname
+            userNickname : userNickname
         };
-        axios.post('http://localhost:4040/auth/checkNickname', data).then((response) => {
-            const result = response.data.result;
-            if(result) setNicknameCheckResult(-1);
-            else setNicknameCheckResult(1);
+        axios.post('http://localhost:4040/auth/checkNickname', data)
+        .then((response) => {
+            const result = response.data.status;
+            const message = response.data.message;
+            if (result) {
+                setNicknameCheckResult(1);
+                setNicknameCheckResultMsg(message)
+            } else {
+                setNicknameCheckResult(-1);
+                setNicknameCheckResultMsg(message)
+            }
         })
     } 
 
@@ -112,15 +172,15 @@ export default function Signup() {
                 <div className="config-input">
                     <TextField size='small' label="닉네임" sx={{width: "80%"}} onChange={(e) => setUserNickname(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' onChange={(e) => setNickname(e.target.value)} type="text" placeholder="닉네임" /> */}
-                    <button onClick={() => onExistIdHandler2()} className='check-btn'>중복확인</button>
+                    <button onClick={() => onExistIdHandler2()} className='check-btn' type='button'>중복확인</button>
                 </div>
                 {
-                    nicknameCheckResult === 1 ? (<div className='success' id='check-error'>사용 가능한 닉네임입니다.</div>) :
-                    nicknameCheckResult === -1 ? (<div className='failed' id='check-error'>중복된 닉네임입니다.</div>) :
+                    nicknameCheckResult === 1 ? (<div className='success' id='check-error'>{nicknameCheckResultMsg}</div>) :
+                    nicknameCheckResult === -1 ? (<div className='failed' id='check-error'>{nicknameCheckResultMsg}</div>) :
                     (<></>)
                 }
                 <div className="config-input">
-                    <TextField size='small' label="아이디(이메일)" sx={{width: "80%"}} onChange={(e) => setUserEmail(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
+                    <TextField size='small' label="아이디(이메일)" sx={{width: "80%"}} onChange={(e) => setUserEmail(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" type="email" required/>
                     {/* <input className='singup-input' onChange={(e) => setId(e.target.value)} type="email" placeholder="아이디(이메일)" /> */}
                     <button onClick={() => onExistIdHandler()} className='check-btn'>중복확인</button>
                 </div>
@@ -138,32 +198,32 @@ export default function Signup() {
                     {/* <input className='singup-input' onChange={(e) => setPassword2(e.target.value)} type="password" placeholder="비밀번호 확인" /> */}
                 </div>
                 <div className="config-input">
-                <TextField size='small' label="우편 찾기" sx={{width: "80%"}} onChange={(e) => setPostNumber(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
+                <TextField value={postNumber} size='small' label="우편 찾기" sx={{width: "80%"}} onChange={(e) => setPostNumber(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' onChange={(e) => setPostNumber(e.target.value)} type="text" placeholder="우편찾기" /> */}
-                    <button className='check-btn'>주소검색</button>
+                    <button className='check-btn' onClick={() => setPostPopup(true)}>주소검색</button>
                 </div>
                     <div className="address-input config-input">
-                    <TextField size='small' label="주소" sx={{width: "80%"}} onChange={(e) => setUserAddress(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
+                    <TextField value={userAddress} size='small' label="주소" sx={{width: "80%"}} onChange={(e) => setUserAddress(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                         {/* <input className='singup-input' onChange={(e) => setAddress(e.target.value)} type="text" placeholder="주소" /> */}
                     </div>
                     <div className="address-input2 config-input">
-                    <TextField size='small' label="나머지 주소" sx={{width: "80%"}} onChange={(e) => setUserAddressDetail(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
+                    <TextField value={userAddressDetail} size='small' label="나머지 주소" sx={{width: "80%"}} onChange={(e) => setUserAddressDetail(e.target.value)} id="outlined-basic" variant="outlined" margin="normal"/>
                         {/* <input className='singup-input' onChange={(e) => setAddressDetail(e.target.value)} type="text" placeholder="나머지주소" /> */}
                     </div>
                 <div className="config-input">
                 <TextField size='small' label="휴대전화" sx={{width: "80%"}} onChange={(e) => setUserPhoneNumber(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' type="text" placeholder="휴대전화" /> */}
                 </div>
+                {postPopup && (<DaumPostCode onComplete={handleComplete} className="post-code"/>)}
+                
             </ThemeProvider>
         </div>
-        <div className='submit-btn'>
+        <div className='Signup-submit-btn'>
             <Link to="/Login">
                 <button className='signup-btn'>이전으로</button>
             </Link>
-            <Link to="/SUSC">
             {/* onclick을 했을 경우 백으로 전송 */}
-                <button className='signup-btn' onClick={() => onSubmitHandler()}>회원가입</button>
-            </Link>
+            <button className='signup-btn' onClick={() => onSubmitHandler()}>회원가입</button>
         </div>
     </div>
     )

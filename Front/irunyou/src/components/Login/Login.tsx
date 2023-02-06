@@ -131,9 +131,7 @@ export default function Login() {
                 </div>
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">
-                    <Link to="/MainPage">
-                        <button type="button" className="login-button button" onClick={() => loginButton()}>로그인</button>
-                    </Link>
+                    <button type="button" className="login-button button" onClick={() => loginButton()}>로그인</button>
                     <Link to="/Signup">
                         <button className="signup-button button" >회원가입</button>
                     </Link>
