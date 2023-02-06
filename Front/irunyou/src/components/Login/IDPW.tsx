@@ -18,6 +18,8 @@ export default function IDPW() {
     const [userName, setUserName] = useState<string>('');
     const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
     const [userEmail, setUserEmail] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [id, setId] = useState<string>('');
 
     // 아이디 찾기
     const movePage = useNavigate();
