@@ -26,6 +26,9 @@ import com.project.irunyou.data.entity.UserEntity;
 import com.project.irunyou.data.repository.CodeRepository;
 import com.project.irunyou.data.repository.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class UserService {
 

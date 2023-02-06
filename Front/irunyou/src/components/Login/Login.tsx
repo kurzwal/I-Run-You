@@ -32,7 +32,7 @@ export default function Login() {
 
     const movePage = useNavigate();
 
-    const LoginAction = (userEmail: string, userPassword: string) => {
+    const LoginAction = () => {
 
         return axios.post("http://localhost:4040/auth/login", {
             userEmail,
@@ -91,26 +91,6 @@ export default function Login() {
     // // 로그인을 할 시 사용자가 입력한 데이터가 일치하지 않을 경우 경고창 띄우기
     // // 지금 적어놓은 조건문은 else에 있는 조건문만 실행됨
 
-    const loginButton = () => {
-        
-        LoginAction(userEmail,userPassword);
-
-        const data = {
-            userEmail,
-            userPassword
-        }
-
-        axios.post('http://localhost:4040/irunyou/auth/login', data).then((Response) => {
-            const UserInformation = Response.data.user;
-            console.log(UserInformation);
-
-            if(!UserInformation) alert('입력하신 회원정보가 존재하지않습니다.');
-            else movePage('/MainPage');
-        })
-        // 로그인을 할 시 사용자가 입력한 데이터가 일치하지 않을 경우 경고창 띄우기
-        // 지금 적어놓은 조건문은 else에 있는 조건문만 실행됨
-    } 
-
     const loginWithKakao = () => {
         Kakao.Auth.authorize({
             // 나중에 주소 수정
@@ -158,9 +138,7 @@ export default function Login() {
                 </div>
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">
-                    <Link to="/MainPage">
-                        <button type="button" className="login-button button" onClick={() => loginButton()}>로그인</button>
-                    </Link>
+                        <button type="button" className="login-button button" onClick={() => LoginAction()}>로그인</button>
                     <Link to="/Signup">
                         <button className="signup-button button" >회원가입</button>
                     </Link>
