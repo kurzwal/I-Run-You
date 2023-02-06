@@ -38,44 +38,32 @@ import com.project.irunyou.data.service.UserService;
 @RestController
 @RequestMapping("irunyou/")
 public class UserController {
-	
-	@Autowired UserService userService;
-	@Autowired ResgisterMailService mailService;
-	
+
+	@Autowired
+	UserService userService;
+	@Autowired
+	ResgisterMailService mailService;
 
 	// Read (회원정보 읽기)
 	@GetMapping("mypage")
-	public ResponseDto<GetUserResponseDto> readUser (@AuthenticationPrincipal String email) {	// 로그인 되어있는 상태! -> 마이페이지
+	public ResponseDto<GetUserResponseDto> readUser(@AuthenticationPrincipal String email) { // 로그인 되어있는 상태! -> 마이페이지
 		return userService.readUser(email);
 	}
-	
+
 	// Update (회원정보 수정)
 	@PatchMapping("")
-	public ResponseDto<GetUserResponseDto> updateUser (@RequestBody PatchUserDto requestBody) {
+	public ResponseDto<GetUserResponseDto> updateUser(@RequestBody PatchUserDto requestBody) {
 		return userService.updateUser(requestBody);
 	}
-	
+
+	// 홍지혜
 	// Delete (회원탈퇴)
-	@PostMapping("dropuser")	// deleteMapping의 경우 RequestBody를 받지 않기 때문에 Post로 처리함.
-	public ResponseDto<ResultResponseDto> deleteUser (@AuthenticationPrincipal String email, @RequestBody String password) {
+	@PostMapping("dropuser") // deleteMapping의 경우 RequestBody를 받지 않기 때문에 Post로 처리함.
+	public ResponseDto<ResultResponseDto> deleteUser(@AuthenticationPrincipal String email,
+			@RequestBody String password) {
 		// password의 경우 프론트에서 json형태가 아닌 text로 처리해야 합니다!
-		return userService.deleteUser(email,password);
-	}
-	
-	// id찾기
-	@GetMapping("findemail")
-	public ResponseDto<UserRequestDto> findUserId(@RequestBody UserPhoneAndNameDto requestBody) {
-		return userService.findUserId(requestBody);
-	}
-	
-	// pw찾기
-	// request method가 Post이고 end point는 findPw
-	@PostMapping("findPw")
-	public ResponseDto<ResultResponseDto> findPw(@RequestBody FindPasswordDto requestBody) {
-		// 비즈니스 로직에 대한 결과 반환
-		return userService.findPw(requestBody);
+		return userService.deleteUser(email, password);
 	}
 
 
-	
 }

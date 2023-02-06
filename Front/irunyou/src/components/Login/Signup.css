@@ -30,7 +30,8 @@ body {
 }
 
 .config-container {
-    width: 30%;
+    margin-left: 5%;
+    width: 500px;
 }
 
 .singup-mui {
@@ -42,23 +43,36 @@ body {
     display: flex;
     flex-direction: column;
 
+    width: 15%;
+    height: 50%;
+
     margin-left: 10px;
     margin-top: 5px;
-
+    padding-left: 9px;
+    
     line-height: 25px;
-    width: 15%;
-    height: 30px;
 }
 
-#check-error {
-    display: none;
+.success {
+    color: #b6cf55;
 }
 
-.singup-btn {
+.failed {
+    color: red;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: space-between;
+
+    width: 500px;
+}
+
+.signup-btn {
     border: none;
 
     margin-top: 30px;
-
+    
     width: 200px;
     height: 40px;
 

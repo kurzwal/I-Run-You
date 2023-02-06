@@ -21,7 +21,7 @@ export default function MenuItemList() {
                 <img className="menu-icon" src={Calander}/>
                 <div className="menu-item-txt">내 일정</div>
             </div>
-            <div className="main-menu-item">
+            <div className="main-menu-item" onClick={() => movePage("/FAQmain")}>
                 <img className="menu-icon" src={Question}/>
                 <div className="menu-item-txt">고객지원</div>
             </div>

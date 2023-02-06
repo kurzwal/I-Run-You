@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.irunyou.data.dto.FindPasswordDto;
 import com.project.irunyou.data.dto.LoginUserDto;
 import com.project.irunyou.data.dto.PostUserDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
+import com.project.irunyou.data.dto.UserPhoneAndNameDto;
+import com.project.irunyou.data.dto.UserRequestDto;
 import com.project.irunyou.data.entity.UserEntity;
 import com.project.irunyou.data.service.AuthService;
 import com.project.irunyou.data.service.UserService;
@@ -29,6 +32,7 @@ import com.project.irunyou.data.service.UserService;
 public class AuthController {
 	
 	@Autowired private AuthService authService;
+	@Autowired private UserService userService;
 	
 	// 회원가입
 	@PostMapping("signup")
@@ -42,5 +46,37 @@ public class AuthController {
 		return authService.LoginUser(requestBody);
 	}
 	
+	
+	// 홍지혜 2023-02-02 회원가입 과정 검증 기능 userController -> AuthController로 이동
+	// 토큰 검증 때문에 auth/ 경로 외엔 로그인없이 접근 불가능하기 때문
+	
+	// 최예정 2023-02-02
+	// id 찾기
+	@PostMapping("findemail")
+	public ResponseDto<UserRequestDto> findUserId(@RequestBody UserPhoneAndNameDto requestBody) {
+		return userService.findUserId(requestBody);
+	}
+
+	// 최예정 2023-02-01
+	// 아이디(이메일) 중복 체크
+	@PostMapping("checkId")
+	public ResponseDto<ResultResponseDto> checkId(@RequestBody UserRequestDto requsetBody) {
+		return userService.checkId(requsetBody);
+	}
+
+	// 최예정 2023-02-02
+	// 닉네임 중복 체크
+	@PostMapping("checkNickname")
+	public ResponseDto<ResultResponseDto> checkNickname(@RequestBody UserPhoneAndNameDto requsetBody) {
+		return userService.checkNickname(requsetBody);
+	}
+
+	// pw찾기
+	// request method가 Post이고 end point는 findPw
+	@PostMapping("findPw")
+	public ResponseDto<ResultResponseDto> findPw(@RequestBody FindPasswordDto requestBody) {
+		// 비즈니스 로직에 대한 결과 반환
+		return userService.findPw(requestBody);
+	}
 	
 }
