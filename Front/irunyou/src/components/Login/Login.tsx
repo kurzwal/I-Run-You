@@ -1,11 +1,14 @@
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import kakao from '../../assets/images/kakao_login_medium_wide.png';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 // import { LoginAction } from "../../service/auth-service";
 import { usePreviousProps } from "@mui/utils";
+import { useCookies } from "react-cookie";
+
 const { Kakao }: Window = window;
+
 
 // 작성자 : 최예정
 // 파일의 역할 : id, password 찾기 html
@@ -16,10 +19,17 @@ const { Kakao }: Window = window;
 
 // 홍지혜 2023-02-01
 // 로그인 -> 토큰 로컬스토리지 저장
+
+// 홍지혜 2023-02-06
+// 아이디 저장 -> 쿠키에 이메일 정보 저장
+
 export default function Login() {
 
     const [userEmail, setUserEmail] = useState<string>('');
     const [userPassword, setUserPassword] = useState<string>('');
+
+    const [isRemember, setIsRemember] = useState(false);
+    const [cookie, setCookie, removeCookie] = useCookies(['rememberEmail']);
 
     const movePage = useNavigate();
 
@@ -51,6 +61,17 @@ export default function Login() {
 
     }
 
+    const rememberEmail = (e : any) => {
+        if(e.target.checked) {
+            setIsRemember(true)
+            setCookie('rememberEmail',userEmail,{maxAge : 2000});
+        } else {
+            setIsRemember(false)
+            removeCookie('rememberEmail');
+        }
+    }
+
+
     // const loginButton = () => {
 
     //     LoginAction(userEmail,userPassword, movePage);
@@ -80,6 +101,14 @@ export default function Login() {
         });
     };
 
+    useEffect(()=> {
+        if(cookie.rememberEmail !== undefined) {
+            setUserEmail(cookie.rememberEmail);
+            setIsRemember(true);
+        }
+    },[]);
+
+
     return (
         <div className="login-container">
             {/* 로그인 전체 form */}
@@ -88,12 +117,12 @@ export default function Login() {
                 {/* 아이디(이메일), 비밀번호 입력창 */}
                 <fieldset>
                     <div className="input-border">
-                        <input className="email-input login-input" type="text" placeholder="아이디(이메일)" required onChange={(e) => setUserEmail(e.target.value)} />
+                        <input className="email-input login-input" type="text" placeholder="아이디(이메일)" value={cookie.rememberEmail} required onChange={(e) => setUserEmail(e.target.value)} />
                         <input className="password-input login-input" type="password" placeholder="비밀번호(8~16자 숫자, 영문, 특수문자)" required onChange={(e) => setUserPassword(e.target.value)} />
                     </div>
                 </fieldset>
                 <div className="box">
-                    <input className="id-save" type="checkbox" id="checkid" name="checkid" />
+                    <input className="id-save" type="checkbox" id="checkid" name="checkid" onChange={(e) => rememberEmail(e)} checked={isRemember}/>
                     <label htmlFor="checkid"> 아이디 저장</label>
                 </div>
                 {/* 아이디(이메일), 비밀번호 찾는 링크 */}

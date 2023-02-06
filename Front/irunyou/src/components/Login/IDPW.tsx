@@ -1,5 +1,5 @@
 import "./IDPW.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -16,25 +16,40 @@ export default function IDPW() {
     const [telnumber, setTelnumber] = useState<string>('');
     const [id, setId] = useState<string>('');
 
+    const movePage = useNavigate();
+
     const findId = () => {
         const id = {
             name,
             telnumber
         }
-        axios.post('http//localhost:4040/irunyou/', findId).then((Response) => {
+        axios.post('http://localhost:4040/irunyou/', findId).then((Response) => {
         const UserInformation = Response.data.user;
         alert(findId);
         })
     }
 
-    const findPassword = () => {
+    // 2023-02-06 홍지혜 임시비밀번호 발급 로직
+    // 유저 정보(이메일)있는지 먼저 확인, 유저정보 없을시 안내메시지,  화면 넘어가지 않음
+    // 유저 정보 있을 시 화면 넘어감
+    // dto 값 : userEmail
+    const findPassword = (name : any, id : any) => {
+
         const password = {
-            name,
-            id
+            userEmail : id
         }
-        axios.post('http//localhost:4040/irunyou/', findPassword).then((Response) => {
-            const UserInformation = Response.data.user;
-            alert(findPassword);
+        axios.post('http://localhost:4040/auth/findPw', password)
+        .then((response) => {
+            if(!response.data.status) {
+                alert(response.data.message);
+                window.location.reload
+            } else {
+                movePage("/EMverify", {state : {id : id}});
+                
+            }
+        })
+        .catch((error) => {
+
         })
     }
 
@@ -76,12 +91,10 @@ export default function IDPW() {
                 </div>
                 <div className="form-container">
                     <form className="pw-form">
-                        <input className="form" type="text" placeholder="NAME" />
-                        <input className="form" type="email" placeholder="EMAIL" />
+                        <input className="form" type="text" placeholder="NAME" onChange={(e)=>setName(e.target.value)}/>
+                        <input className="form" type="email" placeholder="EMAIL" onChange={(e)=>setId(e.target.value)}/>
                         <br />
-                        <Link to="/EMverify">
-                        <button className="idpw-btn" type="button">임시비밀번호 발급</button>
-                        </Link>
+                        <button className="idpw-btn" type="button" onClick={()=>findPassword(name,id)}>임시비밀번호 발급</button>
                         <Link to="/Login">
                         <button className="idpw-btn" type="button">로그인</button>
                         </Link>

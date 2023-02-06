@@ -3,36 +3,17 @@
  * 작성날짜 : 2023-01-18
  * 
  * 업데이트 작성자 : 최예정
- * 업데이트 날짜 : 2023-01-30
+ * 업데이트 날짜 : 2023-02-06
  */
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 100vh;
-}
-
-
-.em-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    width: 200px;
-    height: 50px;
-    
-    border: none;
-    background-color: #b6cf55;
-
-    font-size: medium;
-}
-
-.email-container {
+ .email-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+
+    width: 100vw;
+    height: 100vh;
 }
 
 .fa-envelope {
@@ -42,5 +23,23 @@ body {
 .btn-con {
     display: flex;
     justify-content: space-between;
-    width: 130%;
+    align-items: center;
+
+    width: 600px;
+
+    margin-top: 20px;
+}
+
+.em-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 200px;
+    height: 40px;
+    
+    border: none;
+    background-color: #b6cf55;
+
+    font-size: medium;
 }

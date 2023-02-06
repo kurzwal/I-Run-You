@@ -151,19 +151,35 @@ public class UserService {
 	}
 
 	// pw찾기 0126 황석민
+	// 2023-02-06 홍지혜 로직 변경
+	// pw 찾기 : 회원 이름과 이메일 입력 -> 임시 비밀번호 발급
 	public ResponseDto<ResultResponseDto> findPw(FindPasswordDto dto) {
-		// 전화번호 하고 이메일 입력 검증
+//		// 전화번호 하고 이메일 입력 검증
+//		String email = dto.getUserEmail();
+//		String phoneNumber = dto.getUserPhoneNumber();
 		String email = dto.getUserEmail();
-		String phoneNumber = dto.getUserPhoneNumber();
-		// 둘중 하나라도 정상이 아니면 ResponseDto Failed 반환
-		if (!StringUtils.hasText(email) || !StringUtils.hasText(phoneNumber))
-			return ResponseDto.setFailed("빈값입니다.");
-
-		// 데이터베이스에서 해당 이메일과 전화번호를 조건으로 검색
-		UserEntity userEntity = userRepository.findByUserEmailAndUserPhoneNumber(email, phoneNumber);
-		// 존재하지 않으면 존재하지 않는 다는 ResponseDto 반환
-		if (userEntity == null)
+		
+		// 넘어온 값이 있는지 먼저 검증
+		if(email.isEmpty()) {
 			return ResponseDto.setFailed("입력정보가 존재하지 않습니다.");
+		}
+		// 이메일 DB 검증
+		log.info(email);
+		
+		UserEntity user = userRepository.findByUserEmail(email);
+		
+		if(user == null) {
+			return ResponseDto.setFailed("해당 유저정보가 존재하지 않습니다.");
+		}
+//		// 둘중 하나라도 정상이 아니면 ResponseDto Failed 반환
+//		if (!StringUtils.hasText(email) || !StringUtils.hasText(phoneNumber))
+//			return ResponseDto.setFailed("빈값입니다.");
+
+//		// 데이터베이스에서 해당 이메일과 전화번호를 조건으로 검색
+//		UserEntity userEntity = userRepository.findByUserEmailAndUserPhoneNumber(email, phoneNumber);
+//		// 존재하지 않으면 존재하지 않는 다는 ResponseDto 반환
+//		if (userEntity == null)
+//			return ResponseDto.setFailed("입력정보가 존재하지 않습니다.");
 
 		// sendMail 하고 결과로 받은 code를 데이터베이스에 저장
 		try {

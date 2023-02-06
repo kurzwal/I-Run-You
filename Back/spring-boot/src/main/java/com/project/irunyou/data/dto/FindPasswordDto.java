@@ -14,7 +14,5 @@ import lombok.NoArgsConstructor;
 public class FindPasswordDto {
 	@NotNull
 	private String userEmail;
-	@NotNull
-	private String userPhoneNumber;
-	
+
 }
