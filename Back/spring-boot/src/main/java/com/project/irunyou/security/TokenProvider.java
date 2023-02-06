@@ -3,6 +3,8 @@ package com.project.irunyou.security;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -22,14 +24,15 @@ public class TokenProvider {
 	public String create(UserEntity userEntity) {
 		// 만료 기한 = Instant.now() : 현재시간  ChronoUnit.DAYS : 하루 단위
 		// 로그인 시점부터 1일
-		Date expiryDate = Date.from(Instant.now().plus(1, ChronoUnit.DAYS));
-		
+		Date expiryDate = Date.from(Instant.now().plus(30, ChronoUnit.SECONDS));
+
 		// 토큰 생성
 		return Jwts.builder()
 				// header 내용, 서명 SECRET_KEY
 				// JWT 기본 서명 알고리즘 (대칭 알고리즘-1개의 SECRET KEY) HS512 : HMAC using SHA-512
 				.signWith(SignatureAlgorithm.HS512, SECRET_KEY)
 				// payload
+				.claim("Role", "USER")	// 일반 유저
 				// subject : 토큰의 주인 유일한 식별자
 				.setSubject(userEntity.getUserEmail())
 				// Issuer : 토큰 발행 주체
@@ -60,5 +63,5 @@ public class TokenProvider {
 				.getBody();
 		return claims.getExpiration().getTime();
 	}
-	
+		
 }

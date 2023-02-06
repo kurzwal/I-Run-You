@@ -48,6 +48,7 @@ export default function MainPage(){
     } = useToggleStore();
     return (
         <div>
+            <div className=""></div>
             {/* 기본그림 */}
             <Box sx={{...(mapOpen ? {display: 'none'} : {display: 'flex'})}}> {/* false되면 나옴 */}
                 <div className="home-main-img"></div>

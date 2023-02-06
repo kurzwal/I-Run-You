@@ -82,7 +82,7 @@ public class AuthService {
 	public ResponseDto<?> LoginUser(LoginUserDto dto) {
 		
 		UserEntity user = getByCredentials(dto.getUserEmail(), dto.getUserPassword(), passwordEncoder);
-
+		
 		if (user == null) {	// 해당 유저 정보 없음
 			return ResponseDto.setFailed("해당하는 유저정보가 없습니다. 이메일과 비밀번호를 확인해 주세요.");
 		} else { // 유저정보가 존재함
@@ -92,12 +92,14 @@ public class AuthService {
 			LoginTokenDto tokenResponse = LoginTokenDto.builder()	
 					.token(token)
 					.expiration(expiration)
+					.userNickname(user.getUserNickname())	// 유저 닉네임 반환
 					.build();	// LoginTokenDto에 토큰과 토큰 유효기간 담아 response
 			
 			return ResponseDto.setSuccess("로그인 되었습니다.", tokenResponse);
 		}
 
 	}
+	
 
 	
 	

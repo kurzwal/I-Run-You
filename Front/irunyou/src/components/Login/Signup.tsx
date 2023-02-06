@@ -42,6 +42,7 @@ export default function Signup() {
 
     const [idCheckResultMsg, setIdCheckResultMsg] = useState<string>();
     const [nicknameCheckResult, setNicknameCheckResult] = useState<number>(0);
+    const [nicknameCheckResultMsg, setNicknameCheckResultMsg] = useState<string>();
 
     const onSubmitHandler = () => {
         const data = {
@@ -61,14 +62,21 @@ export default function Signup() {
     }
 
     // 중복된 닉네임 확인
+    // 홍지혜 2023-02-02 중복 닉네임 로직 수정
     const onExistIdHandler2 = () => {
         const data = {
             userNickname
         };
         axios.post('http://localhost:4040/auth/checkNickname', data).then((response) => {
-            const result = response.data.result;
-            if(result) setNicknameCheckResult(-1);
-            else setNicknameCheckResult(1);
+            const result = response.data.status
+            const message = response.data.message
+            if (result) {
+                setNicknameCheckResult(1);
+                setNicknameCheckResultMsg(message)
+            } else {
+                setNicknameCheckResult(-1);
+                setNicknameCheckResultMsg(message)
+            }
         })
     } 
 
@@ -115,8 +123,8 @@ export default function Signup() {
                     <button onClick={() => onExistIdHandler2()} className='check-btn'>중복확인</button>
                 </div>
                 {
-                    nicknameCheckResult === 1 ? (<div className='success' id='check-error'>사용 가능한 닉네임입니다.</div>) :
-                    nicknameCheckResult === -1 ? (<div className='failed' id='check-error'>중복된 닉네임입니다.</div>) :
+                    nicknameCheckResult === 1 ? (<div className='success' id='check-error'>{nicknameCheckResultMsg}</div>) :
+                    nicknameCheckResult === -1 ? (<div className='failed' id='check-error'>{nicknameCheckResultMsg}</div>) :
                     (<></>)
                 }
                 <div className="config-input">

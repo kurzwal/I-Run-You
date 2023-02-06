@@ -1,5 +1,5 @@
 import "./IDPW.css";
-import { Link, Route } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useEmailStore from './emailStore';
 import axios from "axios";
@@ -18,28 +18,44 @@ export default function IDPW() {
     const [userName, setUserName] = useState<string>('');
     const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
     const [userEmail, setUserEmail] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [id, setId] = useState<string>('');
 
     // 아이디 찾기
+    const movePage = useNavigate();
+
     const findId = () => {
         const data = {
             userName,
             userPhoneNumber
         }
-        axios.post('http://localhost:4040/irunyou/findEmail', data).then((response) => {
-        const {userEmail} = response.data.data;
-        setEmail(userEmail);
+        axios.post('http://localhost:4040/irunyou/', findId).then((Response) => {
+        const UserInformation = Response.data.user;
+        alert(findId);
         })
     }
-    
-    // 비밀번호 찾기
-    const findPassword = () => {
-        const data = {
-            userName,
-            userEmail
+
+    // 2023-02-06 홍지혜 임시비밀번호 발급 로직
+    // 유저 정보(이메일)있는지 먼저 확인, 유저정보 없을시 안내메시지,  화면 넘어가지 않음
+    // 유저 정보 있을 시 화면 넘어감
+    // dto 값 : userEmail
+    const findPassword = (name : any, id : any) => {
+
+        const password = {
+            userEmail : id
         }
-        axios.post('http://localhost:4040/irunyou/findPw', data).then((response) => {
-            const UserInformation = response.data.user;
-            alert(data);
+        axios.post('http://localhost:4040/auth/findPw', password)
+        .then((response) => {
+            if(!response.data.status) {
+                alert(response.data.message);
+                window.location.reload
+            } else {
+                movePage("/EMverify", {state : {id : id}});
+                
+            }
+        })
+        .catch((error) => {
+
         })
     }
 
@@ -78,12 +94,10 @@ export default function IDPW() {
                 </div>
                 <div className="form-container">
                     <form className="pw-form">
-                        <input className="form" type="text" placeholder="NAME" />
-                        <input className="form" type="email" placeholder="EMAIL" />
+                        <input className="form" type="text" placeholder="NAME" onChange={(e)=>setName(e.target.value)}/>
+                        <input className="form" type="email" placeholder="EMAIL" onChange={(e)=>setId(e.target.value)}/>
                         <br />
-                        <Link to="/EMverify">
-                        <button className="idpw-btn" type="button">임시비밀번호 발급</button>
-                        </Link>
+                        <button className="idpw-btn" type="button" onClick={()=>findPassword(name,id)}>임시비밀번호 발급</button>
                         <Link to="/Login">
                         <button className="idpw-btn" type="button">로그인</button>
                         </Link>
