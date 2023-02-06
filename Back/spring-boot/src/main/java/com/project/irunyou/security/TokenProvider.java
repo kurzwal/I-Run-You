@@ -65,5 +65,5 @@ public class TokenProvider {
 				.getBody();
 		return claims.getExpiration().getTime();
 	}
-	
+		
 }
