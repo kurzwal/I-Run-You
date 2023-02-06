@@ -8,4 +8,7 @@ import lombok.Data;
 public class LoginTokenDto {
 	private String token;
 	private long expiration;
+	private String userNickname;
+	
 }
+

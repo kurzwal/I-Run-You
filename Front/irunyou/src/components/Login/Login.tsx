@@ -50,7 +50,7 @@ export default function Login() {
                     localStorage.setItem('token', tokendata.token);
                     localStorage.setItem('expiration', "" + tokendata.expiration);
                     alert(responseMessage);
-                    movePage("/MainPage");
+                    movePage("/MainPage", {state : {userNickname : tokendata.userNickname}});
                 }
 
             }).catch((error) => {
