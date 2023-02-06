@@ -1,6 +1,13 @@
 import './FAQmain.css'
 import { Link } from "react-router-dom";
 
+// 작성자 : 문경원
+// 파일의 역할 : 고객지원센터 html
+// 작성날짜 : 2023-02-03
+
+// 업데이트 작성자 : 최예정
+// 업데이트 날짜 : 2023-02-06
+
 export default function FAQmain() {
     return(
         <div className='FAQ-container'>
