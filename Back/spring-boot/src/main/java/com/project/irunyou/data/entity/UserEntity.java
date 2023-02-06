@@ -49,4 +49,5 @@ public class UserEntity {
     @CreatedDate
     private LocalDateTime userJoinDate;
     private String userName;
+    private String userNickname;
 }
