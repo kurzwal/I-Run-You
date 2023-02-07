@@ -1,30 +1,38 @@
+/* 작성자 : 문경원
+ * 파일의 역할 : 문의하기 css
+ * 작성날짜 : 2023-02-03
+ * 
+ * 업데이트 작성자 : 최예정
+ * 업데이트 날짜 : 2023-02-07
+ */
+
 .FAQ-detail-con {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     width: 100vw;
     height: 100vh;
-
-    margin-top: -10%;
 }
 
 .FAQ-d-title {
     display: flex;
     justify-content: center;
+    align-items: center;
 
     width: 50em;
+    height: 100px;
+
+    padding-top: 20px;
 
     font-size: 40px;
     font-weight: 800;
-    margin-bottom: 30px;
 }
 
 .FAQ-d-inquiry {
     display: flex;
     justify-content: space-between;
-
 
     width: 600px;
 }

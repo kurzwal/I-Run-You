@@ -3,12 +3,20 @@ import { useState } from 'react';
 import './FAQdetail.css'
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import Box from '@mui/material/Box';
 import FAQmodal from './FAQmodal';
+import MenuLogo from '../MenuComp/Mainmenu/MenuLogo';
+
+// 작성자 : 문경원
+// 파일의 역할 : 문의하기 html
+// 작성날짜 : 2023-02-03
+
+// 업데이트 작성자 : 최예정
+// 업데이트 날짜 : 2023-02-07
 
 
 const theme:any = createTheme({
@@ -18,7 +26,6 @@ const theme:any = createTheme({
         }
     }
 })
-
 
 // const modal = document.getElementById("modal")
 // const btnModal = document.getElementById("btn-modal")
@@ -31,8 +38,13 @@ export default function FAQdetail(){
     // 창을 띄웠을 때 뜨지않기 위해 false
     const [modal, setModal] = useState<boolean>(false);
 
+    const movePage = useNavigate();
+
     return (
         <div className='FAQ-detail-con'>
+            <div onClick={() => { movePage("/MainPage") }} style={{cursor: "pointer", width: "100%" }}>
+                <MenuLogo />
+            </div>
             <div className='FAQ-d-title'>문의입력</div>
             <ThemeProvider theme={theme}>
                 <div className='FAQ-d-inquiry'>
