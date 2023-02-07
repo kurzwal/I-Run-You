@@ -11,7 +11,6 @@ import api from "./axios";
 
 const { Kakao } = window;
 
-
 const KakaoRedirectHandler = () => {
 
   useEffect(() => {
@@ -21,7 +20,8 @@ const KakaoRedirectHandler = () => {
     let client_id = process.env.REACT_APP_KAKAO_CLIENT_ID;
     axios
       .post(
-        `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${process.env.REACT_APP_FRONTEND_BASE_URL}/login/oauth&code=${code}`,
+        `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id={f400d82968cb62b48108b02d694a55b7}&redirect_uri={	
+          http://localhost:3000/Login/kakao}/login/oauth&code=${code}`,
         {
           headers: {
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
