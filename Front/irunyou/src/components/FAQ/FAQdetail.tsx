@@ -31,7 +31,6 @@ const theme:any = createTheme({
     }
 })
 
-
 // const modal = document.getElementById("modal")
 // const btnModal = document.getElementById("btn-modal")
 // btnModal.addEventListener("click", e => {

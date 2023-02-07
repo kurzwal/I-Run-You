@@ -19,9 +19,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     width: 50em;
     height: 100px;
+
     padding-top: 20px;
+
     font-size: 40px;
     font-weight: 800;
 }
