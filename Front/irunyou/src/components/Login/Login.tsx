@@ -70,27 +70,6 @@ export default function Login() {
         }
     }
 
-
-    // const loginButton = () => {
-
-    //     LoginAction(userEmail,userPassword, movePage);
-
-    // const data = {
-    //     userEmail,
-    //     userPassword
-    // }
-
-    // axios.post('http://localhost:4040/irunyou/auth/login', data)
-    // .then((Response) => {
-    //     const UserInformation = Response.data.user;
-    //     console.log(UserInformation);
-
-    //     if(!UserInformation) alert('입력하신 회원정보가 존재하지않습니다.');
-    //     else movePage('/MainPage');
-    // })
-    // // 로그인을 할 시 사용자가 입력한 데이터가 일치하지 않을 경우 경고창 띄우기
-    // // 지금 적어놓은 조건문은 else에 있는 조건문만 실행됨
-
     const loginWithKakao = () => {
         Kakao.Auth.authorize({
             // 나중에 주소 수정

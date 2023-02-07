@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import api from "./axios";
 
@@ -11,7 +11,9 @@ import api from "./axios";
 
 const { Kakao } = window;
 
+
 const KakaoRedirectHandler = () => {
+
   useEffect(() => {
     let params = new URL(document.location.toString()).searchParams;
     let code = params.get("code");
@@ -47,7 +49,7 @@ const KakaoRedirectHandler = () => {
             });
           });
   });
-  return <div>kakao login 완료</div>;
+  return <div>kakao 로그인을 성공하였습니다.</div> ;
 }
 
 export default KakaoRedirectHandler;
