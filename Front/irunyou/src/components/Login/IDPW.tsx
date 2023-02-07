@@ -78,7 +78,7 @@ export default function IDPW() {
                             <button className="idpw-btn" type="button" onClick={() => findId()} >아이디 찾기</button>
                         </Link>
                         <Link to="/Login">
-                            <button type="button">로그인</button>
+                            <button className="idpw-btn" type="button">로그인</button>
                         </Link>
                     </form>
                 </div>
