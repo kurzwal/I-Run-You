@@ -30,12 +30,12 @@ export default function EMverify() {
         .then((response) => {
                 alert("메일이 재전송 되었습니다.");
                 setIsLoading(false)
-                window.location.reload
+                window.location.reload();
             }
         )
         .catch((error) => {
-
-        })
+        
+        })    
     }
 
     return(
