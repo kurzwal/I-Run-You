@@ -1,3 +1,4 @@
+
 import './FAQmain.css'
 import { Link, useNavigate } from "react-router-dom";
 import search from '../../assets/images/search.svg';
@@ -12,6 +13,8 @@ import MenuLogo from '../MenuComp/Mainmenu/MenuLogo';
 
 
 export default function FAQmain() {
+
+    
 
     const movePage = useNavigate();
 
