@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import './views.css';
 import useToggleStore from './Store';
-import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
@@ -33,8 +32,6 @@ function MenuIcon() {
 
 export default function MainPage(){
 
-    
-
     const { 
         // 변수값
         mapOpen, menuOpen, menuState, popRegist, popUpdate,
@@ -46,6 +43,7 @@ export default function MainPage(){
         // 일정 생성/수정창 여닫기
         togglePopRegist, togglePopUpdate,
     } = useToggleStore();
+
     return (
         <div>
             <div className=""></div>
@@ -138,7 +136,7 @@ export default function MainPage(){
                 </Box>
             </Drawer>
 
-            {/* 공원 찾기(리스트) */}
+            {/* 공원 찾기(상세정보) */}
             <Drawer
                 sx={{
                 width: 0,
