@@ -3,12 +3,13 @@ import MenuProfile from "./MenuProfile";
 import MenuItemList from "./MenuItemList"
 import useToggleStore from '../../../view/Store';
 
+// 업데이트 : 2023-02-07 홍지혜 - 프로필 바 링크 닉네임 부분으로 이동 (Profile바 전체에 링크가 먹어서 로그아웃 버튼이 안 눌러짐)
 
 export default function MainMenu() {
-    const { setMenuMyInfo } = useToggleStore();    
+    
     return (
         <div className="menu-header">
-            <div onClick={setMenuMyInfo} style={{width:"100%"}}>
+            <div style={{width:"100%"}}>
                 <MenuProfile></MenuProfile>
             </div>
             <MenuItemList></MenuItemList>
