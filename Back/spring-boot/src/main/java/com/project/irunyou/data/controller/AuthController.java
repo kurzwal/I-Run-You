@@ -12,6 +12,7 @@ import com.project.irunyou.data.dto.LoginUserDto;
 import com.project.irunyou.data.dto.PostUserDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
+import com.project.irunyou.data.dto.UserNicknameDto;
 import com.project.irunyou.data.dto.UserPhoneAndNameDto;
 import com.project.irunyou.data.dto.UserRequestDto;
 import com.project.irunyou.data.entity.UserEntity;
@@ -63,7 +64,7 @@ public class AuthController {
 	// 최예정 2023-02-02
 	// 닉네임 중복 체크
 	@PostMapping("checkNickname")
-	public ResponseDto<ResultResponseDto> checkNickname(@RequestBody UserPhoneAndNameDto requsetBody) {
+	public ResponseDto<ResultResponseDto> checkNickname(@RequestBody UserNicknameDto requsetBody) {
 		return userService.checkNickname(requsetBody);
 	}
 

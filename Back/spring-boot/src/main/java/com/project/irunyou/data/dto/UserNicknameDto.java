@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserPhoneAndNameDto {
-	
-	private String userName;
-	private String userPhoneNumber;
-
-
+public class UserNicknameDto {
+	 
+	private String userNickname;
 }
