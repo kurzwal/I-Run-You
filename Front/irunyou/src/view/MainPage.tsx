@@ -136,27 +136,6 @@ export default function MainPage(){
                 </Box>
             </Drawer>
 
-            {/* 공원 찾기(상세정보) */}
-            <Drawer
-                sx={{
-                width: 0,
-                flexShrink: 0,
-                '& .MuiDrawer-paper': {
-                    borderRadius: '10px',
-                    width: '25%',
-                    boxSizing: 'border-box',
-                },
-                }}
-                variant="persistent"
-                anchor="right"
-                open={menuOpen && menuState == 3}
-            >
-                <ParkInfo></ParkInfo>
-                <Box>
-                <img className='x-icon' src={ Xmark }
-                    onClick={() => toggleMenu()} />
-                </Box>
-            </Drawer>
 
             {/* 내 일정 */}
             <Drawer
@@ -179,6 +158,12 @@ export default function MainPage(){
                     onClick={() => toggleMenu()} />
                 </Box>
             </Drawer>
+
+
+            {/* 공원 상세정보 팝업 */}
+            <div></div>
+
+            
         </div>
     )
 }
