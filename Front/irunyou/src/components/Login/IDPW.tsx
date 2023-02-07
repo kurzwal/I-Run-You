@@ -39,24 +39,25 @@ export default function IDPW() {
     // 유저 정보(이메일)있는지 먼저 확인, 유저정보 없을시 안내메시지,  화면 넘어가지 않음
     // 유저 정보 있을 시 화면 넘어감
     // dto 값 : userEmail
-    const findPassword = (name : any, id : any) => {
+    const findPassword = () => {
 
-        const password = {
+        const userEmail = {
             userEmail : id
         }
-        axios.post('http://localhost:4040/auth/findPw', password)
+
+        axios.post('http://localhost:4040/auth/findPw', userEmail)
         .then((response) => {
             if(!response.data.status) {
                 alert(response.data.message);
-                window.location.reload
+                window.location.reload();
             } else {
                 movePage("/EMverify", {state : {id : id}});
-                
             }
         })
         .catch((error) => {
 
         })
+
     }
 
     return(
@@ -97,7 +98,7 @@ export default function IDPW() {
                         <input className="form" type="text" placeholder="NAME" onChange={(e)=>setName(e.target.value)}/>
                         <input className="form" type="email" placeholder="EMAIL" onChange={(e)=>setId(e.target.value)}/>
                         <br />
-                        <button className="idpw-btn" type="button" onClick={()=>findPassword(name,id)}>임시비밀번호 발급</button>
+                        <button className="idpw-btn" type="button" onClick={()=>findPassword()}>임시비밀번호 발급</button>
                         <Link to="/Login">
                         <button className="idpw-btn" type="button">로그인</button>
                         </Link>
