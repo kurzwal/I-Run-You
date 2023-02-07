@@ -1,5 +1,7 @@
 package com.project.irunyou.data.dto;
 
+import javax.validation.constraints.Pattern;
+
 import com.project.irunyou.data.entity.UserEntity;
 
 import lombok.AllArgsConstructor;

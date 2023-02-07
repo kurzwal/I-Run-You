@@ -69,7 +69,7 @@ export default function NoticeItemList() {
                 setTotlaPages(pageInfo.totalPages);
                 setNoticeList(noticeList);
             }).catch((error) => {
-                alert(error.message);
+                // alert(error.message);
             })
     };
 

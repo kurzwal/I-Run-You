@@ -27,7 +27,7 @@ public interface ParkRepository extends JpaRepository<ParkEntity, Integer> {
 	// 위도, 경도를 보내면 제일 가까운 공원 5개의 ParkEntity를 가져옴
 	@Query(nativeQuery=true,value="select \r\n"
 			+ "	*,\r\n"
-			+ "	(6371 * acos( cos( radians(?1) ) * cos( radians( p.latitude ) ) * cos( radians(?2) - radians(p.longitude) ) + sin( radians(?1) ) * sin( radians( p.latitude ) ) ) ) as distance\r\n"
+			+ "	(6371 * acos( cos( radians(?1) ) * cos( radians( p.park_latitude ) ) * cos( radians(?2) - radians(p.park_longitude) ) + sin( radians(?1) ) * sin( radians( p.park_latitude ) ) ) ) as distance\r\n"
 			+ "from park as p\r\n"
 			+ "order by distance  limit 5")
 	public List<ParkEntity> findAllByDistance(double latitude,double longitude);

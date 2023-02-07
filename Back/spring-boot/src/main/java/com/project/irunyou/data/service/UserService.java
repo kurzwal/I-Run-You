@@ -9,10 +9,14 @@
 
 package com.project.irunyou.data.service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 
 import com.project.irunyou.data.dto.FindPasswordDto;
 import com.project.irunyou.data.dto.GetUserResponseDto;
@@ -126,20 +130,26 @@ public class UserService {
 
 	
 
-	
+	// 홍지혜 2023-02-07 정규표현식으로 이메일 포맷 확인 추가 
 	// 홍지혜 2023-02-02 로직수정 : 입력창이 빈값인지 먼저 검증
 	// 최예정 2023-02-01
 	// 아이디(이메일) 중복 체크
 	public ResponseDto<ResultResponseDto> checkId(UserRequestDto data) {
-	
+		
 		String email = data.getUserEmail();
+		String regex = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
 		
 		if(email.isEmpty()) {
 			return ResponseDto.setFailed("이메일을 입력해 주세요.");
 		}
-
+		
+		boolean regexCheck = Pattern.matches(regex, email);
+		
+		if(!regexCheck) {
+			return ResponseDto.setFailed("이메일 형식이 올바르지 않습니다.");
+		}
+		
 		boolean checkUserEmailDupe = userRepository.existsByUserEmail(email);
-		// log.info(checkUserEmailDupe+"");
 
 		if (checkUserEmailDupe) {
 			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 이메일 입니다.", email));
