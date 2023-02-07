@@ -99,6 +99,18 @@ export default function Login() {
         });
     };
 
+    const handleOnClick = () => {
+        LoginAction();
+      };
+
+    const handleOnKeyPress = (e : any) => {
+        if (e.key === 'Enter') {
+            handleOnClick();
+        }
+    }
+
+    
+
     useEffect(()=> {
         if(cookie.rememberEmail !== undefined) {
             setUserEmail(cookie.rememberEmail);
@@ -116,7 +128,7 @@ export default function Login() {
                 <fieldset>
                     <div className="input-border">
                         <input className="email-input login-input" type="text" placeholder="아이디(이메일)" value={cookie.rememberEmail} required onChange={(e) => setUserEmail(e.target.value)} />
-                        <input className="password-input login-input" type="password" placeholder="비밀번호(8~16자 숫자, 영문, 특수문자)" required onChange={(e) => setUserPassword(e.target.value)} />
+                        <input className="password-input login-input" type="password" onKeyPress={handleOnKeyPress} placeholder="비밀번호(8~16자 숫자, 영문, 특수문자)" required onChange={(e) => setUserPassword(e.target.value)} />
                     </div>
                 </fieldset>
                 <div className="box">
@@ -129,6 +141,7 @@ export default function Login() {
                 </div>
                 {/* 간편 로그인 */}
                 <div className="other-login">
+
                     <div className="line"></div>
                     <div className="other-login-text">간편 로그인</div>
                     <div className="line"></div>

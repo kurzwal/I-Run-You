@@ -47,7 +47,8 @@ const KakaoRedirectHandler = () => {
             });
           });
   });
-  return <div>kakao login 완료</div>;
+  
+  return <div></div>;
 }
 
 export default KakaoRedirectHandler;
