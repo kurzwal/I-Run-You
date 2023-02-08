@@ -223,7 +223,7 @@ export default function Signup() {
             <Link to="/Login">
                 <button className='signup-btn'>이전으로</button>
             </Link>
-            {/* onclick을 했을 경우 백으로 전송 */}
+            {/* onclick을 했을 경우 사용자에게 받은 정보를 백으로 전송 */}
             <button className='signup-btn' onClick={() => onSubmitHandler()}>회원가입</button>
         </div>
     </div>
