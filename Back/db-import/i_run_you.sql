@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: localhost    Database: i_run_you
+-- Host: 127.0.0.1    Database: i_run_you
 -- ------------------------------------------------------
 -- Server version	8.0.31
 
@@ -15,9 +15,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- i_run_you 데이터베이스 구조 내보내기
-CREATE DATABASE IF NOT EXISTS `i_run_you` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `i_run_you`;
 --
 -- Table structure for table `code`
 --
@@ -38,6 +35,7 @@ CREATE TABLE `code` (
 
 LOCK TABLES `code` WRITE;
 /*!40000 ALTER TABLE `code` DISABLE KEYS */;
+INSERT INTO `code` VALUES ('64tK2pJe','mkw1999@naver.com'),('6HRPdRKJ','mkw1999@naver.com'),('SD2orRRY','mkw1999@naver.com');
 /*!40000 ALTER TABLE `code` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,6 +91,34 @@ LOCK TABLES `comment_like` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `faq`
+--
+
+DROP TABLE IF EXISTS `faq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `faq` (
+  `faq_index` int NOT NULL AUTO_INCREMENT,
+  `faq_title` varchar(45) DEFAULT NULL,
+  `faq_user_name` varchar(45) DEFAULT NULL,
+  `faq_inquiry_type` varchar(45) DEFAULT NULL,
+  `faq_user_email` varchar(45) DEFAULT NULL,
+  `faq_content` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`faq_index`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `faq`
+--
+
+LOCK TABLES `faq` WRITE;
+/*!40000 ALTER TABLE `faq` DISABLE KEYS */;
+INSERT INTO `faq` VALUES (1,'qwer','문경원','기타','mkw1999@naver.com','qwerlkqlkhrytlhlkh'),(2,'asfdasdfasdf','aasdf','10','asfdasdf','asdfasdfasdfasfd'),(3,'aaa','aaaa','','aaa','aaa'),(4,'asdff','asdf','공원찾기','asdf','asdfafsdasdfasdf'),(5,'sadf','asdf','','asdf','asdf');
+/*!40000 ALTER TABLE `faq` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `level`
 --
 
@@ -127,7 +153,7 @@ CREATE TABLE `notice_board` (
   `notice_title` varchar(45) NOT NULL,
   `notice_content` text NOT NULL,
   PRIMARY KEY (`notice_index`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,11 +204,12 @@ CREATE TABLE `run_schedule` (
   `run_schedule_index` int NOT NULL AUTO_INCREMENT,
   `run_schedule_park` int NOT NULL,
   `run_schedule_title` varchar(45) NOT NULL,
-  `run_schedule_writer` varchar(50) NOT NULL,
+  `run_schedule_writer_index` int NOT NULL,
   `run_schedule_datetime` datetime NOT NULL,
   `run_schedule_content` varchar(1000) NOT NULL,
+  `run_schedule_like_user` int DEFAULT '0',
   PRIMARY KEY (`run_schedule_index`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,27 +222,27 @@ LOCK TABLES `run_schedule` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `run_schedule_participate`
+-- Table structure for table `run_schedule_like`
 --
 
-DROP TABLE IF EXISTS `run_schedule_participate`;
+DROP TABLE IF EXISTS `run_schedule_like`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `run_schedule_participate` (
-  `run_schedule_participate_index` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `run_schedule_like` (
+  `run_schedule_like_index` int NOT NULL AUTO_INCREMENT,
   `run_schedule_index` int NOT NULL,
-  `user_email` varchar(50) NOT NULL,
-  PRIMARY KEY (`run_schedule_participate_index`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `user_index` int NOT NULL,
+  PRIMARY KEY (`run_schedule_like_index`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `run_schedule_participate`
+-- Dumping data for table `run_schedule_like`
 --
 
-LOCK TABLES `run_schedule_participate` WRITE;
-/*!40000 ALTER TABLE `run_schedule_participate` DISABLE KEYS */;
-/*!40000 ALTER TABLE `run_schedule_participate` ENABLE KEYS */;
+LOCK TABLES `run_schedule_like` WRITE;
+/*!40000 ALTER TABLE `run_schedule_like` DISABLE KEYS */;
+/*!40000 ALTER TABLE `run_schedule_like` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -228,13 +255,14 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_index` int NOT NULL AUTO_INCREMENT,
   `user_email` varchar(45) NOT NULL,
-  `user_password` varchar(100) NOT NULL,
+  `user_password` varchar(1000) NOT NULL,
   `user_address` varchar(45) DEFAULT NULL,
-  `user_address_detail` varchar(100) DEFAULT NULL,
+  `user_address_detail` varchar(45) DEFAULT NULL,
   `user_phone_number` varchar(16) NOT NULL,
   `user_level` int DEFAULT '1',
-  `user_join_date` date NOT NULL,
-  `user_name` varchar(10) NOT NULL,
+  `user_join_date` datetime NOT NULL,
+  `user_nickname` varchar(45) NOT NULL,
+  `user_name` varchar(45) NOT NULL,
   PRIMARY KEY (`user_index`),
   UNIQUE KEY `user_email` (`user_email`,`user_phone_number`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -246,7 +274,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (12,'1234@gmail.com','$2a$10$9q4REo1PAqCGYRl3HmpgweZqsfuHN/htoiWuVSLixjPxpIx/X1/yS','경남 김해시','내외동','01000011212',0,'2023-01-31','지혜');
+INSERT INTO `user` VALUES (11,'mkw1999@naver.com','$2a$10$axNIiJiMieE8P2wSCwN.fe09vf8JbrLDiw8xyoZQGUYgPkbFTw5R2','46997 부산 사상구 백양대로342번길 16','주례동, 엘지신주례아파트','01064350294',0,'2023-02-07 12:48:28','kw','문경원'),(12,'asdf','$2a$10$Pi.kqcxw7RWxCmLjfoXGIewNHOMO0v5T/RgR9AI0rRZRg.v3vYIZC','13480 경기 성남시 분당구 대왕판교로 477','판교동, 낙생고등학교','01011111111',0,'2023-02-08 12:34:01','asdf','asdf');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +287,8 @@ DROP TABLE IF EXISTS `user_address_detail`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_address_detail` (
   `user_address_detail_index` int NOT NULL AUTO_INCREMENT,
-  `user_email` varchar(50) NOT NULL,
+  `user_index` int NOT NULL,
+  `user_address_detail` varchar(45) DEFAULT NULL,
   `user_poastal_code` int DEFAULT NULL,
   PRIMARY KEY (`user_address_detail_index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -275,23 +304,6 @@ LOCK TABLES `user_address_detail` WRITE;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-CREATE TABLE `faq` (
-  `faq_index` int NOT NULL AUTO_INCREMENT,
-  `faq_title` varchar(45) DEFAULT NULL,
-  `faq_user_name` varchar(45) DEFAULT NULL,
-  `faq_inquiry_type` varchar(45) DEFAULT NULL,
-  `faq_user_email` varchar(45) DEFAULT NULL,
-  `faq_content` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`faq_index`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
--- 테이블 데이터 i_run_you.user:~0 rows (대략적) 내보내기
--- DELETE FROM `user`;
-
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
@@ -300,4 +312,4 @@ CREATE TABLE `faq` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-02 22:39:34
+-- Dump completed on 2023-02-08 12:45:52
