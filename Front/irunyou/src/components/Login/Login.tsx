@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import kakao from '../../assets/images/kakao_login_medium_wide.png';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { usePreviousProps } from "@mui/utils";
 import { useCookies } from "react-cookie";
 
 import { REST_API_KEY, REDIRECT_URI } from "./Kakao";
@@ -110,7 +109,7 @@ export default function Login() {
                     <div className="line"></div>
                 </div>
                 <div className="kakao-login">
-                    <img className="kakao-login-img" src={kakao} />
+                    <img onClick={KaKaoLogin} className="kakao-login-img" src={kakao} />
                 </div>
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">
