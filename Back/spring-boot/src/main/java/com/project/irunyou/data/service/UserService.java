@@ -168,7 +168,7 @@ public class UserService {
 			return ResponseDto.setFailed("닉네임을 입력해 주세요.");
 		}
 		
-		boolean checkUserNicknameDupe = userRepository.existsByUserName(nickname);
+		boolean checkUserNicknameDupe = userRepository.existsByUserNickname(nickname);
 
 		if (checkUserNicknameDupe) {
 			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 닉네임 입니다.", nickname));

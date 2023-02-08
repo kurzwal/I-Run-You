@@ -50,7 +50,7 @@ export default function MainPage(){
         <div>
             <div className=""></div>
             {/* 기본그림 */}
-            <Box sx={{...(mapOpen ? {display: 'none'} : {display: 'flex'})}}> {/* false되면 나옴 */}
+            <Box sx={{...(mapOpen ? {display: 'none'} : {display: 'flex'})} }> {/* false되면 나옴 */}
                 <div className="home-main-img"></div>
             </Box>
             {/* 지도 */}
@@ -78,7 +78,7 @@ export default function MainPage(){
                 '& .MuiDrawer-paper': {
                     borderTopLeftRadius: '10px',
                     borderBottomLeftRadius: '10px',
-                    width: '25%',
+                    width: '390px', // 2023-02-08 : 홍지혜 - 메뉴바 크기 고정 (카카오맵참조) 이하 동일
                     boxSizing: 'border-box',
                 },
                 }}
@@ -100,7 +100,7 @@ export default function MainPage(){
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     borderRadius: '10px',
-                    width: '25%',
+                    width: '390px',
                     boxSizing: 'border-box',
                 },
                 }}
@@ -122,7 +122,7 @@ export default function MainPage(){
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     borderRadius: '10px',
-                    width: '25%',
+                    width: '390px',
                     boxSizing: 'border-box',
                 },
                 }}
@@ -145,7 +145,7 @@ export default function MainPage(){
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     borderRadius: '10px',
-                    width: '25%',
+                    width: '390px',
                     boxSizing: 'border-box',
                 },
                 }}
@@ -167,7 +167,7 @@ export default function MainPage(){
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     borderRadius: '10px',
-                    width: '25%',
+                    width: '390px',
                     boxSizing: 'border-box',
                 },
                 }}
