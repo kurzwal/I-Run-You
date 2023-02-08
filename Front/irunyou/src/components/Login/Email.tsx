@@ -24,18 +24,18 @@ export default function Email() {
     const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
     
     // 데이터베이스에 저장되어있는 아이디 가져오기 (POST로 가지고 와야함)
-    const findEmail= () => {
-        const data = {
-            userName,
-            userPhoneNumber
-        }
-        axios.post('http://localhost:4040/irunyou/findEmail', data).then((response) => {
-            const UserInformation = response.data;
-            // 상태를 바꾸어 밑에 사용할 구간에 넣어주어야한다.
-            const { userEmail } = UserInformation.userEmail;
-            setUserEmail(userEmail);
-        })
-    }
+    // const findEmail= () => {
+    //     const data = {
+    //         userName,
+    //         userPhoneNumber
+    //     }
+    //     axios.post('http://localhost:4040/auth/findemail', data).then((response) => {
+    //         const UserInformation = response.data.data;
+    //         // 상태를 바꾸어 밑에 사용할 구간에 넣어주어야한다.
+    //         const { userEmail } = UserInformation.userEmail;
+    //         setUserEmail(userEmail);
+    //     })
+    // }
 
     return(
         <div className='Email-container'>
