@@ -1,5 +1,3 @@
-import React, { useEffect, useContext, useState } from 'react';
-import axios from 'axios';
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 
@@ -12,7 +10,8 @@ import EMverifyView from './components/Login/EMverify';
 import EmailView from './components/Login/Email';
 import SUSCView from './components/Login/SUSC';
 import Noticeboard from './components/MenuComp/Notice/Noticeboard';
-// import KakaoLogin from './components/Login/KakaoLogin';
+import KakaoLogin from './components/Login/KakaoLogin';
+
 import KakaoMap from './components/KakaoMap';
 import HomePage from './view/HomePage';
 import MainPage from './view/MainPage';
