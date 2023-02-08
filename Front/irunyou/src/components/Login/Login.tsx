@@ -6,7 +6,7 @@ import axios from "axios";
 import { usePreviousProps } from "@mui/utils";
 import { useCookies } from "react-cookie";
 
-const { Kakao }: Window = window;
+import { REST_API_KEY, REDIRECT_URI } from "./Kakao";
 
 
 // 작성자 : 최예정
@@ -70,14 +70,6 @@ export default function Login() {
         }
     }
 
-    const loginWithKakao = () => {
-        Kakao.Auth.authorize({
-            // 나중에 주소 수정
-            redirectUri: 'http://localhost:3000/Login/kakao',
-            scope: "profile_nickname, account_email",
-        });
-    };
-
     useEffect(()=> {
         if(cookie.rememberEmail !== undefined) {
             setUserEmail(cookie.rememberEmail);
@@ -85,6 +77,11 @@ export default function Login() {
         }
     },[]);
 
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+    
+    const KaKaoLogin = () => {
+        window.location.href = KAKAO_AUTH_URL;
+    }
 
     return (
         <div className="login-container">
@@ -113,7 +110,7 @@ export default function Login() {
                     <div className="line"></div>
                 </div>
                 <div className="kakao-login">
-                    <img onClick={loginWithKakao} className="kakao-login-img" src={kakao} />
+                    <img className="kakao-login-img" src={kakao} />
                 </div>
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">

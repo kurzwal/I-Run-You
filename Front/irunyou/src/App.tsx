@@ -12,7 +12,7 @@ import EMverifyView from './components/Login/EMverify';
 import EmailView from './components/Login/Email';
 import SUSCView from './components/Login/SUSC';
 import Noticeboard from './components/MenuComp/Notice/Noticeboard';
-import KakaoRedirectHandler from './components/Login/KakaoRedirectHandler';
+// import KakaoLogin from './components/Login/KakaoLogin';
 import KakaoMap from './components/KakaoMap';
 import HomePage from './view/HomePage';
 import MainPage from './view/MainPage';
@@ -56,17 +56,16 @@ function App() {
         <Route path="/EMverify" element={<EMverifyView />}  />
         <Route path="/Email" element={<EmailView />} />
         <Route path="/SUSC" element={<SUSCView />} />
-        <Route path="/Login/kakao" element={<KakaoRedirectHandler />} />
+        <Route path="/Login/kakao" element={<KakaoLogin />} />
+
         <Route path="/FAQmain" element={<FAQmain />} />
         <Route path="/FAQdetail" element={<FAQdetail />} />
+
         <Route path="/Notice" element={<Noticeboard />}/>
         <Route path="/Notice/Admin/Write" element={<NoticeWriteAdmin/>}/>
         <Route path="/Notice/Admin/Modify" element={<NoticeModifyAdmin/>}/>
-        {/* <Route path="*" element={<NotFound />} /> */}
-        <Route path="/FAQmain" element={<FAQmain />} />
-        <Route path="/FAQdetail" element={<FAQdetail />} />
-        {/* <Route path="*" element={<NotFound />} /> */}
 
+        {/* <Route path="*" element={<NotFound />} /> */}
         {/* <Route path='/' element={< Autehntication />}/> */}
         <Route  />
       </Routes>
