@@ -2,10 +2,13 @@ import { useLocation, useNavigate } from "react-router";
 import { REST_API_KEY, REDIRECT_URI } from "./Kakao";
 import { useEffect } from "react";
 
+<<<<<<< HEAD
 // 작성자 : 최예정
 // 파일의 역할 : 카카오 로그인 api
 // 작성날짜 : 2023-02-08
 
+=======
+>>>>>>> irunyou/front
 export default function KaKaoLogin() {
   const location = useLocation();
   const navigate = useNavigate();
