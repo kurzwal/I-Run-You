@@ -1,0 +1,51 @@
+.userDelete-contaier {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.userDelete-main {
+    padding-bottom: 20px;
+}
+
+.main-text {
+    display: flex;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.userDelete-idpw {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 500px;
+}
+
+.userDelete-btn {
+    display: flex;
+    justify-content: space-between;
+
+    width: 600px;
+
+    padding-top: 20px;
+}
+
+.user-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 40px;
+
+    border: none;
+
+    background-color: #b6cf55;
+}

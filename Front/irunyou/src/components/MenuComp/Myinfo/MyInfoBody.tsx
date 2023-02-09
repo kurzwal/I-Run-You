@@ -1,6 +1,7 @@
 import "./myinfo.css";
 import InfoItem from "./InfoItem";
 import Button from '@mui/material/Button';
+import { Link } from "react-router-dom";
 
 export default function MyInfoBody() {
     return (
@@ -18,7 +19,9 @@ export default function MyInfoBody() {
                 <Button variant="outlined">비밀번호 수정</Button>
                 <Button variant="outlined">정보 수정</Button>
             </div>
+            <Link to="/UserDelete">
             <Button variant="contained" color="error">회원 탈퇴</Button>
+            </Link>
         </div>
     )
 }

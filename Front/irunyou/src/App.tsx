@@ -21,6 +21,8 @@ import NoticeWriteAdmin from './components/MenuComp/Notice/NoticeWriteAdmin';
 import NoticeModifyAdmin from './components/MenuComp/Notice/NoticeModifyAdmin';
 import axiosInstance from '././service/axiosInstance';
 
+import UserDelete from './components/MenuComp/Myinfo/UserDelete';
+
 // 작성자 : 최예정
 // 파일의 역할 : 링크 연결, 백 -> 프론트 GET
 // 작성날짜 : 2023-01-25
@@ -63,6 +65,8 @@ function App() {
         <Route path="/Notice" element={<Noticeboard />}/>
         <Route path="/Notice/Admin/Write" element={<NoticeWriteAdmin/>}/>
         <Route path="/Notice/Admin/Modify" element={<NoticeModifyAdmin/>}/>
+        
+        <Route path="/UserDelete" element={<UserDelete/>}/>
 
         {/* <Route path="*" element={<NotFound />} /> */}
         {/* <Route path='/' element={< Autehntication />}/> */}
