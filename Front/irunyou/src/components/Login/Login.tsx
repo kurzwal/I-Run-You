@@ -1,5 +1,5 @@
 import "./Login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import kakao from '../../assets/images/kakao_login_medium_wide.png';
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -75,6 +75,16 @@ export default function Login() {
             setIsRemember(true);
         }
     },[]);
+    
+    const handleOnClick = (e : any) => {
+        movePage('/MainPage')
+    }
+    
+    const handleOnKeyPress = (e : any) => {
+        if(e.key === 'Enter') {
+            handleOnClick(e.handleOnKeyPress);
+        }
+    }
 
     // 카카오 로그인
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
