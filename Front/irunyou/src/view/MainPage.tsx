@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import Drawer from '@mui/material/Drawer';
+import Dialog from '@mui/material/Dialog';
 
 import MenuImg from '../assets/bars-solid.svg';
 import Xmark from '../assets/xmark-solid.svg';
@@ -161,9 +162,9 @@ export default function MainPage(){
 
 
             {/* 공원 상세정보 팝업 */}
-            <div></div>
+            <ParkInfo></ParkInfo>
 
-            
+
         </div>
     )
 }

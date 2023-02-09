@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import "./parklist.css";
 import ParkListItem from "./ParkListItem";
 import axios from 'axios';
+import useStore from '../Parkinfo/Store';
+import ParkInfo from '../ParkInfo';
 
 interface Location {
     UserLatitude: number;
@@ -18,6 +20,8 @@ interface Parks {
 
 
 export default function ParkListBody() {
+
+  const { parkInfo, setParkInfo } = useStore();
 
   const [location, setLocation] = useState<Location>({
     UserLatitude: 0,
@@ -61,6 +65,8 @@ export default function ParkListBody() {
       return [];
     }
   };
+  
+
 
   useEffect(() => {
 
