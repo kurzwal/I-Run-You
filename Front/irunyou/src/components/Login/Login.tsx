@@ -76,6 +76,8 @@ export default function Login() {
         }
     },[]);
     
+    // 문경원 2023 02 09
+    // 아이디 비밀번호 치고 엔터쳤을 경우 로그인이 되는 기능
     const handleOnClick = (e : any) => {
         movePage('/MainPage')
     }
