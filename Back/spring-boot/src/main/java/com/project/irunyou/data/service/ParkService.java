@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -22,6 +23,8 @@ import com.project.irunyou.data.dto.PageResponseDto;
 import com.project.irunyou.data.dto.ParkInfoDto;
 import com.project.irunyou.data.dto.ParkRunScheduleDto;
 import com.project.irunyou.data.dto.ResponseDto;
+import com.project.irunyou.data.dto.SliceInfoDto;
+import com.project.irunyou.data.dto.SliceResponseDto;
 import com.project.irunyou.data.dto.UserLocationDto;
 import com.project.irunyou.data.entity.NoticeBoardEntity;
 import com.project.irunyou.data.entity.ParkEntity;
@@ -36,46 +39,32 @@ public class ParkService {
 	@Autowired ParkRepository parkRepository;
 	@Autowired RunScheduleRepository runScheduleRepository; 
 	
-	// 해당 공원의 런스케쥴 페이지네이션 처리
-	public Page<RunScheduleEntity> findRunScheduleListByParkIndex (int page, int size, int parkIndex) {
+	// 2023-02-09 홍지혜 -> 공원에 잡혀있는 RunSchedule Slice 
+	
+	// 공원 인덱스가 포함된 RunSchedule Slice 처리
+	public Slice<RunScheduleEntity> findRunScheduleSliceByParkIndex (int page, int size, int parkIndex) {
 		PageRequest pageRequest = PageRequest.of(page, size);
-		return runScheduleRepository.findAllByRunScheduleParkOrderByRunScheduleDateTimeDesc(parkIndex,pageRequest);	// 해당 공원에 해당하는 런스케줄 시간순 정렬
+		return runScheduleRepository.findAllByRunScheduleParkOrderByRunScheduleDateTime(parkIndex, pageRequest);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public ResponseDto<PageResponseDto<ParkRunScheduleDto>> getParkRunScheduleList(int page, int size, int parkIndex) {
+	// 공원에 잡힌 RunSchedule 불러오기
+	public ResponseDto<SliceResponseDto<ParkRunScheduleDto>> getParkRunScheduleList(int page, int size, int parkIndex) {
+		Slice<RunScheduleEntity> slicePage = findRunScheduleSliceByParkIndex(page-1, size, parkIndex);
 		
-		Page<RunScheduleEntity> ParkRunSchedulePage = findRunScheduleListByParkIndex(page-1, size, parkIndex);
+		SliceInfoDto slicePageInfo = SliceInfoDto.builder().last(slicePage.isLast()).build();
 		
-		PageInfoDto parkRunShedulePageInfo = PageInfoDto.builder()	// 해당 자료의 페이지 정보
-				.page(page).size(size)
-				.totalElements((int)ParkRunSchedulePage.getTotalElements())
-				.totalPages(ParkRunSchedulePage.getTotalPages())
-				.build();
-		
-		List<RunScheduleEntity> runSchedules = ParkRunSchedulePage.getContent();
+		List<RunScheduleEntity> schedules = slicePage.getContent();
 		
 		List<ParkRunScheduleDto> data = new ArrayList<>();
 		
-		for(RunScheduleEntity r : runSchedules) {
+		for(RunScheduleEntity r : schedules) {
 			data.add(new ParkRunScheduleDto(r));
 		}
-				
-		return ResponseDto.setSuccess("data load Success",new PageResponseDto(data,parkRunShedulePageInfo));
+		
+		return ResponseDto.setSuccess("data load Success", new SliceResponseDto(data, slicePageInfo));
 	}
 	
-	
-//	
-//	public ResponseDto<List<ParkRunScheduleDto>> getRunScheduleList(int parkNum) {
-//		List<RunScheduleEntity> findRunSchedeulListByParkIndex = runScheduleRepository.findAllByRunSchedulePark(parkNum);
-//		List<ParkRunScheduleDto> parkRunScheduleList = new ArrayList<>();
-//		for(RunScheduleEntity r : findRunSchedeulListByParkIndex) {
-//			parkRunScheduleList.add(new ParkRunScheduleDto(r));
-//		}
-//		return ResponseDto.setSuccess("Success",parkRunScheduleList);
-//	}
-	
-		
+
 	public ResponseDto<ParkInfoDto> searchParkById (Integer parkNum) {
 		
 		ParkEntity park = findById(parkNum);

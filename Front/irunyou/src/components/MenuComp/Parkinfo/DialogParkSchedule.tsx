@@ -2,37 +2,32 @@ import { useEffect, useState } from "react"
 import "./parkinfo.css"
 import ScheduleItem from "./ScheduleItem"
 import axiosInstance from "../../../service/axiosInstance";
-
-interface props {
-    park: {
-        parkIndex: number;
-    }
-}
+import useStore from './Store';
 
 
 export default function DialogParkSchedule() {
-    const[parkRunScheduleList, setParkRunScheduleList] = useState<any[]>([]);
-    const [pageSize, setPageSize] = useState(1);
-    const [totalElements, setTotalElements] = useState(1);
-    const [totalPages, setTotlaPages] = useState(1);
-    const [currentPage, setCurrentPage] = useState(1);
+
+    const { parkInfo } = useStore();
+
+    const [parkRunScheduleList, setParkRunScheduleList] = useState<any[]>([]);
+    const [parkIndex, setParkIndex] = useState(parkInfo.parkIndex);
+    const [isLast, setIsLast] = useState(false);
     
-    const getParkRunScheduleList = async (page : number, {park} : props) => {
+    const getParkRunScheduleList = async (page : number) => {
         await axiosInstance
         .get("irunyou/park/runSchedule", {
             params : {
-                parkIndex : park.parkIndex,
+                parkIndex,
                 page : page
             }
         })
         .then(response => {
-            const pageInfo = response.data.data.PageInfoDto;
-            const scheduleList = response.data.data.data;
-            
-            setPageSize(pageInfo.size);
-            setTotalElements(pageInfo.totalElements);
-            setTotlaPages(pageInfo.totalPages);
-            setParkRunScheduleList(scheduleList);
+            if(!response.data.status) {
+                alert("데이터를 불러오는 중 오류가 발생했습니다.");
+            }
+
+            setParkRunScheduleList(response.data.data.data);
+            setIsLast(response.data.data.sliceInfoDto.last);
 
         }).catch((error) => {
             alert(error.message);
@@ -40,7 +35,7 @@ export default function DialogParkSchedule() {
     }
 
     useEffect(() => {
-        // getParkRunScheduleList(1,);
+        getParkRunScheduleList(1);
     },[]);
 
     return (

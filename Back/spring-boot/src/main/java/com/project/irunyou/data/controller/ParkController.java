@@ -4,9 +4,11 @@
  * */
 package com.project.irunyou.data.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,10 @@ import com.project.irunyou.data.dto.PageResponseDto;
 import com.project.irunyou.data.dto.ParkInfoDto;
 import com.project.irunyou.data.dto.ParkRunScheduleDto;
 import com.project.irunyou.data.dto.ResponseDto;
+import com.project.irunyou.data.dto.RunScheduleDto;
+import com.project.irunyou.data.dto.SliceResponseDto;
 import com.project.irunyou.data.dto.UserLocationDto;
+import com.project.irunyou.data.entity.RunScheduleEntity;
 import com.project.irunyou.data.service.ParkService;
 
 @CrossOrigin(originPatterns = "http://localhost:3000")
@@ -29,11 +34,6 @@ import com.project.irunyou.data.service.ParkService;
 public class ParkController {
 
 	@Autowired ParkService parkService;
-	
-//	@GetMapping("runSchedule")
-//	public ResponseDto<List<ParkRunScheduleDto>> getRunScheduleList(@RequestParam int parkNum){
-//		return parkService.getRunScheduleList(parkNum);
-//	}
 	
 	// 사용자 위치기반 가까운 공원 5개
 	@PostMapping("")
@@ -44,8 +44,11 @@ public class ParkController {
 	// 2023-02-09 홍지혜
 	// 공원에 등록된 런스케쥴 리스트 가져오기 (페이지네이션 처리)
 	@GetMapping("runSchedule")
-	public ResponseDto<PageResponseDto<ParkRunScheduleDto>> getParkRunScheduleList(@RequestParam int parkIndex, int page) {
-		return parkService.getParkRunScheduleList(page,5,parkIndex);
+	public ResponseDto<SliceResponseDto<ParkRunScheduleDto>> getParkRunScheduleList(@RequestParam int parkIndex, int page) {
+		return parkService.getParkRunScheduleList(page, 5, parkIndex);	// 사이즈 5로 고정
 	}
-
+	
+	// Unknow column 오류 뜰 경우
+	// DB 에서 run_schedule 테이블의 datetime 컬럼명이 'run_schedule_date_time'과 일치하게 바꿔주세요 
+	
 }
