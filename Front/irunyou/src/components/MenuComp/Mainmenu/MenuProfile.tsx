@@ -5,7 +5,8 @@ export default function MenuProfile() {
 
     const location = useLocation();
     
-    const userNickname = location.state.userNickname;
+    // const userNickname = location.state.userNickname;
+    const userNickname = "username";
 
 
     return (

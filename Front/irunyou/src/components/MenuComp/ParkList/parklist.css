@@ -11,6 +11,7 @@
     height: 20%;
     margin-bottom: 3%;
     border-bottom: 1px solid gray;
+    cursor: pointer;
 }
 
 .park-list-img {

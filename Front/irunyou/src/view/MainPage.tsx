@@ -2,12 +2,12 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import './views.css';
 import useToggleStore from './Store';
-import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import Drawer from '@mui/material/Drawer';
+import Dialog from '@mui/material/Dialog';
 
 import MenuImg from '../assets/bars-solid.svg';
 import Xmark from '../assets/xmark-solid.svg';
@@ -33,8 +33,6 @@ function MenuIcon() {
 
 export default function MainPage(){
 
-    
-
     const { 
         // 변수값
         mapOpen, menuOpen, menuState, popRegist, popUpdate,
@@ -46,6 +44,7 @@ export default function MainPage(){
         // 일정 생성/수정창 여닫기
         togglePopRegist, togglePopUpdate,
     } = useToggleStore();
+
     return (
         <div>
             <div className=""></div>
@@ -138,27 +137,6 @@ export default function MainPage(){
                 </Box>
             </Drawer>
 
-            {/* 공원 찾기(리스트) */}
-            <Drawer
-                sx={{
-                width: 0,
-                flexShrink: 0,
-                '& .MuiDrawer-paper': {
-                    borderRadius: '10px',
-                    width: '25%',
-                    boxSizing: 'border-box',
-                },
-                }}
-                variant="persistent"
-                anchor="right"
-                open={menuOpen && menuState == 3}
-            >
-                <ParkInfo></ParkInfo>
-                <Box>
-                <img className='x-icon' src={ Xmark }
-                    onClick={() => toggleMenu()} />
-                </Box>
-            </Drawer>
 
             {/* 내 일정 */}
             <Drawer
@@ -181,6 +159,12 @@ export default function MainPage(){
                     onClick={() => toggleMenu()} />
                 </Box>
             </Drawer>
+
+
+            {/* 공원 상세정보 팝업 */}
+            <ParkInfo></ParkInfo>
+
+
         </div>
     )
 }

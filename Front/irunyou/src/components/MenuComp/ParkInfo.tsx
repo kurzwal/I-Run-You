@@ -1,12 +1,42 @@
 import "./menucomp.css";
-import MenuLogoBack from "./Mainmenu/MenuLogoBack";
-import ParkInfoBody from "./Parkinfo/ParkInfoBody";
+import useStore from "./Parkinfo/Store";
+
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+
+import ViewParkMain from "./Parkinfo/ViewParkMain";
+import ViewSceduleInfo from "./Parkinfo/ViewSceduleInfo";
+import ViewSceduleReg from "./Parkinfo/ViewSceduleReg";
+
 
 export default function ParkInfo() {
+
+    const { parkInfoOpen, parkInfoState } = useStore();
+
+  
     return (
-        <div className="main-menu zi3">
-            <MenuLogoBack />
-            <ParkInfoBody />
-        </div>
-    )
-}
+        <Dialog
+            open={ parkInfoOpen }
+            PaperProps={{ style:{ borderRadius: "25px", width: "100%", height: "100%", backgroundColor: "#c5ce9f" } }}>
+            <DialogContent 
+                style=
+                {{overflow: "hidden", flexDirection: "column",}} 
+                sx={{...((parkInfoOpen && parkInfoState === 0) ? {display: 'flex'} : {display: 'none'})}}>
+                <ViewParkMain />
+            </DialogContent>
+            <DialogContent 
+                style=
+                {{overflow: "hidden", flexDirection: "column"}} 
+                sx={{...((parkInfoOpen && parkInfoState === 1) ? {display: 'flex'} : {display: 'none'})}}>
+                <ViewSceduleInfo />
+            </DialogContent>
+            <DialogContent 
+                style=
+                {{overflow: "hidden", flexDirection: "column"}} 
+                sx={{...((parkInfoOpen && parkInfoState === 2) ? {display: 'flex'} : {display: 'none'})}}>
+                <ViewSceduleReg />
+            </DialogContent>
+
+        </Dialog>
+    );
+  }

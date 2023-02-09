@@ -1,9 +1,124 @@
-* {
-    box-sizing: border-box;
+.max-wh {
+    width: 100%;
+    height: 100%;
 }
-body {
-    margin: 0;
+
+/* Dialog Header */
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 8%;
+    
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #00000042;
+}
+
+.dialog-header-parkname {
+    font-size: 35px;
+    font-weight: 800;
+}
+
+.dialog-xmark {
+    width: 24px;
+    margin-top: -15px;
+    cursor: pointer;
+}
+
+
+/*  */
+
+.dialog-parkinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-bottom: 1px solid #00000042;
+}
+
+.dialog-parkinfo-img {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.dialog-parkinfo-contents {
+    margin-bottom: 10px;
 }
 
 /* */
 
+.dialog-park-schedule-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+    padding: 20px 30px 20px 20px;
+    padding-right: 10px;
+    overflow-y: scroll;
+}
+
+.dialog-park-schedule-title {
+    font-size: 27px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.dialog-schedule-item {
+    width: 95%;
+    height: 200px;
+    padding: 15px;
+    border: 1px solid #00000065;
+    border-radius: 25px;
+}
+
+.dsi-header {
+    display: flex;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #00000042;
+}
+
+.dsi-weekday {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.dsi-config {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex: 1;
+
+    padding-left: 10px;
+}
+
+.dsi-title {
+    font-size: 17px;
+    width: 100%;
+    font-weight: 600;
+}
+
+.dsi-time {
+    width: 50%;
+}
+
+.dsi-writer {
+    width: 50%;
+}
+
+.dsi-desc {
+    padding: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-height: 50px;
+}
