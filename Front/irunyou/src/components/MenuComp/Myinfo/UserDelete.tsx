@@ -1,6 +1,11 @@
 import './UserDelete.css';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material';
+import axios from 'axios';
+
+// 작성자 : 최예정
+// 파일의 역할 : 회원탈퇴 html
+// 작성날짜 : 2023-02-09
 
 export default function UserDelete() {
 
@@ -11,6 +16,16 @@ export default function UserDelete() {
             }
         }
     })
+
+    // 회원탈퇴 기능
+    // const handleDelete = async () => {
+    //     try {
+    //         const response = await axios.delete('http://localhost:4040/irunyou/dropuser' + userEmail);
+    //         console.log(response.data);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
     return(
         <div className="userDelete-contaier">
