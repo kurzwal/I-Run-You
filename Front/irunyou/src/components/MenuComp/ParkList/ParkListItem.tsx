@@ -5,6 +5,7 @@ import useStore from "../Parkinfo/Store";
 
 interface props {
     park: {
+        parkIndex: number;
         parkName: string;
         parkAddress: string;
         parkLatitude: number;
