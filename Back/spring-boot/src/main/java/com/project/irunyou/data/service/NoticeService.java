@@ -9,8 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.project.irunyou.data.dto.NoticeDto;
-import com.project.irunyou.data.dto.NoticePageInfoDto;
-import com.project.irunyou.data.dto.NoticePageResponseDto;
+import com.project.irunyou.data.dto.PageInfoDto;
+import com.project.irunyou.data.dto.PageResponseDto;
+import com.project.irunyou.data.dto.PageInfoDto;
+import com.project.irunyou.data.dto.PageResponseDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.entity.NoticeBoardEntity;
@@ -31,10 +33,10 @@ public class NoticeService {
 	
 	// 페이지네이션 처리 해서 데이터 불러오기
 	@SuppressWarnings("unchecked")
-	public ResponseDto<NoticePageResponseDto<?>> getNoticeList(int page, int size) {
+	public ResponseDto<PageResponseDto<NoticeDto>> getNoticeList(int page, int size) {
 		Page<NoticeBoardEntity> noticePage = findAllNotice(page-1, size);
 		
-		NoticePageInfoDto noticePageInfo = NoticePageInfoDto.builder()
+		PageInfoDto noticePageInfo = PageInfoDto.builder()
 				.page(page).size(size)
 				.totalElements((int)noticePage.getTotalElements())
 				.totalPages(noticePage.getTotalPages())
@@ -48,7 +50,7 @@ public class NoticeService {
 			data.add(new NoticeDto(n));
 		}
 				
-		return ResponseDto.setSuccess("date load Success",new NoticePageResponseDto(data,noticePageInfo));
+		return ResponseDto.setSuccess("date load Success",new PageResponseDto(data,noticePageInfo));
 	}
 	
 	

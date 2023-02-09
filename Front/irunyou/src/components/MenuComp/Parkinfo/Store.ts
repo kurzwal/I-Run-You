@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 interface Park {
+    parkIndex: number;
     parkName: string;
     parkAddress: string;
     parkLatitude: number;
@@ -33,6 +34,7 @@ const useStore = create<MapStoreInterface>((set) => ({
 
     // 클릭하면 띄울 공원정보 저장
     parkInfo: {
+        parkIndex: 0,
         parkName: "",
         parkAddress: "",
         parkLatitude: 0,

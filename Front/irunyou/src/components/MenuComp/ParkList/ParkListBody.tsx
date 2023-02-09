@@ -11,6 +11,7 @@ interface Location {
 }
 
 interface Parks {
+    parkIndex: number;
     parkName: string;
     parkAddress: string;
     parkLatitude: number;

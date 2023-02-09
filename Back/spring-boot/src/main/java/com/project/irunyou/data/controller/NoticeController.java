@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.irunyou.data.dto.NoticeDto;
-import com.project.irunyou.data.dto.NoticePageResponseDto;
+import com.project.irunyou.data.dto.PageResponseDto;
+import com.project.irunyou.data.dto.PageResponseDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.service.NoticeService;
@@ -59,7 +60,7 @@ public class NoticeController {
 	// 공지사항 목록 페이징처리 해서 불러오기
 	//?page=()
 	@GetMapping("")
-	public ResponseDto<NoticePageResponseDto<?>> getNoticeList(@RequestParam int page) {
+	public ResponseDto<PageResponseDto<NoticeDto>> getNoticeList(@RequestParam int page) {
 		return noticeService.getNoticeList(page,6);	// 한 페이지당 6개 씩 뜨게 고정
 	}
 	

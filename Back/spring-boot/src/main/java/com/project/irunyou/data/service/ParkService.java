@@ -9,20 +9,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import com.project.irunyou.data.dto.NoticeDto;
+import com.project.irunyou.data.dto.PageInfoDto;
+import com.project.irunyou.data.dto.PageResponseDto;
+import com.project.irunyou.data.dto.PageInfoDto;
+import com.project.irunyou.data.dto.PageResponseDto;
 import com.project.irunyou.data.dto.ParkInfoDto;
+import com.project.irunyou.data.dto.ParkRunScheduleDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.UserLocationDto;
+import com.project.irunyou.data.entity.NoticeBoardEntity;
 import com.project.irunyou.data.entity.ParkEntity;
+import com.project.irunyou.data.entity.RunScheduleEntity;
 import com.project.irunyou.data.repository.ParkRepository;
+import com.project.irunyou.data.repository.RunScheduleRepository;
 
 
 @Service
 public class ParkService {
 	
 	@Autowired ParkRepository parkRepository;
+	@Autowired RunScheduleRepository runScheduleRepository; 
 	
+	// 해당 공원의 런스케쥴 페이지네이션 처리
+	public Page<RunScheduleEntity> findRunScheduleListByParkIndex (int page, int size, int parkIndex) {
+		PageRequest pageRequest = PageRequest.of(page, size);
+		return runScheduleRepository.findAllByRunScheduleParkOrderByRunScheduleDateTimeDesc(parkIndex,pageRequest);	// 해당 공원에 해당하는 런스케줄 시간순 정렬
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ResponseDto<PageResponseDto<ParkRunScheduleDto>> getParkRunScheduleList(int page, int size, int parkIndex) {
+		
+		Page<RunScheduleEntity> ParkRunSchedulePage = findRunScheduleListByParkIndex(page-1, size, parkIndex);
+		
+		PageInfoDto parkRunShedulePageInfo = PageInfoDto.builder()	// 해당 자료의 페이지 정보
+				.page(page).size(size)
+				.totalElements((int)ParkRunSchedulePage.getTotalElements())
+				.totalPages(ParkRunSchedulePage.getTotalPages())
+				.build();
+		
+		List<RunScheduleEntity> runSchedules = ParkRunSchedulePage.getContent();
+		
+		List<ParkRunScheduleDto> data = new ArrayList<>();
+		
+		for(RunScheduleEntity r : runSchedules) {
+			data.add(new ParkRunScheduleDto(r));
+		}
+				
+		return ResponseDto.setSuccess("data load Success",new PageResponseDto(data,parkRunShedulePageInfo));
+	}
+	
+	
+//	
+//	public ResponseDto<List<ParkRunScheduleDto>> getRunScheduleList(int parkNum) {
+//		List<RunScheduleEntity> findRunSchedeulListByParkIndex = runScheduleRepository.findAllByRunSchedulePark(parkNum);
+//		List<ParkRunScheduleDto> parkRunScheduleList = new ArrayList<>();
+//		for(RunScheduleEntity r : findRunSchedeulListByParkIndex) {
+//			parkRunScheduleList.add(new ParkRunScheduleDto(r));
+//		}
+//		return ResponseDto.setSuccess("Success",parkRunScheduleList);
+//	}
+	
+		
 	public ResponseDto<ParkInfoDto> searchParkById (Integer parkNum) {
 		
 		ParkEntity park = findById(parkNum);
@@ -115,7 +168,7 @@ public class ParkService {
 // 		}
 // 		return ResponseDto.setSuccess("공원정보 불러오기에 성공했습니다.", data);
 // 	}	
-}
+
 		
 //		for (ParkEntity park : parkList) {
 //			for(int j = 0; j < distanceList.size(); j++) {
@@ -151,3 +204,5 @@ public class ParkService {
 //			arr.add(result);
 //		}
 //	}
+
+}

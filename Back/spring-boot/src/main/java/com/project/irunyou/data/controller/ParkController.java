@@ -8,13 +8,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.irunyou.data.dto.PageResponseDto;
 import com.project.irunyou.data.dto.ParkInfoDto;
+import com.project.irunyou.data.dto.ParkRunScheduleDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.UserLocationDto;
 import com.project.irunyou.data.service.ParkService;
@@ -26,15 +30,22 @@ public class ParkController {
 
 	@Autowired ParkService parkService;
 	
-	@PostMapping("{parkNum}")
-	public ResponseDto<ParkInfoDto> searchParkById(@PathVariable("parkNum") int parkNum){
-		return parkService.searchParkById(parkNum);
-	}
+//	@GetMapping("runSchedule")
+//	public ResponseDto<List<ParkRunScheduleDto>> getRunScheduleList(@RequestParam int parkNum){
+//		return parkService.getRunScheduleList(parkNum);
+//	}
 	
 	// 사용자 위치기반 가까운 공원 5개
 	@PostMapping("")
 	public ResponseDto<List<ParkInfoDto>> findClosePark(@RequestBody UserLocationDto dto) {
 		return parkService.findClosePark(dto);
+	}
+	
+	// 2023-02-09 홍지혜
+	// 공원에 등록된 런스케쥴 리스트 가져오기 (페이지네이션 처리)
+	@GetMapping("runSchedule")
+	public ResponseDto<PageResponseDto<ParkRunScheduleDto>> getParkRunScheduleList(@RequestParam int parkIndex, int page) {
+		return parkService.getParkRunScheduleList(page,5,parkIndex);
 	}
 
 }
