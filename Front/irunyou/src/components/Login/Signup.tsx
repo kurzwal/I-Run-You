@@ -101,11 +101,11 @@ export default function Signup() {
         } else if (data.userPhoneNumber == '') {
             alert("전화번호를 입력하세요")
             return;
+        } else if (nicknameCheckResult === 0) {
+            alert("닉네임 중복확인은 필수입니다")
         } else if (idCheckResult === 0) {
             alert("이메일 중복확인은 필수입니다")
             return;
-        } else if (nicknameCheckResult === 0) {
-            alert("닉네임 중복확인은 필수입니다")
         } else {
             axios.post('http://localhost:4040/auth/signup', data).then((response) => {
                 const UserInformation = response.data.user;
@@ -223,7 +223,7 @@ export default function Signup() {
             <Link to="/Login">
                 <button className='signup-btn'>이전으로</button>
             </Link>
-            {/* onclick을 했을 경우 백으로 전송 */}
+            {/* onclick을 했을 경우 사용자에게 받은 정보를 백으로 전송 */}
             <button className='signup-btn' onClick={() => onSubmitHandler()}>회원가입</button>
         </div>
     </div>
