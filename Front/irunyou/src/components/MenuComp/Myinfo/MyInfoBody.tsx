@@ -1,6 +1,10 @@
 import "./myinfo.css";
 import InfoItem from "./InfoItem";
 import Button from '@mui/material/Button';
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/kw2
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
@@ -12,25 +16,20 @@ export default function MyInfoBody() {
 
     const movePage = useNavigate();
 
+    const LogoutActionHandler = () => {
+        localStorage.clear();
+        alert("로그아웃 되었습니다.")
+        window.location.href="/"
+    }
+
     return (
         <div className="info-container">
-            <div className="grayline"></div>
-            <InfoItem label="이름" value="ddd" />
-            <div className="lightgrayline"></div>
-            <InfoItem label="닉네임" value="ddd" />
-            <div className="lightgrayline"></div>
-            <InfoItem label="주소" value="ddd" />
-            <div className="lightgrayline"></div>
-            <InfoItem label="전화번호" value="ddd" />
-            <div className="lightgrayline"></div>
             <div className="user-info-btn-container">
-                <Button variant="outlined">비밀번호 수정</Button>
-                <Button variant="outlined" onClick={() => setModal(true)}>정보 수정</Button>
+                <Button variant="outlined" onClick={() => {LogoutActionHandler()}}>로그아웃</Button>
+                <Button variant="outlined" onClick={() => setModal(true)}>회원정보 수정</Button>
             </div>
-            <Link to="/UserDelete">
-            <Button variant="contained" color="error">회원 탈퇴</Button>
             { modal && (<MyInfoVerify setModal={setModal} />) }
-            </Link>
+            {/* <Button variant="contained" color="error">회원 탈퇴</Button> */}
         </div>
     );
 }

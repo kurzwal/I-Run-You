@@ -167,7 +167,8 @@ public class UserService {
 		if(nickname.isEmpty()) {
 			return ResponseDto.setFailed("닉네임을 입력해 주세요.");
 		}
-		
+
+		log.debug(nickname);
 		boolean checkUserNicknameDupe = userRepository.existsByUserNickname(nickname);
 
 		if (checkUserNicknameDupe) {
