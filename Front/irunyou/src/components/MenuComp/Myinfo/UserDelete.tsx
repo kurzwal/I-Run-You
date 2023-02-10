@@ -2,12 +2,16 @@ import './UserDelete.css';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { useState } from 'react';
+// import bcrypt from 'bcrypt';
 
 import axiosInstance from "../../../service/axiosInstance";
 
 // 작성자 : 최예정
 // 파일의 역할 : 회원탈퇴 html
 // 작성날짜 : 2023-02-09
+
+// 작성자 : 최예정 
+// 업데이트 날짜 : 2023-02-10
 
 export default function UserDelete() {
 
@@ -19,13 +23,28 @@ export default function UserDelete() {
         }
     })
 
-    const [userEmail, setUserEmail] = useState<string>('');
     const [userPassword, setUserPassword] = useState<string>('');
+    const [isChecked, setIsChecked] = useState(false);
 
-    // 회원탈퇴 기능
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked)
+    }
+
     const userDelete = async () => {
+    
+        // 체크박스를 하지 않을 경우 회원 탈퇴가 되지 않게
+        if (!isChecked) {
+            alert('동의하기를 눌러주세요.');
+            return;
+        }
 
-        let isDelete = window.confirm("정말 탈퇴하시겠습니까?");
+        // 회원탈퇴 기능
+        let isDelete = window.confirm("정말 삭제하시겠습니까?");
+
+        // const saltRounds = 10;
+
+        // const salt = bcrypt.genSaltSync(saltRounds);
+        // const hashedPassword = bcrypt.hashSync(userPassword, salt);
 
         if (isDelete) {
             await axiosInstance
@@ -41,9 +60,9 @@ export default function UserDelete() {
                 }).catch(error => {
                     alert(error.message)
                 })
-        }
-    }
 
+            }
+        }
 
     return(
         <div className="userDelete-contaier">
@@ -61,7 +80,7 @@ export default function UserDelete() {
                 </p>
             </div>
             <div className="userDelete-check">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={handleCheckboxChange}  />
                 위 내용을 숙지하였으며, 동의합니다.
             </div>
             <div className='userDelete-idpw'>

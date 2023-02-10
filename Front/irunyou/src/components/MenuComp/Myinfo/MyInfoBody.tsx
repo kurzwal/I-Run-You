@@ -1,10 +1,7 @@
 import "./myinfo.css";
 import InfoItem from "./InfoItem";
 import Button from '@mui/material/Button';
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/kw2
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
