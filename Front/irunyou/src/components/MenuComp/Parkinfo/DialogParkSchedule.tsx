@@ -1,51 +1,83 @@
-import { useEffect, useState } from "react"
-import "./parkinfo.css"
-import ScheduleItem from "./ScheduleItem"
+import { useCallback, useEffect, useState } from "react";
+import "./parkinfo.css";
+import ScheduleItem from "./ScheduleItem";
 import axiosInstance from "../../../service/axiosInstance";
-import useStore from './Store';
+import useStore from "./Store";
+import { Button } from "@mui/material";
 
+interface props {
+  parkIndex: number;
+}
 
-export default function DialogParkSchedule() {
+export default function DialogParkSchedule({ parkIndex }: props) {
+  const [parkRunScheduleList, setParkRunScheduleList] = useState<any[]>([]);
+  const [page, setPage] = useState(1);
+  const [isLast, setIsLast] = useState(false);  // 더보기
 
-    const { parkInfo } = useStore();
+  const getParkRunScheduleList = async (page: number) => {
+    await axiosInstance
+      .get("irunyou/park/runSchedule", {
+        params: {
+          parkIndex,
+          page: page
+        }
+      })
+      .then((response) => {
+        if (!response.data.status) {
+          alert(response.data.message);
+        }
 
-    const [parkRunScheduleList, setParkRunScheduleList] = useState<any[]>([]);
-    const [parkIndex, setParkIndex] = useState(parkInfo.parkIndex);
-    const [isLast, setIsLast] = useState(false);
-    
-    const getParkRunScheduleList = async (page : number) => {
-        await axiosInstance
-        .get("irunyou/park/runSchedule", {
-            params : {
-                parkIndex,
-                page : page
-            }
-        })
-        .then(response => {
-            if(!response.data.status) {
-                alert("데이터를 불러오는 중 오류가 발생했습니다.");
-            }
+        setParkRunScheduleList(response.data.data.data); // 일정 리스트
+        setIsLast(response.data.data.last); // 마지막 페이지 여부
+        setPage(page);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
 
-            setParkRunScheduleList(response.data.data.data);
-            setIsLast(response.data.data.sliceInfoDto.last);
+  useEffect(() => {
+    getParkRunScheduleList(1);
+  }, []);
 
-        }).catch((error) => {
-            alert(error.message);
-        })
-    }
-
-    useEffect(() => {
-        getParkRunScheduleList(1);
-    },[]);
-
-    return (
-        <div className="dialog-park-schedule-container">
-            <div className="dialog-park-schedule-title">모집중인 일정</div>
-            <div>
-            {parkRunScheduleList.map((scheduleList : any) => (
-                <ScheduleItem></ScheduleItem>
-            ))}
-            </div>
-        </div>
-    )
+  return (
+    <div className="dialog-park-schedule-container">
+      <div className="dialog-park-schedule-title">모집중인 일정</div>
+      <div>
+        {parkRunScheduleList &&
+          parkRunScheduleList.map((scheduleList: any) => (
+            <ScheduleItem
+              key={scheduleList.runScheduleIndex}
+              runScheduleInfo={scheduleList}
+            ></ScheduleItem>
+          ))}
+      </div>
+      {isLast ? (
+        <Button
+          variant="contained"
+          disableElevation
+          color="success"
+          style={{
+            width: "100px",
+            color: "white"
+          }}
+        >
+          마지막 페이지 입니다.
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          disableElevation
+          color="success"
+          style={{
+            width: "100px",
+            color: "white"
+          }}
+          onClick={() => getParkRunScheduleList(page + 1)}
+        >
+          + 더보기...
+        </Button>
+      )}
+    </div>
+  );
 }

@@ -23,7 +23,6 @@ import com.project.irunyou.data.dto.PageResponseDto;
 import com.project.irunyou.data.dto.ParkInfoDto;
 import com.project.irunyou.data.dto.ParkRunScheduleDto;
 import com.project.irunyou.data.dto.ResponseDto;
-import com.project.irunyou.data.dto.SliceInfoDto;
 import com.project.irunyou.data.dto.SliceResponseDto;
 import com.project.irunyou.data.dto.UserLocationDto;
 import com.project.irunyou.data.entity.NoticeBoardEntity;
@@ -49,9 +48,9 @@ public class ParkService {
 	
 	// 공원에 잡힌 RunSchedule 불러오기
 	public ResponseDto<SliceResponseDto<ParkRunScheduleDto>> getParkRunScheduleList(int page, int size, int parkIndex) {
-		Slice<RunScheduleEntity> slicePage = findRunScheduleSliceByParkIndex(page-1, size, parkIndex);
+		Slice<RunScheduleEntity> slicePage = findRunScheduleSliceByParkIndex(page-1, size, parkIndex);	// page 0 부터 시작하기 때문에 -1 해줌
 		
-		SliceInfoDto slicePageInfo = SliceInfoDto.builder().last(slicePage.isLast()).build();
+		boolean isLast = slicePage.isLast();	// 마지막 페이지인지 확인
 		
 		List<RunScheduleEntity> schedules = slicePage.getContent();
 		
@@ -61,7 +60,7 @@ public class ParkService {
 			data.add(new ParkRunScheduleDto(r));
 		}
 		
-		return ResponseDto.setSuccess("data load Success", new SliceResponseDto(data, slicePageInfo));
+		return ResponseDto.setSuccess("data load Success", new SliceResponseDto(data, isLast));
 	}
 	
 

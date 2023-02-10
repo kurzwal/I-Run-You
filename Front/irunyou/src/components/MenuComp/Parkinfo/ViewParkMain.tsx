@@ -14,7 +14,7 @@ export default function ViewParkMain() {
         <>
             <DialogHeader parkName={ parkInfo.parkName }></DialogHeader>
             <DialogParkInfo parkAddress={ parkInfo.parkAddress } parkArea={ parkInfo.parkArea }></DialogParkInfo>
-            <DialogParkSchedule></DialogParkSchedule>
+            <DialogParkSchedule parkIndex={parkInfo.parkIndex}></DialogParkSchedule>
         </>
     )
 }

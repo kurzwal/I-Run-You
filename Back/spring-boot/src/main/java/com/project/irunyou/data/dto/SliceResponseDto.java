@@ -7,6 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class SliceResponseDto<T> {
 	private T data;
-	private SliceInfoDto sliceInfoDto;
+	private boolean isLast;
 	
 }
