@@ -51,7 +51,7 @@ public class RunScheduleService {
 					.runSchedulePark(dto.getRunSchedulePark())
 					.runScheduleTitle(dto.getRunScheduleTitle())
 					.runScheduleWriter(writer)
-					.runScheduleDatetime(dto.getRunScheduleDatetime())
+					.runScheduleDateTime(dto.getRunScheduleDatetime())
 					.runScheduleContent(dto.getRunScheduleContent())
 					.build();
 			runScheduleRepository.save(runShedule);
@@ -86,7 +86,7 @@ public class RunScheduleService {
 		RunScheduleEntity patchSchedule = runScheduleRepository.findById(schIdx).get();
 		
 		patchSchedule.setRunScheduleTitle(dto.getRunScheduleTitle());
-		patchSchedule.setRunScheduleDatetime(dto.getRunScheduleDatetime());
+		patchSchedule.setRunScheduleDateTime(dto.getRunScheduleDatetime());
 		patchSchedule.setRunScheduleContent(dto.getRunScheduleContent());
 		
 		runScheduleRepository.save(patchSchedule);

@@ -8,10 +8,15 @@
  * */
 package com.project.irunyou.data.repository;
 
+import com.project.irunyou.data.entity.NoticeBoardEntity;
 import com.project.irunyou.data.entity.RunScheduleEntity;
 
 import java.util.List;
 
+import java.awt.print.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +24,12 @@ import org.springframework.stereotype.Repository;
 public interface RunScheduleRepository extends JpaRepository<RunScheduleEntity,Integer>{	
 	public List<RunScheduleEntity> findAllByRunScheduleWriter(String userEmail);
 	public List<RunScheduleEntity> findAllByRunScheduleIndex(int runScheduleIndex);
+	public List<RunScheduleEntity> findAllByRunSchedulePark(int parkIndex);
 	
 	public RunScheduleEntity findByRunScheduleIndex(int runScheduleIndex);
+	
+	// 공원 인덱스에 해당하는 RunSchedule 불러온 후 시간 순 정렬, 반환형 Slice
+	// Slice : limit(size) + 1 된 값을 가져옴
+	public Slice<RunScheduleEntity> findAllByRunScheduleParkOrderByRunScheduleDateTime(int runSchedulePark, PageRequest pageRequest);
 	
 }

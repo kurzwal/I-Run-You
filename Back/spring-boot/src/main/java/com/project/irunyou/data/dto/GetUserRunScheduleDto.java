@@ -28,7 +28,7 @@ public class GetUserRunScheduleDto {
 	public GetUserRunScheduleDto(RunScheduleEntity runSchedule) {
 		this.runSchedulePark = runSchedule.getRunSchedulePark();
 		this.runScheduleTitle = runSchedule.getRunScheduleTitle();
-		this.runScheduleDatetime = runSchedule.getRunScheduleDatetime();
+		this.runScheduleDatetime = runSchedule.getRunScheduleDateTime();
 	}
 
 	

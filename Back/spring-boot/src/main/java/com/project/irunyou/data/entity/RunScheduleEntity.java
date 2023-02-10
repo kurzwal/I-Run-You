@@ -44,7 +44,7 @@ public class RunScheduleEntity {
     @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime runScheduleDatetime;
+    private LocalDateTime runScheduleDateTime;
     @NotNull
     private String runScheduleContent;
     
