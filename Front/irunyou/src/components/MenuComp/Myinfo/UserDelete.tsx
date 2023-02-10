@@ -1,7 +1,9 @@
 import './UserDelete.css';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material';
-import axios from 'axios';
+import { useState } from 'react';
+
+import axiosInstance from "../../../service/axiosInstance";
 
 // 작성자 : 최예정
 // 파일의 역할 : 회원탈퇴 html
@@ -17,15 +19,31 @@ export default function UserDelete() {
         }
     })
 
+    const [userEmail, setUserEmail] = useState<string>('');
+    const [userPassword, setUserPassword] = useState<string>('');
+
     // 회원탈퇴 기능
-    // const handleDelete = async () => {
-    //     try {
-    //         const response = await axios.delete('http://localhost:4040/irunyou/dropuser' + userEmail);
-    //         console.log(response.data);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
+    const userDelete = async () => {
+
+        let isDelete = window.confirm("정말 삭제하시겠습니까?");
+
+        if (isDelete) {
+            await axiosInstance
+                .post("irunyou/dropuser", {
+                    userPassword : userPassword
+                })
+                .then(response => {
+                    if(!response.data.status) {
+                        return alert(response.data.message);
+                    }
+                    alert(response.data.message);
+                    window.location.reload();
+                }).catch(error => {
+                    alert(error.message)
+                })
+        }
+    }
+
 
     return(
         <div className="userDelete-contaier">
@@ -48,13 +66,12 @@ export default function UserDelete() {
             </div>
             <div className='userDelete-idpw'>
             <ThemeProvider theme={theme}>
-                <TextField size='small' label="아이디 확인" sx={{width: "80%"}}  id="outlined-basic" variant="outlined" margin="normal" required/>
-                <TextField size='small' label="비밀번호 확인" type="password" sx={{width: "80%"}} id="outlined-basic" variant="outlined" margin="normal" required/>
+                <TextField size='small' label="비밀번호 확인" type="password" sx={{width: "80%"}} id="outlined-basic" variant="outlined" margin="normal" onChange={(event) => setUserPassword(event.target.value)} required/>
             </ThemeProvider>
             </div>
             <div className="userDelete-btn">
                 <button className='user-btn back-btn' onClick={() => window.history.back()}>이전으로</button>
-                <button className='user-btn delete-btn'>탈퇴하기</button>
+                <button className='user-btn delete-btn' onClick={() => userDelete()}>탈퇴하기</button>
             </div>
         </div>
     );

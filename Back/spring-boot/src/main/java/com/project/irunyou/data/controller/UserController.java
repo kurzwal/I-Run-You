@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.irunyou.data.dto.DeleteUserPasswordDto;
 import com.project.irunyou.data.dto.FindPasswordDto;
 import com.project.irunyou.data.dto.GetUserResponseDto;
 import com.project.irunyou.data.dto.PatchUserDto;
@@ -58,9 +59,9 @@ public class UserController {
 	// Delete (회원탈퇴)
 	@PostMapping("dropuser") // deleteMapping의 경우 RequestBody를 받지 않기 때문에 Post로 처리함.
 	public ResponseDto<ResultResponseDto> deleteUser(@AuthenticationPrincipal String email,
-			@RequestBody String password) {
+			@RequestBody DeleteUserPasswordDto dto) {
 		// password의 경우 프론트에서 json형태가 아닌 text로 처리해야 합니다!
-		return userService.deleteUser(email,password);
+		return userService.deleteUser(email,dto.getUserPassword());
 	}
 
 	// 최예정 2023-02-02

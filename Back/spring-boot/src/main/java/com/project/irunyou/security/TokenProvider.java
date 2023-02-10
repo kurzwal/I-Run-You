@@ -24,7 +24,7 @@ public class TokenProvider {
 	public String create(UserEntity userEntity) {
 		// 만료 기한 = Instant.now() : 현재시간  ChronoUnit.DAYS : 하루 단위
 		// 로그인 시점부터 1일
-		Date expiryDate = Date.from(Instant.now().plus(30, ChronoUnit.SECONDS));
+		Date expiryDate = Date.from(Instant.now().plus(1, ChronoUnit.DAYS));
 
 		// 토큰 생성
 		return Jwts.builder()
