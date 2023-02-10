@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useStore from './MenuComp/LocationStore';
+import useToggleStore from './MenuComp/Parkinfo/Store';
 
 declare global {
   interface Window {
@@ -16,11 +17,9 @@ interface marker {
 
 export default function Map() {
 
-  const { userLocation, closeParks, markers, setMarkers } = useStore();
+  const { userLocation, closeParks, } = useStore();
+  const { setParkInfo, toggleParkInfo } = useToggleStore();
 
-  const addMarker = (marker:marker) => {
-    setMarkers([...markers, marker]);
-  }
 
   const [startFirst, setStartFirst] = useState<boolean>(true);
 
@@ -37,24 +36,31 @@ export default function Map() {
         let map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
         const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+        // 마커 이미지의 이미지 크기 입니다
         const imageSize = new window.kakao.maps.Size(24, 35); 
+        // 마커 이미지를 생성합니다    
         const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize); 
         
         for (var i = 0; i < closeParks.length; i ++) {
             
-            // 마커 이미지의 이미지 크기 입니다
             
-            // 마커 이미지를 생성합니다    
             
             const position = new window.kakao.maps.LatLng(closeParks[i].parkLatitude, closeParks[i].parkLongitude); // 마커를 표시할 위치
   
             // 마커를 생성합니다
-            addMarker(new window.kakao.maps.Marker({
-                map: map, // 마커를 표시할 지도
-                position: position,
-                title : closeParks[i].parkName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                image : markerImage // 마커 이미지 
-            }));
+            const marker = new window.kakao.maps.Marker({
+              map: map, // 마커를 표시할 지도
+              position: position,
+              title: closeParks[i].parkName, // 마커의 타이틀, 마우스를 올리면 타이틀이 표시됩니다
+              image: markerImage // 마커 이미지 
+            });
+            
+            (function(index) {
+              window.kakao.maps.event.addListener(marker, 'click', function() {
+                setParkInfo(closeParks[index]);
+                toggleParkInfo();
+              });
+            })(i);
           }
 
         setStartFirst(false); // 한번만 실행되도록 바꿈
