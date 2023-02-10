@@ -46,10 +46,10 @@ public class AuthService {
 		}
 
 		boolean checkUserPhoneNumberDupe = userRepository.existsByUserPhoneNumber(dto.getUserPhoneNumber());
-		// 휴대폰번호 중복여부 체크
-		if (checkUserPhoneNumberDupe) {
-			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 휴대폰 번호 입니다.", dto.getUserPhoneNumber()));
-		}
+//		// 휴대폰번호 중복여부 체크
+//		if (checkUserPhoneNumberDupe) {
+//			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 휴대폰 번호 입니다.", dto.getUserPhoneNumber()));
+//		}
 
 		String password = dto.getUserPassword();
 		String password2 = dto.getUserPassword2();

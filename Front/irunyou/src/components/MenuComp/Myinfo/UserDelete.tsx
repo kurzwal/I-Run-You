@@ -25,7 +25,7 @@ export default function UserDelete() {
     // 회원탈퇴 기능
     const userDelete = async () => {
 
-        let isDelete = window.confirm("정말 삭제하시겠습니까?");
+        let isDelete = window.confirm("정말 탈퇴하시겠습니까?");
 
         if (isDelete) {
             await axiosInstance
