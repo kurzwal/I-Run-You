@@ -9,6 +9,9 @@ import axiosInstance from "../../../service/axiosInstance";
 // 파일의 역할 : 회원탈퇴 html
 // 작성날짜 : 2023-02-09
 
+// 작성자 : 최예정 
+// 업데이트 날짜 : 2023-02-10
+
 export default function UserDelete() {
 
     const theme:any = createTheme({
