@@ -6,12 +6,6 @@
  * 업데이트 날짜 : 2023-01-30
  */
 
- * {
-    box-sizing: border-box;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
 .text {
     text-align: center;
     padding: 0 30px;

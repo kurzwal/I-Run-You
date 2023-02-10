@@ -1,4 +1,3 @@
-/*아이디찾기할때 띄워야되는데 안띄워져서 못만드는중,,,*/
 import React, { Dispatch, SetStateAction } from 'react'
 import { Link } from 'react-router-dom';
 
