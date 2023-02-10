@@ -14,13 +14,22 @@ interface Parks {
     parkArea: number;
 }
 
+interface Marker {
+    map: any;
+    position: any;
+    title : string;
+    image : any;
+}
+
 interface LocationStoreInterface {
     userLocation: Location;
 
     closeParks: Array<Parks>;
+    markers: Array<Marker>;
 
     setUserLocation: (userLocation: Location) => void;
     setCloseParks: (closeParks: Array<Parks>) => void;
+    setMarkers: (markers: Array<Marker>) => void;
 }
 
 
@@ -32,9 +41,11 @@ const useStore = create<LocationStoreInterface>((set) => ({
     },
 
     closeParks: [],
+    markers: [],
 
     setUserLocation: (userLocation) => set((state) => ({ ...state, userLocation})),
     setCloseParks: (closeParks) => set((state) => ({ ...state, closeParks})),
+    setMarkers: (markers) => set((state) => ({ ...state, markers})),
 
 }))
 

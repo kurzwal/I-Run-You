@@ -7,22 +7,22 @@ declare global {
   }
 }
 
-interface location {
-  userLatitude: number;
-  userLongitude: number;
-}
-
 interface marker {
-  title: string;
-  latlng: any;
+  map: any;
+  position: any;
+  title : string;
+  image : any;
 }
 
 export default function Map() {
 
-  const { userLocation, closeParks } = useStore();
+  const { userLocation, closeParks, markers, setMarkers } = useStore();
+
+  const addMarker = (marker:marker) => {
+    setMarkers([...markers, marker]);
+  }
 
   const [startFirst, setStartFirst] = useState<boolean>(true);
-
 
     useEffect(() => {
       
@@ -49,24 +49,19 @@ export default function Map() {
             const position = new window.kakao.maps.LatLng(closeParks[i].parkLatitude, closeParks[i].parkLongitude); // 마커를 표시할 위치
   
             // 마커를 생성합니다
-            const marker = new window.kakao.maps.Marker({
+            addMarker(new window.kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도
                 position: position,
                 title : closeParks[i].parkName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                 image : markerImage // 마커 이미지 
-            });
+            }));
           }
 
         setStartFirst(false); // 한번만 실행되도록 바꿈
       }
-    }, [closeParks])
+    }, [closeParks, userLocation])
 
-    useEffect(() => {
-      // 
-
-      // 
-    },[])
-
+    
 
     return (
         <div id="map" style={{ width: "100vw", height: "100vh" }} />
