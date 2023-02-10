@@ -13,7 +13,7 @@ interface Props {
 const theme:any = createTheme({
     palette: {
         primary: {
-            main: '#b6cf55'
+            main: '#000000'
         }
     }
 })
@@ -23,17 +23,17 @@ export default function MyInfoVerify({setModal}: Props) {
     <div id="info-modal" className="info-modal-overlay">
         <div className="info-modal-window">
             <div className="info-title">
-                <h2>비밀번호 입력</h2>
+                <h2 className='info-h2'>비밀번호 입력</h2>
             </div>
             <div className="content">
             <ThemeProvider theme={theme}>
-                <TextField size='small' label="비밀번호(8~16자까지 영문 대소문자/숫자)" type="password" sx={{width: "80%"}}  id="outlined-basic" variant="outlined" margin="normal" required/>
+                <TextField size='small' label="비밀번호 확인" type="password" sx={{width: "100%"}}  id="outlined-basic" variant="outlined" margin="normal" required/>
                     {/* <input className='singup-input' onChange={(e) => setPassword(e.target.value)} type="password" placeholder="비밀번호(8~16자까지 영문 대소문자/숫자/특수문자 사용)" /> */}
             </ThemeProvider>
             </div>
             <br />
             <div className="modal-btn">
-                <Link to="/Loginmain">
+                <Link to="/InfoModify">
                 <button className="ok-btn submit-btn">확인</button>
                 </Link>
                 <button className="submit-btn" onClick={() => setModal(false)}>취소</button>

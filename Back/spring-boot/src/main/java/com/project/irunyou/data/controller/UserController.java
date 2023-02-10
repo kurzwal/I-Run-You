@@ -50,7 +50,7 @@ public class UserController {
 	}
 
 	// Update (회원정보 수정)
-	@PatchMapping("")
+	@PatchMapping("patchuser")
 	public ResponseDto<GetUserResponseDto> updateUser(@RequestBody PatchUserDto requestBody) {
 		return userService.updateUser(requestBody);
 	}

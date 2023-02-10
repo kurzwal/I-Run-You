@@ -15,6 +15,7 @@ import KakaoLogin from './components/Login/KakaoLogin';
 import KakaoMap from './components/KakaoMap';
 import HomePage from './view/HomePage';
 import MainPage from './view/MainPage';
+import InfoModify from './components/MenuComp/Myinfo/InfoModify';
 import FAQmain from './components/FAQ/FAQmain';
 import FAQdetail from './components/FAQ/FAQdetail';
 import NoticeWriteAdmin from './components/MenuComp/Notice/NoticeWriteAdmin';
@@ -61,6 +62,8 @@ function App() {
 
         <Route path="/FAQmain" element={<FAQmain />} />
         <Route path="/FAQdetail" element={<FAQdetail />} />
+
+        <Route path="/InfoModify" element={<InfoModify />} />
 
         <Route path="/Notice" element={<Noticeboard />}/>
         <Route path="/Notice/Admin/Write" element={<NoticeWriteAdmin/>}/>
