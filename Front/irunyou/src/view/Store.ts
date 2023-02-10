@@ -25,11 +25,6 @@ interface MapStoreInterface {
 
 }
 
-interface ParkInfoInterface {
-    parkIdx: number;
-    setParkIdx: (by:number) => void;
-}
-
 const useStore = create<MapStoreInterface>((set) => ({
     mapOpen: false,    // 맵 열기
     menuOpen: true,    // 메뉴 여닫기

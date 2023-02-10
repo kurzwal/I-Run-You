@@ -12,9 +12,9 @@ export default function ViewParkMain() {
 
     return (
         <>
-            <DialogHeader parkName={ parkInfo.parkName }></DialogHeader>
-            <DialogParkInfo parkAddress={ parkInfo.parkAddress } parkArea={ parkInfo.parkArea }></DialogParkInfo>
-            <DialogParkSchedule></DialogParkSchedule>
+            <DialogHeader parkName={ parkInfo.parkName }/>
+            <DialogParkInfo parkAddress={ parkInfo.parkAddress } parkArea={ parkInfo.parkArea }/>
+            <DialogParkSchedule parkIndex={ parkInfo.parkIndex }/>
         </>
     )
 }

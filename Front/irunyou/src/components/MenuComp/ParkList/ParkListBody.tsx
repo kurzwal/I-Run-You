@@ -11,6 +11,7 @@ interface Location {
 }
 
 interface Parks {
+    parkIndex: number;
     parkName: string;
     parkAddress: string;
     parkLatitude: number;
@@ -20,13 +21,6 @@ interface Parks {
 
 
 export default function ParkListBody() {
-
-  const { parkInfo, setParkInfo } = useStore();
-
-  const [location, setLocation] = useState<Location>({
-    UserLatitude: 0,
-    UserLongitude: 0,
-  });
 
   const [parks, setParks] = useState<Parks[]>([])
 
