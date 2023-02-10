@@ -31,7 +31,9 @@ import com.project.irunyou.data.entity.RunScheduleEntity;
 import com.project.irunyou.data.repository.ParkRepository;
 import com.project.irunyou.data.repository.RunScheduleRepository;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class ParkService {
 	
@@ -97,10 +99,13 @@ public class ParkService {
 	// 가까운 공원 5개 가져오기
 	// request 값 위도, 경도
 	public ResponseDto<List<ParkInfoDto>> findClosePark(UserLocationDto dto) {
+		log.info(dto.getLatitude() + "");
+		log.info(dto.getLongitude()+"");
 		List<ParkInfoDto> ClosePark = new ArrayList<>();
 		try {
-			List<ParkEntity> CloseDistancePark = parkRepository.findAllByDistance(dto.getUserLatitude(),
-					dto.getUserLongitude());
+			List<ParkEntity> CloseDistancePark = parkRepository.findAllByDistance(dto.getLatitude(),dto.getLongitude());
+			log.info(dto.getLatitude() + "");
+			log.info(dto.getLongitude()+"");
 			for (ParkEntity p : CloseDistancePark) {
 				ClosePark.add(new ParkInfoDto(p));
 			}

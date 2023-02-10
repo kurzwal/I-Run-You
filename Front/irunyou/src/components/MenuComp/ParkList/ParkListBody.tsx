@@ -52,7 +52,10 @@ export default function ParkListBody() {
   
   const getParks = async (userLocation: Location): Promise<Parks[]> => {
     try {
-      const response = await axios.post('http://localhost:4040/irunyou/park/', userLocation);
+      const response = await axios.post('http://localhost:4040/irunyou/park/',{
+        latitude : userLocation.UserLatitude,
+        longitude : userLocation.UserLongitude
+    });
       return response.data.data;
     } catch (error) {
       console.error(error);
