@@ -1,8 +1,6 @@
 import "./myinfo.css";
 import InfoItem from "./InfoItem";
 import Button from '@mui/material/Button';
-import { Link } from "react-router-dom";
-
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
@@ -30,8 +28,9 @@ export default function MyInfoBody() {
                 <Button variant="outlined" onClick={() => setModal(true)}>정보 수정</Button>
             </div>
             <Link to="/UserDelete">
-            <Button variant="contained" color="error">회원 탈퇴</Button>
-            { modal && (<MyInfoVerify setModal={setModal} />) }
+                <Button variant="contained" color="error">회원 탈퇴</Button>
+                { modal && (<MyInfoVerify setModal={setModal} />) }
+            </Link>
         </div>
     );
 }

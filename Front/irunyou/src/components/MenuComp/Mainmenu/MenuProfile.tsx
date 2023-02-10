@@ -10,7 +10,7 @@ export default function MenuProfile() {
 
     const location = useLocation();
     const { setMenuMyInfo } = useToggleStore();    
-    const [userNickname,setUserNickname] = useState<string>(location.state.userNickname);
+    const [userNickname, setUserNickname] = useState<string>(location.state.userNickname);
 
     const LogoutActionHandler = () => {
         localStorage.clear();
