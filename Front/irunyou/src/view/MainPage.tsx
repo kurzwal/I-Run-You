@@ -45,17 +45,31 @@ export default function MainPage(){
         togglePopRegist, togglePopUpdate,
     } = useToggleStore();
 
+    const setMainImageNone:() => void = () => {
+        const mainImg = document.getElementById("home-main-img");
+        if (mainImg) {
+            mainImg.style.display = "none";
+        }
+    }
+
+    useEffect(() => {
+        if (mapOpen) {
+            setMainImageNone();
+        }
+    },[mapOpen])
+
     return (
         <div>
             <div className=""></div>
+
             {/* 기본그림 */}
-            <Box sx={{...(mapOpen ? {display: 'none'} : {display: 'flex'})}}> {/* false되면 나옴 */}
-                <div className="home-main-img"></div>
-            </Box>
+
+            <div id="home-main-img" className="home-main-img"></div>
+
             {/* 지도 */}
-            <Box sx={{...(!mapOpen ? {display: 'none'} : {display: 'flex'})}}> {/* true되면 나옴 */}
-                {/* <KakaoMap></KakaoMap> */}
-            </Box>
+
+            <KakaoMap></KakaoMap>
+
             {/* 공지사항 alert창 */}
             <></>
             {/* 메뉴버튼 */}

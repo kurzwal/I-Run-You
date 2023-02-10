@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import "./parklist.css";
 import ParkListItem from "./ParkListItem";
 import axios from 'axios';
-import useStore from '../Parkinfo/Store';
-import ParkInfo from '../ParkInfo';
+import useLocationStore from'../LocationStore';
 
 interface Location {
     UserLatitude: number;
@@ -24,9 +23,12 @@ export default function ParkListBody() {
 
   const [parks, setParks] = useState<Parks[]>([])
 
+  const { setCloseParks, setUserLocation } = useLocationStore();
+
   const fetchData = async (locale: any) => {
     const parksData = await getParks(locale);
     setParks(parksData);
+    setCloseParks(parksData);
   };
 
   const getUserLocation = () => {
@@ -38,10 +40,7 @@ export default function ParkListBody() {
           locale.UserLongitude = position.coords.longitude;
           
           fetchData(locale);
-          // setLocation({
-          //     UserLatitude: position.coords.latitude,
-          //     UserLongitude: position.coords.longitude,
-          // });
+          setUserLocation(locale);
         },
       );
     } else {
