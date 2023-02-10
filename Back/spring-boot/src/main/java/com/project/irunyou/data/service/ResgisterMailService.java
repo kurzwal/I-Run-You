@@ -27,12 +27,12 @@ public class ResgisterMailService {
 		MimeMessage message = mailSender.createMimeMessage();
 		
 		message.addRecipients(RecipientType.TO,UserEmail);	// 메일 받을 사용자
-		message.setSubject("[I Run You] 인증코드를 보내드립니다."); 	// 이메일 제목
+		message.setSubject("[I Run You] 임시비밀번호가 발급되었습니다."); 	// 이메일 제목
 		
 		String msgg = "";
-		msgg += "<h1>[I Run You] 인증코드 입니다.<h1>";
+		msgg += "<h1>[I Run You] 임시비밀번호가 발급되었습니다.<h1>";
 		msgg += "<br>";
-		msgg += "<p> 아래의 인증코드로 인증해주세요.</p>";
+		msgg += "<p> 아래의 임시 비밀번호로 로그인 해 주세요.</p>";
 		msgg += "<br>";
 		msgg += "<p>" + cerpw + "<p>";
 		msgg += "<br>";

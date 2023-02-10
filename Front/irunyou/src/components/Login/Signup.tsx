@@ -145,6 +145,7 @@ export default function Signup() {
             userEmail
         };
         axios.post('http://localhost:4040/auth/checkId', data).then((response) => {
+
             const result = response.data.status
             const message = response.data.message
             if (result) {

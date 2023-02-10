@@ -9,10 +9,14 @@
 
 package com.project.irunyou.data.service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 
 import com.project.irunyou.data.dto.FindPasswordDto;
 import com.project.irunyou.data.dto.GetUserResponseDto;
@@ -126,20 +130,26 @@ public class UserService {
 
 	
 
-	
+	// 홍지혜 2023-02-07 정규표현식으로 이메일 포맷 확인 추가 
 	// 홍지혜 2023-02-02 로직수정 : 입력창이 빈값인지 먼저 검증
 	// 최예정 2023-02-01
 	// 아이디(이메일) 중복 체크
 	public ResponseDto<ResultResponseDto> checkId(UserRequestDto data) {
-	
+		
 		String email = data.getUserEmail();
+		String regex = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
 		
 		if(email.isEmpty()) {
 			return ResponseDto.setFailed("이메일을 입력해 주세요.");
 		}
-
+		
+		boolean regexCheck = Pattern.matches(regex, email);
+		
+		if(!regexCheck) {
+			return ResponseDto.setFailed("이메일 형식이 올바르지 않습니다.");
+		}
+		
 		boolean checkUserEmailDupe = userRepository.existsByUserEmail(email);
-		// log.info(checkUserEmailDupe+"");
 
 		if (checkUserEmailDupe) {
 			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 이메일 입니다.", email));
@@ -158,7 +168,7 @@ public class UserService {
 			return ResponseDto.setFailed("닉네임을 입력해 주세요.");
 		}
 		
-		boolean checkUserNicknameDupe = userRepository.existsByUserName(nickname);
+		boolean checkUserNicknameDupe = userRepository.existsByUserNickname(nickname);
 
 		if (checkUserNicknameDupe) {
 			return ResponseDto.setFailed(String.format("'%s'는 이미 가입된 닉네임 입니다.", nickname));
@@ -167,13 +177,15 @@ public class UserService {
 	}
 
 	// pw찾기 0126 황석민
-	// 2023-02-06 홍지혜 로직 변경
+	// 2023-02-07 홍지혜 로직 변경 - 임시비밀번호 발급 후 해당 비밀번호로 유저 비밀번호 변경
+	// 2023-02-06 홍지혜 : 로직 변경 - 유효한 request인지 먼저 확인 
 	// pw 찾기 : 회원 이름과 이메일 입력 -> 임시 비밀번호 발급
 	public ResponseDto<ResultResponseDto> findPw(FindPasswordDto dto) {
 //		// 전화번호 하고 이메일 입력 검증
 //		String email = dto.getUserEmail();
 //		String phoneNumber = dto.getUserPhoneNumber();
 		String email = dto.getUserEmail();
+		String code = "";
 		
 		// 넘어온 값이 있는지 먼저 검증
 		if(email.isEmpty()) {
@@ -199,7 +211,7 @@ public class UserService {
 
 		// sendMail 하고 결과로 받은 code를 데이터베이스에 저장
 		try {
-			String code = mailService.sendMail(email);
+			code = mailService.sendMail(email);
 			// TODO : 보낸 코드를 데이터베이스에 저장
 			// 1. Code Entity 생성 (email, code 기준으로)
 			CodeEntity codeEtt = new CodeEntity(code, email);
@@ -208,6 +220,18 @@ public class UserService {
 		} catch (Exception exception) {
 			return ResponseDto.setFailed("코드 전송 또는 저장에 실패했습니다.");
 		}
+		
+		try {
+			// 임시비밀번호 인코딩 후 유저 정보에서 비밀번호 수정후 저장
+			String EncodingTemporaryPassword = passwordEncoder.encode(code);
+			
+			user.setUserPassword(EncodingTemporaryPassword);
+			userRepository.save(user);
+			
+		} catch(Exception e) {
+			return ResponseDto.setFailed("오류가 발생했습니다.");
+		}
+		
 		// 성공하면 ResponseDto Successed 반환
 		return ResponseDto.setSuccess("메일 전송에 성공했습니다.", new ResultResponseDto(true));
 	}

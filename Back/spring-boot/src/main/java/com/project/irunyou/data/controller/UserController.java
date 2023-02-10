@@ -64,36 +64,6 @@ public class UserController {
 		return userService.deleteUser(email,dto.getUserPassword());
 	}
 
-	// 최예정 2023-02-02
-	// id 찾기
-	@PostMapping("findEmail")
-	public ResponseDto<UserRequestDto> findUserId(@RequestBody UserPhoneAndNameDto requestBody) {
-		return userService.findUserId(requestBody);
-	}
-	
-	
-	// 최예정 2023-02-01
-	// 아이디(이메일) 중복 체크
-	@PostMapping("checkId")
-	public ResponseDto<ResultResponseDto> checkId(@RequestBody UserRequestDto requsetBody) {
-		return userService.checkId(requsetBody);
-	}
-	
-	// 최예정 2023-02-02
-	// 닉네임 중복 체크
-	@PostMapping("checkNickname")
-	public ResponseDto<ResultResponseDto> checkNickname(@RequestBody UserNicknameDto requsetBody) {
-		return userService.checkNickname(requsetBody);
-	}
-	
-	// pw찾기
-	// request method가 Post이고 end point는 findPw
-	@PostMapping("findPw")
-	public ResponseDto<ResultResponseDto> findPw(@RequestBody FindPasswordDto requestBody) {
-		// 비즈니스 로직에 대한 결과 반환
-		return userService.findPw(requestBody);
-	}
-
 
 
 }
