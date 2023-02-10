@@ -2,6 +2,7 @@ import './UserDelete.css';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { useState } from 'react';
+// import bcrypt from 'bcrypt';
 
 import axiosInstance from "../../../service/axiosInstance";
 
@@ -39,6 +40,11 @@ export default function UserDelete() {
 
         // 회원탈퇴 기능
         let isDelete = window.confirm("정말 삭제하시겠습니까?");
+
+        // const saltRounds = 10;
+
+        // const salt = bcrypt.genSaltSync(saltRounds);
+        // const hashedPassword = bcrypt.hashSync(userPassword, salt);
 
         if (isDelete) {
             await axiosInstance
