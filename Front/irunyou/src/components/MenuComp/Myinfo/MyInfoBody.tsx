@@ -1,7 +1,6 @@
 import "./myinfo.css";
 import InfoItem from "./InfoItem";
 import Button from '@mui/material/Button';
-import { Link } from "react-router-dom";
 
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -31,6 +30,7 @@ export default function MyInfoBody() {
             </div>
             <Link to="/UserDelete">
             <Button variant="contained" color="error">회원 탈퇴</Button>
+            </Link>
             { modal && (<MyInfoVerify setModal={setModal} />) }
         </div>
     );
