@@ -13,23 +13,30 @@ import java.time.LocalDateTime;
 import com.project.irunyou.data.entity.RunScheduleEntity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetUserRunScheduleDto {
-	private int runSchedulePark;
+	
+	private int runScheduleIndex;
+	private String runSchedulePark;
+	private String runScheduleWriter;
 	private String runScheduleTitle;
 	private LocalDateTime runScheduleDatetime;
 	
-	// 일정 조회 서비스용 생성자
-	public GetUserRunScheduleDto(RunScheduleEntity runSchedule) {
-		this.runSchedulePark = runSchedule.getRunSchedulePark();
-		this.runScheduleTitle = runSchedule.getRunScheduleTitle();
-		this.runScheduleDatetime = runSchedule.getRunScheduleDateTime();
-	}
+//	// 일정 조회 서비스용 생성자
+//	public GetUserRunScheduleDto(RunScheduleEntity runSchedule) {
+//		this.runScheduleIndex = runSchedule.getRunScheduleIndex();
+//		this.runSchedulePark = runSchedule.getParkName();
+//		this.runScheduleWriter = runSchedule.getUserNickname();
+//		this.runScheduleTitle = runSchedule.getRunScheduleTitle();
+//		this.runScheduleDatetime = runSchedule.getRunScheduleDateTime();
+//	}
 
 	
 }
