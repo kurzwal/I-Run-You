@@ -13,7 +13,7 @@ interface props {
 
 export default function ScheduleItem( {runScheduleInfo} : props) {
     return (
-        <div className="schedule-item-container">
+        <div className="schedule-item-container" onClick={()=> {}}>
             {/* 이거 걍 월화수목금토일 이미지를 만들어서 쓰자 */}
             <div className="week-txt"><span>월</span></div>
             <div className="schedule-txt-container">
