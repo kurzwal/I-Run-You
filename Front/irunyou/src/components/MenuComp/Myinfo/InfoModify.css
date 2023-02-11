@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.config-container {
+    margin-left: 5%;
+    width: 500px;
+}
+
+.singup-mui {
+    display: flex;
+    justify-content: left;
+}
+
+.check-btn {
+    display: flex;
+    flex-direction: column;
+
+    width: 15%;
+    height: 50%;
+
+    margin-left: 10px;
+    margin-top: 5px;
+    padding-left: 9px;
+    
+    line-height: 25px;
+}
+
+.success {
+    color: #b6cf55;
+}
+
+.failed {
+    color: red;
+}
+
+.Signup-submit-btn {
+    display: flex;
+    justify-content: space-between;
+
+    width: 500px;
+}
+
+.signup-btn {
+    border: none;
+
+    margin-top: 30px;
+    
+    width: 200px;
+    height: 40px;
+
+    background-color: #b6cf55;
+}
+
+.config-input {
+    display: flex;
+    align-items: center;
+}
+
+/* 스크롤바 숨기기(없애기) */
+body::-webkit-scrollbar {
+    display: none;
+}

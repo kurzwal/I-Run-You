@@ -5,12 +5,16 @@
  * */
 package com.project.irunyou.data.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.irunyou.data.dto.CommentDto;
@@ -26,6 +30,12 @@ import com.project.irunyou.data.service.CommentService;
 public class CommentController {
 
 	@Autowired CommentService commentService;
+	
+	// Read (댓글 불러오기)
+	@GetMapping("")
+	public ResponseDto<List<CommentResponseDto>> getCommentList (@RequestParam Integer requestParam) {
+		return commentService.getCommentList(requestParam);
+	}
 	
 	// Create (댓글작성)
 	@PutMapping("")

@@ -1,5 +1,7 @@
 package com.project.irunyou.data.dto;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserLocationDto {
-	private double UserLatitude;
-	private double UserLongitude;
+	@NotNull
+	private double latitude;
+	@NotNull
+	private double longitude;
 }
