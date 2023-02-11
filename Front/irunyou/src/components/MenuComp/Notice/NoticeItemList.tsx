@@ -86,7 +86,7 @@ export default function NoticeItemList() {
             <div className="notice-list-container">
                 {noticeList &&
                     noticeList.map((notice: any, index) => (
-                        <Accordion>
+                        <Accordion key={notice.noticeIndex}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"

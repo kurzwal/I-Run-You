@@ -32,7 +32,9 @@ public interface ParkRepository extends JpaRepository<ParkEntity, Integer> {
 			+ "order by distance  limit 5")
 	public List<ParkEntity> findAllByDistance(double latitude,double longitude);
 	
-	
-	
+	// 공원 인덱스 -> 공원 이름 으로 반환
+	@Query("select p.parkName from park p where p.parkIndex = ?1")
+	public String findParkNameByParkIndex(int parkIndex);
+		
 	
 }
