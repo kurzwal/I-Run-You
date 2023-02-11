@@ -1,3 +1,6 @@
+// 2023-02-10 홍지혜
+// 백-프론트 연결 -> 컴포넌트 map으로 
+
 import React, { useCallback, useEffect, useState } from "react";
 import "./parkinfo.css";
 import ScheduleItem from "./ScheduleItem";

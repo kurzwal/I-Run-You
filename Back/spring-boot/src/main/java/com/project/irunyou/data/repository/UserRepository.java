@@ -31,8 +31,13 @@ public interface UserRepository extends JpaRepository<UserEntity,Integer> {
 	public UserEntity findByUserEmailAndUserPhoneNumber(String email, String phoneNumber);
 	public UserEntity findByUserPhoneNumberAndUserName(String userPhoneNumber, String userName);
 	
+	// 2023-02-12 홍지혜
 	// 유저 이메일 -> 유저 닉네임으로 반환
 	@Query("select u.userNickname from user u where u.userEmail = ?1")
 	public String findUserNicknameByUserEmail(String userEmail);
+	
+	// 코멘트 작성 유저 인덱스 -> 유저 닉네임으로 반환
+	@Query("select u.userNickname from user u where u.userIndex = ?1")
+	public String findUserNicknameByCommentWriterIndex(int CommentWriterIndex);
 	
 }
