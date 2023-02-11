@@ -27,14 +27,19 @@ import com.project.irunyou.data.dto.PatchScheduleDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.dto.RunScheduleDto;
+import com.project.irunyou.data.entity.ParkEntity;
 import com.project.irunyou.data.entity.RunScheduleEntity;
 import com.project.irunyou.data.entity.RunSchedulePaticipateEntity;
+import com.project.irunyou.data.entity.UserEntity;
 import com.project.irunyou.data.repository.ParkRepository;
 import com.project.irunyou.data.repository.RunScheduleRepository;
 import com.project.irunyou.data.repository.UserRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.project.irunyou.data.repository.RunScheduleParticipateRepository;
 
-
+@Slf4j
 @Service
 public class RunScheduleService {
 	
@@ -50,7 +55,7 @@ public class RunScheduleService {
 			RunScheduleEntity runShedule = RunScheduleEntity.builder()
 					.runSchedulePark(dto.getRunSchedulePark())
 					.runScheduleTitle(dto.getRunScheduleTitle())
-					.runScheduleWriter(writer)
+					.runScheduleWriter(writer)	// 유저 이메일
 					.runScheduleDateTime(dto.getRunScheduleDatetime())
 					.runScheduleContent(dto.getRunScheduleContent())
 					.build();
@@ -76,6 +81,7 @@ public class RunScheduleService {
 		}
 		return ResponseDto.setSuccess("일정이 삭제되었습니다.", new ResultResponseDto(true));
 	}
+	
 	
 	// 유저가 자신이 등록한 일정 수정
 	public ResponseDto<ResultResponseDto> patchSchedule(PatchScheduleDto dto) {
@@ -116,6 +122,7 @@ public class RunScheduleService {
 		return ResponseDto.setSuccess("일정 참여가 완료되었습니다.", new ResultResponseDto(true));
 	}
 	
+	
 	// 유저가 이미 존재하는 일정에 참여했다가 참여 취소
 	public ResponseDto<ResultResponseDto> cancelRunSchedule(String user, FindRunScheduleDto dto) {
 		try {
@@ -131,15 +138,24 @@ public class RunScheduleService {
 	
 	// 유저가 직접 생성한 일정 리스트 불러오기
 	public List<GetUserRunScheduleDto> readMyRunSchedule(String userEmail) {
+
 		List<GetUserRunScheduleDto> myRunScheduleList = new ArrayList<>();
+		
 		try {
 			List<RunScheduleEntity> myRunScheduleEntityList = runScheduleRepository.findAllByRunScheduleWriter(userEmail);
 			
 			for(RunScheduleEntity r : myRunScheduleEntityList) {
-				myRunScheduleList.add(new GetUserRunScheduleDto(r));
+				myRunScheduleList.add(GetUserRunScheduleDto.builder()
+					.runScheduleIndex(r.getRunScheduleIndex())
+					.runSchedulePark(parkRepository.findParkNameByParkIndex(r.getRunSchedulePark()))
+					.runScheduleTitle(r.getRunScheduleTitle())
+					.runScheduleWriter(userRepository.findUserNicknameByUserEmail(userEmail))
+					.runScheduleDatetime(r.getRunScheduleDateTime())
+					.build());
 			}
-			
+
 		}catch (Exception e) {
+
 			myRunScheduleList = null;
 		}
 		
@@ -149,48 +165,60 @@ public class RunScheduleService {
 	
 	// 유저가 참여한 일정 리스트 불러오기
 	public List<GetUserRunScheduleDto> readParticipateRunSchedule(String userEmail) {
-		List<RunScheduleEntity> participateRunScheduleEntities = new ArrayList<>();
-
+		
+		List<RunScheduleEntity> participateRunScheduleEntities = new ArrayList<>();	
 		List<GetUserRunScheduleDto> participateRunScheduleList = new ArrayList<>();
 
 		try {
 
-			List<RunSchedulePaticipateEntity> myParticipateRunScheduleEntityList = runScheduleParticipatieRepository
-					.findAllByUserEmail(userEmail);
-
+			List<RunSchedulePaticipateEntity> myParticipateRunScheduleEntityList = 
+					runScheduleParticipatieRepository.findAllByUserEmail(userEmail);	// 일정참여테이블에서 유저 이메일로 Entity객체 리스트 생성
+			
 			List<Integer> runScheduleIndex = new ArrayList<>();
 
 			for (RunSchedulePaticipateEntity r : myParticipateRunScheduleEntityList) {
-				runScheduleIndex.add(r.getRunScheduleIndex());
+				runScheduleIndex.add(r.getRunScheduleIndex());	// 해당 일정 인덱스 리스트
 			}
 
 			for (Integer i : runScheduleIndex) {
-				participateRunScheduleEntities.add(runScheduleRepository.findByRunScheduleIndex(i));
+				participateRunScheduleEntities.add(runScheduleRepository.findByRunScheduleIndex(i));	// 일정 인덱스로 일정 Entity객체 리스트 생성
 			}
 
-			for (RunScheduleEntity r : participateRunScheduleEntities) {
-				participateRunScheduleList.add(new GetUserRunScheduleDto(r));
+			for (RunScheduleEntity r : participateRunScheduleEntities) {	// entity객체 dto로 
+				participateRunScheduleList.add(GetUserRunScheduleDto.builder()
+						.runScheduleIndex(r.getRunScheduleIndex())
+						.runSchedulePark(parkRepository.findParkNameByParkIndex(r.getRunSchedulePark()))
+						.runScheduleTitle(r.getRunScheduleTitle())
+						.runScheduleWriter(userRepository.findUserNicknameByUserEmail(userEmail))
+						.runScheduleDatetime(r.getRunScheduleDateTime())
+						.build());	
 			}
+			
 		} catch (Exception e) {
+
 			participateRunScheduleList = null;
 		}
 
 		return participateRunScheduleList;
-
 	}
+	
 	
 	// 유저 일정 조회 (내가 만든 일정, 내가 참여한 일정 나눠서 출력됨)
 	public ResponseDto<Map<String,List<GetUserRunScheduleDto>>> readSchedule(String email) {
 		Map<String, List<GetUserRunScheduleDto>> data = new HashMap<>();
+
 		try {
-			data.put("내가 만든 일정", readMyRunSchedule(email));
-			data.put("내가 참여한 일정", readParticipateRunSchedule(email));
+
+			data.put("registrationSchedule", readMyRunSchedule(email));
+			data.put("participationSchedule", readParticipateRunSchedule(email));
+
 		} catch (Exception e) {
+
 			return ResponseDto.setFailed("일정을 불러오던 중 오류가 발생했습니다.");
 		}
-		
-		return ResponseDto.setSuccess("Success",data);
-		
+
+		return ResponseDto.setSuccess("Success", data);
+
 		}
 	
 }

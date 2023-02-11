@@ -32,9 +32,10 @@ public class CommentController {
 	@Autowired CommentService commentService;
 	
 	// Read (댓글 불러오기)
-	@GetMapping("")
-	public ResponseDto<List<CommentResponseDto>> getCommentList (@RequestParam Integer requestParam) {
-		return commentService.getCommentList(requestParam);
+	// http://localhost:3000/irunyou/comment&schIdx=?
+	@GetMapping("")	
+	public ResponseDto<List<CommentResponseDto>> getCommentList (@RequestParam int schIdx) {	// RequestParam 쓰실경우 파라미터 이름 알기쉽게 정해야 합니다
+		return commentService.getCommentList(schIdx);
 	}
 	
 	// Create (댓글작성)

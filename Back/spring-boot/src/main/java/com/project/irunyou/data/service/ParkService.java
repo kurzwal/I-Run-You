@@ -30,6 +30,7 @@ import com.project.irunyou.data.entity.ParkEntity;
 import com.project.irunyou.data.entity.RunScheduleEntity;
 import com.project.irunyou.data.repository.ParkRepository;
 import com.project.irunyou.data.repository.RunScheduleRepository;
+import com.project.irunyou.data.repository.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,6 +40,7 @@ public class ParkService {
 	
 	@Autowired ParkRepository parkRepository;
 	@Autowired RunScheduleRepository runScheduleRepository; 
+	@Autowired UserRepository userRepository;
 	
 	// 2023-02-09 홍지혜 -> 공원에 잡혀있는 RunSchedule Slice 
 	
@@ -48,18 +50,37 @@ public class ParkService {
 		return runScheduleRepository.findAllByRunScheduleParkOrderByRunScheduleDateTime(parkIndex, pageRequest);
 	}
 	
+	// 2023-02-12 홍지혜 -> 작성자 닉네임으로 뜨게 변경
 	// 공원에 잡힌 RunSchedule 불러오기
 	public ResponseDto<SliceResponseDto<ParkRunScheduleDto>> getParkRunScheduleList(int page, int size, int parkIndex) {
-		Slice<RunScheduleEntity> slicePage = findRunScheduleSliceByParkIndex(page-1, size, parkIndex);	// page 0 부터 시작하기 때문에 -1 해줌
-		
-		boolean isLast = slicePage.isLast();	// 마지막 페이지인지 확인
-		
-		List<RunScheduleEntity> schedules = slicePage.getContent();
 		
 		List<ParkRunScheduleDto> data = new ArrayList<>();
+		boolean isLast;
 		
-		for(RunScheduleEntity r : schedules) {
-			data.add(new ParkRunScheduleDto(r));
+		try {
+		
+			Slice<RunScheduleEntity> slicePage = findRunScheduleSliceByParkIndex(page-1, size, parkIndex);	// page 0 부터 시작하기 때문에 -1 해줌
+		
+			isLast = slicePage.isLast();	// 마지막 페이지인지 확인
+		
+			List<RunScheduleEntity> schedules = slicePage.getContent();
+		
+		
+			for(RunScheduleEntity r : schedules) {
+				data.add(ParkRunScheduleDto.builder()
+					.runScheduleIndex(r.getRunScheduleIndex())
+					.runSchedulePark(r.getRunSchedulePark())
+					.runScheduleTitle(r.getRunScheduleTitle())
+					.runScheduleWriter(userRepository.findUserNicknameByUserEmail(r.getRunScheduleWriter()))
+					.runScheduleContent(r.getRunScheduleContent())
+					.runScheduleDatetime(r.getRunScheduleDateTime())
+					.build());
+			}
+		
+		} catch(Exception e) {
+			
+			return ResponseDto.setFailed("data load Faild");
+		
 		}
 		
 		return ResponseDto.setSuccess("data load Success", new SliceResponseDto(data, isLast));

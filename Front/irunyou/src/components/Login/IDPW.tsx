@@ -23,18 +23,27 @@ export default function IDPW() {
     // 아이디 찾기
     const movePage = useNavigate();
 
+    // 2023-02-11 홍지혜 아이디 찾기 로직 수정
     const findId = () => {
         const data = {
             userName,
             userPhoneNumber
         }
-        axios.post('http://localhost:4040/auth/findemail', data).then((response) => {
-            const UserInformation = response.data.data;
-            // 상태를 바꾸어 밑에 사용할 구간에 넣어주어야한다.
-            const userEmail = UserInformation.userEmail;
-            setEmail(userEmail);
-            movePage("/Email")
-        })
+        axios.post('http://localhost:4040/auth/findemail', data)
+            .then((response) => {
+                if (!response.data.status) { // 가입정보가 없을 시 안내 메시지 띄우고 끝남
+                    return alert(response.data.message);
+                }
+                else {
+                    const UserInformation = response.data.data;
+                    // 상태를 바꾸어 밑에 사용할 구간에 넣어주어야한다.
+                    const userEmail = UserInformation.userEmail;
+                    setEmail(userEmail);
+                    movePage("/Email")
+                }
+            }).catch((error) => {
+
+            })
     }
 
     // 2023-02-06 홍지혜 임시비밀번호 발급 로직
@@ -44,27 +53,26 @@ export default function IDPW() {
     const findPassword = () => {
 
         const userEmail = {
-            userEmail : id
+            userEmail: id
         }
 
         axios.post('http://localhost:4040/auth/findPw', userEmail)
-        .then((response) => {
-            if(!response.data.status) {
-                setIsLoading(false)
-                alert(response.data.message);
-                window.location.reload();
-            } else {
-                setIsLoading(false)
-                movePage("/EMverify", {state : {id : id}});
-            }
-        })
-        .catch((error) => {
+            .then((response) => {
+                if (!response.data.status) {
+                    setIsLoading(false)
+                    return alert(response.data.message);
+                } else {
+                    setIsLoading(false)
+                    movePage("/EMverify", { state: { id: id } });
+                }
+            })
+            .catch((error) => {
 
-        })
+            })
 
     }
 
-    return(
+    return (
         <div className="idpw-container">
             <div className="container">
                 <div className="form-container">
@@ -97,12 +105,12 @@ export default function IDPW() {
                 </div>
                 <div className="form-container">
                     <form className="pw-form">
-                        <input className="form" type="text" placeholder="NAME" onChange={(e)=>setName(e.target.value)}/>
-                        <input className="form" type="email" placeholder="EMAIL" onChange={(e)=>setId(e.target.value)}/>
+                        <input className="form" type="text" placeholder="NAME" onChange={(e) => setName(e.target.value)} />
+                        <input className="form" type="email" placeholder="EMAIL" onChange={(e) => setId(e.target.value)} />
                         <br />
-                        <button className="idpw-btn" type="button" onClick={()=>findPassword()}>임시비밀번호 발급</button>
+                        <button className="idpw-btn" type="button" onClick={() => findPassword()}>임시비밀번호 발급</button>
                         <Link to="/Login">
-                        <button className="idpw-btn" type="button">로그인</button>
+                            <button className="idpw-btn" type="button">로그인</button>
                         </Link>
                     </form>
                 </div>

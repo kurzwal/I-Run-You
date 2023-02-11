@@ -13,27 +13,44 @@ import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.entity.CommentEntity;
 import com.project.irunyou.data.repository.CommentRepository;
+import com.project.irunyou.data.repository.UserRepository;
 
 @Service
 public class CommentService {
 
 	@Autowired CommentRepository commentRepository;
+	@Autowired UserRepository userRepository;
 	
-//	댓글 리스트 불러오는 메서드
-	public ResponseDto<List<CommentResponseDto>> getCommentList (Integer requestParam) {
+	// 2023-02-12 수정 : 홍지혜
+	//	댓글 리스트 불러오는 메서드
+	public ResponseDto<List<CommentResponseDto>> getCommentList (int schIndx) {
 		
-		List<CommentEntity> commentEntityList;
-		List<CommentResponseDto> commentListResult = new ArrayList<>();
+		List<CommentEntity> commentEntityList;	// 코멘트 엔티티 리스트 생성
+		List<CommentResponseDto> commentListResult = new ArrayList<>();	// response될 Dto 생성
+		
 		try {
-			commentEntityList = commentRepository.findAllByCommentScheduleIndex((int) requestParam);
+			commentEntityList = commentRepository.findAllByCommentScheduleIndex(schIndx);	// 스케줄 인덱스로 댓글 정보 가져오기
+			
+			// dto 로 변환
+			for(CommentEntity c : commentEntityList) {
+				commentListResult.add(CommentResponseDto.builder()
+						.commentIndex(c.getCommentIndex())
+						.commentScheduleIndex(c.getCommentScheduleIndex())
+						.commentWriter(userRepository.findUserNicknameByCommentWriterIndex(c.getCommentWriterIndex()))	// 여기서 유저인덱스 -> 유저 닉네임으로 바꿔서 넣습니다
+						.commentContent(c.getCommentContent())
+						.commentDatetime(c.getCommentDatetime())
+						.build());
+			}
+						
 		} catch(Exception e) {
 			return ResponseDto.setFailed("데이터베이스 조회 실패");
 		}
-		for (int i = 0; i < commentEntityList.size(); i++) {
-			commentListResult.add(new CommentResponseDto(commentEntityList.get(i)));
-		}
+//		for (int i = 0; i < commentEntityList.size(); i++) {
+//			commentListResult.add(new CommentResponseDto(commentEntityList.get(i)));
+//		}
 		return ResponseDto.setSuccess("댓글 조회에 성공했습니다.", commentListResult);
 	}
+	
 	
 	public ResponseDto<CommentResponseDto> registComment(CommentDto dto) {
 		
