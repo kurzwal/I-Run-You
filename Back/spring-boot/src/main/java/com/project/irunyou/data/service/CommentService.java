@@ -1,5 +1,8 @@
 package com.project.irunyou.data.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,22 @@ import com.project.irunyou.data.repository.CommentRepository;
 public class CommentService {
 
 	@Autowired CommentRepository commentRepository;
+	
+//	댓글 리스트 불러오는 메서드
+	public ResponseDto<List<CommentResponseDto>> getCommentList (Integer requestParam) {
+		
+		List<CommentEntity> commentEntityList;
+		List<CommentResponseDto> commentListResult = new ArrayList<>();
+		try {
+			commentEntityList = commentRepository.findAllByCommentScheduleIndex((int) requestParam);
+		} catch(Exception e) {
+			return ResponseDto.setFailed("데이터베이스 조회 실패");
+		}
+		for (int i = 0; i < commentEntityList.size(); i++) {
+			commentListResult.add(new CommentResponseDto(commentEntityList.get(i)));
+		}
+		return ResponseDto.setSuccess("댓글 조회에 성공했습니다.", commentListResult);
+	}
 	
 	public ResponseDto<CommentResponseDto> registComment(CommentDto dto) {
 		

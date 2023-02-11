@@ -17,6 +17,8 @@ export default function DialogParkSchedule({ parkIndex }: props) {
   const [isLast, setIsLast] = useState(false);  // 마지막인지
   const [ref, inView] = useInView();  // ref를 div에 걸어주면 해당 요소가 보이면 inView가 true로. 안 보이면 false로 자동 변경됨
 
+  const { setStateScheduleRegist }= useStore();
+
   // 서버에서 일정 가져오는 함수 Page가 바뀔때마다 재생성
   const getParkRunScheduleList = useCallback (async () => {
     setIsLoading(true);
@@ -59,9 +61,12 @@ export default function DialogParkSchedule({ parkIndex }: props) {
   // page가 바뀔 때마다 서버에 정보를 요청
   return (
     <div className="dialog-park-schedule-container">
-      <div className="dialog-park-schedule-title">모집중인 일정</div>
+      <div className="dialog-park-schedule-title">모집중인 일정
+        <Button onClick={setStateScheduleRegist} variant="contained">일정 생성</Button>
+      </div>
       <div>
-        {parkRunScheduleList.map((scheduleList: any, index : number) => (
+        { parkRunScheduleList.length !== 0 ?
+        parkRunScheduleList.map((scheduleList: any, index : number) => (
             <React.Fragment key ={index}>
                 {!isLoading && !isLast ? (
                     <div ref={ref}>
@@ -79,7 +84,8 @@ export default function DialogParkSchedule({ parkIndex }: props) {
                     </div>
                 )}
             </React.Fragment>
-          ))}
+          )) : 
+          <div>현재 이 공원에 모집중인 일정이 없습니다.</div>}
       </div>
     </div>
   );

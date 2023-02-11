@@ -59,7 +59,7 @@ export default function MainPage(){
     },[mapOpen])
 
     return (
-        <div>
+        <div className="main-page-wraper">
             <div className=""></div>
 
             {/* 기본그림 */}

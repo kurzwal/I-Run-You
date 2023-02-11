@@ -55,6 +55,8 @@ export default function Map() {
               image: markerImage // 마커 이미지 
             });
             
+            // 마커 누르면 공원상세정보로 이동하는 function
+            // (생성된 마커에 index번호 할당해서 각각의 function 만들어주기)
             (function(index) {
               window.kakao.maps.event.addListener(marker, 'click', function() {
                 setParkInfo(closeParks[index]);
