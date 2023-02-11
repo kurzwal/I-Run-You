@@ -16,7 +16,6 @@ import KakaoMap from './components/KakaoMap';
 import HomePage from './view/HomePage';
 import MainPage from './view/MainPage';
 import InfoModify from './components/MenuComp/Myinfo/InfoModify';
-import FAQmain from './components/FAQ/FAQmain';
 import FAQdetail from './components/FAQ/FAQdetail';
 import NoticeWriteAdmin from './components/MenuComp/Notice/NoticeWriteAdmin';
 import NoticeModifyAdmin from './components/MenuComp/Notice/NoticeModifyAdmin';
@@ -60,7 +59,6 @@ function App() {
         <Route path="/SUSC" element={<SUSCView />} />
         <Route path="/Login/kakao" element={<KakaoLogin />} />
 
-        <Route path="/FAQmain" element={<FAQmain />} />
         <Route path="/FAQdetail" element={<FAQdetail />} />
 
         <Route path="/InfoModify" element={<InfoModify />} />
