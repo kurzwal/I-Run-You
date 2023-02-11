@@ -1,0 +1,37 @@
+*{
+    box-sizing: border-box;
+}
+
+.comment-wraper {
+    padding: 0px 20px;
+}
+
+.comment-header-bar {
+    display: flex;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #00000042;
+}
+
+.comment-header-bar div {
+    padding-right: 10px;
+}
+
+.comment-item-wraper {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+
+    padding: 10px;
+    margin: 5px;
+    background-color: white;
+    border-radius: 5px;
+
+}
+
+.comment-content-container {
+    display: flex;
+    justify-content: left;
+    text-align: left;
+    width: 300px;
+
+}
