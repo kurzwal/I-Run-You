@@ -90,6 +90,14 @@
 
 /* MainPage */
 
+
+.main-page-wraper {
+    width: 100vw;
+    height: 100vh;
+    
+    overflow: hidden;
+}
+
 .speed-dial-container {
     display: flex;
     justify-content: center;

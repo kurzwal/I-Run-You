@@ -10,9 +10,12 @@ interface Park {
 }
 
 interface Schedule {
+    runScheduleIndex: number;
     runSchedulePark: number;
     runScheduleTitle: string;
-    runScheduleDatetime: Date;
+    runScheduleWriter: number;
+    runScheduleDatetime: string;
+    runScheduleContent: string;
 }
 
 interface MapStoreInterface {
@@ -21,7 +24,7 @@ interface MapStoreInterface {
 
     parkInfo: Park;
 
-    scheduleInfoArray: Array<Schedule>;
+    scheduleInfo: Schedule;
 
     toggleParkInfo: () => void;
     setStateParkInfo: () => void;
@@ -29,7 +32,7 @@ interface MapStoreInterface {
     setStateScheduleRegist: () => void;   // 스케쥴 생성하기
 
     setParkInfo: (park:Park) => void;
-    setScheduleInfoArray: (scheduleInfoArray:Array<Schedule>) => void;
+    setScheduleInfo: (scheduleInfo:Schedule) => void;
 }
 
 
@@ -51,7 +54,14 @@ const useStore = create<MapStoreInterface>((set) => ({
         parkArea: 0,
     },
 
-    scheduleInfoArray: [],
+    scheduleInfo: {
+        runScheduleIndex: 0,
+        runSchedulePark: 0,
+        runScheduleTitle: "",
+        runScheduleWriter: 0,
+        runScheduleDatetime: "",
+        runScheduleContent: "",
+    },
 
     // 상세정보 여닫기
     toggleParkInfo: () => set((state) => ({ ...state, parkInfoOpen : !state.parkInfoOpen })),
@@ -61,7 +71,7 @@ const useStore = create<MapStoreInterface>((set) => ({
     setStateScheduleRegist: () => set((state) => ({...state, parkInfoState : 2})),
 
     setParkInfo: (parkInfo) => set((state) => ({ ...state, parkInfo})),
-    setScheduleInfoArray: (scheduleInfoArray) => set((state) => ({ ...state, scheduleInfoArray})),
+    setScheduleInfo: (scheduleInfo) => set((state) => ({ ...state, scheduleInfo})),
 }))
 
 export default useStore;

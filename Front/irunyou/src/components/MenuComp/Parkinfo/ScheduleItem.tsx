@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import useStore from "./Store";
+
 interface props {
   runScheduleInfo: {
     runScheduleIndex: number;
@@ -12,8 +14,16 @@ interface props {
 }
 
 export default function ScheduleItem({runScheduleInfo} : props) {
+
+  const { setStateScheduleInfo, setScheduleInfo } = useStore();
+
+  const openScheduleInfoHandler = () => {
+    setStateScheduleInfo();
+    setScheduleInfo(runScheduleInfo);
+  }
+
   return (
-    <div className="dialog-schedule-item">
+    <div className="dialog-schedule-item" onClick={ openScheduleInfoHandler } style={{ cursor: "pointer" }} >
       <div className="dsi-header">
         <div className="dsi-weekday">
           <span>월</span>
