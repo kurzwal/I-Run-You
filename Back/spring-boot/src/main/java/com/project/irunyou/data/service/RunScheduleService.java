@@ -52,6 +52,7 @@ public class RunScheduleService {
 	// 유저가 직접 일정 등록 (공원, 제목, 작성자, 시간, 내용)
 	public ResponseDto<ResultResponseDto> registSchedule(String writer, RunScheduleDto dto){
 		try {
+			System.out.println("여기?");
 			RunScheduleEntity runShedule = RunScheduleEntity.builder()
 					.runSchedulePark(dto.getRunSchedulePark())
 					.runScheduleTitle(dto.getRunScheduleTitle())
@@ -59,7 +60,9 @@ public class RunScheduleService {
 					.runScheduleDateTime(dto.getRunScheduleDatetime())
 					.runScheduleContent(dto.getRunScheduleContent())
 					.build();
+			System.out.println("여기??");
 			runScheduleRepository.save(runShedule);
+			System.out.println("여기???");
 			
 		} catch (Exception e) {
 			return ResponseDto.setFailed("일정 등록중 오류가 발생했습니다.");
