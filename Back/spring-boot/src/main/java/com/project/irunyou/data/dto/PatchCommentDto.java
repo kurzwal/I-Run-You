@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DeleteCommentDto {
+public class PatchCommentDto {
 	
 	private int commentIndex;
-	private int commentScheduleIndex;
-	private int commentWriterIndex;
-
+	private String commentContent;
+	
 }

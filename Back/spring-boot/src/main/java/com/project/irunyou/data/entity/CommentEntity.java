@@ -34,20 +34,21 @@ import java.time.LocalDateTime;
 @Entity(name="comment")
 @Table(name="comment")
 public class CommentEntity {
+	
+	// 댓글정보를 담는 comment 테이블과 매핑되는 CommentEntity입니다.
+	
     @Id
     @NotNull
-    private int commentIndex;
+    private int commentIndex;	// comment 테이블의 인덱스입니다. 테이블에 값이 추가될 때 마다 자동으로 증가합니다.
     @NotNull
-    private int commentScheduleIndex;
+    private int commentScheduleIndex;	// 댓글이 달린 Run일정의 인덱스입니다.
     @NotNull
-    private int commentWriterIndex;
+    private String commentWriter;	// 댓글 작성 유저의 정보입니다. AuthenticationPrincipal로 값을 받아 유저 이메일이 저장됩니다.
     @NotNull
-    private String commentContent;
-    @NotNull
+    private String commentContent;	// 댓글의 내용입니다.
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
-    //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    @CreatedDate	// service클래스에서 dateTime 빌드없이 설정해주기
-    private LocalDateTime commentDatetime;
-    private int commentLikeUser;
+    @CreatedDate
+    private LocalDateTime commentDatetime;	// 댓글의 작성 시간입니다. LocalDateTime.now() 함수로 입력됩니다.
+    private int commentLikeUser;	// 댓글 좋아요가 눌려진 수 입니다.
 
 }
