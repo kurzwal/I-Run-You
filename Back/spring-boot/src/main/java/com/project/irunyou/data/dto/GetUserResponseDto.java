@@ -34,6 +34,5 @@ public class GetUserResponseDto {
 		this.userAddress = user.getUserAddress();
 		this.userAddressDetail = user.getUserAddressDetail();
 //		this.phone_num = user.getPhone_num();
-		this.userLevel = user.getUserLevel();
 	}
 }

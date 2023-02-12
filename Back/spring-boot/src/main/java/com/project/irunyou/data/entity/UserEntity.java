@@ -44,7 +44,6 @@ public class UserEntity {
     private String userAddressDetail;
     @NotNull
     private String userPhoneNumber;
-    private int userLevel;
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
     @CreatedDate
     private LocalDateTime userJoinDate;
