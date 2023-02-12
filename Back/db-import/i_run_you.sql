@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: i_run_you
+-- Host: localhost    Database: i_run_you
 -- ------------------------------------------------------
 -- Server version	8.0.31
 
@@ -35,7 +35,6 @@ CREATE TABLE `code` (
 
 LOCK TABLES `code` WRITE;
 /*!40000 ALTER TABLE `code` DISABLE KEYS */;
-INSERT INTO `code` VALUES ('64tK2pJe','mkw1999@naver.com'),('6HRPdRKJ','mkw1999@naver.com'),('SD2orRRY','mkw1999@naver.com');
 /*!40000 ALTER TABLE `code` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,7 +53,7 @@ CREATE TABLE `comment` (
   `comment_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `comment_like_user` int DEFAULT '0',
   PRIMARY KEY (`comment_index`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +104,7 @@ CREATE TABLE `faq` (
   `faq_user_email` varchar(45) DEFAULT NULL,
   `faq_content` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`faq_index`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,31 +113,7 @@ CREATE TABLE `faq` (
 
 LOCK TABLES `faq` WRITE;
 /*!40000 ALTER TABLE `faq` DISABLE KEYS */;
-INSERT INTO `faq` VALUES (1,'qwer','문경원','기타','mkw1999@naver.com','qwerlkqlkhrytlhlkh'),(2,'asfdasdfasdf','aasdf','10','asfdasdf','asdfasdfasdfasfd'),(3,'aaa','aaaa','','aaa','aaa'),(4,'asdff','asdf','공원찾기','asdf','asdfafsdasdfasdf'),(5,'sadf','asdf','','asdf','asdf');
 /*!40000 ALTER TABLE `faq` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `level`
---
-
-DROP TABLE IF EXISTS `level`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `level` (
-  `level_index` int NOT NULL AUTO_INCREMENT,
-  `level_img` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`level_index`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `level`
---
-
-LOCK TABLES `level` WRITE;
-/*!40000 ALTER TABLE `level` DISABLE KEYS */;
-/*!40000 ALTER TABLE `level` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -150,10 +125,10 @@ DROP TABLE IF EXISTS `notice_board`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notice_board` (
   `notice_index` int NOT NULL AUTO_INCREMENT,
-  `notice_title` varchar(45) NOT NULL,
+  `notice_title` varchar(50) NOT NULL,
   `notice_content` text NOT NULL,
   PRIMARY KEY (`notice_index`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,12 +179,11 @@ CREATE TABLE `run_schedule` (
   `run_schedule_index` int NOT NULL AUTO_INCREMENT,
   `run_schedule_park` int NOT NULL,
   `run_schedule_title` varchar(45) NOT NULL,
-  `run_schedule_writer_index` int NOT NULL,
-  `run_schedule_datetime` datetime NOT NULL,
+  `run_schedule_writer` varchar(50) NOT NULL,
+  `run_schedule_date_time` datetime NOT NULL,
   `run_schedule_content` varchar(1000) NOT NULL,
-  `run_schedule_like_user` int DEFAULT '0',
   PRIMARY KEY (`run_schedule_index`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,27 +196,27 @@ LOCK TABLES `run_schedule` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `run_schedule_like`
+-- Table structure for table `run_schedule_participate`
 --
 
-DROP TABLE IF EXISTS `run_schedule_like`;
+DROP TABLE IF EXISTS `run_schedule_participate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `run_schedule_like` (
-  `run_schedule_like_index` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `run_schedule_participate` (
+  `run_schedule_participate_index` int NOT NULL AUTO_INCREMENT,
   `run_schedule_index` int NOT NULL,
-  `user_index` int NOT NULL,
-  PRIMARY KEY (`run_schedule_like_index`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `user_email` varchar(50) NOT NULL,
+  PRIMARY KEY (`run_schedule_participate_index`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `run_schedule_like`
+-- Dumping data for table `run_schedule_participate`
 --
 
-LOCK TABLES `run_schedule_like` WRITE;
-/*!40000 ALTER TABLE `run_schedule_like` DISABLE KEYS */;
-/*!40000 ALTER TABLE `run_schedule_like` ENABLE KEYS */;
+LOCK TABLES `run_schedule_participate` WRITE;
+/*!40000 ALTER TABLE `run_schedule_participate` DISABLE KEYS */;
+/*!40000 ALTER TABLE `run_schedule_participate` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -255,17 +229,16 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_index` int NOT NULL AUTO_INCREMENT,
   `user_email` varchar(45) NOT NULL,
-  `user_password` varchar(1000) NOT NULL,
+  `user_password` varchar(100) NOT NULL,
   `user_address` varchar(45) DEFAULT NULL,
-  `user_address_detail` varchar(45) DEFAULT NULL,
+  `user_address_detail` varchar(100) DEFAULT NULL,
   `user_phone_number` varchar(16) NOT NULL,
-  `user_level` int DEFAULT '1',
-  `user_join_date` datetime NOT NULL,
+  `user_join_date` date NOT NULL,
+  `user_name` varchar(10) NOT NULL,
   `user_nickname` varchar(45) NOT NULL,
-  `user_name` varchar(45) NOT NULL,
   PRIMARY KEY (`user_index`),
   UNIQUE KEY `user_email` (`user_email`,`user_phone_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -274,33 +247,8 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (11,'mkw1999@naver.com','$2a$10$axNIiJiMieE8P2wSCwN.fe09vf8JbrLDiw8xyoZQGUYgPkbFTw5R2','46997 부산 사상구 백양대로342번길 16','주례동, 엘지신주례아파트','01064350294',0,'2023-02-07 12:48:28','kw','문경원'),(12,'asdf','$2a$10$Pi.kqcxw7RWxCmLjfoXGIewNHOMO0v5T/RgR9AI0rRZRg.v3vYIZC','13480 경기 성남시 분당구 대왕판교로 477','판교동, 낙생고등학교','01011111111',0,'2023-02-08 12:34:01','asdf','asdf');
+INSERT INTO `user` VALUES (1,'1234@gmail.com','$2a$10$9q4REo1PAqCGYRl3HmpgweZqsfuHN/htoiWuVSLixjPxpIx/X1/yS','경남 김해시','내외동','01000011212','2023-01-31','지혜','피자배달부'),(2,'minsick@naver.com','$2a$10$ig2R8PB6Uq5In2JPvswl3ONir1xdsMn97glDJ.ti6GyjINRsH.xcW','63214 제주특별자치도 제주시 가령로 5-1','이도이동 102호','01078787878','2023-02-12','김민식','민식대장'),(3,'enjung1106@gmail.com','$2a$10$/CcchQK5J5ZlbsPkYnRdce9l.hdaedxssxZWqdt8uap.sQLqa4tFC','13494 경기 성남시 분당구 대왕판교로 670','삼평동, 유스페이스2 1004호','01011111111','2023-02-12','이은정','은정호소인'),(4,'gdfjkcmdk@naver.com','$2a$10$oAVOK8I08O80KlrbYRj0v.RTEd25fGWQZPegOKZmcoK6/qpBeTc0e','06036 서울 강남구 가로수길 14-3','신사동','01098760000','2023-02-12','김재훈','용개'),(5,'vmd045@gmail.com','$2a$10$mR1LKpa3zBj6VIBDEgNkNu6.I1Zdga/NNIc7KuU5rMLtDF2se9HNS','44717 울산 남구 갈밭로 14','삼산동','01067676767','2023-02-12','김채원','채원공주'),(6,'cfgk54@daum.net','$2a$10$9/qfa3qoohWfoQoIV2ad4.5GjfLYde763j8z0f6/C4uroKj5Y1prG','52309 경남 하동군 청암면 전나무길 18','묵계리','01054545454','2023-02-12','남궁성','자바의정석'),(7,'dsxmk4520978@gmail.com','$2a$10$Wg2lOJNuYcW977lNf9l6zuAH8bABUGGg5tw1k08EjeqolZ/OZ.Ff6','24744 강원 고성군 죽왕면 짱고개길 13','가진리, 마리스','01023232323','2023-02-12','한성례','성례호소인'),(8,'azjmk239@gmail.com','$2a$10$aaENMHcSgU6wlrHIzJRsreF4zu2H6mXpm5Gg/WURRcx4B2OXI9EDu','32263 충남 홍성군 홍북읍 충남대로 24','신경리, 내포제나우스오피스텔 3021호','01024242424','2023-02-12','채숙향','숙향호소인'),(9,'graejoi43@gmail.com','$2a$10$WBiyJH/HhcBtsQfCYaS6DeGN8iNBfzd1CwHHN4r3L7q.l6vm1Q5.G','08322 서울 구로구 구로동로 5-7','가리봉동, 삼원빌','01009090909','2023-02-12','김영재','영재호소인'),(10,'graeoih@gmail.com','$2a$10$SeBZqJIzw8up3KL4skihf.lZ6cb0vt30qDjv2EHjcYJedZP4aGe8K','04716 서울 성동구 고산자로 175','행당동, 서울숲행당푸르지오아파트','01000000000','2023-02-12','김종운','걸레문다람쥐');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user_address_detail`
---
-
-DROP TABLE IF EXISTS `user_address_detail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_address_detail` (
-  `user_address_detail_index` int NOT NULL AUTO_INCREMENT,
-  `user_index` int NOT NULL,
-  `user_address_detail` varchar(45) DEFAULT NULL,
-  `user_poastal_code` int DEFAULT NULL,
-  PRIMARY KEY (`user_address_detail_index`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_address_detail`
---
-
-LOCK TABLES `user_address_detail` WRITE;
-/*!40000 ALTER TABLE `user_address_detail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_address_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -312,4 +260,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-08 12:45:52
+-- Dump completed on 2023-02-12 18:33:00
