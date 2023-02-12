@@ -8,9 +8,11 @@ package com.project.irunyou.data.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.irunyou.data.dto.CommentDto;
 import com.project.irunyou.data.dto.CommentResponseDto;
-import com.project.irunyou.data.dto.DeleteCommentDto;
+import com.project.irunyou.data.dto.PatchCommentDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.service.CommentService;
@@ -40,14 +42,20 @@ public class CommentController {
 	
 	// Create (댓글작성)
 	@PutMapping("")
-	public ResponseDto<CommentResponseDto> registComment (@RequestBody CommentDto requestBody){
-		return commentService.registComment(requestBody);
+	public ResponseDto<ResultResponseDto> registComment (@AuthenticationPrincipal String email, @RequestBody CommentDto requestBody){
+		return commentService.registComment(email, requestBody);
 	}
 	
 	// Delete (댓글삭제)
 	@DeleteMapping("")
-	public ResponseDto<ResultResponseDto> deleteComment (@RequestBody DeleteCommentDto requestBody){
-		return commentService.deleteComment(requestBody);
+	public ResponseDto<ResultResponseDto> deleteComment (@AuthenticationPrincipal String email, @RequestParam int cmtIdx){
+		return commentService.deleteComment(email,cmtIdx);
 	}
 	
+	// 2023-02-12 홍지혜
+	// 댓글 수정
+	@PatchMapping("")
+	public ResponseDto<ResultResponseDto> modifyComment(String email,PatchCommentDto dto) {
+		return commentService.modifyComment(email, dto);
+	}
 }

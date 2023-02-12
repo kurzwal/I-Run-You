@@ -23,17 +23,22 @@ import javax.persistence.Table;
 @Entity(name="park")
 @Table(name="park")
 public class ParkEntity {
+	
+	// 공원정보를 담는 park 테이블과 매핑되는 ParkEntity입니다.
+	
     @Id
     @NotNull
-    private int parkIndex;
+    private int parkIndex;	// park 테이블의 인덱스입니다. 테이블에 값이 추가될 때마다 자동으로 증가합니다.
     @NotNull
-    private String parkName;
+    private String parkName;	// 공원의 이름입니다.
     @NotNull
-    private String parkAddress;
+    private String parkAddress;		// 공원의 주소 정보입니다.
     @NotNull
-    private double parkLatitude;
+    private double parkLatitude;	// 공원의 위도입니다.
     @NotNull
-    private double parkLongitude;
+    private double parkLongitude;	// 공원의 경도입니다.
     @NotNull
-    private int parkArea;
+    private int parkArea;	// 공원의 면적입니다. 
+    						// I-RUN-YOU는 달리기를 중점으로 하기 때문에,
+    						// 공원에서 달릴말한 공간이 확보되는 30000㎡ 이상 면적을 가진 공원만을 다룹니다.
 }

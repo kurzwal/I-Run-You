@@ -14,8 +14,6 @@ import lombok.NoArgsConstructor;
 public class CommentDto {
 
 	@NotNull
-    private int commentWriterIndex;
-	@NotNull
     private int commentScheduleIndex;
 	@NotNull
     private String commentContent;

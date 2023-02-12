@@ -1,5 +1,9 @@
 package com.project.irunyou.data.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -65,11 +69,15 @@ public class AuthService {
 		// 비밀번호 암호화
 		String encryptedPassword = passwordEncoder.encode(password);
 
-		UserEntity user = UserEntity.builder().userName(dto.getUserName()).userEmail(dto.getUserEmail())
+		UserEntity user = UserEntity.builder()
+				.userName(dto.getUserName())	// 유저 이름
+				.userEmail(dto.getUserEmail())	// 유저 이메일
 				.userPassword(encryptedPassword) // 암호화된 비밀번호로 저장
-				.userAddress(dto.getUserAddress()).userAddressDetail(dto.getUserAddressDetail())
+				.userAddress(dto.getUserAddress())	
+				.userAddressDetail(dto.getUserAddressDetail())	// 유저의 주소 정보
 				.userPhoneNumber(userPhone) // 하이픈 제외한 휴대전화번호 저장
 				.userNickname(dto.getUserNickname()) // 닉네임
+				.userJoinDate(LocalDate.now()) 	// 가입날짜
 				.build();
 
 		userRepository.save(user);

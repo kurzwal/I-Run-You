@@ -65,13 +65,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 //			filterChain.doFilter(request,response);		
 //		} else {
 		try {			
-			log.info("필터실행중");
+//			log.info("필터실행중");
 			String token = parseBearerToken(request);
-			log.info("request토큰확인 " + token);// request에서 토큰 가져오기
+//			log.info("request토큰확인 " + token);// request에서 토큰 가져오기
 			
 			if(token != null && !token.equalsIgnoreCase("null")) {	// 토큰 검사
 				String userEmail = tokenProvider.CheckAndGetUserEmail(token);	// 이메일 가져오기
-				log.info("인증 유저 이메일 확인용 : " + userEmail);
+//				log.info("인증 유저 이메일 확인용 : " + userEmail);
 				// SecurityContextHolder에 등록해야 인증된 사용자
 				AbstractAuthenticationToken abstractAuthenticationToken
 					// 사용자 인증정보 저장

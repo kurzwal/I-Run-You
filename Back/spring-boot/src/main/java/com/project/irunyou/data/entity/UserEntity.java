@@ -15,6 +15,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -33,20 +34,23 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name="user")
 @EntityListeners(AuditingEntityListener.class)
 public class UserEntity {
+	
+	// 유저정보를 담는 user 테이블과 매핑되는 UserEntity입니다.
+	
     @Id
     @NotNull
-    private int userIndex;
+    private int userIndex;	// user 테이블의 인덱스입니다. 테이블에 값이 추가될 때 마다 자동으로 증가합니다.
     @NotNull
-    private String userEmail;
+    private String userEmail;	// 유저의 이메일 입니다. 타 유저와 중복될 수 없습니다.
     @NotNull
-    private String userPassword;
-    private String userAddress;
-    private String userAddressDetail;
+    private String userPassword;	// 유저의 비밀번호 입니다. 암호화 되어 저장됩니다.
+    private String userAddress;		// 유저의 주소정보입니다. 우편번호와 함께 저장됩니다.
+    private String userAddressDetail;	// 유저 주소정보의 세부 정보입니다. 
     @NotNull
-    private String userPhoneNumber;
+    private String userPhoneNumber;	// 유저의 휴대폰 번호입니다. 타 유저와 중복될 수 없습니다.
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="Asia/Seoul")
     @CreatedDate
-    private LocalDateTime userJoinDate;
-    private String userName;
-    private String userNickname;
+    private LocalDate userJoinDate;		// 유저가 회원가입을 한 날짜입니다. LocalDate.now() 함수로 입력됩니다.
+    private String userName;	// 유저의 본명입니다.
+    private String userNickname;	// 유저의 닉네임입니다. 타 유저와 중복될 수 없습니다.
 }

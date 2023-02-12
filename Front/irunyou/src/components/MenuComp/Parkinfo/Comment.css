@@ -21,11 +21,15 @@
     justify-content: space-between;
     text-align: center;
 
-    padding: 10px;
+    padding: 5px;
     margin: 5px;
-    background-color: white;
-    border-radius: 5px;
+    
+    border-bottom: 1px solid #00000042; 
 
+}
+
+.comment-item-wraper div {
+    font-size: 13px;
 }
 
 .comment-content-container {
@@ -34,4 +38,35 @@
     text-align: left;
     width: 300px;
 
+}
+
+.comment-write-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-input-container {
+    padding: 5px;
+}
+
+.comment-input-container textarea {
+    width: 100%;
+    height: 60px;
+    border-radius: 5px;
+    padding: 10px;
+    resize: none;
+
+    font-size: 13px;
+}
+
+.comment-write-button-div {
+    display: flex;
+    justify-content: right;
+    padding: 0px 5px;
+}
+
+.comment-ud-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
