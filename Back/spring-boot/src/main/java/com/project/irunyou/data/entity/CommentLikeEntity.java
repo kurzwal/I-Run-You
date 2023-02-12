@@ -24,5 +24,5 @@ public class CommentLikeEntity {
 	@NotNull
 	private int commentIndex;
 	@NotNull
-	private int userIndex;
+	private String userEmail;
 }

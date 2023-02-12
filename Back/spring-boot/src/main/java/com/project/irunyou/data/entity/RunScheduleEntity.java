@@ -23,6 +23,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -32,21 +34,24 @@ import java.time.LocalDateTime;
 @Entity(name="run_schedule")
 @Table(name="run_schedule")
 public class RunScheduleEntity {
+	
+	// Run일정 정보를 담는 run_Schedule과 매핑되는 RunScheduleEntity입니다.
 
     @Id
     @NotNull
-    private int runScheduleIndex;
-    private int runSchedulePark;
+    private int runScheduleIndex;	// run_Schedule 테이블의 인덱스입니다. 테이블에 값이 추가될 때 매다 자동으로 증가합니다.
     @NotNull
-    private String runScheduleTitle;
+    private int runSchedulePark;	// Run일정이 잡혀있는 공원의 인덱스 번호 입니다. 
     @NotNull
-    private String runScheduleWriter;
+    private String runScheduleTitle;	// Run 일정의 제목입니다.
+    @NotNull
+    private String runScheduleWriter;	// Run 일정의 작성자입니다. @AuthenticationPrincipal로 값을 받아 유저 이메일이 저장됩니다.
     @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime runScheduleDateTime;
+    private LocalDateTime runScheduleDateTime;	// Run일정이 열릴 시간입니다. 유저가 직접 설정합니다.
     @NotNull
-    private String runScheduleContent;
+    private String runScheduleContent;	// Run일정의 내용입니다.
     
 
 }
