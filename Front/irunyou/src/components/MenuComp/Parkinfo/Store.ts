@@ -26,6 +26,8 @@ interface MapStoreInterface {
 
     scheduleInfo: Schedule;
 
+    scheduleDatetime: string;
+
     toggleParkInfo: () => void;
     setStateParkInfo: () => void;
     setStateScheduleInfo: () => void;   // 스케쥴 자세히보기
@@ -33,6 +35,7 @@ interface MapStoreInterface {
 
     setParkInfo: (park:Park) => void;
     setScheduleInfo: (scheduleInfo:Schedule) => void;
+    setScheduleDatetime: (scheduleDatetime: string) => void;
 }
 
 
@@ -63,6 +66,8 @@ const useStore = create<MapStoreInterface>((set) => ({
         runScheduleContent: "",
     },
 
+    scheduleDatetime: "2023-01-01T00:00:00",
+
     // 상세정보 여닫기
     toggleParkInfo: () => set((state) => ({ ...state, parkInfoOpen : !state.parkInfoOpen })),
     // 공원정보 보기
@@ -72,6 +77,10 @@ const useStore = create<MapStoreInterface>((set) => ({
 
     setParkInfo: (parkInfo) => set((state) => ({ ...state, parkInfo})),
     setScheduleInfo: (scheduleInfo) => set((state) => ({ ...state, scheduleInfo})),
+
+    setScheduleDatetime: (scheduleDateTime) => set((state) => ({ ...state, scheduleDatetime: scheduleDateTime})),
+
+
 }))
 
 export default useStore;
