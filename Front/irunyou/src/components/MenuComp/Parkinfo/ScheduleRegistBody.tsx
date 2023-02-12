@@ -1,5 +1,6 @@
 import useStore from "./Store"
 import { useState } from 'react';
+import axios from 'axios';
 
 interface ScheduleRegist {
 	runSchedulePark: number;
@@ -22,17 +23,38 @@ export default function ScheduleRegistBody() {
         // url : "/irunyou/runschedule/create"
         // data : ScheduleRegist interface 참고
         // runScheduleDatetime은 자료형 나중에 맞추고 일단 postSomeTime 사용
+    
+
+    const axiosInstance = axios.create({
+        baseURL: "http://localhost:4040",
+        // 백 주소인지 프론트 주소인지 잘 모르겠음
+    });
+
+    axiosInstance
+        .post("/irunyou/runschedule/create", {
+            scheduleRegist : scheduleRegist
+        })
+        .then(response => {
+        if (!response.data.status) {
+            return alert(response.data.message);
+        }
+        alert(response.data.message);
+        window.location.reload();
+        })
+        .catch(error => {
+        alert(error.message);
+        });
 
     const postSomeTime: string = "2023-03-01T12:00"
     
 
     return (
         <div className="regist-body-wraper">
-            <div className="title">스케쥴 생성하기</div>
+            <div className="title">스케줄 생성하기</div>
             {/* textfield */}
             <div>
-                {/* cancel btn */}
-                {/* submit btn */}
+                <button className="cancel btn"></button>
+                <button className="submit-btn"></button>
             </div>
         </div>
     )
