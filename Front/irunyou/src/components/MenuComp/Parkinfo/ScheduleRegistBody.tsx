@@ -25,27 +25,27 @@ export default function ScheduleRegistBody() {
         // runScheduleDatetime은 자료형 나중에 맞추고 일단 postSomeTime 사용
     
 
-    const axiosInstance = axios.create({
-        baseURL: "http://localhost:4040",
-        // 백 주소인지 프론트 주소인지 잘 모르겠음
-    });
+    // const axiosInstance = axios.create({
+    //     baseURL: "http://localhost:4040",
+    //     // 백 주소인지 프론트 주소인지 잘 모르겠음
+    // });
 
-    axiosInstance
-        .post("/irunyou/runschedule/create", {
-            scheduleRegist : scheduleRegist
-        })
-        .then(response => {
-        if (!response.data.status) {
-            return alert(response.data.message);
-        }
-        alert(response.data.message);
-        window.location.reload();
-        })
-        .catch(error => {
-        alert(error.message);
-        });
+    // axiosInstance
+    //     .post("/irunyou/runschedule/create", {
+    //         scheduleRegist : scheduleRegist
+    //     })
+    //     .then(response => {
+    //     if (!response.data.status) {
+    //         return alert(response.data.message);
+    //     }
+    //     alert(response.data.message);
+    //     window.location.reload();
+    //     })
+    //     .catch(error => {
+    //     alert(error.message);
+    //     });
 
-    const postSomeTime: string = "2023-03-01T12:00"
+    // const postSomeTime: string = "2023-03-01T12:00"
     
 
     return (

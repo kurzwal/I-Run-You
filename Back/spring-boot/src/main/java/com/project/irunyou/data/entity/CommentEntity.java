@@ -40,10 +40,9 @@ public class CommentEntity {
     @NotNull
     private int commentScheduleIndex;
     @NotNull
-    private int commentWriterIndex;
+    private String commentWriter;	// 댓글 작성 유저 이메일
     @NotNull
     private String commentContent;
-    @NotNull
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @CreatedDate	// service클래스에서 dateTime 빌드없이 설정해주기

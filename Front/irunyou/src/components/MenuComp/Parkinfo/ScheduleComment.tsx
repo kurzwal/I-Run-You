@@ -3,6 +3,8 @@ import axiosInstance from "../../../service/axiosInstance";
 import { useState, useEffect } from 'react';
 import './Comment.css';
 import CommentItem from './CommentItem';
+import { Button } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 interface Props {
     runScheduleIndex: number;
@@ -16,10 +18,15 @@ interface Comment {
     commentDatetime: string;
 }
 
+
 export default function ScheduleComment({ runScheduleIndex }: Props) {
 
     const [commentArray, setCommentArray] = useState<Comment[]>([]);
+    const [commentContent,setCommentContent] = useState(String);
 
+
+    // 댓글 목록 불러오는 함수
+    // 자꾸 무한요청이 들어갑니다... ㅠㅠ 검토좀
     const getScheduleComment = (async () => {
         await axiosInstance.get(
             "irunyou/comment/", {
@@ -38,14 +45,26 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
     }
     );
 
+    // 댓글 등록 함수
+    const registComment = async () => {
+        await axiosInstance.put(
+            "irunyou/comment/",{
+                commentScheduleIndex : runScheduleIndex,
+                commentContent : commentContent
+            }
+        ).then((response) => {
+            alert(response.data.message);
+        }).catch((error) => {
+            alert(error.message);
+        })
+    }
+
+
     useEffect(() => {
         getScheduleComment();
-    }, [runScheduleIndex])  // 스케쥴 인덱스가 바뀔때마다 실행되게 하기
-
-
-    const postScheduleComment = () => {
-
-    }
+    }, [registComment,CommentItem])
+    // 댓글이 등록,수정,삭제될때마다 댓글 리스트 재 실행 -> 실시간으로 댓글 확인 가능
+    // 왜때문에 무한 랜더링...
 
     return (
         <div className='comment-wraper'>
@@ -56,12 +75,32 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
             <div className='comment-read'></div>
             {commentArray.length !== 0 ?
                 commentArray.map((commentArray: any) => (
-                    <CommentItem comment={commentArray}/>
+                    <CommentItem key={commentArray.commentIndex} comment={commentArray} />
                 ))
                 : (
                     <div className='comment-empty'>댓글이 없습니다.</div>
                 )
             }
+            <div className='comment-write-container'>
+                <div className='comment-input-container'>
+                    <textarea 
+                    placeholder='타인의 권리를 침해하거나 명예를 훼손하는 댓글은 운영원칙 및 관련 법률에 제재를 받을 수 있습니다.'
+                    onChange={(e) => setCommentContent(e.target.value)}
+                    ></textarea>
+                </div>
+                <div className='comment-write-button-div'>
+                <Button variant="contained" disableElevation color='success'
+                    style={{
+                        width: "90px",
+                        height:"30px",
+                        fontSize:"12px",
+                        color : "white"
+                    }}
+                    onClick={()=>registComment()}>
+                        댓글등록
+                    </Button>
+                </div>
+            </div>
         </div>
     )
 }
