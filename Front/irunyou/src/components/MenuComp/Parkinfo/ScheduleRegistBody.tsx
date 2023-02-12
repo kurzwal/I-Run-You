@@ -1,7 +1,10 @@
+import './parkinfo.css';
 import useStore from "./Store"
 import { useState } from 'react';
 import axiosInstance from "../../../service/axiosInstance";
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import ScheduleDatetimeSelector from './ScheduleDatetimeSelector';
 
 interface ScheduleRegist {
 	runSchedulePark: number;
@@ -75,18 +78,18 @@ export default function ScheduleRegistBody() {
         postSchedule();
         setScheduleRegist({...scheduleRegist, runScheduleTitle: '', runScheduleContent: '',});
     }
-    
-
-    
 
     return (
         <div className="regist-body-wraper">
-            <div className="title">일정 생성하기</div>
-            <TextField label="일정 이름" onChange={(event) => setScheduleTitle(event.target.value)} />
-            <TextField label="일정 소개하기" onChange={(event) => setScheduleContent(event.target.value)} />
-            <div>
-                <button className="cancel btn" onClick={setStateParkInfo}>이전으로</button>
-                <button className="submit-btn" onClick={submitAll}>일정생성</button>
+            <ScheduleDatetimeSelector />
+            <div className="regist-body-title">일정 생성하기</div>
+            <TextField label="일정 이름" onChange={(event) => setScheduleTitle(event.target.value)} 
+                style={{ marginBottom: '15px'}} />
+            <TextField label="일정 소개하기" onChange={(event) => setScheduleContent(event.target.value)} 
+                style={{ marginBottom: '15px'}} multiline rows={5} />
+            <div className='regist-btn-container'>
+                <Button variant='outlined' size='large' onClick={setStateParkInfo}>이전으로</Button>
+                <Button variant='contained' size='large' onClick={submitAll}>일정생성</Button>
             </div>
         </div>
     )

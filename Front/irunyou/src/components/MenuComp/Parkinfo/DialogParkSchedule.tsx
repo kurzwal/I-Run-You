@@ -20,7 +20,7 @@ export default function DialogParkSchedule({ parkIndex }: props) {
   const [isLast, setIsLast] = useState(false);  // 마지막인지
   const [ref, inView] = useInView();  // ref를 div에 걸어주면 해당 요소가 보이면 inView가 true로. 안 보이면 false로 자동 변경됨
 
-  const { setStateScheduleRegist }= useStore();
+  const { setStateScheduleRegist, parkInfoState }= useStore();
 
   // 서버에서 일정 가져오는 함수 Page가 바뀔때마다 재생성
   const getParkRunScheduleList = useCallback (async () => {
@@ -52,7 +52,7 @@ export default function DialogParkSchedule({ parkIndex }: props) {
   // getParkRunScheduleList 함수가 바뀔때마다 실행 
   useEffect(() => {
     getParkRunScheduleList();
-  }, [getParkRunScheduleList]);
+  }, [getParkRunScheduleList, parkInfoState]);
 
   // 유저가 마지막 요소를 보고 있고, 페이지가 마지막이 아니고, 로딩중이 아니라면 실행
   useEffect(()=> {
