@@ -47,14 +47,13 @@ export default function ScheduleDatetimeSelector() {
 
     const storeTime = () => {
         if (year && month && day) {
-          const startTimeString = `${year}-${month}-${day}T${startTime}:00`;
+          const startTimeString = `${year}-${month}-${day}T${startTime}`;
           setScheduleDatetime(startTimeString);
         }
       };
 
     useEffect(() => {
         storeTime();
-        console.log(scheduleDatetime);
     }, [year, month, day, startTime])
 
     return (
@@ -135,9 +134,6 @@ export default function ScheduleDatetimeSelector() {
                     }}
                     InputLabelProps={{
                     shrink: true,
-                    }}
-                    inputProps={{
-                    step: 300, // 5 minute increments
                     }}
                 />
             </div>

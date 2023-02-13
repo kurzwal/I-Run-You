@@ -68,6 +68,13 @@
     overflow-y: scroll;
 }
 
+.dialog-park-schedule-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 10px;
+}
+
 .dialog-park-schedule-title {
     font-size: 27px;
     font-weight: 800;

@@ -70,10 +70,12 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
         <div className='comment-wraper'>
             <div className='comment-header-bar'>
                 <div>전체 댓글</div>
-                <div>{commentArray.length} 개</div>
+                {commentArray ?
+                (<div>{commentArray.length} 개</div>):
+                (<div>0 개</div>)}
             </div>
             <div className='comment-read'></div>
-            {commentArray.length !== 0 ?
+            {commentArray && commentArray.length !== 0 ?
                 commentArray.map((commentArray: any) => (
                     <CommentItem key={commentArray.commentIndex} comment={commentArray} />
                 ))

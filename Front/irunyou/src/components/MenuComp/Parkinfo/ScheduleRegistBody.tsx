@@ -1,6 +1,6 @@
 import './parkinfo.css';
 import useStore from "./Store"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axiosInstance from "../../../service/axiosInstance";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -17,13 +17,13 @@ interface ScheduleRegist {
 export default function ScheduleRegistBody() {
 
     // parkIndex는 zustand로 불러와서 runSchedulePark = parkIndex 하면 됨
-    const { parkInfo, setStateParkInfo } = useStore();
+    const { parkInfo, setStateParkInfo, scheduleDatetime } = useStore();
 
     // data는 scheduleRegist 넣기
     const [scheduleRegist, setScheduleRegist] = useState<ScheduleRegist>({
         runSchedulePark: parkInfo.parkIndex,
         runScheduleTitle: '',
-        runScheduleDatetime: "2023-03-01T12:00:00",
+        runScheduleDatetime: "2023-01-01T12:00",
         runScheduleContent: '',
     });
 
@@ -41,7 +41,7 @@ export default function ScheduleRegistBody() {
             .post("/irunyou/runschedule/create", {
                 runSchedulePark: parkInfo.parkIndex,
                 runScheduleTitle: scheduleRegist.runScheduleTitle,
-                runScheduleDatetime: "2023-03-01T12:00",
+                runScheduleDatetime: scheduleDatetime,
                 runScheduleContent: scheduleRegist.runScheduleContent,
             })
             .then(response => {
@@ -68,6 +68,12 @@ export default function ScheduleRegistBody() {
         setScheduleRegist({...scheduleRegist, runScheduleDatetime});
     }
 
+    const checkScheduleTime = () => {
+        const currentDate = new Date();
+        const postDate = new Date(scheduleDatetime);
+        return currentDate.getTime() > postDate.getTime();
+    }
+
     const submitAll = () => {
         if (!scheduleRegist.runScheduleTitle) {
             return alert("제목을 입력하세요.")
@@ -75,6 +81,10 @@ export default function ScheduleRegistBody() {
         if (!scheduleRegist.runScheduleContent) {
             return alert("내용을 입력하세요.")
         }
+        if (checkScheduleTime()) {
+            return alert("현재보다 미래의 시간만 생성 가능합니다.")
+        }
+        
         postSchedule();
         setScheduleRegist({...scheduleRegist, runScheduleTitle: '', runScheduleContent: '',});
     }
