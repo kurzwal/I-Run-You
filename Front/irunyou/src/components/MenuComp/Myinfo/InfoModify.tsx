@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from "react-router";
 
+import './InfoModify.css';
+
 import DaumPostCode from 'react-daum-postcode';
 
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material';
 
-import useToggleStore from '../../../view/Store';
 import axiosInstance from "../../../service/axiosInstance";
 
 
@@ -209,12 +210,13 @@ export default function InfoModify() {
                 
             </ThemeProvider>
         </div>
-        <div className='Signup-submit-btn'>
+        <div className='secession-submit-btn'>
             <Link to="/MainPage">
-                <button className='signup-btn'>이전으로</button>
+                <button className='secession-btn'>이전으로</button>
             </Link>
             {/* onclick을 했을 경우 사용자에게 받은 정보를 백으로 전송 */}
-            <button className='signup-btn' onClick={() => onSubmitHandler()}>저장하기</button>
+            <button className='secession-btn' onClick={() => onSubmitHandler()}>저장하기</button>
+            <button className='secession-btn' onClick={() => navigator('/UserDelete')}>탈퇴하기</button>
         </div>
     </div>
     )
