@@ -8,16 +8,15 @@
 */
 
 /* HomePage */
-
-.home-main-img {
-    width: 100vw;
-    height: 100vh;
-    background-image: url("../assets/mainimg.jpg");
-    background-size: 100vw;
-    background-color: #b7cf55af;
-    background-repeat: no-repeat;
-    padding: 100px 0px;
-}
+    .home-main-img {
+        width: 100vw;
+        height: 100vh;
+        background-image: url("../assets/mainimg.jpg");
+        background-size: 100vw;
+        background-color: #b7cf55af;
+        background-repeat: no-repeat;
+        padding: 100px 0px;
+    }
 
 .home-container { 
     display: flex;
