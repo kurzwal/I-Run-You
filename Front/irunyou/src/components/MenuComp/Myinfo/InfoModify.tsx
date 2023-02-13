@@ -16,6 +16,9 @@ import axiosInstance from "../../../service/axiosInstance";
 // 파일의 역할 : 정보수정창
 // 작성날짜 : 2023-02-10
 
+// 작성자 : 최예정
+// 업데이트 날짜 : 2023-02-13
+
 const theme:any = createTheme({
     palette: {
         primary: {
