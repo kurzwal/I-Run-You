@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 public class GetUserResponseDto {
 
 	private int userIndex;
+	private String userNickName;
 	private String userEmail;
 	private String userAddress;
 	private String userAddressDetail;
@@ -29,6 +30,7 @@ public class GetUserResponseDto {
 	// 생성자 생성, 전화번호는 공개여부 곤란..(생성자 매개변수 명 확인요망)
 	public GetUserResponseDto(UserEntity user) {
 		this.userName = user.getUserName();
+		this.userNickName = user.getUserNickname();
 		this.userIndex = user.getUserIndex();
 		this.userEmail = user.getUserEmail();
 		this.userAddress = user.getUserAddress();
