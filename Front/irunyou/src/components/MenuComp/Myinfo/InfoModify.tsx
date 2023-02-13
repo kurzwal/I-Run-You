@@ -41,7 +41,7 @@ export default function InfoModify() {
     const [userAddressDetail, setUserAddressDetail] = useState<string>('');
     const [postNumber, setPostNumber] = useState<string>('');
     const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
-
+    const [userFirstName, setUserFristName] = useState<string>('');
 
     const [postPopup, setPostPopup] = useState<boolean>(false);
 
@@ -91,17 +91,11 @@ export default function InfoModify() {
         } else if (data.userPhoneNumber == '') {
             alert("전화번호를 입력하세요")
             return;
-        } else if (nicknameCheckResult === 0) {
+        } else if (userFirstName !== userNickname && nicknameCheckResult === 0) {
             alert("닉네임 중복확인은 필수입니다")
             return;
         } else if (nicknameCheckResult === -1) {
             alert("다른 닉네임으로 설정해주세요")
-            return;
-        } else if (idCheckResult === 0) {
-            alert("이메일 중복확인은 필수입니다")
-            return;
-        } else if (idCheckResult === -1) {
-            alert("다른 이메일으로 설정해주세요")
             return;
         } else {
             axios.post('http://localhost:4040/auth/signup', data).then((response) => {
@@ -113,6 +107,9 @@ export default function InfoModify() {
     // 중복된 닉네임 확인
     // 홍지혜 2023-02-02 중복 닉네임 로직 수정
     const onExistIdHandler2 = () => {
+        if (userFirstName == userNickname) {
+            return;
+        }
         const data = {
             userNickname : userNickname
         };
@@ -164,6 +161,7 @@ export default function InfoModify() {
             setUserAddress(response.data.data.userAddress);
             setUserAddressDetail(response.data.data.userAddressDetail);
             setUserPhoneNumber(response.data.data.userPhoneNumber);
+            setUserFristName(response.data.data.userNickname);
         })
     },[])
 
