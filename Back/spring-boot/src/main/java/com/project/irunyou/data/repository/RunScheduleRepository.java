@@ -35,7 +35,5 @@ public interface RunScheduleRepository extends JpaRepository<RunScheduleEntity,I
 	// Slice : limit(size) + 1 된 값을 가져옴
 	public Slice<RunScheduleEntity> findAllByRunScheduleParkOrderByRunScheduleDateTime(int runSchedulePark, PageRequest pageRequest);
 	
-	@Query(nativeQuery = true, value = "delete from run_schedule r where run_schedule_date_time < DATE_ADD(now(),INTERVAL -1 DAY)")
-	public void deleteByRunScheduleDateTime(LocalDateTime now);
 	
 }

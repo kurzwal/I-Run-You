@@ -226,11 +226,6 @@ public class RunScheduleService {
 
 		}
 	
-	// 매일 0시에 실행
-	@Scheduled(cron = "0 0 0 * * *")	// 초, 분, 시, 일, 월, 주 (년)
-	public void deletePastRunSchedule() {
-		
-	}
 	
 	
 }
