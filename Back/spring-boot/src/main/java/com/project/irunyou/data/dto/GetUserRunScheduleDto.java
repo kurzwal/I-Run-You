@@ -25,9 +25,11 @@ public class GetUserRunScheduleDto {
 	
 	private int runScheduleIndex;
 	private String runSchedulePark;
+	private int parkIndex;
 	private String runScheduleWriter;
 	private String runScheduleTitle;
 	private LocalDateTime runScheduleDatetime;
+	private String runScheduleContent;
 	
 //	// 일정 조회 서비스용 생성자
 //	public GetUserRunScheduleDto(RunScheduleEntity runSchedule) {

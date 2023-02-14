@@ -9,7 +9,7 @@ import useToggleStore from '../../../view/Store';
 export default function MenuProfile() {
 
     const location = useLocation();
-    const { setMenuMyInfo } = useToggleStore();    
+    const { setMenuMyInfo } = useToggleStore();
     const [userNickname, setUserNickname] = useState<string>(location.state.userNickname);
 
     const LogoutActionHandler = () => {
