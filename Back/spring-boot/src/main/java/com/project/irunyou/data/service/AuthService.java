@@ -73,6 +73,7 @@ public class AuthService {
 				.userName(dto.getUserName())	// 유저 이름
 				.userEmail(dto.getUserEmail())	// 유저 이메일
 				.userPassword(encryptedPassword) // 암호화된 비밀번호로 저장
+				.postNumber(dto.getPostNumber())
 				.userAddress(dto.getUserAddress())	
 				.userAddressDetail(dto.getUserAddressDetail())	// 유저의 주소 정보
 				.userPhoneNumber(userPhone) // 하이픈 제외한 휴대전화번호 저장

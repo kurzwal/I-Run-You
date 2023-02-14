@@ -33,5 +33,7 @@ public class PostUserDto {
 	private String userName;
 	@NotNull
 	private String userNickname;
+	@NotNull
+	private String postNumber;
 	
 }

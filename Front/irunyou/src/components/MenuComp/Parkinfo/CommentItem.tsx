@@ -4,6 +4,8 @@ import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRig
 import { SvgIcon } from "@mui/material";
 import axiosInstance from "../../../service/axiosInstance";
 import { useEffect, useState } from "react";
+import { BiLike } from "react-icons/bi";
+
 
 interface Props {
     comment: {
@@ -50,11 +52,17 @@ export default function CommentItem({ comment, setCommentArray }: Props) {
 
     })
 
+    // 좋아요 기능
+
+
 
     return (
         <div className="comment-item-wraper">
             <div className="comment-writer-container">{comment.commentWriter}</div>
             <div className="comment-content-container">{comment.commentContent}</div>
+            <div className="commit-like">
+                <span onClick={() => {}}><BiLike size="20"></BiLike></span>
+            </div>
             <div className="comment-time-container">
                 <div>{date}</div>
                 <div>{time}</div>                
