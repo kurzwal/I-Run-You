@@ -55,6 +55,7 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
         ).then((response) => {
             // setFlag(!flag);
             alert(response.data.message);
+            setCommentContent('');
             setCommentArray(response.data.data);
         }).catch((error) => {
             alert(error.message);
@@ -89,7 +90,9 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
             <div className='comment-write-container'>
                 <div className='comment-input-container'>
                     <textarea 
+                    id="CtextArea"
                     placeholder='타인의 권리를 침해하거나 명예를 훼손하는 댓글은 운영원칙 및 관련 법률에 제재를 받을 수 있습니다.'
+                    value={commentContent}
                     onChange={(e) => setCommentContent(e.target.value)}
                     ></textarea>
                 </div>
