@@ -64,8 +64,9 @@ export default function DialogParkSchedule({ parkIndex }: props) {
   // page가 바뀔 때마다 서버에 정보를 요청
   return (
     <div className="dialog-park-schedule-container">
-      <div className="dialog-park-schedule-title">모집중인 일정
-        <Button onClick={setStateScheduleRegist} variant="contained">일정 생성</Button>
+      <div className="dialog-park-schedule-header">
+        <div className="dialog-park-schedule-title">모집중인 일정</div>
+        <Button onClick={setStateScheduleRegist} variant="contained" size="medium" style={{ height: 40, padding: '0 30px' }}>일정 생성</Button>
       </div>
       <div>
         { parkRunScheduleList.length !== 0 ?

@@ -1,11 +1,8 @@
 import "./Login.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import kakao from '../../assets/images/kakao_login_medium_wide.png';
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-
-import { REST_API_KEY, REDIRECT_URI } from "./Kakao";
 
 
 // 작성자 : 최예정
@@ -89,11 +86,11 @@ export default function Login() {
     }
 
     // 카카오 로그인
-    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+    // const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
     
-    const KaKaoLogin = () => {
-        window.location.href = KAKAO_AUTH_URL;
-    }
+    // const KaKaoLogin = () => {
+    //     window.location.href = KAKAO_AUTH_URL;
+    // }
 
     return (
         <div className="login-container">
@@ -115,16 +112,16 @@ export default function Login() {
                 <div className="email-password-find">
                     <Link to="/IDPW">아이디 / 비밀번호 찾기</Link>
                 </div>
-                {/* 간편 로그인 */}
+                {/* 간편 로그인
                 <div className="other-login">
 
                     <div className="line"></div>
                     <div className="other-login-text">간편 로그인</div>
                     <div className="line"></div>
-                </div>
-                <div className="kakao-login">
+                </div> */}
+                {/* <div className="kakao-login">
                     <img onClick={KaKaoLogin} className="kakao-login-img" src={kakao} />
-                </div>
+                </div> */}
                 {/* 로그인, 회원가입 각 버튼 */}
                 <div className="login-signup-button">
                         <button type="button" className="login-button button" onClick={() => LoginAction()}>로그인</button>

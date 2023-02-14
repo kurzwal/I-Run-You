@@ -44,6 +44,7 @@ public class UserEntity {
     private String userEmail;	// 유저의 이메일 입니다. 타 유저와 중복될 수 없습니다.
     @NotNull
     private String userPassword;	// 유저의 비밀번호 입니다. 암호화 되어 저장됩니다.
+    private String postNumber;
     private String userAddress;		// 유저의 주소정보입니다. 우편번호와 함께 저장됩니다.
     private String userAddressDetail;	// 유저 주소정보의 세부 정보입니다. 
     @NotNull
