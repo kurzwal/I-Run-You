@@ -35,6 +35,12 @@ public class ParkController {
 
 	@Autowired ParkService parkService;
 	
+	
+	@GetMapping("")
+	public ResponseDto<ParkInfoDto> searchParkById (@RequestParam Integer parkNum) {
+		return parkService.searchParkById(parkNum);
+	}
+	
 	// 사용자 위치기반 가까운 공원 5개
 	@PostMapping("")
 	public ResponseDto<List<ParkInfoDto>> findClosePark(@RequestBody UserLocationDto dto) {
