@@ -1,8 +1,11 @@
 import "./Comment.css";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
 import { SvgIcon } from "@mui/material";
 import axiosInstance from "../../../service/axiosInstance";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { BiLike } from "react-icons/bi";
+
 
 interface Props {
     comment: {
@@ -11,14 +14,14 @@ interface Props {
         commentWriter: string;
         commentContent: string;
         commentDatetime: string;
-    }
+    },
+    setCommentArray : any;
 }
-
 
 //  commentWriterIndex로 Writer 불러오는 메소드를 백에서 Join으로 작성해야 할 것 같아요
 //  망했다
 
-export default function CommentItem({ comment }: Props) {
+export default function CommentItem({ comment, setCommentArray }: Props) {
     
     const date = comment.commentDatetime.substring(0, 10);
     const time = comment.commentDatetime.substring(11, 19);
@@ -32,6 +35,7 @@ export default function CommentItem({ comment }: Props) {
             await axiosInstance.delete("irunyou/comment/",{
                 params : {
                     cmtIdx : comment.commentIndex,
+                    schIdx : comment.commentScheduleIndex,
                 }
             })
             .then(response => {
@@ -39,6 +43,7 @@ export default function CommentItem({ comment }: Props) {
                     return alert(response.data.message);
                 }
                 alert(response.data.message);
+                setCommentArray(response.data.data);
             })
             .catch(error => {
                 alert(error.message);
@@ -47,10 +52,17 @@ export default function CommentItem({ comment }: Props) {
 
     })
 
+    // 좋아요 기능
+
+
+
     return (
         <div className="comment-item-wraper">
-            <div>{comment.commentWriter}</div>
+            <div className="comment-writer-container">{comment.commentWriter}</div>
             <div className="comment-content-container">{comment.commentContent}</div>
+            <div className="commit-like">
+                <span onClick={() => {}}><BiLike size="20"></BiLike></span>
+            </div>
             <div className="comment-time-container">
                 <div>{date}</div>
                 <div>{time}</div>                
@@ -60,6 +72,13 @@ export default function CommentItem({ comment }: Props) {
                 <div onClick={()=> {deleteComment()}}>
                     <DeleteForeverIcon
                     fontSize="small" 
+                    style={{
+                        cursor:"pointer"
+                    }}/>
+                </div>
+                <div>
+                    <SubdirectoryArrowRightIcon
+                    fontSize="small"
                     style={{
                         cursor:"pointer"
                     }}/>

@@ -27,7 +27,7 @@ export default function HomePage() {
           <div className="home-title">I Run You는 함께 뛰는 문화를 만듭니다.</div>
           <br />
           <div className="home-desc">
-            I Run You는 SNS기반의 러닝 스케쥴 서비스로써<br />
+            I Run You는 SNS기반의 러닝 스케줄 서비스로써<br />
             같이 달릴 친구를 찾아드립니다.<br />
             지금 I Run You에서 새로운 친구들과 함께 달려보세요!<br />
           </div>

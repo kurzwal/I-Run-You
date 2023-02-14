@@ -26,7 +26,10 @@ import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.service.CommentService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @CrossOrigin(originPatterns = "http://localhost:3000")
+@Slf4j
 @RestController
 @RequestMapping("irunyou/comment/")
 public class CommentController {
@@ -34,7 +37,7 @@ public class CommentController {
 	@Autowired CommentService commentService;
 	
 	// Read (댓글 불러오기)
-	// http://localhost:3000/irunyou/comment&schIdx=?
+	// http://localhost:4040/irunyou/comment&schIdx=?
 	@GetMapping("")	
 	public ResponseDto<List<CommentResponseDto>> getCommentList (@RequestParam int schIdx) {	// RequestParam 쓰실경우 파라미터 이름 알기쉽게 정해야 합니다
 		return commentService.getCommentList(schIdx);
@@ -42,14 +45,14 @@ public class CommentController {
 	
 	// Create (댓글작성)
 	@PutMapping("")
-	public ResponseDto<ResultResponseDto> registComment (@AuthenticationPrincipal String email, @RequestBody CommentDto requestBody){
+	public ResponseDto<List<CommentResponseDto>> registComment (@AuthenticationPrincipal String email, @RequestBody CommentDto requestBody){
 		return commentService.registComment(email, requestBody);
 	}
 	
 	// Delete (댓글삭제)
 	@DeleteMapping("")
-	public ResponseDto<ResultResponseDto> deleteComment (@AuthenticationPrincipal String email, @RequestParam int cmtIdx){
-		return commentService.deleteComment(email,cmtIdx);
+	public ResponseDto<List<CommentResponseDto>> deleteComment (@AuthenticationPrincipal String email, @RequestParam int cmtIdx, int schIdx){
+		return commentService.deleteComment(email,cmtIdx, schIdx);
 	}
 	
 	// 2023-02-12 홍지혜

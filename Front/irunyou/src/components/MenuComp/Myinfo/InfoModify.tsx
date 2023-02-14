@@ -3,18 +3,22 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from "react-router";
 
+import './InfoModify.css';
+
 import DaumPostCode from 'react-daum-postcode';
 
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material';
 
-import useToggleStore from '../../../view/Store';
 import axiosInstance from "../../../service/axiosInstance";
 
 
 // 작성자 : 문경원
 // 파일의 역할 : 정보수정창
 // 작성날짜 : 2023-02-10
+
+// 작성자 : 최예정
+// 업데이트 날짜 : 2023-02-13
 
 const theme:any = createTheme({
     palette: {
@@ -38,7 +42,7 @@ export default function InfoModify() {
     const [userAddressDetail, setUserAddressDetail] = useState<string>('');
     const [postNumber, setPostNumber] = useState<string>('');
     const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
-
+    const [userFirstName, setUserFristName] = useState<string>('');
 
     const [postPopup, setPostPopup] = useState<boolean>(false);
 
@@ -73,7 +77,8 @@ export default function InfoModify() {
             userEmail,
             userPassword,
             userPassword2,
-            userAddress: `${postNumber} ${userAddress}`,
+            postNumber,
+            userAddress,
             userAddressDetail,
             userPhoneNumber
         }
@@ -87,17 +92,11 @@ export default function InfoModify() {
         } else if (data.userPhoneNumber == '') {
             alert("전화번호를 입력하세요")
             return;
-        } else if (nicknameCheckResult === 0) {
+        } else if (userFirstName !== userNickname && nicknameCheckResult === 0) {
             alert("닉네임 중복확인은 필수입니다")
             return;
         } else if (nicknameCheckResult === -1) {
             alert("다른 닉네임으로 설정해주세요")
-            return;
-        } else if (idCheckResult === 0) {
-            alert("이메일 중복확인은 필수입니다")
-            return;
-        } else if (idCheckResult === -1) {
-            alert("다른 이메일으로 설정해주세요")
             return;
         } else {
             axios.post('http://localhost:4040/auth/signup', data).then((response) => {
@@ -109,6 +108,9 @@ export default function InfoModify() {
     // 중복된 닉네임 확인
     // 홍지혜 2023-02-02 중복 닉네임 로직 수정
     const onExistIdHandler2 = () => {
+        if (userFirstName == userNickname) {
+            return;
+        }
         const data = {
             userNickname : userNickname
         };
@@ -154,11 +156,13 @@ export default function InfoModify() {
     useEffect(()=> {
         axiosInstance.get('http://localhost:4040/irunyou/mypage').then((response) => {
             setUserName(response.data.data.userName);
-            // userNickname: response.data.data.userNickname,
+            setUserNickname(response.data.data.userNickname)
             setUserEmail(response.data.data.userEmail);
-            // userAddress: response.data.data.userAddress,
-            // userAddressDetail: response.data.data.userAddressDetail,
-            // userPhoneNumber: response.data.data.userPhoneNumber
+            setPostNumber(response.data.data.postNumber);
+            setUserAddress(response.data.data.userAddress);
+            setUserAddressDetail(response.data.data.userAddressDetail);
+            setUserPhoneNumber(response.data.data.userPhoneNumber);
+            setUserFristName(response.data.data.userNickname);
         })
     },[])
 
@@ -171,11 +175,9 @@ export default function InfoModify() {
             <ThemeProvider theme={theme}>
                 <div className="config-input">
                     <TextField size='small' label="이름" sx={{width: "80%", opacity: 0.7}} InputProps={{readOnly: true,}} value = {userName || ""} id="userName" variant="outlined" margin="normal" required/>
-                    {/* <input className='singup-input' onChange={(e) => setName(e.target.value)} type="text" placeholder="이름" /> */}
                 </div>
                 <div className="config-input">
-                    <TextField size='small' label="닉네임" sx={{width: "80%"}} onChange={(e) => setUserNickname(e.target.value)} id="userNickName" variant="outlined" margin="normal" required/>
-                    {/* <input className='singup-input' onChange={(e) => setNickname(e.target.value)} type="text" placeholder="닉네임" /> */}
+                    <TextField size='small' label="닉네임" sx={{width: "80%"}} onChange={(e) => setUserNickname(e.target.value)} value = {userNickname || ""}  id="userNickName" variant="outlined" margin="normal" required/>
                     <button onClick={() => onExistIdHandler2()} className='check-btn' type='button'>중복확인</button>
                 </div>
                 {
@@ -184,9 +186,7 @@ export default function InfoModify() {
                     (<></>)
                 }
                 <div className="config-input">
-                    <TextField size='small' label="아이디(이메일)" sx={{width: "80%"}} onChange={(e) => setUserEmail(e.target.value)} id="userEmail" variant="outlined" margin="normal" type="email" required/>
-                    {/* <input className='singup-input' onChange={(e) => setId(e.target.value)} type="email" placeholder="아이디(이메일)" /> */}
-                    <button onClick={() => onExistIdHandler()} className='check-btn'>중복확인</button>
+                    <TextField size='small' label="아이디(이메일)" sx={{width: "80%", opacity: 0.7}} onChange={(e) => setUserEmail(e.target.value)} InputProps={{readOnly: true,}} value = {userEmail || ""} id="userEmail" variant="outlined" margin="normal" required/>
                 </div>
                 {
                     idCheckResult === 1 ? (<div className='success' id='check-error'>{idCheckResultMsg}</div>) :
@@ -194,32 +194,29 @@ export default function InfoModify() {
                     (<></>)
                 }
                 <div className="config-input">
-                <TextField value={postNumber} size='small' label="우편 찾기" sx={{width: "80%"}} onChange={(e) => setPostNumber(e.target.value)} id="outlined-basic" variant="outlined" margin="normal" required/>
-                    {/* <input className='singup-input' onChange={(e) => setPostNumber(e.target.value)} type="text" placeholder="우편찾기" /> */}
+                <TextField size='small' label="우편 찾기" sx={{width: "80%"}} onChange={(e) => setPostNumber(e.target.value)} value = {postNumber || ""} id="outlined-basic" variant="outlined" margin="normal" required/>
                     <button className='check-btn' onClick={() => setPostPopup(true)}>주소검색</button>
                 </div>
                     <div className="address-input config-input">
                     <TextField value={userAddress} size='small' label="주소" sx={{width: "80%"}} onChange={(e) => setUserAddress(e.target.value)} id="userAddress" variant="outlined" margin="normal" required/>
-                        {/* <input className='singup-input' onChange={(e) => setAddress(e.target.value)} type="text" placeholder="주소" /> */}
                     </div>
                     <div className="address-input2 config-input">
-                    <TextField value={userAddressDetail} size='small' label="나머지 주소" sx={{width: "80%"}} onChange={(e) => setUserAddressDetail(e.target.value)} id="userAddressDetail" variant="outlined" margin="normal"/>
-                        {/* <input className='singup-input' onChange={(e) => setAddressDetail(e.target.value)} type="text" placeholder="나머지주소" /> */}
+                    <TextField size='small' label="나머지 주소" sx={{width: "80%"}} onChange={(e) => setUserAddressDetail(e.target.value)} value = {userAddressDetail || ""} id="userAddressDetail" variant="outlined" margin="normal"/>
                     </div>
                 <div className="config-input">
-                <TextField size='small' label="휴대전화" sx={{width: "80%"}} onChange={(e) => setUserPhoneNumber(e.target.value)} id="userPhoneNumber" variant="outlined" margin="normal" required/>
-                    {/* <input className='singup-input' type="text" placeholder="휴대전화" /> */}
+                <TextField size='small' label="휴대전화" sx={{width: "80%"}} onChange={(e) => setUserPhoneNumber(e.target.value)} value = {userPhoneNumber || ""} id="userPhoneNumber" variant="outlined" margin="normal" required/>
                 </div>
                 {postPopup && (<DaumPostCode onComplete={handleComplete} className="post-code"/>)}
                 
             </ThemeProvider>
         </div>
-        <div className='Signup-submit-btn'>
+        <div className='secession-submit-btn'>
             <Link to="/MainPage">
-                <button className='signup-btn'>이전으로</button>
+                <button className='secession-btn'>이전으로</button>
             </Link>
             {/* onclick을 했을 경우 사용자에게 받은 정보를 백으로 전송 */}
-            <button className='signup-btn' onClick={() => onSubmitHandler()}>제출하기</button>
+            <button className='secession-btn' onClick={() => onSubmitHandler()}>저장하기</button>
+            <button className='secession-btn' onClick={() => navigator('/UserDelete')}>탈퇴하기</button>
         </div>
     </div>
     )

@@ -61,7 +61,7 @@ export default function FAQdetail(){
 
         axios.post('http://localhost:4040/irunyou/FAQ/', data).then((response) => {
             const faqInformation = response.data.faq;
-            movePage('/FAQmain');
+            movePage('/MainPage');
         })
     }
 

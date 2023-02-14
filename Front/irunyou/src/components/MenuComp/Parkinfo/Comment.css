@@ -65,8 +65,34 @@
     padding: 0px 5px;
 }
 
-.comment-ud-box {
+.comment-writer-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
+    text-align: center;
+}
+
+.comment-content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.comment-time-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.comment-ud-box {
+    display: flex;
+    /* justify-content: space-around; */
+}
+
+.comment-ud-box div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }

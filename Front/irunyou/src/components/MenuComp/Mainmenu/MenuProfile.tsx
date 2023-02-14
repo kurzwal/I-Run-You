@@ -9,8 +9,8 @@ import useToggleStore from '../../../view/Store';
 export default function MenuProfile() {
 
     const location = useLocation();
-    const { setMenuMyInfo } = useToggleStore();
-    const [userNickname, setUserNickname] = useState<string>(location.state.userNickname);
+    const { userNickname, setUserNickname, setMenuMyInfo } = useToggleStore();    
+    // const [userNickname, setUserNickname] = useState<string>(location.state.userNickname);
 
     const LogoutActionHandler = () => {
         localStorage.clear();
@@ -20,7 +20,7 @@ export default function MenuProfile() {
 
     // 리액트 무한루프 랜더링 방지 useEffect로 감싸줌 (useState -> 비동기 : 예측대로 랜더링되지 않고 꼬여버림)
     useEffect(()=> {
-        if(userNickname.length > 6) {
+        if(userNickname && userNickname.length > 6) {
             setUserNickname(userNickname.slice(0,4).concat("..."));
         }
     },[userNickname])

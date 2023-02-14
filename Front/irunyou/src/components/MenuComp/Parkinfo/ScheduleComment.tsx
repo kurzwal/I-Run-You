@@ -23,11 +23,11 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
 
     const [commentArray, setCommentArray] = useState<Comment[]>([]);
     const [commentContent,setCommentContent] = useState(String);
+    const [flag, setFlag] = useState<boolean>(false);
 
 
     // 댓글 목록 불러오는 함수
-    // 자꾸 무한요청이 들어갑니다... ㅠㅠ 검토좀
-    const getScheduleComment = (async () => {
+    const getScheduleComment = async () => {
         await axiosInstance.get(
             "irunyou/comment/", {
             params: {
@@ -39,11 +39,11 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
                 //     return alert(response.data.message);
                 // }
                 setCommentArray(response.data.data);
+
             }).catch((error) => {
                 alert(error.message);
             })
-    }
-    );
+    };
 
     // 댓글 등록 함수
     const registComment = async () => {
@@ -53,7 +53,10 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
                 commentContent : commentContent
             }
         ).then((response) => {
+            // setFlag(!flag);
             alert(response.data.message);
+            setCommentContent('');
+            setCommentArray(response.data.data);
         }).catch((error) => {
             alert(error.message);
         })
@@ -62,9 +65,9 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
 
     useEffect(() => {
         getScheduleComment();
-    }, [registComment,CommentItem])
+    }, [runScheduleIndex, setCommentArray])
     // 댓글이 등록,수정,삭제될때마다 댓글 리스트 재 실행 -> 실시간으로 댓글 확인 가능
-    // 왜때문에 무한 랜더링...
+
 
     return (
         <div className='comment-wraper'>
@@ -77,7 +80,8 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
             <div className='comment-read'></div>
             {commentArray && commentArray.length !== 0 ?
                 commentArray.map((commentArray: any) => (
-                    <CommentItem key={commentArray.commentIndex} comment={commentArray} />
+                    <CommentItem key={commentArray.commentIndex} comment={commentArray} 
+                    setCommentArray={setCommentArray}/>
                 ))
                 : (
                     <div className='comment-empty'>댓글이 없습니다.</div>
@@ -86,7 +90,9 @@ export default function ScheduleComment({ runScheduleIndex }: Props) {
             <div className='comment-write-container'>
                 <div className='comment-input-container'>
                     <textarea 
+                    id="CtextArea"
                     placeholder='타인의 권리를 침해하거나 명예를 훼손하는 댓글은 운영원칙 및 관련 법률에 제재를 받을 수 있습니다.'
+                    value={commentContent}
                     onChange={(e) => setCommentContent(e.target.value)}
                     ></textarea>
                 </div>
