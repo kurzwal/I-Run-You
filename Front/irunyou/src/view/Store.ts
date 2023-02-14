@@ -7,12 +7,15 @@
 
 import { create } from 'zustand';
 
+
+
 interface MapStoreInterface {
     mapOpen: boolean;
     menuOpen: boolean;
     menuState: number;
     popRegist: boolean;
     popUpdate: boolean;
+    userNickname: string;
     openMap: () => void;
     toggleMenu: () => void;
     setMenuMain: () => void;
@@ -22,6 +25,7 @@ interface MapStoreInterface {
     setMenuMySchedule: () => void;
     togglePopRegist: () => void;
     togglePopUpdate: () => void;
+    setUserNickname: (userNickname: string) => void;
 
 }
 
@@ -32,6 +36,8 @@ const useStore = create<MapStoreInterface>((set) => ({
 // 0: 메인, 1: 내 정보, 2: 공원 리스트, 3: 공원 상세보기, 4: 내 일정
     popRegist: false,  // 일정 생성
     popUpdate: false,  // 일정 수정
+
+    userNickname: '',
     
     // 지도 열기
     openMap: () => set((state) => ({ ...state, mapOpen : true })),
@@ -48,6 +54,7 @@ const useStore = create<MapStoreInterface>((set) => ({
     togglePopRegist: () => set((state) => ({...state, popRegist : !state.popRegist})),
     // 일정 수정 창 여닫기
     togglePopUpdate: () => set((state) => ({...state, popUpdate : !state.popUpdate})),
+    setUserNickname: (userNickname) => set((state) => ({ ...state, userNickname})),
 }))
 
 export default useStore;

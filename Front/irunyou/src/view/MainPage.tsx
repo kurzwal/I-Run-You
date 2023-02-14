@@ -1,7 +1,8 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import './views.css';
 import useToggleStore from './Store';
+import axiosInstance from '../service/axiosInstance';
 
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
@@ -17,7 +18,6 @@ import MyInfo from '../components/MenuComp/MyInfo';
 import ParkList from '../components/MenuComp/ParkList';
 import ParkInfo from '../components/MenuComp/ParkInfo';
 import MySchedule from '../components/MenuComp/MySchedule';
-import { useLocation } from 'react-router';
 
 
 
@@ -35,14 +35,14 @@ export default function MainPage(){
 
     const { 
         // 변수값
-        mapOpen, menuOpen, menuState, popRegist, popUpdate,
+        mapOpen, menuOpen, menuState, popRegist, popUpdate, userNickname, 
         // 지도와 메뉴 여닫기
         openMap, toggleMenu,
         // 메뉴 종류 정하기
         setMenuMain, setMenuMyInfo, setMenuParkList,
         setMenuParkInfo, setMenuMySchedule,
         // 일정 생성/수정창 여닫기
-        togglePopRegist, togglePopUpdate,
+        togglePopRegist, togglePopUpdate, setUserNickname,
     } = useToggleStore();
 
     const setMainImageNone:() => void = () => {
@@ -57,6 +57,23 @@ export default function MainPage(){
             setMainImageNone();
         }
     },[mapOpen])
+
+    const getUserNickname = async () => {
+        await axiosInstance
+            .get('irunyou/mypage')
+            .then(response => {
+                const nicknameInstance = response.data.data.userNickName;
+                setUserNickname(nicknameInstance);
+            }).catch(error => {
+                alert(error.message)
+            })
+    }
+
+    useEffect(() => {
+        if (!userNickname) {
+            const nicknameInstance = getUserNickname();
+        }
+    }, [userNickname])
 
     return (
         <div className="main-page-wraper">

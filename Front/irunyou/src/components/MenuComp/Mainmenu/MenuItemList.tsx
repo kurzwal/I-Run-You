@@ -25,6 +25,10 @@ export default function MenuItemList() {
                 <img className="menu-icon" src={Question}/>
                 <div className="menu-item-txt">공지사항</div>
             </div>
+            <div className="main-menu-item" onClick={() => movePage("/FAQDetail")}>
+                <img className="menu-icon" src={Question}/>
+                <div className="menu-item-txt">문의하기</div>
+            </div>
         </div>
     )
 }

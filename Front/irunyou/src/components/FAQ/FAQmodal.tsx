@@ -19,7 +19,7 @@ export default function FAQmodal({setModal}: Props) {
             </div>
             <br />
             <div className="modal-btn">
-                <Link to="/FAQmain">
+                <Link to="/MainPage">
                 <button className="ok-btn submit-btn">확인</button>
                 </Link>
                 <button className="submit-btn" onClick={() => setModal(false)}>취소</button>
