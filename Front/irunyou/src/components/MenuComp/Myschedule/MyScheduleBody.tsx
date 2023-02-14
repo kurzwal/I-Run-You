@@ -24,7 +24,7 @@ export default function MyScheduleBody() {
                     setUserParticipationSchedule(participationSchedule);
             })
             .catch((error) => {
-                alert(error.message);
+                
             })
     }
 

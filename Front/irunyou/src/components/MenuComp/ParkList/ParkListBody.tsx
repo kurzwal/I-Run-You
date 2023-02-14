@@ -4,6 +4,8 @@ import ParkListItem from "./ParkListItem";
 import axios from 'axios';
 import useLocationStore from'../LocationStore';
 
+import axiosInstance from '../../../service/axiosInstance';
+
 interface Location {
     UserLatitude: number;
     UserLongitude: number;
@@ -52,13 +54,13 @@ export default function ParkListBody() {
   
   const getParks = async (userLocation: Location): Promise<Parks[]> => {
     try {
-      const response = await axios.post('http://localhost:4040/irunyou/park/',{
+      const response = await axiosInstance.post('irunyou/park/',{
         latitude : userLocation.UserLatitude,
         longitude : userLocation.UserLongitude
     });
       return response.data.data;
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       return [];
     }
   };

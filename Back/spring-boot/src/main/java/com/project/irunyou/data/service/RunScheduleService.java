@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.project.irunyou.data.dto.FindRunScheduleDto;
@@ -224,5 +225,12 @@ public class RunScheduleService {
 		return ResponseDto.setSuccess("Success", data);
 
 		}
+	
+	// 매일 0시에 실행
+	@Scheduled(cron = "0 0 0 * * *")	// 초, 분, 시, 일, 월, 주 (년)
+	public void deletePastRunSchedule() {
+		
+	}
+	
 	
 }
