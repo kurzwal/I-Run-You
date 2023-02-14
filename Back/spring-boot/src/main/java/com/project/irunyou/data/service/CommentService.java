@@ -6,16 +6,20 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mysql.cj.protocol.a.LocalDateTimeValueEncoder;
 import com.project.irunyou.data.dto.CommentDto;
+import com.project.irunyou.data.dto.CommentLikeDto;
 import com.project.irunyou.data.dto.CommentResponseDto;
 import com.project.irunyou.data.dto.PatchCommentDto;
 import com.project.irunyou.data.dto.ResponseDto;
 import com.project.irunyou.data.dto.ResultResponseDto;
 import com.project.irunyou.data.entity.CommentEntity;
+import com.project.irunyou.data.entity.CommentLikeEntity;
+import com.project.irunyou.data.repository.CommentLikeRepository;
 import com.project.irunyou.data.repository.CommentRepository;
 import com.project.irunyou.data.repository.UserRepository;
 
@@ -27,6 +31,7 @@ public class CommentService {
 
 	@Autowired CommentRepository commentRepository;
 	@Autowired UserRepository userRepository;
+	@Autowired CommentLikeRepository commentLikeRepository;
 	
 	// 댓글 리스트 불러오는 메서드
 	public List<CommentResponseDto> getCommentResponseDtoList(int schIdx) {
@@ -186,5 +191,31 @@ public class CommentService {
 		
 		return ResponseDto.setSuccess("수정이 완료되었습니다.", new ResultResponseDto(true));
 		
+	}
+	
+	// 2023-02-14 최예정
+	// 사용자 한 명이 좋아요 누르면 1개의 좋아요만 올라가거나 내려감
+	public ResponseDto<CommentLikeDto> commentLike (String email, int cmtIdx) {
+		
+		boolean checkLike = commentLikeRepository.existsByCommentIndexAndUserEmail(cmtIdx, email);
+		int result = commentLikeRepository.countByCommentIndex(cmtIdx);
+		
+		try {
+			
+			if (checkLike) {
+				commentLikeRepository.deleteByCommentIndexAndUserEmail(cmtIdx, email);
+				return ResponseDto.setSuccess("cancel liked", new CommentLikeDto(result));
+			} else {
+				CommentLikeEntity commentLike = new CommentLikeEntity(0, cmtIdx, email);
+				commentLikeRepository.save(commentLike);
+				return ResponseDto.setSuccess("push liked", new CommentLikeDto(result));
+			}
+			
+		} catch (Exception e) {
+			return ResponseDto.setFailed("db error");
+		}
+		
+		//Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'cmtIdx' for method parameter type int is not present]
+		// 오류남
 	}
 }

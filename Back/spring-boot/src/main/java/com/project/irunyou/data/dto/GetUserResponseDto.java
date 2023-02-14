@@ -32,11 +32,8 @@ public class GetUserResponseDto {
 	// 생성자 생성, 전화번호는 공개여부 곤란..(생성자 매개변수 명 확인요망)
 	public GetUserResponseDto(UserEntity user) {
 		this.userName = user.getUserName();
-<<<<<<< HEAD
 		this.userNickname = user.getUserNickname();
-=======
 		this.userNickName = user.getUserNickname();
->>>>>>> origin/kw2
 		this.userIndex = user.getUserIndex();
 		this.userEmail = user.getUserEmail();
 		this.postNumber = user.getPostNumber();
