@@ -53,7 +53,25 @@ export default function CommentItem({ comment, setCommentArray }: Props) {
     })
 
     // 좋아요 기능
+    const[like, changeLike] = useState<number>(0);
 
+    const LikeHandler = (async () => {
+
+        await axiosInstance.post('irunyou/comment/', {
+            params : { cmtIdx : comment.commentIndex}
+
+        }).then(response => {
+            changeLike(response.data.data.commentLikeUser);
+            if(!response.data.status) {
+                return alert(response.data.message);
+            }
+            alert(response.data.message);
+            setCommentArray(response.data.data);
+        })
+        .catch(error => {
+            alert(error.message);
+        })
+    })
 
 
     return (
@@ -61,7 +79,7 @@ export default function CommentItem({ comment, setCommentArray }: Props) {
             <div className="comment-writer-container">{comment.commentWriter}</div>
             <div className="comment-content-container">{comment.commentContent}</div>
             <div className="commit-like">
-                <span onClick={() => {}}><BiLike size="20"></BiLike></span>
+                <span onClick={() => {LikeHandler()}}><BiLike size="20"></BiLike></span> { like }
             </div>
             <div className="comment-time-container">
                 <div>{date}</div>

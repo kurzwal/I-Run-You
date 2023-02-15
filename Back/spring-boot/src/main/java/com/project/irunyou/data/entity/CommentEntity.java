@@ -49,6 +49,6 @@ public class CommentEntity {
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd'T'HH:mm:ss",timezone="Asia/Seoul" )
     @CreatedDate
     private LocalDateTime commentDatetime;	// 댓글의 작성 시간입니다. LocalDateTime.now() 함수로 입력됩니다.
-    private int commentLikeUser;	// 댓글 좋아요가 눌려진 수 입니다.
+//    private int commentLikeUser;	// 댓글 좋아요가 눌려진 수 입니다.
 
 }
