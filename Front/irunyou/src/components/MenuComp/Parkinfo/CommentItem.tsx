@@ -79,7 +79,7 @@ export default function CommentItem({ comment, setCommentArray }: Props) {
         axiosInstance.get('http://localhost:4040/irunyou/comment/').then((response) => {
             changeLike(response.data.data.commentLikeUser);
         })
-    },[changeLike])
+    },[changeLike]) // 변수가 바뀔 때 마다 유지되기 위해서 changeLike를 넣어줌
 
     return (
         <div className="comment-item-wraper">
