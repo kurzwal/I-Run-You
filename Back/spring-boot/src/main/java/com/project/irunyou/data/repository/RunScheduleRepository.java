@@ -14,10 +14,13 @@ import com.project.irunyou.data.entity.RunScheduleEntity;
 import java.util.List;
 
 import java.awt.print.Pageable;
+import java.time.LocalDateTime;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -31,5 +34,9 @@ public interface RunScheduleRepository extends JpaRepository<RunScheduleEntity,I
 	// 공원 인덱스에 해당하는 RunSchedule 불러온 후 시간 순 정렬, 반환형 Slice
 	// Slice : limit(size) + 1 된 값을 가져옴
 	public Slice<RunScheduleEntity> findAllByRunScheduleParkOrderByRunScheduleDateTime(int runSchedulePark, PageRequest pageRequest);
+	
+	// 런 일정 인덱스, 유저 이메일로 자신이 만든 일정인지 확인
+	public boolean existsByRunScheduleIndexAndRunScheduleWriter(int runScheduleIndex, String userEmail);
+	
 	
 }

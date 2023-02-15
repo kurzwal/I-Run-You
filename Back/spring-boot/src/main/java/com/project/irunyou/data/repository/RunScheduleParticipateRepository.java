@@ -16,4 +16,6 @@ public interface RunScheduleParticipateRepository extends JpaRepository<RunSched
 	// 스케쥴 인덱스와 유저가 짝이 맞는 데이터를 가져옴
 	public RunSchedulePaticipateEntity findByRunScheduleIndexAndUserEmail(int runScheduleIndex, String userEmail);
 	
+	// 이미 참여하고 있는지 확인
+	public boolean existsByRunScheduleIndexAndUserEmail(int runScheduleIndex, String userEmail);
 }

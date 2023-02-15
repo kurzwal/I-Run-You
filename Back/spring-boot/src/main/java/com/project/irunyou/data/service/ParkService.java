@@ -131,6 +131,7 @@ public class ParkService {
 				ClosePark.add(new ParkInfoDto(p));
 			}
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 

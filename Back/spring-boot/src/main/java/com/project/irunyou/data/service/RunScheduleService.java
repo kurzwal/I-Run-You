@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.project.irunyou.data.dto.FindRunScheduleDto;
@@ -108,6 +109,23 @@ public class RunScheduleService {
 	// 유저가 이미 존재하는 일정에 참여
 	public ResponseDto<ResultResponseDto> participateRunSchedule(String user, FindRunScheduleDto dto) {
 		try {
+			
+			// 자신이 만든 일정인지 확인 -> 자신이 만든 일정이면 참여 불가
+			boolean isUserRunSchedule = runScheduleRepository.existsByRunScheduleIndexAndRunScheduleWriter(dto.getRunScheduleIndex(), user);
+			
+			if(isUserRunSchedule) {
+				return ResponseDto.setFailed("자신이 만든 일정에는 참여할 수 없습니다.");
+			}
+			
+			// 이미 참여하고 있다면 참여 불가
+			boolean isParticipate = runScheduleParticipatieRepository.existsByRunScheduleIndexAndUserEmail(dto.getRunScheduleIndex(), user);
+			log.info(dto.getRunScheduleIndex()+"");
+			log.info(user);
+			log.info(isParticipate+"");
+			if(isParticipate) {
+				return ResponseDto.setFailed("이미 참여한 일정입니다.");
+			}
+			
 			RunSchedulePaticipateEntity participateRunSchedule = RunSchedulePaticipateEntity.builder()
 					.runScheduleIndex(dto.getRunScheduleIndex())
 					.userEmail(user)
@@ -154,10 +172,11 @@ public class RunScheduleService {
 					.runScheduleDatetime(r.getRunScheduleDateTime())
 					.runScheduleContent(r.getRunScheduleContent())
 					.build());
+				System.out.println(userRepository.findUserNicknameByUserEmail(userEmail));
 			}
 
 		}catch (Exception e) {
-
+			e.printStackTrace();
 			myRunScheduleList = null;
 		}
 		
@@ -199,7 +218,7 @@ public class RunScheduleService {
 			}
 			
 		} catch (Exception e) {
-
+			e.printStackTrace();
 			participateRunScheduleList = null;
 		}
 
@@ -224,5 +243,27 @@ public class RunScheduleService {
 		return ResponseDto.setSuccess("Success", data);
 
 		}
+	
+	
+	// 로그인한 유저의 일정 참여 여부
+	public ResponseDto<ResultResponseDto> getIsParticipate(String userEmail, int schIdx) {
+		
+		boolean isParticipate;
+		
+		try {
+			
+			isParticipate = runScheduleParticipatieRepository.existsByRunScheduleIndexAndUserEmail(schIdx, userEmail);
+			
+			if(isParticipate) {
+				return ResponseDto.setSuccess("is not participate", new ResultResponseDto(isParticipate));
+			}
+			
+		} catch(Exception e) {
+			return ResponseDto.setFailed("Error");
+		}
+		
+		return ResponseDto.setSuccess("is participate", new ResultResponseDto(isParticipate));
+	}
+	
 	
 }

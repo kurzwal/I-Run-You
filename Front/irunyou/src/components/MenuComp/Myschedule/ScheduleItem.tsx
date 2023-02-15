@@ -8,7 +8,7 @@ interface props {
         runScheduleIndex: number;
         parkIndex: number;
         runSchedulePark: string;
-        runScheduleWriterNickName: string;
+        runScheduleWriter: string;
         runScheduleTitle: string;
         runScheduleDatetime: string;
         runScheduleContent: string;
@@ -26,10 +26,10 @@ export default function ScheduleItem( {runScheduleInfo} : props) {
             .then(response => {
                 setParkInfo(response.data.data);
                 setScheduleInfo({
-                    runScheduleIndex: runScheduleInfo.parkIndex,
-                    runSchedulePark: 0,
+                    runScheduleIndex: runScheduleInfo.runScheduleIndex,
+                    runSchedulePark: runScheduleInfo.parkIndex,
                     runScheduleTitle: runScheduleInfo.runScheduleTitle,
-                    runScheduleWriter: 0,
+                    runScheduleWriter: runScheduleInfo.runScheduleWriter,
                     runScheduleDatetime: runScheduleInfo.runScheduleDatetime,
                     runScheduleContent: runScheduleInfo.runScheduleContent,
                 });
@@ -49,7 +49,7 @@ export default function ScheduleItem( {runScheduleInfo} : props) {
             <div className="schedule-txt-container">
                 <div className="schedule-title">{runScheduleInfo.runScheduleTitle}</div>
                 <div className="schedule-park-name">{runScheduleInfo.runSchedulePark}</div>
-                <div className="schedule-host-name">{runScheduleInfo.runScheduleWriterNickName}</div>
+                <div className="schedule-host-name">작성자 : {runScheduleInfo.runScheduleWriter}</div>
             </div>
             <div className="schedule-datetime">{runScheduleInfo.runScheduleDatetime}</div>
         </div>
