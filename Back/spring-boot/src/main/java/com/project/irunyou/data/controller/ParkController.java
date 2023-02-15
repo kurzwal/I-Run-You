@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Slice;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,7 +55,5 @@ public class ParkController {
 		return parkService.getParkRunScheduleList(page, 5, parkIndex);	// 사이즈 5로 고정
 	}
 	
-	// Unknow column 오류 뜰 경우
-	// DB 에서 run_schedule 테이블의 datetime 컬럼명이 'run_schedule_date_time'과 일치하게 바꿔주세요 
 	
 }

@@ -41,7 +41,12 @@ instance.interceptors.response.use(
         // 왜 403오류???
         // 401 : 클라이언트가 인증되지 않음
         // 403 : 클라이언트가 해당 요청에 대한 권한이 없음
-        if(error.response.status === 403) {
+        if(localStorage.getItem("token") === null) {
+            alert("로그인 후 이용해 주세요.")
+            window.location.href="/Login"
+        } 
+
+        if(localStorage.getItem("token") && error.response.status === 403) {
             localStorage.clear();
             alert("로그인 시간이 만료되었습니다. 다시 로그인 해 주세요.")
             window.location.href="/Login"

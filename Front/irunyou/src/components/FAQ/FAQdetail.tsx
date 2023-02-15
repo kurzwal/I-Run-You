@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
+import axiosInstance from '../../service/axiosInstance';
+
 import './FAQdetail.css'
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -59,7 +61,7 @@ export default function FAQdetail(){
             faqContent
         }
 
-        axios.post('http://localhost:4040/irunyou/FAQ/', data).then((response) => {
+        axiosInstance.post('irunyou/FAQ/', data).then((response) => {
             const faqInformation = response.data.faq;
             movePage('/MainPage');
         })
