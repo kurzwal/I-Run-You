@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.irunyou.data.dto.CommentDto;
+import com.project.irunyou.data.dto.CommentLikeDto;
 import com.project.irunyou.data.dto.CommentResponseDto;
 import com.project.irunyou.data.dto.PatchCommentDto;
 import com.project.irunyou.data.dto.ResponseDto;
@@ -60,5 +62,12 @@ public class CommentController {
 	@PatchMapping("")
 	public ResponseDto<ResultResponseDto> modifyComment(String email,PatchCommentDto dto) {
 		return commentService.modifyComment(email, dto);
+	}
+	
+	// 2023-02-14 최예정
+	// 사용자 한 명이 좋아요 누르면 1개의 좋아요만 올라가거나 내려감
+	@PostMapping("")
+	public ResponseDto<CommentLikeDto> commentLike (@AuthenticationPrincipal String email, @RequestParam int cmtIdx) {
+		return commentService.commentLike(email, cmtIdx);
 	}
 }
