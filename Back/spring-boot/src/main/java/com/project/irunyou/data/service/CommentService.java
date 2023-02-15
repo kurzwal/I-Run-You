@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mysql.cj.protocol.a.LocalDateTimeValueEncoder;
 import com.project.irunyou.data.dto.CommentDto;
+import com.project.irunyou.data.dto.CommentIndexDto;
 import com.project.irunyou.data.dto.CommentLikeDto;
 import com.project.irunyou.data.dto.CommentResponseDto;
 import com.project.irunyou.data.dto.PatchCommentDto;
@@ -195,27 +196,33 @@ public class CommentService {
 	
 	// 2023-02-14 최예정
 	// 사용자 한 명이 좋아요 누르면 1개의 좋아요만 올라가거나 내려감
-	public ResponseDto<CommentLikeDto> commentLike (String email, int cmtIdx) {
+	public ResponseDto<CommentLikeDto> commentLike (String email, CommentIndexDto dto) {
 		
-		boolean checkLike = commentLikeRepository.existsByCommentIndexAndUserEmail(cmtIdx, email);
-		int result = commentLikeRepository.countByCommentIndex(cmtIdx);
+		CommentLikeEntity checkLike = commentLikeRepository.findByCommentIndexAndUserEmail(dto.getCommentIndex(), email);
+		String message = "";
+		// 성공과 실패의 메세지를 messge라는 변수명을 선언해 그 안에 메세지를 한꺼번에 출력할 수 있게 반환해줌
 		
 		try {
 			
-			if (checkLike) {
-				commentLikeRepository.deleteByCommentIndexAndUserEmail(cmtIdx, email);
-				return ResponseDto.setSuccess("cancel liked", new CommentLikeDto(result));
+			if (checkLike != null) {
+//				commentLikeRepository.deleteByCommentIndexAndUserEmail(dto.getCommentIndex(), email);
+				// delete는 Dto를 선언해서 하는 것이 아닌
+				commentLikeRepository.delete(checkLike);
+				// delete할 변수를 안에 넣어줄 수 있음
+				message = "cancel liked";
 			} else {
-				CommentLikeEntity commentLike = new CommentLikeEntity(0, cmtIdx, email);
+				CommentLikeEntity commentLike = new CommentLikeEntity(0, email, dto.getCommentIndex());
 				commentLikeRepository.save(commentLike);
-				return ResponseDto.setSuccess("push liked", new CommentLikeDto(result));
+				message = "push liked";
 			}
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseDto.setFailed("db error");
 		}
 		
-		//Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'cmtIdx' for method parameter type int is not present]
-		// 오류남
+		// 중복된 리턴된 값들을 위에서 선언하는 것이 아닌 밑으로 빼서 리턴 해줌
+		int result = commentLikeRepository.countByCommentIndex(dto.getCommentIndex());
+		return ResponseDto.setSuccess(message, new CommentLikeDto(result));
 	}
 }

@@ -5,6 +5,7 @@ import { SvgIcon } from "@mui/material";
 import axiosInstance from "../../../service/axiosInstance";
 import { useEffect, useState } from "react";
 import { BiLike } from "react-icons/bi";
+import axios from "axios";
 
 
 interface Props {
@@ -49,34 +50,40 @@ export default function CommentItem({ comment, setCommentArray }: Props) {
 
     })
 
+    // 프론트에서 params 값은 보내짐
+    // 백에서 cmtidx를 찾지 못함
+
+    // 2023-02-14 최예정
     // 좋아요 기능
     const[like, changeLike] = useState<number>(0);
 
-    const LikeHandler = (async () => {
-
-        await axiosInstance.post('irunyou/comment/', {
-            params : { cmtIdx : comment.commentIndex}
-
-        }).then(response => {
-            changeLike(response.data.data.commentLikeUser);
-            if(!response.data.status) {
-                return alert(response.data.message);
+    const LikeHandler = ( async () => {
+        const data = {
+            commentIndex : comment.commentIndex
+        };
+        await axiosInstance.post('http://localhost:4040/irunyou/comment/', data)
+        .then((response) => {
+            const res = response.data;
+            const result = res.data;
+            changeLike(result.commentLikeUser);
+            if(!result) {
+                alert(res.message)
             }
-            alert(response.data.message);
-            setCommentArray(response.data.data);
-        })
-        .catch(error => {
-            alert(error.message);
         })
     })
 
+    useEffect(()=> {
+        axiosInstance.get('http://localhost:4040/irunyou/comment/').then((response) => {
+            changeLike(response.data.data.commentLikeUser);
+        })
+    },[changeLike]) // 변수가 바뀔 때 마다 유지되기 위해서 changeLike를 넣어줌
 
     return (
         <div className="comment-item-wraper">
             <div className="comment-writer-container">{comment.commentWriter}</div>
             <div className="comment-content-container">{comment.commentContent}</div>
             <div className="commit-like">
-                <span onClick={() => {LikeHandler()}}><BiLike size="20"></BiLike></span> { like }
+                <span onClick={() => LikeHandler()}><BiLike size="20" cursor="pointer"></BiLike></span> { like }
             </div>
             <div className="comment-time-container">
                 <div>{date}</div>
