@@ -18,9 +18,6 @@ interface Props {
     setCommentArray : any;
 }
 
-//  commentWriterIndex로 Writer 불러오는 메소드를 백에서 Join으로 작성해야 할 것 같아요
-//  망했다
-
 export default function CommentItem({ comment, setCommentArray }: Props) {
     
     const date = comment.commentDatetime.substring(0, 10);

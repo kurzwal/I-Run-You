@@ -154,6 +154,7 @@ public class RunScheduleService {
 					.runScheduleDatetime(r.getRunScheduleDateTime())
 					.runScheduleContent(r.getRunScheduleContent())
 					.build());
+				System.out.println(userRepository.findUserNicknameByUserEmail(userEmail));
 			}
 
 		}catch (Exception e) {

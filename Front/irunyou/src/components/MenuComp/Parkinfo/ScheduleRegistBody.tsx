@@ -1,9 +1,12 @@
 import './parkinfo.css';
 import useStore from "./Store"
+import useObserveStore from '../Myschedule/ScheduleObserveStore'
 import { useState, useEffect } from 'react';
 import axiosInstance from "../../../service/axiosInstance";
+
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+
 import ScheduleDatetimeSelector from './ScheduleDatetimeSelector';
 
 interface ScheduleRegist {
@@ -18,6 +21,7 @@ export default function ScheduleRegistBody() {
 
     // parkIndex는 zustand로 불러와서 runSchedulePark = parkIndex 하면 됨
     const { parkInfo, setStateParkInfo, scheduleDatetime } = useStore();
+    const { toggleObserve } = useObserveStore();
 
     // data는 scheduleRegist 넣기
     const [scheduleRegist, setScheduleRegist] = useState<ScheduleRegist>({
@@ -74,7 +78,7 @@ export default function ScheduleRegistBody() {
         return currentDate.getTime() > postDate.getTime();
     }
 
-    const submitAll = () => {
+    const submitAll = async () => {
         if (!scheduleRegist.runScheduleTitle) {
             return alert("제목을 입력하세요.")
         }
@@ -85,7 +89,10 @@ export default function ScheduleRegistBody() {
             return alert("현재보다 미래의 시간만 생성 가능합니다.")
         }
         
-        postSchedule();
+        await postSchedule();
+        // 내일정 다시불러오기 메서드
+        toggleObserve();
+        // 일정생성 작성값 초기화
         setScheduleRegist({...scheduleRegist, runScheduleTitle: '', runScheduleContent: '',});
     }
 

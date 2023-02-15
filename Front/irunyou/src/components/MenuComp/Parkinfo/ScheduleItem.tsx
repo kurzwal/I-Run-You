@@ -7,7 +7,7 @@ interface props {
     runScheduleIndex: number;
     runSchedulePark: number;
     runScheduleTitle: string;
-    runScheduleWriter: number;
+    runScheduleWriter: string;
     runScheduleDatetime: string;
     runScheduleContent: string;
   };
