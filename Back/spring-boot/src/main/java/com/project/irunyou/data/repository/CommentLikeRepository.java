@@ -9,6 +9,7 @@ import com.project.irunyou.data.entity.CommentLikeEntity;
 @Repository
 public interface CommentLikeRepository extends JpaRepository<CommentLikeEntity, Integer>{
 	public boolean existsByCommentIndexAndUserEmail(int commentIndex, String userEmail);
+	public CommentLikeEntity findByCommentIndexAndUserEmail(int commentIndex, String userEmail);
 	public int countByCommentIndex(int commentIndex);
-	public void deleteByCommentIndexAndUserEmail(int commentIndex, String userEmail);
+//	public void deleteByCommentIndexAndUserEmail(int commentIndex, String userEmail);
 }
