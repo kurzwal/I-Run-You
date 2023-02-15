@@ -213,3 +213,10 @@
     padding: 15px;
     width: 100%;
 }
+
+.schedule-participate-btn {
+    display: flex;
+    justify-content: right;
+    padding-top: 40px;
+    
+}

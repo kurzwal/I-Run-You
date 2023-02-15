@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.irunyou.data.dto.FindRunScheduleDto;
@@ -75,6 +76,12 @@ public class RunScheduleController {
 	@GetMapping("list")
 	public ResponseDto<Map<String,List<GetUserRunScheduleDto>>> readSchedule(@AuthenticationPrincipal String userEmail) {
 		return scheduleService.readSchedule(userEmail);
+	}
+	
+	// 로그인한 유저의 일정 참여 여부
+	@GetMapping("isParticipate")
+	public ResponseDto<ResultResponseDto> isParticipate(@AuthenticationPrincipal String userEmail, @RequestParam int schIdx) {
+		return scheduleService.getIsParticipate(userEmail, schIdx);
 	}
 
 }

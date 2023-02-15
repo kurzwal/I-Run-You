@@ -35,5 +35,8 @@ public interface RunScheduleRepository extends JpaRepository<RunScheduleEntity,I
 	// Slice : limit(size) + 1 된 값을 가져옴
 	public Slice<RunScheduleEntity> findAllByRunScheduleParkOrderByRunScheduleDateTime(int runSchedulePark, PageRequest pageRequest);
 	
+	// 런 일정 인덱스, 유저 이메일로 자신이 만든 일정인지 확인
+	public boolean existsByRunScheduleIndexAndRunScheduleWriter(int runScheduleIndex, String userEmail);
+	
 	
 }
