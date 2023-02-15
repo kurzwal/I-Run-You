@@ -13,7 +13,7 @@ interface Schedule {
     runScheduleIndex: number;
     runSchedulePark: number;
     runScheduleTitle: string;
-    runScheduleWriter: number;
+    runScheduleWriter: string;
     runScheduleDatetime: string;
     runScheduleContent: string;
 }
@@ -61,7 +61,7 @@ const useStore = create<MapStoreInterface>((set) => ({
         runScheduleIndex: 0,
         runSchedulePark: 0,
         runScheduleTitle: "",
-        runScheduleWriter: 0,
+        runScheduleWriter: "",
         runScheduleDatetime: "",
         runScheduleContent: "",
     },

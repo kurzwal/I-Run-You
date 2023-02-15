@@ -2,7 +2,11 @@ import "./myschedule.css"
 import ScheduleItem from "./ScheduleItem"
 import axiosInstance from "../../../service/axiosInstance";
 import React, { useCallback, useEffect, useState } from "react";
+
 import useToggleStore from '../../../view/Store';
+
+//import useStore from './ScheduleObserveStore';
+
 
 // 2023-02-11 홍지혜 나의 스케줄 리스트
 
@@ -10,11 +14,16 @@ export default function MyScheduleBody() {
 
     const [userRegistrationSchedule, setUserRegistrationSchedule] = useState<any[]>([]);
     const [userParticipationSchedule, setUserParticipationSchedule] = useState<any[]>([]);
+
     
     const { menuState } = useToggleStore();    
 
-    const getUserRunSchedule = async () => {
-        await axiosInstance
+    //const { observe } = useStore();
+
+
+    const getUserRunSchedule = () => {
+        console.log(userRegistrationSchedule);
+        axiosInstance
             .get("/irunyou/runschedule/list")
             .then(response => {
                 const participationSchedule = response.data.data.participationSchedule;
@@ -23,6 +32,7 @@ export default function MyScheduleBody() {
                 if (!response.data.status) {
                     return alert(response.data.message);
                 }
+
                     setUserRegistrationSchedule(registrationSchedule);
                     setUserParticipationSchedule(participationSchedule);
             })
@@ -33,7 +43,11 @@ export default function MyScheduleBody() {
 
     useEffect(() => {
         getUserRunSchedule();
+
     }, [menuState===4]);
+
+//    }, [observe]);
+
 
     return (
         <div className="myschedule-container">

@@ -22,7 +22,7 @@ public class CommentLikeEntity {
 	@NotNull
 	private int commentLikeIndex;
 	@NotNull
-	private int commentIndex;
-	@NotNull
 	private String userEmail;
+	@NotNull
+	private int commentIndex;
 }

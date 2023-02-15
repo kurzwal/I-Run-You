@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.irunyou.data.dto.CommentDto;
+import com.project.irunyou.data.dto.CommentIndexDto;
 import com.project.irunyou.data.dto.CommentLikeDto;
 import com.project.irunyou.data.dto.CommentResponseDto;
 import com.project.irunyou.data.dto.PatchCommentDto;
@@ -67,7 +68,7 @@ public class CommentController {
 	// 2023-02-14 최예정
 	// 사용자 한 명이 좋아요 누르면 1개의 좋아요만 올라가거나 내려감
 	@PostMapping("")
-	public ResponseDto<CommentLikeDto> commentLike (@AuthenticationPrincipal String email, @RequestParam int cmtIdx) {
-		return commentService.commentLike(email, cmtIdx);
+	public ResponseDto<CommentLikeDto> commentLike (@AuthenticationPrincipal String email, @RequestBody CommentIndexDto requestBody) {
+		return commentService.commentLike(email, requestBody);
 	}
 }
