@@ -81,7 +81,7 @@ export default function MainPage(){
 
             {/* 기본그림 */}
 
-            <div id="home-main-img" className="home-main-img"></div>
+            {/* <div id="home-main-img" className="home-main-img"></div> */}
 
             {/* 지도 */}
 
