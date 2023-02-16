@@ -6,6 +6,7 @@ import axiosInstance from "../../../service/axiosInstance";
 import { useEffect, useState } from "react";
 import { BiLike } from "react-icons/bi";
 import axios from "axios";
+import { style } from "@mui/system";
 
 
 interface Props {
@@ -81,7 +82,7 @@ export default function CommentItem({ comment, setCommentArray }: Props) {
             <div className="comment-writer-container">{comment.commentWriter}</div>
             <div className="comment-content-container">{comment.commentContent}</div>
             <div className="commit-like">
-                <span onClick={() => LikeHandler()}><BiLike size="20" cursor="pointer"></BiLike></span> { like }
+                <span onClick={() => LikeHandler()}><BiLike className="BiLike-icon" size="20px"></BiLike></span> {like}
             </div>
             <div className="comment-time-container">
                 <div>{date}</div>
