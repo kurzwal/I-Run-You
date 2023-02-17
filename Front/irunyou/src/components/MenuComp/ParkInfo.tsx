@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import ViewParkMain from "./Parkinfo/ViewParkMain";
 import ViewSceduleInfo from "./Parkinfo/ViewSceduleInfo";
 import ViewSceduleReg from "./Parkinfo/ViewSceduleReg";
+import ViewScheduleUpdate from "./Parkinfo/ViewSceduleUpdate";
 
 
 export default function ParkInfo() {
@@ -35,6 +36,12 @@ export default function ParkInfo() {
                 {{overflow: "hidden", flexDirection: "column"}} 
                 sx={{...((parkInfoOpen && parkInfoState === 2) ? {display: 'flex'} : {display: 'none'})}}>
                 <ViewSceduleReg />
+            </DialogContent>
+            <DialogContent 
+                style=
+                {{overflow: "hidden", flexDirection: "column"}} 
+                sx={{...((parkInfoOpen && parkInfoState === 3) ? {display: 'flex'} : {display: 'none'})}}>
+                <ViewScheduleUpdate />
             </DialogContent>
 
         </Dialog>

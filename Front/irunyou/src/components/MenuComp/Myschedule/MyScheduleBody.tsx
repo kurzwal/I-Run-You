@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import useToggleStore from '../../../view/Store';
 
 //import useStore from './ScheduleObserveStore';
+import ScheduleItemOwned from './ScheduleItemOwned';
 
 
 // 2023-02-11 홍지혜 나의 스케줄 리스트
@@ -55,7 +56,7 @@ export default function MyScheduleBody() {
             <div className="my-schedule-subTitle">만든 일정</div>
                 {userRegistrationSchedule.map((scheduleList) => (
                     <div key={scheduleList.runScheduleIndex}>
-                        <ScheduleItem runScheduleInfo={scheduleList}></ScheduleItem>
+                        <ScheduleItemOwned runScheduleInfo={scheduleList}></ScheduleItemOwned>
                     </div>
                 ))}
             <div className="my-schedule-subTitle">참여하는 일정</div>

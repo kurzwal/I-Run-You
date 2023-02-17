@@ -1,7 +1,6 @@
 import "./myschedule.css"
 import useStore from '../Parkinfo/Store';
 import axiosInstance from "../../../service/axiosInstance";
-import Circle from "../../../assets/circle-regular.svg"
 
 interface props {
     runScheduleInfo: {

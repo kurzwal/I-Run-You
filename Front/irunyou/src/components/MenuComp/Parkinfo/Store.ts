@@ -30,8 +30,9 @@ interface MapStoreInterface {
 
     toggleParkInfo: () => void;
     setStateParkInfo: () => void;
-    setStateScheduleInfo: () => void;   // 스케쥴 자세히보기
-    setStateScheduleRegist: () => void;   // 스케쥴 생성하기
+    setStateScheduleInfo: () => void;       // 스케쥴 자세히보기
+    setStateScheduleRegist: () => void;     // 스케쥴 생성하기
+    setStateScheduleUpdate: () => void;     // 스케쥴 수정하기
 
     setParkInfo: (park:Park) => void;
     setScheduleInfo: (scheduleInfo:Schedule) => void;
@@ -74,6 +75,7 @@ const useStore = create<MapStoreInterface>((set) => ({
     setStateParkInfo: () => set((state) => ({...state, parkInfoState : 0})),
     setStateScheduleInfo: () => set((state) => ({...state, parkInfoState : 1})),
     setStateScheduleRegist: () => set((state) => ({...state, parkInfoState : 2})),
+    setStateScheduleUpdate: () => set((state) => ({...state, parkInfoState : 3})),
 
     setParkInfo: (parkInfo) => set((state) => ({ ...state, parkInfo})),
     setScheduleInfo: (scheduleInfo) => set((state) => ({ ...state, scheduleInfo})),
