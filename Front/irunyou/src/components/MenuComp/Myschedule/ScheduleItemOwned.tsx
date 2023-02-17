@@ -1,6 +1,7 @@
 import "./myschedule.css"
 import { useState } from 'react';
 import useStore from '../Parkinfo/Store';
+import useObserverStore from './ScheduleObserveStore';
 import axiosInstance from "../../../service/axiosInstance";
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -33,6 +34,7 @@ interface props {
 export default function ScheduleItemOwned( {runScheduleInfo} : props) {
 
     const { toggleParkInfo, setParkInfo, setStateScheduleInfo, setScheduleInfo, setStateScheduleRegist } = useStore();
+    const { toggleObserve } = useObserverStore();
 
     const [modal, setModal] = useState<boolean>(false);
 
@@ -43,8 +45,9 @@ export default function ScheduleItemOwned( {runScheduleInfo} : props) {
         deleteParkInfo();
         } else if (target.id === 'update') {
         // update btn
-        } else if (target.id === 'info') {
+        } else {
         // info clicked
+        getParkInfo();
         }
       };
 
@@ -73,14 +76,7 @@ export default function ScheduleItemOwned( {runScheduleInfo} : props) {
 
     function showConfirm() {
         const result = window.confirm('정말 삭제하시겠습니까?');
-      
-        if (result) {
-          // 확인 버튼을 클릭한 경우 처리할 작업
-          return true;
-        } else {
-          // 취소 버튼을 클릭한 경우 처리할 작업
-          return false;
-        }
+        return result;
       }
       
     const deleteParkInfo = async () => {
@@ -91,9 +87,13 @@ export default function ScheduleItemOwned( {runScheduleInfo} : props) {
             await axiosInstance
                 .patch('irunyou/runschedule/delete', deleteData)
                 .then(response => {
-                    alert('일정이 삭제되었습니다.')
+                    alert('일정이 삭제되었습니다.');
+                    toggleObserve();
                 }
             )
+        } else {
+            // confirm 창에서 취소를 누른 경우
+            return;
         }
     }
 
@@ -132,9 +132,9 @@ export default function ScheduleItemOwned( {runScheduleInfo} : props) {
             <ThemeProvider theme={theme}>
                 <div className="schedule-item-btn-container">
                     <Button id="update" style={{margin: '0 15px', zIndex: 3}} variant="contained" color="primary"
-                        onClick={handleClick}>수정</Button>
+                        >수정</Button>
                     <Button id="delete" style={{zIndex: 3}} variant="contained" color="error"
-                        onClick={handleClick}>삭제</Button>
+                        >삭제</Button>
                 </div>
             </ThemeProvider>
         </div>
