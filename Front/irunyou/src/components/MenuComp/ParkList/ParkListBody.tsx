@@ -31,7 +31,6 @@ export default function ParkListBody() {
 
   const fetchData = async (locale: any) => {
     const parksData = await getParks(locale);
-    console.log(parksData[1].parkIndex)
     setParks(parksData);
     setCloseParks(parksData);
   };

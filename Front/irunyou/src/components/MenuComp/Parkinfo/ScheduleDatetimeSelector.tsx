@@ -6,8 +6,11 @@ import InputLabel from '@mui/material/InputLabel';
 
 export default function ScheduleDatetimeSelector() {
 
-    const { scheduleDatetime, setScheduleDatetime } = useStore();
+    const { scheduleInfo, setScheduleDatetime, parkInfoState } = useStore();
     
+    const [firstCheck, setFirstCheck] = useState(true);
+    
+
     const [year, setYear] = useState('');
     const [month, setMonth] = useState('');
     const [day, setDay] = useState('');
@@ -53,7 +56,16 @@ export default function ScheduleDatetimeSelector() {
       };
 
     useEffect(() => {
+        if (firstCheck && parkInfoState == 3) {
+            setFirstCheck(false);
+            setYear(scheduleInfo.runScheduleDatetime.slice(0, 4));
+            setMonth(scheduleInfo.runScheduleDatetime.slice(5, 7));
+            generateDays(year, month);
+            setDay(scheduleInfo.runScheduleDatetime.slice(8, 10));
+            setStartTime(scheduleInfo.runScheduleDatetime.slice(11, 16))
+        } 
         storeTime();
+        
     }, [year, month, day, startTime])
 
     return (
@@ -129,6 +141,7 @@ export default function ScheduleDatetimeSelector() {
                     id="start-time-picker"
                     label="Start Time"
                     type="time"
+                    value={scheduleInfo.runScheduleDatetime.toString().substring(11, 16)}
                     onChange={e => {
                         setStartTime(e.target.value);
                     }}

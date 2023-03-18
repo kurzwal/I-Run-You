@@ -23,7 +23,6 @@ export default function MyScheduleBody() {
 
 
     const getUserRunSchedule = () => {
-        console.log(userRegistrationSchedule);
         axiosInstance
             .get("/irunyou/runschedule/list")
             .then(response => {

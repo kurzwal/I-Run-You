@@ -33,10 +33,8 @@ interface props {
 
 export default function ScheduleItemOwned( {runScheduleInfo} : props) {
 
-    const { toggleParkInfo, setParkInfo, setStateScheduleInfo, setScheduleInfo, setStateScheduleRegist } = useStore();
+    const { toggleParkInfo, setParkInfo, setStateScheduleInfo, setScheduleInfo, setStateScheduleUpdate } = useStore();
     const { toggleObserve } = useObserverStore();
-
-    const [modal, setModal] = useState<boolean>(false);
 
     const handleClick = (event: React.MouseEvent) => {
         const target = event.target as Element;
@@ -45,6 +43,7 @@ export default function ScheduleItemOwned( {runScheduleInfo} : props) {
         deleteParkInfo();
         } else if (target.id === 'update') {
         // update btn
+        updateParkInfo();
         } else {
         // info clicked
         getParkInfo();
@@ -72,8 +71,6 @@ export default function ScheduleItemOwned( {runScheduleInfo} : props) {
             })
     }
 
-    // const updateParkInfo ()
-
     function showConfirm() {
         const result = window.confirm('정말 삭제하시겠습니까?');
         return result;
@@ -89,6 +86,8 @@ export default function ScheduleItemOwned( {runScheduleInfo} : props) {
                 .then(response => {
                     alert('일정이 삭제되었습니다.');
                     toggleObserve();
+                    const deletedItem = document.getElementsByClassName('schedule-item-container')[0] as HTMLElement;
+                    deletedItem.style.display = 'none';
                 }
             )
         } else {
@@ -112,7 +111,7 @@ export default function ScheduleItemOwned( {runScheduleInfo} : props) {
                 runScheduleContent: runScheduleInfo.runScheduleContent,
             });
             toggleParkInfo();
-            setStateScheduleInfo();
+            setStateScheduleUpdate();
         }).catch(error => {
             alert(error.message)
         })

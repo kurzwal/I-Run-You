@@ -32,13 +32,14 @@ public class GetUserRunScheduleDto {
 	private String runScheduleContent;
 	
 //	// 일정 조회 서비스용 생성자
-//	public GetUserRunScheduleDto(RunScheduleEntity runSchedule) {
-//		this.runScheduleIndex = runSchedule.getRunScheduleIndex();
-//		this.runSchedulePark = runSchedule.getParkName();
-//		this.runScheduleWriter = runSchedule.getUserNickname();
-//		this.runScheduleTitle = runSchedule.getRunScheduleTitle();
-//		this.runScheduleDatetime = runSchedule.getRunScheduleDateTime();
-//	}
+	public GetUserRunScheduleDto(RunScheduleEntity runSchedule) {
+		this.runScheduleIndex = runSchedule.getRunScheduleIndex();
+		this.parkIndex = runSchedule.getRunSchedulePark();
+		this.runScheduleWriter = runSchedule.getRunScheduleWriter();
+		this.runScheduleTitle = runSchedule.getRunScheduleTitle();
+		this.runScheduleDatetime = runSchedule.getRunScheduleDateTime();
+		this.runScheduleContent = runSchedule.getRunScheduleContent();
+	}
 
 	
 }

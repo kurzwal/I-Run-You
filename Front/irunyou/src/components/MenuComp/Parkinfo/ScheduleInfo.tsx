@@ -21,7 +21,6 @@ export default function ScheduleInfo() {
       })
       .then((response) => {
         setIsParticipate(response.data.data.result);
-        console.log(isParticipate + "일정참여여부");
       });
   };
 

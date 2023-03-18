@@ -47,6 +47,12 @@ public class RunScheduleController {
 		return scheduleService.registSchedule(writer,requestBody);
 	}
 	
+	//기존에 존재하는 공원일정을 idx로 조회
+	@GetMapping("scheduleinfo")
+	public ResponseDto<GetUserRunScheduleDto> getScheduleInfo(@RequestParam int scheduleIdx) {
+		return scheduleService.getScheduleInfo(scheduleIdx);
+	}
+	
 	// 유저가 직접 생성한 일정 수정
 	@PatchMapping("modify")
 	ResponseDto<ResultResponseDto> patchSchedule(@RequestBody PatchScheduleDto requestBody) {

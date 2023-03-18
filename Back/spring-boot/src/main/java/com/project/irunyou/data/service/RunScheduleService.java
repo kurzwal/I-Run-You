@@ -21,6 +21,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.irunyou.data.dto.FindRunScheduleDto;
 import com.project.irunyou.data.dto.GetUserRunScheduleDto;
@@ -66,6 +67,17 @@ public class RunScheduleService {
 			return ResponseDto.setFailed("일정 등록중 오류가 발생했습니다.");
 		}
 		return ResponseDto.setSuccess("일정이 등록되었습니다.",new ResultResponseDto(true));
+	}
+	
+	public ResponseDto<GetUserRunScheduleDto> getScheduleInfo(int scheduleIdx) {
+		RunScheduleEntity scheduleEntity = null;
+		try {
+			scheduleEntity = runScheduleRepository.findById(scheduleIdx).get();
+		} catch (Exception e) {
+			return ResponseDto.setFailed("일정 조회에 실패했습니다.");
+		}
+		GetUserRunScheduleDto result = new GetUserRunScheduleDto(scheduleEntity);
+		return ResponseDto.setSuccess("일정을 조회했습니다.", result);
 	}
 	
 	// 유저가 자신이 등록한 일정 삭제
